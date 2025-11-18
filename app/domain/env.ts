@@ -24,7 +24,7 @@ export const PUBLIC_URL = (
 export const ENDPOINT =
   clientEnv?.ENDPOINT ??
   process.env.ENDPOINT ??
-  "sparql+https://lindas-cached.cluster.ldbar.ch/query";
+  "sparql+https://data.gov.rs/sparql";
 
 export const WHITELISTED_DATA_SOURCES = clientEnv?.WHITELISTED_DATA_SOURCES ??
   (process.env.WHITELISTED_DATA_SOURCES !== undefined
@@ -34,7 +34,7 @@ export const WHITELISTED_DATA_SOURCES = clientEnv?.WHITELISTED_DATA_SOURCES ??
 export const SPARQL_GEO_ENDPOINT =
   clientEnv?.SPARQL_GEO_ENDPOINT ??
   process.env.SPARQL_GEO_ENDPOINT ??
-  "https://geo.ld.admin.ch/query";
+  "https://data.gov.rs/sparql";
 
 export const SQL_ENDPOINT =
   clientEnv?.SQL_ENDPOINT ?? process.env.SQL_ENDPOINT ?? "";
