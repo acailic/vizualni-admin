@@ -105,6 +105,19 @@ module.exports = withPreconstruct(
 
       pageExtensions: ["js", "ts", "tsx", "mdx"],
 
+      // Enable SWC minifier for faster builds
+      swcMinify: true,
+
+      // Optimize production builds
+      productionBrowserSourceMaps: false,
+
+      // Enable compiler optimizations
+      compiler: {
+        removeConsole: process.env.NODE_ENV === "production" ? {
+          exclude: ["error", "warn"],
+        } : false,
+      },
+
       eslint: {
         // Warning: Dangerously allow production builds to successfully complete even if
         // your project has ESLint errors.
@@ -118,25 +131,9 @@ module.exports = withPreconstruct(
           loader: "graphql-tag/loader",
         });
 
-        /* Enable source maps in production */
+        /* Disable source maps in production for faster builds */
         if (!dev) {
-          config.devtool = "source-map";
-
-          for (const plugin of config.plugins) {
-            if (plugin.constructor.name === "UglifyJsPlugin") {
-              plugin.options.sourceMap = true;
-              break;
-            }
-          }
-
-          if (config.optimization && config.optimization.minimizer) {
-            for (const plugin of config.optimization.minimizer) {
-              if (plugin.constructor.name === "TerserPlugin") {
-                plugin.options.sourceMap = true;
-                break;
-              }
-            }
-          }
+          config.devtool = false;
         }
 
         config.resolve.extensions.push(dev ? ".dev.ts" : ".prod.ts");

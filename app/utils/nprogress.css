@@ -4,7 +4,7 @@
 }
 
 #nprogress .bar {
-  background: #006699;
+  background: #0C4076; /* Serbian blue */
 
   position: fixed;
   z-index: 1031;
@@ -22,7 +22,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #006699, 0 0 5px #006699;
+  box-shadow: 0 0 10px #0C4076, 0 0 5px #0C4076; /* Serbian blue */
   opacity: 1;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
@@ -45,8 +45,8 @@
   box-sizing: border-box;
 
   border: solid 2px transparent;
-  border-top-color: #006699;
-  border-left-color: #006699;
+  border-top-color: #0C4076; /* Serbian blue */
+  border-left-color: #0C4076; /* Serbian blue */
   border-radius: 50%;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;

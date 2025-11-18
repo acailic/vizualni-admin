@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Tabs, Tab } from '@mui/material';
 import { useState } from 'react';
 import { DemoLayout, DemoLoading, DemoError, DemoEmpty } from '@/components/demos/demo-layout';
+import { SimpleChart } from '@/components/demos/simple-chart';
 import { DEMO_CONFIGS, getDemoConfig } from '@/lib/demos/config';
 import { useDataGovRs } from '@/hooks/use-data-gov-rs';
 import { ChartVisualizer } from '@/components/demos/ChartVisualizer';
@@ -88,13 +89,34 @@ export default function DemoPage() {
                 <Typography variant="body2" color="text.secondary">
                   <strong>Format:</strong> {resource.format}
                 </Typography>
-              )}
+              )} 
               {Array.isArray(data) && (
                 <Typography variant="body2" color="text.secondary">
                   <strong>Broj redova:</strong> {data.length}
                 </Typography>
               )}
+ 
             </Box>
+          </Paper>
+
+          {/* Chart Visualization */}
+          <Paper sx={{ p: 4, mb: 4, backgroundColor: 'white' }}>
+            <Typography variant="h6" sx={{ mb: 3, fontWeight: 500 }}>
+              📊 Vizualizacija podataka
+            </Typography>
+
+            {Array.isArray(data) && data.length > 0 ? (
+              <SimpleChart
+                data={data}
+                chartType={config.chartType}
+                width={Math.min(1000, typeof window !== 'undefined' ? window.innerWidth - 100 : 1000)}
+                height={450}
+              />
+            ) : (
+              <Typography variant="body2" color="text.secondary">
+                Podaci nisu dostupni u formatu pogodnom za vizualizaciju.
+              </Typography>
+            )} 
           </Paper>
 
           {/* Tabs for different views */}
