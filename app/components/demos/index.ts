@@ -3,3 +3,4 @@
  */
 
 export * from './demo-layout';
+export * from './simple-chart';

@@ -6,6 +6,7 @@
 import { useRouter } from 'next/router';
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { DemoLayout, DemoLoading, DemoError, DemoEmpty } from '@/components/demos/demo-layout';
+import { SimpleChart } from '@/components/demos/simple-chart';
 import { DEMO_CONFIGS, getDemoConfig } from '@/lib/demos/config';
 import { useDataGovRs } from '@/hooks/use-data-gov-rs';
 
@@ -89,34 +90,24 @@ export default function DemoPage() {
             </Box>
           </Paper>
 
-          {/* Chart Placeholder */}
-          <Paper sx={{ p: 4, mb: 4, backgroundColor: 'white', textAlign: 'center' }}>
-            <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
-              📊 Vizualizacija ({config.chartType})
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Ovde će biti prikazana {config.chartType} vizualizacija.
-              <br />
-              Podaci su uspešno učitani i spremni za prikaz.
+          {/* Chart Visualization */}
+          <Paper sx={{ p: 4, mb: 4, backgroundColor: 'white' }}>
+            <Typography variant="h6" sx={{ mb: 3, fontWeight: 500 }}>
+              📊 Vizualizacija podataka
             </Typography>
 
-            <Box
-              sx={{
-                mt: 3,
-                p: 3,
-                backgroundColor: 'grey.100',
-                borderRadius: 1
-              }}
-            >
+            {Array.isArray(data) && data.length > 0 ? (
+              <SimpleChart
+                data={data}
+                chartType={config.chartType}
+                width={Math.min(1000, typeof window !== 'undefined' ? window.innerWidth - 100 : 1000)}
+                height={450}
+              />
+            ) : (
               <Typography variant="body2" color="text.secondary">
-                <strong>Broj redova:</strong> {Array.isArray(data) ? data.length : 'N/A'}
+                Podaci nisu dostupni u formatu pogodnom za vizualizaciju.
               </Typography>
-              {Array.isArray(data) && data.length > 0 && (
-                <Typography variant="body2" color="text.secondary">
-                  <strong>Kolone:</strong> {Object.keys(data[0]).join(', ')}
-                </Typography>
-              )}
-            </Box>
+            )}
           </Paper>
 
           {/* Data Table Preview */}
