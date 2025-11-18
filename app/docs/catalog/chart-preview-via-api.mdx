@@ -1,0 +1,234 @@
+<style>{`
+  table:not([class]) {
+     margin-top: 1rem;
+     font-size: 0.875rem;
+     cell-spacing: none;
+     border-spacing: 0;
+     border-collapse: collapse;
+  }
+
+  table:not([class]) tr:nth-child(2n) {
+    background: #eee;
+  }
+
+  table:not([class]) td, table:not([class]) th {
+    border-bottom: #ccc 1px solid;
+    margin-top: 0;
+    padding: 0.25rem 0.5rem;
+  }
+
+  table:not([class]) tr {
+    margin-bottom: 0;
+  }
+
+  li > code {
+    font-size: 0.875rem;
+  }
+`}</style>
+
+While usually you'll want to publish your chart, sometimes you might want to
+simply preview it, without going through the publishing process. This could be
+especially helpful to programmatically generate charts based on many different
+configuration options. Visualize offers a way to preview charts without
+publishing them, by using a custom API or iframe hash parameter.
+
+## iframe preview via query parameters
+
+**Demo:** Visit <a href="/_preview" target="_blank">`/_preview`</a> to see a
+page with two iframes containing chart previews. The first iframe gets the chart
+state via hash parameters.
+
+In order to get the parameters, you can use the _Copy preview link_ button found
+in the editor or use the
+[objectToHashString](https://github.com/visualize-admin/visualization-tool/blob/main/app/utils/hash-utils.ts)
+function.
+
+```html
+<iframe
+  id="chart"
+  src="https://visualize.admin.ch/it/preview#hash-params"
+  width="100%"
+  height="500"
+  frameborder="0"
+/>
+```
+
+**Note:** Manually changing `chartType` can lead to unexpected behavior and
+potentially necessitates further adjustments. For example a change from
+`chartType=bar` to `chartType=column` needs a swap in `x` and `y` fields.
+
+## iframe preview via API
+
+**Demo:** Visit <a href="/_preview" target="_blank">`/_preview`</a> to see a
+page with two iframes containing chart previews. The second iframe gets the
+chart state from posting a message to the iframe window.
+
+This method works by pointing an iframe to the `/preview` page, and posting a
+message with the chart state to the iframe window when ready.
+
+<CodeSpecimen
+  lang="js"
+  raw
+  rawBody={`const iframe = document.getElementById("chart");
+const handleMessage = (e) => {
+  if (e.data?.type === "ready" && e.source === iframe.contentWindow) {
+    iframe.contentWindow?.postMessage(configuratorState, "*");
+    window.removeEventListener("message", handleMessage);
+  }
+};
+window.addEventListener("message", handleMessage);
+`}
+/>
+
+### Controlling the language
+
+You can set the desired language for the chart preview by adding a `/de`, `/fr`,
+`/it` or `/en` part to the iframe URL, like so:
+
+```html
+<iframe
+  id="chart"
+  src="https://visualize.admin.ch/it/preview"
+  width="100%"
+  height="500"
+  frameborder="0"
+/>
+```
+
+## POST request
+
+**Demo:** Visit <a href="/_preview_post" target="_blank">`/_preview_post`</a> to
+see a page with two buttons that open a new page with a chart preview after
+clicking.
+
+This method works by sending a POST request to `/preview_post` page with chart
+state when clicking on a form button. The `/preview_post` page retrieves the
+content of a request in `getServerSideProps` and renders a preview of a chart.
+
+It's important to only use one input inside a form (as we split the string by
+`=`).
+
+<CodeSpecimen
+  lang="css"
+  raw
+  rawBody={`<form method="post" action="/preview_post" target="_blank">
+  <input
+    type="hidden"
+    name="configuratorState"
+    value={JSON.stringify(photovoltaikanlagenState)}
+  />
+  <input type="submit" value="☀️ Preview a Photovoltaikanlagen chart" />
+</form>`}
+/>
+
+### Controlling the language
+
+You can set the desired language for the chart preview by adding a `/de`, `/fr`,
+`/it` or `/en` part to the form action parameter, like so:
+
+```html
+<form method="post" action="/it/preview_post" target="_blank">
+  <input
+    type="hidden"
+    name="configuratorState"
+    value="{JSON.stringify(photovoltaikanlagenState)}"
+  />
+  <input type="submit" value="☀️ Preview a Photovoltaikanlagen chart" />
+</form>
+```
+
+## Configurator and chart config schemas
+
+As the application constantly evolves, the configurator and chart config schemas
+will change. You can find their latest TypeScript definitions in the
+[config-types.ts](https://github.com/visualize-admin/visualization-tool/blob/main/app/config-types.ts)
+file and according JSON Schema definitions and examples in the
+[json-schema folder](https://github.com/visualize-admin/visualization-tool/tree/main/app/public/json-schema).
+
+JSON Schema examples can be opened e.g. in Visual Studio Code, where you will
+have an autocomplete feature to help you fill in the configuration.
+
+Note that the types are very complex and it's encouraged to visit the Visualize
+application with `&flag__debug=true` added to the end of the URL to enable the
+debug mode. You will then see the configurator state directly below the chart
+that is being edited. It also enables the `Dump to console` button, which will
+log the state to the browser console, for easier re-use.
+
+An example configurator state is shown below.
+
+<CodeSpecimen
+  lang="json"
+  raw
+  rawBody={`{
+  state: "CONFIGURING_CHART",
+  dataSet:
+    "https://energy.ld.admin.ch/sfoe/bfe_ogd84_einmalverguetung_fuer_photovoltaikanlagen/7",
+  dataSource: {
+    type: "sparql",
+    url: "https://lindas-cached.cluster.ldbar.ch/query",
+  },
+  meta: {
+    title: {
+      de: "",
+      fr: "",
+      it: "",
+      en: "",
+    },
+    description: {
+      de: "",
+      fr: "",
+      it: "",
+      en: "",
+    },
+  },
+  chartConfig: {
+    version: "1.4.2",
+    chartType: "column",
+    filters: {
+      "https://energy.ld.admin.ch/sfoe/bfe_ogd84_einmalverguetung_fuer_photovoltaikanlagen/Kanton":
+        {
+          type: "single",
+          value: "https://ld.admin.ch/canton/1",
+        },
+    },
+    interactiveFiltersConfig: {
+      legend: {
+        active: false,
+        componentIri: "",
+      },
+      timeRange: {
+        active: false,
+        componentIri:
+          "https://energy.ld.admin.ch/sfoe/bfe_ogd84_einmalverguetung_fuer_photovoltaikanlagen/Jahr",
+        presets: {
+          type: "range",
+          from: "",
+          to: "",
+        },
+      },
+      dataFilters: {
+        active: false,
+        componentIris: [],
+      },
+      calculation: {
+        active: false,
+        type: "identity",
+      },
+    },
+    fields: {
+      x: {
+        componentIri:
+          "https://energy.ld.admin.ch/sfoe/bfe_ogd84_einmalverguetung_fuer_photovoltaikanlagen/Jahr",
+        sorting: {
+          sortingType: "byAuto",
+          sortingOrder: "asc",
+        },
+      },
+      y: {
+        componentIri:
+          "https://energy.ld.admin.ch/sfoe/bfe_ogd84_einmalverguetung_fuer_photovoltaikanlagen/AnzahlAnlagen",
+      },
+    },
+  },
+}`}
+/>
