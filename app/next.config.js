@@ -118,6 +118,14 @@ module.exports = withPreconstruct(
         } : false,
       },
 
+      // Experimental optimizations for faster builds
+      experimental: {
+        // Optimize package imports to reduce bundle size
+        optimizePackageImports: ['@mui/material', '@mui/icons-material', 'date-fns', 'lodash'],
+        // Enable parallel compilation
+        cpus: require('os').cpus().length - 1 || 1,
+      },
+
       eslint: {
         // Warning: Dangerously allow production builds to successfully complete even if
         // your project has ESLint errors.
