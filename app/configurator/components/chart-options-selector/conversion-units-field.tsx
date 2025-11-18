@@ -174,7 +174,7 @@ export const ConversionUnitsField = ({
             >
               {checked && sizeComponent ? (
                 <div>
-                  <Typography variant="body3" fontWeight="bold">
+                  <Typography variant="body2" fontWeight="bold">
                     <Trans id="controls.size">Size</Trans>:{" "}
                     {sizeComponent.label}
                   </Typography>
@@ -187,7 +187,7 @@ export const ConversionUnitsField = ({
               ) : null}
               {checked && colorComponent ? (
                 <div>
-                  <Typography variant="body3" fontWeight="bold">
+                  <Typography variant="body2" fontWeight="bold">
                     <Trans id="controls.color">Color</Trans>:{" "}
                     {colorComponent.label}
                   </Typography>
@@ -277,7 +277,7 @@ export const ConversionUnitsField = ({
         >
           {checked && columnComponent ? (
             <div>
-              <Typography variant="body3" fontWeight="bold">
+              <Typography variant="body2" fontWeight="bold">
                 {columnComponent.label}
               </Typography>
               <ConversionUnitContent
@@ -289,7 +289,7 @@ export const ConversionUnitsField = ({
           ) : null}
           {checked && lineComponent ? (
             <div>
-              <Typography variant="body3" fontWeight="bold">
+              <Typography variant="body2" fontWeight="bold">
                 {lineComponent.label}
               </Typography>
               <ConversionUnitContent
@@ -337,7 +337,7 @@ export const ConversionUnitsField = ({
         >
           {checked && leftComponent ? (
             <div>
-              <Typography variant="body3" fontWeight="bold">
+              <Typography variant="body2" fontWeight="bold">
                 {leftComponent.label}
               </Typography>
               <ConversionUnitContent
@@ -349,7 +349,7 @@ export const ConversionUnitsField = ({
           ) : null}
           {checked && rightComponent ? (
             <div>
-              <Typography variant="body3" fontWeight="bold">
+              <Typography variant="body2" fontWeight="bold">
                 {rightComponent.label}
               </Typography>
               <ConversionUnitContent
@@ -485,7 +485,7 @@ const ConversionUnitContent = ({
   return (
     <Box sx={{ mt: 2 }}>
       <Flex sx={{ flexDirection: "column", gap: 2 }}>
-        <Typography variant="body3">
+        <Typography variant="body2">
           <Trans id="controls.convert-unit.original">
             Original unit:{" "}
             {originalUnit || t({ id: "controls.none", message: "None" })}
@@ -497,7 +497,7 @@ const ConversionUnitContent = ({
         />
       </Flex>
       <Flex sx={{ flexDirection: "column", gap: 1 }}>
-        <Typography variant="body3">
+        <Typography variant="body2">
           <Trans id="controls.convert-unit.custom-labels">
             Custom unit labels
           </Trans>

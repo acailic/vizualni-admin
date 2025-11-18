@@ -123,7 +123,7 @@ export const MenuActionItem = (
           sx={{ display: "flex", alignItems: "center", minHeight: 0 }}
         >
           {leadingIcon && <Icon name={leadingIcon} />}
-          <Typography variant="body3">{label}</Typography>
+          <Typography variant="body2">{label}</Typography>
           {trailingIcon && (
             <Icon name={trailingIcon} style={{ marginLeft: "auto" }} />
           )}

@@ -222,7 +222,7 @@ export const CustomLayersSelector = () => {
       </LeftDrawer>
       <ControlSectionContent gap="lg">
         {configLayers.length === 0 && (
-          <Typography variant="body3" color="text.secondary">
+          <Typography variant="body2" color="text.secondary">
             <Trans id="chart.map.layers.no-layers">No imported maps</Trans>
           </Typography>
         )}
@@ -318,7 +318,7 @@ const DraggableLayer = ({
               gap: 1,
             }}
           >
-            <Typography variant="body3" sx={{ flexGrow: 1 }}>
+            <Typography variant="body2" sx={{ flexGrow: 1 }}>
               {parsedLayer?.title ?? "Unknown layer"}
             </Typography>
             <IconButton onClick={handleRemoveClick}>

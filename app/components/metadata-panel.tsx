@@ -648,7 +648,7 @@ const DataPanel = ({
                     {parts.map(({ text, highlight }, i) => (
                       <Typography
                         key={i}
-                        variant="body3"
+                        variant="body2"
                         component="span"
                         flexGrow={1}
                         style={{
@@ -826,7 +826,7 @@ const ComponentTabPanel = ({
             ) : null}
           </Box>
           {description && (
-            <Typography variant="body3" component="p" sx={{ mt: 1 }}>
+            <Typography variant="body2" component="p" sx={{ mt: 1 }}>
               {description}
             </Typography>
           )}
@@ -855,7 +855,7 @@ const ComponentTabPanel = ({
                 )}
               </div>
             ) : null}
-            <Typography variant="body3" sx={{ my: 2, fontWeight: 700 }}>
+            <Typography variant="body2" sx={{ my: 2, fontWeight: 700 }}>
               <Trans id="controls.metadata-panel.available-values">
                 Available values
               </Trans>
@@ -931,7 +931,7 @@ const DimensionValuesNominal = ({ values }: { values: DimensionValue[] }) => {
       {values.map((d) =>
         d.label ? (
           <Fragment key={d.value}>
-            <Typography variant="body3" component="p" {...animationProps}>
+            <Typography variant="body2" component="p" {...animationProps}>
               {d.label}{" "}
               {d.alternateName ? (
                 <span style={{ fontStyle: "italic" }}>({d.alternateName})</span>
@@ -940,7 +940,7 @@ const DimensionValuesNominal = ({ values }: { values: DimensionValue[] }) => {
               )}
             </Typography>
             {d.description ? (
-              <Typography variant="body3" component="p">
+              <Typography variant="body2" component="p">
                 {d.description}
               </Typography>
             ) : null}
@@ -956,10 +956,10 @@ const MeasureValuesNumeric = ({ values }: { values: DimensionValue[] }) => {
 
   return (
     <>
-      <Typography variant="body3" component="p">
+      <Typography variant="body2" component="p">
         Min: {min}
       </Typography>
-      <Typography variant="body3" component="p">
+      <Typography variant="body2" component="p">
         Max: {max}
       </Typography>
     </>
@@ -979,10 +979,10 @@ const DimensionValuesTemporal = ({
 
   return (
     <>
-      <Typography variant="body3" component="p">
+      <Typography variant="body2" component="p">
         Min: {format(min)}
       </Typography>
-      <Typography variant="body3" component="p">
+      <Typography variant="body2" component="p">
         Max: {format(max)}
       </Typography>
     </>

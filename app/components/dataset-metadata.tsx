@@ -159,7 +159,7 @@ const DatasetMetadataBody = ({
   sx?: TypographyProps["sx"];
 }) => (
   <Typography
-    variant="body3"
+    variant="body2"
     sx={{
       display: "flex",
       flexDirection: "column",

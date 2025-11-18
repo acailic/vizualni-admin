@@ -38,7 +38,7 @@ const EmptyGroups = () => {
   const classes = useStyles();
 
   return (
-    <Typography variant="body3" component="div" className={classes.emptyGroups}>
+    <Typography variant="body2" component="div" className={classes.emptyGroups}>
       <Trans id="controls.groups.empty-help">
         Drag and drop columns here to make groups.
       </Trans>
