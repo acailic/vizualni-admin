@@ -2,18 +2,19 @@ import { c as colors } from "@interactivethings/swiss-federal-ci";
 import { type ThemeOptions } from "@mui/material";
 import { PaletteOptions } from "@mui/material/styles";
 
+// Serbian national colors - using Serbian blue as primary
 const blue: PaletteOptions["blue"] = {
-  main: "#1D4ED8",
-  50: "#EFF6FF",
-  100: "#DBEAFE",
-  200: "#BFDBFE",
-  300: "#93C5FD",
-  400: "#60A5FA",
-  500: "#3B82F6",
-  600: "#2563EB",
-  700: "#1D4ED8",
-  800: "#1E40AF",
-  900: "#1E3A8A",
+  main: "#0C4076",
+  50: "#E8EEF5",
+  100: "#C6D5E8",
+  200: "#A0BAD9",
+  300: "#7A9ECA",
+  400: "#5D89BF",
+  500: "#3F74B4",
+  600: "#396CAD",
+  700: "#0C4076",
+  800: "#0A3665",
+  900: "#082A53",
 };
 
 const orange: PaletteOptions["orange"] = {
@@ -44,6 +45,7 @@ const green: PaletteOptions["green"] = {
   900: "#064E3B",
 };
 
+// Serbian blue as primary color
 export const PRIMARY_COLOR = blue[700];
 
 export const palette = {
@@ -91,7 +93,17 @@ export const palette = {
     ...colors.monochrome,
   },
   red: {
-    main: colors.red[700],
+    main: "#C6363C", // Serbian red
+    50: "#FCEDEF",
+    100: "#F8D3D6",
+    200: "#F3B5BA",
+    300: "#EE979E",
+    400: "#EA8089",
+    500: "#E66974",
+    600: "#E3616C",
+    700: "#C6363C",
+    800: "#B42F35",
+    900: "#9E2A2F",
     ...colors.red,
   },
   orange,
