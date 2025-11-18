@@ -10,12 +10,21 @@ import { DemoLayout, DemoLoading, DemoError, DemoEmpty } from '@/components/demo
 import { SimpleChart } from '@/components/demos/simple-chart';
 import { DEMO_CONFIGS, getDemoConfig } from '@/lib/demos/config';
 import { useDataGovRs } from '@/hooks/use-data-gov-rs';
+import dynamic from 'next/dynamic';
+
+// Import enhanced air quality page
+const AirQualityDemo = dynamic(() => import('./air-quality'), { ssr: true });
 import { ChartVisualizer } from '@/components/demos/ChartVisualizer';
 
 export default function DemoPage() {
   const router = useRouter();
   const { category } = router.query;
   const [activeTab, setActiveTab] = useState(0);
+
+  // Use enhanced air quality visualization
+  if (category === 'air-quality') {
+    return <AirQualityDemo />;
+  }
 
   // Get demo configuration
   const config = category ? getDemoConfig(category as string) : null;

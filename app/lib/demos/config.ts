@@ -20,6 +20,21 @@ export interface DemoConfig {
 }
 
 export const DEMO_CONFIGS: Record<string, DemoConfig> = {
+  'air-quality': {
+    id: 'air-quality',
+    title: {
+      sr: '🚨 Kvalitet vazduha - Detaljno',
+      en: '🚨 Air Quality - Detailed'
+    },
+    description: {
+      sr: 'Šokantni podaci o zagađenju vazduha sa WHO upozorenjima i zdravstvenim rizicima',
+      en: 'Shocking air pollution data with WHO warnings and health risks'
+    },
+    searchQuery: 'kvalitet vazduha',
+    chartType: 'line',
+    tags: ['zivotna-sredina', 'zdravlje', 'kritično'],
+    icon: '🚨'
+  },
   budget: {
     id: 'budget',
     title: {
