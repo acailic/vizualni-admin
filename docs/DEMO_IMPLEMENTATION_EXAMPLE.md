@@ -184,6 +184,7 @@ export function useDataGovRs(options: UseDataGovRsOptions): UseDataGovRsReturn {
     if (autoFetch && (datasetId || searchQuery)) {
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [datasetId, searchQuery, autoFetch]);
 
   return {
@@ -196,7 +197,11 @@ export function useDataGovRs(options: UseDataGovRsOptions): UseDataGovRsReturn {
   };
 }
 
-// Simple CSV parser (you might want to use a library like papaparse)
+// NOTE: This is a simplified CSV parser that doesn't handle:
+// - Commas within quoted fields
+// - Newlines within quoted fields  
+// - Escaped quotes
+// For production use, consider using a library like 'papaparse' or 'csv-parse'
 function parseCSV(csv: string): any[] {
   const lines = csv.split('\n').filter(line => line.trim());
   if (lines.length === 0) return [];
@@ -235,9 +240,7 @@ export function DemoLayout({ children, title, description }: DemoLayoutProps) {
   return (
     <div className="demo-layout">
       <nav className="demo-nav">
-        <Link href="/demos">
-          <a>← Back to Demos</a>
-        </Link>
+        <Link href="/demos">← Back to Demos</Link>
       </nav>
 
       <header className="demo-header">
@@ -363,7 +366,7 @@ export default function DemoPage() {
         <div className="error-state">
           <h3>Error Loading Data</h3>
           <p>{error.message}</p>
-          <button onClick={() => router.reload()}>Retry</button>
+          <button onClick={() => window.location.reload()}>Retry</button>
         </div>
       )}
 
@@ -567,20 +570,18 @@ export default function DemosIndex() {
     >
       <div className="demo-grid">
         {Object.entries(DEMO_CONFIGS).map(([key, config]) => (
-          <Link key={key} href={`/demos/${key}`}>
-            <a className="demo-card">
-              <div className="demo-card-icon">
-                {getIconForChartType(config.chartType)}
-              </div>
-              <h3>{config.title[locale as 'sr' | 'en']}</h3>
-              <p>{config.description[locale as 'sr' | 'en']}</p>
-              <div className="demo-card-meta">
-                <span className="chart-type">{config.chartType}</span>
-                {config.tags && (
-                  <span className="tags">{config.tags.join(', ')}</span>
-                )}
-              </div>
-            </a>
+          <Link key={key} href={`/demos/${key}`} className="demo-card">
+            <div className="demo-card-icon">
+              {getIconForChartType(config.chartType)}
+            </div>
+            <h3>{config.title[locale as 'sr' | 'en']}</h3>
+            <p>{config.description[locale as 'sr' | 'en']}</p>
+            <div className="demo-card-meta">
+              <span className="chart-type">{config.chartType}</span>
+              {config.tags && (
+                <span className="tags">{config.tags.join(', ')}</span>
+              )}
+            </div>
           </Link>
         ))}
       </div>
@@ -682,7 +683,7 @@ npx serve app/out
 # 4. Push to GitHub
 git add .
 git commit -m "Add demo visualizations"
-git push origin claude/plan-dataset-usage-0169nzEB2AMFKEW4hxDqhFiQ
+git push origin your-branch-name
 
 # 5. Deploy to GitHub Pages (automatic via GitHub Actions)
 ```
