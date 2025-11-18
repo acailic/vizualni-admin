@@ -1,9 +1,7 @@
-import { Box, Link } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import SuperJSON from "superjson";
-import { SuperJSONResult } from "superjson/dist/types";
 
 import { ChartPublished } from "@/components/chart-published";
 import { Flex } from "@/components/flex";
@@ -13,11 +11,6 @@ import {
   ConfiguratorStateProvider,
   ConfiguratorStatePublished,
 } from "@/configurator";
-import { getAllConfigs } from "@/db/config";
-
-type PageProps = {
-  serializedConfigs: SuperJSONResult;
-};
 
 const useVisible = (
   initialVisible: boolean,
@@ -73,65 +66,24 @@ export const HiddenUntilScrolledTo = ({
   return <div ref={ref}>{hasBeenVisible ? children : fallback}</div>;
 };
 
-export const getServerSideProps = async () => {
-  const configs = await getAllConfigs();
-
-  return {
-    props: {
-      serializedConfigs: SuperJSON.serialize(configs.filter((c) => c.data)),
-    },
-  };
-};
-
-const Page: NextPage<PageProps> = ({ serializedConfigs }) => {
-  const deserializedConfigs = SuperJSON.deserialize(serializedConfigs) as {
-    key: string;
-    data: Config;
-  }[];
-
+const Page: NextPage = () => {
+  // In static export mode, show message that this requires a backend
   return (
     <ContentLayout>
       <Box px={4} sx={{ backgroundColor: "muted.main" }} mb="auto">
-        <Flex sx={{ pt: 4, flexWrap: "wrap" }}>
-          {deserializedConfigs.map((config, i) => {
-            return (
-              <Box
-                key={config.key}
-                id={`chart-${config.key}`}
-                sx={{ width: ["100%", "50%", "50%", "33.33%"], p: 1 }}
-              >
-                <ConfiguratorStateProvider
-                  chartId="published"
-                  initialState={
-                    {
-                      ...config.data,
-                      state: "PUBLISHED",
-                    } as ConfiguratorStatePublished
-                  }
-                >
-                  <HiddenUntilScrolledTo
-                    initialVisible={i < 5}
-                    fallback={<div>Loading...</div>}
-                  >
-                    <ChartPublished />
-                  </HiddenUntilScrolledTo>
-                  <Box
-                    mb={2}
-                    mx={4}
-                    mr={6}
-                    textAlign="right"
-                    typography="caption"
-                  >
-                    Id: {config.key} -{" "}
-                    <NextLink href={`/v/${config.key}`} passHref legacyBehavior>
-                      <Link>Open</Link>
-                    </NextLink>{" "}
-                  </Box>
-                </ConfiguratorStateProvider>
-              </Box>
-            );
-          })}
-        </Flex>
+        <Box sx={{ pt: 4, textAlign: "center" }}>
+          <Typography variant="h4" gutterBottom>
+            Chart Gallery
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            This page requires a backend database to display saved charts.
+            In demo mode, please use the{" "}
+            <NextLink href="/browse" passHref legacyBehavior>
+              <Link>browse</Link>
+            </NextLink>{" "}
+            page to explore datasets and create new visualizations.
+          </Typography>
+        </Box>
       </Box>
     </ContentLayout>
   );

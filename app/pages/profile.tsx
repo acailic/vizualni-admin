@@ -1,52 +1,41 @@
-import { Box } from "@mui/material";
-import { User } from "@prisma/client";
-import { GetServerSideProps } from "next";
-import { getServerSession } from "next-auth";
+import { Box, Link, Typography } from "@mui/material";
+import { GetStaticProps } from "next";
+import NextLink from "next/link";
 
 import { Footer } from "@/components/footer";
 import { AppLayout } from "@/components/layout";
-import { getUserConfigs, ParsedConfig } from "@/db/config";
-import { deserializeProps, Serialized, serializeProps } from "@/db/serialize";
-import { findBySub } from "@/db/user";
-import { userConfigsKey } from "@/domain/user-configs";
-import { ProfileContentTabs } from "@/login/components/profile-content-tabs";
-import { ProfileHeader } from "@/login/components/profile-header";
 import { useRootStyles } from "@/login/utils";
-import { useHydrate } from "@/utils/use-fetch-data";
 
-import { nextAuthOptions } from "./api/auth/[...nextauth]";
-
-type PageProps = {
-  user: User;
-  userConfigs: ParsedConfig[];
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async (
-  ctx
-) => {
-  const { req, res } = ctx;
-  const session = await getServerSession(req, res, nextAuthOptions);
-  const userSub = session?.user.sub;
+export function ProfilePage() {
+  useRootStyles();
 
-  if (userSub) {
-    const user = await findBySub(userSub);
-    const userConfigs = await getUserConfigs(user.id);
+  return (
+    <AppLayout>
+      <Box px={4} py={8} sx={{ textAlign: "center", flexGrow: 1 }}>
+        <Typography variant="h4" gutterBottom>
+          User Profile
+        </Typography>
+        <Typography variant="body1" color="text.secondary" mb={2}>
+          This page requires authentication and a backend database.
+          In demo mode, please use the{" "}
+          <NextLink href="/browse" passHref legacyBehavior>
+            <Link>browse</Link>
+          </NextLink>{" "}
+          page to explore datasets and create new visualizations.
+        </Typography>
+      </Box>
+      <Footer />
+    </AppLayout>
+  );
+}
 
-    return {
-      props: serializeProps({
-        user,
-        userConfigs,
-      }),
-    };
-  } else {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-};
+export default ProfilePage;
 
 const ProfilePage = (props: Serialized<PageProps>) => {
   const { user, userConfigs } = deserializeProps(props);
