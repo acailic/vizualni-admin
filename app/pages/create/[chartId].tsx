@@ -1,28 +1,14 @@
-import { GetServerSideProps, NextPage } from "next";
+import { NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { AppLayout } from "@/components/layout";
 import { Configurator, ConfiguratorStateProvider } from "@/configurator";
 import { AddNewDatasetPanel } from "@/configurator/components/add-new-dataset-panel";
 
-type PageProps = {
-  locale: string;
-  chartId: string;
-};
-
-export const getServerSideProps: GetServerSideProps<PageProps> = async ({
-  params,
-  locale,
-}) => {
-  return {
-    props: {
-      locale: locale!,
-      chartId: params!.chartId as string,
-    },
-  };
-};
-
-const ChartConfiguratorPage: NextPage<PageProps> = ({ chartId }) => {
+const ChartConfiguratorPage: NextPage = () => {
+  const router = useRouter();
+  const chartId = router.query.chartId as string;
   return (
     <>
       <Head>

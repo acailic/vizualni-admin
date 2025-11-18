@@ -1,6 +1,6 @@
 import { Config as PrismaConfig } from "@prisma/client";
 import "iframe-resizer/js/iframeResizer.contentWindow.js";
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import Script from "next/script";
@@ -11,8 +11,6 @@ import {
   ConfiguratorStateProvider,
   ConfiguratorStatePublished,
 } from "@/configurator";
-import { getConfig, increaseConfigViewCount } from "@/db/config";
-import { serializeProps } from "@/db/serialize";
 
 type PageProps =
   | {
@@ -25,24 +23,18 @@ type PageProps =
       };
     };
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async ({
-  query,
-  res,
-}) => {
-  const config = await getConfig(query.chartId as string);
+// For static export, we'll return an empty array
+// Charts won't be pre-rendered in demo mode
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: false,
+  };
+};
 
-  if (config?.data) {
-    await increaseConfigViewCount(config.key);
-    return {
-      props: serializeProps({
-        status: "found",
-        config,
-      }),
-    };
-  }
-
-  res.statusCode = 404;
-
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+  // In static export mode, return notfound
+  // In production with a database, this would fetch the config
   return {
     props: {
       status: "notfound",

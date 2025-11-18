@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Config as PrismaConfig, PUBLISHED_STATE } from "@prisma/client";
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import NextLink from "next/link";
@@ -25,8 +25,7 @@ import { PublishActions } from "@/components/publish-actions";
 import { ConfiguratorStatePublished } from "@/config-types";
 import { getChartConfig } from "@/config-utils";
 import { ConfiguratorStateProvider } from "@/configurator/configurator-state";
-import { getConfig, increaseConfigViewCount } from "@/db/config";
-import { deserializeProps, Serialized, serializeProps } from "@/db/serialize";
+import { deserializeProps, Serialized } from "@/db/serialize";
 import { useLocale } from "@/locales/use-locale";
 import { useDataSourceStore } from "@/stores/data-source";
 
@@ -42,25 +41,24 @@ type PageProps =
       };
     };
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async ({
-  query,
-  res,
-}) => {
-  const config = await getConfig(query.chartId as string);
+// For static export, we'll return an empty array
+// Charts won't be pre-rendered in demo mode
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: false,
+  };
+};
 
-  if (config && config.data) {
-    await increaseConfigViewCount(config.key);
-    return {
-      props: serializeProps({
-        status: "found",
-        config,
-      }),
-    };
-  }
-
-  res.statusCode = 404;
-
-  return { props: { status: "notfound", config: null, viewCount: null } };
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+  // In static export mode, return notfound
+  // In production with a database, this would fetch the config
+  return {
+    props: {
+      status: "notfound",
+      config: null,
+    },
+  };
 };
 
 const useStyles = makeStyles((theme: Theme) => ({

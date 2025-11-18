@@ -1,18 +1,13 @@
-import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 
 import { SelectDatasetStep } from "@/browse/ui/select-dataset-step";
 import { AppLayout } from "@/components/layout";
 import { ConfiguratorStateProvider } from "@/configurator/configurator-state";
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  return {
-    props: {
-      hideHeader: query.odsiframe === "true",
-    },
-  };
-};
+export function DatasetBrowser() {
+  const router = useRouter();
+  const hideHeader = router.query.odsiframe === "true";
 
-export function DatasetBrowser({ hideHeader }: { hideHeader: boolean }) {
   return (
     <AppLayout hideHeader={hideHeader}>
       <ConfiguratorStateProvider chartId="new" allowDefaultRedirect={false}>
