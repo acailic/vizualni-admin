@@ -1,12 +1,12 @@
 # Vizualni Admin - Serbian Open Data Visualization Tool
 
-A visualization tool for Serbian open data from [data.gov.rs](https://data.gov.rs), based on the [visualize-admin/visualization-tool](https://github.com/visualize-admin/visualization-tool).
+A visualization tool for Serbian open data from [data.gov.rs](https://data.gov.rs).
 
 **🌐 Live Demo**: [https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
 
 ## About
 
-This project is a fork/adaptation of the Swiss Federal Office for the Environment's visualization tool, customized to work with Serbian open data from the [Portal otvorenih podataka](https://data.gov.rs).
+This project is a fork/adaptation of other visualization tool, customized to work with Serbian open data from the [Portal otvorenih podataka](https://data.gov.rs).
 
 The tool allows users to:
 - Browse and visualize datasets from data.gov.rs
@@ -151,7 +151,7 @@ This project is licensed under the BSD-3-Clause License - see the [LICENSE](LICE
 
 ## Original Project
 
-This project is based on the [visualize-admin/visualization-tool](https://github.com/visualize-admin/visualization-tool) created by the Swiss Federal Office for the Environment (FOEN).
+This project is based on similar projects like  [visualize-admin/visualization-tool](https://github.com/visualize-admin/visualization-tool) created by the Swiss Federal Office for the Environment (FOEN).
 
 ## Contributing
 
