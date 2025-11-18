@@ -12,7 +12,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export function ProfilePage() {
+function ProfilePage() {
   useRootStyles();
 
   return (
@@ -34,26 +34,5 @@ export function ProfilePage() {
     </AppLayout>
   );
 }
-
-export default ProfilePage;
-
-const ProfilePage = (props: Serialized<PageProps>) => {
-  const { user, userConfigs } = deserializeProps(props);
-  const rootClasses = useRootStyles();
-
-  useHydrate(userConfigsKey, userConfigs);
-
-  return (
-    <AppLayout>
-      <Box className={rootClasses.root}>
-        <ProfileHeader user={user} />
-        <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-          <ProfileContentTabs userId={user.id} />
-        </Box>
-      </Box>
-      <Footer />
-    </AppLayout>
-  );
-};
 
 export default ProfilePage;

@@ -1,2 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[4875],{62066:function(u,n,s){"use strict";s.r(n);var t=s(26732);n.default=t.DatasetBrowser},28277:function(u,n,s){(window.__NEXT_P=window.__NEXT_P||[]).push(["/browse/[type]/[iri]/[subtype]/[subiri]/[subsubtype]/[subsubiri]",function(){return s(62066)}])}},function(u){u.O(0,[31434,88033,68143,72159,54568,96761,2386,22686,25592,17671,65362,92888,49774,40179],function(){return u(u.s=28277)}),_N_E=u.O()}]);
-//# sourceMappingURL=[subsubiri]-ad223217bc6f0b95.js.map
