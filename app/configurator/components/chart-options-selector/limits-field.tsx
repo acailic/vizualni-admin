@@ -272,7 +272,7 @@ export const LimitsField = ({
                 !supportsLimitSymbols ||
                 hasNoAxisDimension ? (
                   <div>
-                    <Typography variant="body3" component="p" sx={{ my: 2 }}>
+                    <Typography variant="body2" component="p" sx={{ my: 2 }}>
                       <Trans id="controls.section.targets-and-limit-values.line-type">
                         Select line type
                       </Trans>

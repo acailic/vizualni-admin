@@ -125,7 +125,7 @@ const DatasetRow = ({
           >
             <Trans id="dataset.footnotes.dataset">Dataset</Trans>
           </Button>
-          <Typography variant="body3">{cube.title}</Typography>
+          <Typography variant="body2">{cube.title}</Typography>
         </Flex>
         <div>
           {canRemove ? (

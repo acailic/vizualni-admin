@@ -41,7 +41,7 @@ export const SearchDatasetSortControl = ({
   return (
     <Flex alignItems="center">
       <label htmlFor="datasetSort">
-        <Typography variant="body3">
+        <Typography variant="body2">
           <Trans id="dataset.sortby">Sort by</Trans>
         </Typography>
       </label>

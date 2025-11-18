@@ -374,7 +374,7 @@ const ProfileVisualizationsRow = ({
               title={<Markdown>{chartTitle}</Markdown>}
               color="primary.main"
             >
-              <Typography variant="body3" component="p" noWrap>
+              <Typography variant="body2" component="p" noWrap>
                 <InlineMarkdown>{chartTitle}</InlineMarkdown>
               </Typography>
             </OverflowTooltip>
@@ -398,14 +398,14 @@ const ProfileVisualizationsRow = ({
                 title={data?.dataCubesMetadata[0]?.title ?? ""}
                 color="primary.main"
               >
-                <Typography variant="body3" component="p" noWrap>
+                <Typography variant="body2" component="p" noWrap>
                   {data?.dataCubesMetadata[0]?.title ?? ""}
                 </Typography>
               </OverflowTooltip>
             </Link>
           </NextLink>
         ) : (
-          <Typography variant="body3" component="p" noWrap>
+          <Typography variant="body2" component="p" noWrap>
             {t({
               id: "login.profile.my-visualizations.multiple-datasets",
               message: "Multiple datasets",
@@ -414,7 +414,7 @@ const ProfileVisualizationsRow = ({
         )}
       </TableCell>
       <TableCell>
-        <Typography variant="body3" component="p" noWrap>
+        <Typography variant="body2" component="p" noWrap>
           {formatInteger(config.viewCount)}
         </Typography>
       </TableCell>

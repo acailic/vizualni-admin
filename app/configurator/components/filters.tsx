@@ -549,7 +549,7 @@ const MultiFilterContent = ({
                     />
                   ) : (
                     <>
-                      <Typography variant="body3" style={{ flexGrow: 1 }}>
+                      <Typography variant="body2" style={{ flexGrow: 1 }}>
                         {label}
                       </Typography>
                       {enableSettingShowValuesBySegment ? (
@@ -806,7 +806,7 @@ const TreeAccordion = ({
             }}
           />
         )}
-        <Typography variant="body3" className={classes.optionLabel}>
+        <Typography variant="body2" className={classes.optionLabel}>
           {label}
         </Typography>
         <Icon
@@ -1021,7 +1021,7 @@ const DrawerContent = forwardRef<
               <SvgIcClose fontSize="inherit" />
             </IconButton>
           </Flex>
-          <Typography variant="body3" color="text.secondary">
+          <Typography variant="body2" color="text.secondary">
             <Trans id="controls.set-filters-caption">
               For best results, do not select more than 7 values in the
               visualization.

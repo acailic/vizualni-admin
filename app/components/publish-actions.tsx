@@ -174,7 +174,7 @@ const EmbedToggleSwitch = ({
     <Flex sx={{ alignItems: "center", gap: 1 }}>
       <FormControlLabel
         control={<Switch {...rest} />}
-        label={<Typography variant="body3">{label}</Typography>}
+        label={<Typography variant="body2">{label}</Typography>}
         sx={{ mr: 0 }}
       />
       {infoMessage && (
@@ -280,7 +280,7 @@ export const EmbedContent = ({
         <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
           <Trans id="publication.embed.iframe">Iframe Embed Code</Trans>
         </Typography>
-        <Typography variant="body3">
+        <Typography variant="body2">
           <Trans id="publication.embed.iframe.caption">
             Use this link to embed the chart into other webpages.
           </Trans>
@@ -432,7 +432,7 @@ export const EmbedContent = ({
             Embed Code for &quot;External Application&quot;
           </Trans>
         </Typography>
-        <Typography variant="body3">
+        <Typography variant="body2">
           <Trans id="publication.embed.external-application.caption">
             Use this link to embed the chart without iframe tags.
           </Trans>
