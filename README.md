@@ -1,6 +1,6 @@
-# Vizualni Admin - Serbian Open Data Visualization Tool
+# Vizualni Admin - Serbian Open Data Visualization Tool 🇷🇸
 
-A visualization tool for Serbian open data from [data.gov.rs](https://data.gov.rs).
+A visualization tool for Serbian open data from [data.gov.rs](https://data.gov.rs). 🇷🇸
 
 **🌐 Live Demo**: [https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
 
