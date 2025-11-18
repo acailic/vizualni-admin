@@ -94,6 +94,21 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
     chartType: 'map',
     tags: ['saobracaj', 'bezbednost', 'nezgode'],
     icon: '🚗'
+  },
+  healthcare: {
+    id: 'healthcare',
+    title: {
+      sr: 'Zdravstvo i bolnice',
+      en: 'Healthcare and Hospitals'
+    },
+    description: {
+      sr: 'Kapaciteti zdravstvenih ustanova, lista čekanja i statistika pacijenata',
+      en: 'Healthcare facility capacity, waiting lists and patient statistics'
+    },
+    searchQuery: 'zdravstvo',
+    chartType: 'bar',
+    tags: ['zdravstvo', 'bolnice', 'pacijenti'],
+    icon: '🏥'
   }
 };
 
