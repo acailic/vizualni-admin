@@ -1,0 +1,37 @@
+## Testing Strategy
+
+### E2E Testing
+
+Several end-to-end scenarios are run (searching, configuring charts) for every pull-request.
+
+### Snapshot Regression Testing
+
+- Existing chart configurations are downloaded from the ~~production~~ develompent environment stored in `app/test/__fixtures`
+- Running `yarn test` will compare **image snapshots** of the rendered charts with previous snapshots. When the new snapshots differ more than a certain threshold, the test will fail and a diff will be stored to inspect.
+
+To prevent regressions between releases, snapshot **tests are run automatically before a new version is applied**.
+
+### Notes
+
+- The snapshot tests rely on the app server running on http://localhost:3000
+- Fixtures can be updated by running `./scripts/fetch-config-fixtures.js`. Make sure that tests are passing before running this command and delete the `__image_snapshots__` directory in `app/test/` to get a fresh set of snapshots.
+
+### To Do
+
+- Download full data for test fixtures incl. observations, so tests can run faster and don't rely on network requests.
+
+## Query performance
+
+A developer tool to monitor resolver performance and SPARQL queries that are made by the server
+is available if a page is accessed with the `flag__debug=true` query parameter.
+
+See for example https://test.visualize.admin.ch/en?flag__debug=true
+
+A small 🛠 should be present in the lower corner of the screen and clicking it will display the
+GraphQL debug panel. This panel shows every GraphQL query that is made to the server and queries
+can be inspected to see the timings of its resolvers. SPARQL queries made during requests are
+also collected and shown.
+
+⚠️ To be able to collect SPARQL queries, we need to monkey-patch the SPARQL client. If a library
+uses its own SPARQL client, we cannot monitor the SPARQL queries made, so some requests that
+are made can be missing.

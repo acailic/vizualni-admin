@@ -1,0 +1,149 @@
+query SearchCubes(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $locale: String!
+  $query: String
+  $order: SearchCubeResultOrder
+  $includeDrafts: Boolean
+  $fetchDimensionTermsets: Boolean
+  $filters: [SearchCubeFilter!]
+) {
+  searchCubes(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    locale: $locale
+    query: $query
+    order: $order
+    includeDrafts: $includeDrafts
+    fetchDimensionTermsets: $fetchDimensionTermsets
+    filters: $filters
+  ) {
+    highlightedTitle
+    highlightedDescription
+    cube
+  }
+}
+
+query DataCubeLatestIri(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $cubeFilter: DataCubeLatestIriFilter!
+) {
+  dataCubeLatestIri(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    cubeFilter: $cubeFilter
+  )
+}
+
+query DataCubeUnversionedIri(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $cubeFilter: DataCubeUnversionedIriFilter!
+) {
+  dataCubeUnversionedIri(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    cubeFilter: $cubeFilter
+  )
+}
+
+query DataCubeComponents(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $locale: String!
+  $cubeFilter: DataCubeComponentFilter!
+) {
+  dataCubeComponents(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    locale: $locale
+    cubeFilter: $cubeFilter
+  )
+}
+
+query DataCubeDimensionGeoShapes(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $locale: String!
+  $cubeFilter: DataCubeDimensionGeoShapesCubeFilter!
+) {
+  dataCubeDimensionGeoShapes(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    locale: $locale
+    cubeFilter: $cubeFilter
+  )
+}
+
+query DataCubeMetadata(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $locale: String!
+  $cubeFilter: DataCubeMetadataFilter!
+) {
+  dataCubeMetadata(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    locale: $locale
+    cubeFilter: $cubeFilter
+  )
+}
+
+query DataCubeComponentTermsets(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $locale: String!
+  $cubeFilter: DataCubeTermsetFilter!
+) {
+  dataCubeComponentTermsets(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    locale: $locale
+    cubeFilter: $cubeFilter
+  )
+}
+
+query DataCubeObservations(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $locale: String!
+  $cubeFilter: DataCubeObservationFilter!
+) {
+  dataCubeObservations(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    locale: $locale
+    cubeFilter: $cubeFilter
+  )
+}
+
+query DataCubePreview(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $locale: String!
+  $cubeFilter: DataCubePreviewFilter!
+) {
+  dataCubePreview(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    locale: $locale
+    cubeFilter: $cubeFilter
+  )
+}
+
+query PossibleFilters(
+  $sourceType: String!
+  $sourceUrl: DataSourceUrl!
+  $cubeFilter: DataCubePossibleFiltersCubeFilter!
+) {
+  possibleFilters(
+    sourceType: $sourceType
+    sourceUrl: $sourceUrl
+    cubeFilter: $cubeFilter
+  ) {
+    type
+    id
+    value
+  }
+}

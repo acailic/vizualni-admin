@@ -1,0 +1,30 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "files.exclude": {
+    "**/.next": true
+  },
+  "search.exclude": {
+    "**/.yarn": true,
+    "yarn.lock": true
+  },
+  "playwright.env": {
+    // Set to "false" not to use any pre-recorded response for API routes
+    // during end-to-end tests
+    "E2E_HAR": "true",
+    "E2E_BASE_URL": "http://localhost:3000"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  }
+}

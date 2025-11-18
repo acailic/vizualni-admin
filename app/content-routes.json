@@ -1,0 +1,38 @@
+{
+  "imprint": {
+    "de": {
+      "title": "Impressum",
+      "path": "/de/impressum"
+    },
+    "fr": {
+      "title": "Impressum",
+      "path": "/fr/impressum"
+    },
+    "it": {
+      "title": "Colophon",
+      "path": "/it/colophon"
+    },
+    "en": {
+      "title": "Imprint",
+      "path": "/en/imprint"
+    }
+  },
+  "legal": {
+    "de": {
+      "title": "Rechtliche Grundlagen",
+      "path": "/de/rechtliche-grundlagen"
+    },
+    "fr": {
+      "title": "Cadre juridique",
+      "path": "/fr/cadre-juridique"
+    },
+    "it": {
+      "title": "Quadro giuridico",
+      "path": "/it/quadro-giuridico"
+    },
+    "en": {
+      "title": "Legal Framework",
+      "path": "/en/legal-framework"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+overwrite: true
+schema: "./app/graphql/schema.graphql"
+documents: ["./app/graphql/queries/*.graphql"]
+generates:
+  app/graphql/query-hooks.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-urql"
+    config:
+      nonOptionalTypename: true
+      preResolveTypes: true
+      withComponent: false
+      withHooks: true
+      contextType: ./context#VisualizeGraphQLContext
+      scalars:
+        Observation: "../domain/data#Observation"
+        ObservationValue: "../domain/data#ObservationValue"
+        DimensionValue: "../domain/data#DimensionValue"
+        HierarchyValue: "../domain/data#HierarchyValue"
+        RawObservation: "../domain/data#RawObservation"
+        Filters: "../configurator#Filters"
+        SingleFilters: "../configurator#SingleFilters"
+        SearchCube: "../domain/data#SearchCube"
+        DataCubeComponents: "../domain/data#DataCubeComponents"
+        DataCubeMetadata: "../domain/data#DataCubeMetadata"
+        DataCubeObservations: "../domain/data#DataCubeObservations"
+        DataCubePreview: "../domain/data#DataCubePreview"
+        Termset: "../domain/data#Termset"
+        ComponentTermsets: "../domain/data#ComponentTermsets"
+        GeoShapes: "../domain/data#GeoShapes"
+        DataSourceUrl: "../domain/data-source#DataSourceUrl"
+  app/graphql/resolver-types.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+      useIndexSignature: true
+      noSchemaStitching: true
+      contextType: ./context#VisualizeGraphQLContext
+      scalars:
+        Observation: "../domain/data#Observation"
+        ObservationValue: "../domain/data#ObservationValue"
+        DimensionValue: "../domain/data#DimensionValue"
+        HierarchyValue: "../domain/data#HierarchyValue"
+        RawObservation: "../domain/data#RawObservation"
+        Filters: "../configurator#Filters"
+        SingleFilters: "../configurator#SingleFilters"
+        SearchCube: "../domain/data#SearchCube"
+        DataCubeComponents: "../domain/data#DataCubeComponents"
+        DataCubeMetadata: "../domain/data#DataCubeMetadata"
+        DataCubeObservations: "../domain/data#DataCubeObservations"
+        DataCubePreview: "../domain/data#DataCubePreview"
+        Termset: "../domain/data#Termset"
+        ComponentTermsets: "../domain/data#ComponentTermsets"
+        GeoShapes: "../domain/data#GeoShapes"
+        DataSourceUrl: "../domain/data-source#DataSourceUrl"

@@ -1,0 +1,216 @@
+scalar Observation
+scalar DimensionValue
+scalar FilterValue
+scalar RawObservation
+scalar Filters
+scalar SingleFilters
+scalar ValueIdentifier
+scalar ValuePosition
+scalar HierarchyValue
+scalar DataCubeComponents
+scalar DataCubeMetadata
+scalar DataCubeObservations
+scalar DataCubePreview
+scalar Termset
+scalar ComponentTermsets
+scalar GeoShapes
+scalar SearchCube
+scalar DataSourceUrl
+
+directive @safeUrl(
+  pattern: String
+) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION | FIELD_DEFINITION
+
+enum DataCubePublicationStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum ScaleType {
+  Ordinal
+  Nominal
+  Interval
+  Ratio
+}
+
+enum RelatedDimensionType {
+  StandardError
+  ConfidenceUpperBound
+  ConfidenceLowerBound
+}
+
+type RelatedDimension {
+  type: RelatedDimensionType!
+  id: String!
+}
+
+type PossibleFilterValue {
+  type: String!
+  id: String!
+  value: FilterValue
+}
+
+enum TimeUnit {
+  Year
+  Month
+  Week
+  Day
+  Hour
+  Minute
+  Second
+}
+
+type SearchCubeResult {
+  score: Float
+  cube: SearchCube!
+  highlightedTitle: String
+  highlightedDescription: String
+}
+
+type DataCubeTheme {
+  iri: String!
+  label: String
+}
+
+type DataCubeOrganization {
+  iri: String!
+  label: String
+}
+
+type DataCubeTermset {
+  iri: String!
+  label: String
+}
+
+enum SearchCubeFilterType {
+  TemporalDimension
+  DataCubeTheme
+  DataCubeOrganization
+  DataCubeAbout
+  DataCubeTermset
+}
+
+input SearchCubeFilter {
+  type: SearchCubeFilterType!
+  label: String
+  value: String!
+}
+
+enum SearchCubeResultOrder {
+  SCORE
+  TITLE_ASC
+  CREATED_DESC
+}
+
+input DataCubeTermsetFilter {
+  iri: String!
+}
+
+input DataCubeComponentFilter {
+  iri: String!
+  filters: Filters
+  componentIds: [String!]
+  joinBy: [String!]
+  loadValues: Boolean
+}
+
+input DataCubeMetadataFilter {
+  iri: String!
+}
+
+input DataCubeObservationFilter {
+  iri: String!
+  filters: Filters
+  componentIds: [String!]
+  joinBy: [String!]
+}
+
+input DataCubeLatestIriFilter {
+  iri: String!
+}
+
+input DataCubeUnversionedIriFilter {
+  iri: String!
+}
+
+input DataCubePreviewFilter {
+  iri: String!
+}
+
+input DataCubePossibleFiltersCubeFilter {
+  iri: String!
+  filters: SingleFilters!
+}
+
+input DataCubeDimensionGeoShapesCubeFilter {
+  iri: String!
+  dimensionId: String!
+}
+
+# The "Query" type is special: it lists all of the available queries that
+# clients can execute, along with the return type for each.
+type Query {
+  dataCubeLatestIri(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    cubeFilter: DataCubeLatestIriFilter!
+  ): String!
+  dataCubeUnversionedIri(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    cubeFilter: DataCubeUnversionedIriFilter!
+  ): String
+  dataCubeComponents(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    locale: String!
+    # In case of changing this variable name, or any other `cubeFilter` down below,
+    # make sure to update GraphQL context to keep the caching-per-cube behavior working.
+    cubeFilter: DataCubeComponentFilter!
+  ): DataCubeComponents!
+  dataCubeComponentTermsets(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    locale: String!
+    cubeFilter: DataCubeTermsetFilter!
+  ): [ComponentTermsets!]!
+  dataCubeMetadata(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    locale: String!
+    cubeFilter: DataCubeMetadataFilter!
+  ): DataCubeMetadata!
+  dataCubeObservations(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    locale: String!
+    cubeFilter: DataCubeObservationFilter!
+  ): DataCubeObservations!
+  dataCubePreview(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    locale: String!
+    cubeFilter: DataCubePreviewFilter!
+  ): DataCubePreview!
+  possibleFilters(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    cubeFilter: DataCubePossibleFiltersCubeFilter!
+  ): [PossibleFilterValue!]!
+  searchCubes(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    locale: String
+    query: String
+    order: SearchCubeResultOrder
+    includeDrafts: Boolean
+    fetchDimensionTermsets: Boolean
+    filters: [SearchCubeFilter!]
+  ): [SearchCubeResult!]!
+  dataCubeDimensionGeoShapes(
+    sourceType: String!
+    sourceUrl: DataSourceUrl!
+    locale: String!
+    cubeFilter: DataCubeDimensionGeoShapesCubeFilter!
+  ): GeoShapes
+}

@@ -1,0 +1,86 @@
+{
+  "state": "CONFIGURING_CHART",
+  "dataSet": "https://environment.ld.admin.ch/foen/gefahren-waldbrand-warnung/1",
+  "dataSource": {
+    "type": "sparql",
+    "url": "https://lindas-cached.cluster.ldbar.ch/query"
+  },
+  "meta": {
+    "title": {
+      "de": "",
+      "fr": "",
+      "it": "",
+      "en": ""
+    },
+    "description": {
+      "de": "",
+      "fr": "",
+      "it": "",
+      "en": ""
+    }
+  },
+  "chartConfig": {
+    "version": "1.4.2",
+    "chartType": "table",
+    "filters": {},
+    "settings": {
+      "showSearch": true,
+      "showAllRows": false
+    },
+    "sorting": [],
+    "fields": {
+      "https://environment.ld.admin.ch/foen/gefahren-waldbrand-warnung/region": {
+        "componentIri": "https://environment.ld.admin.ch/foen/gefahren-waldbrand-warnung/region",
+        "componentType": "GeoShapesDimension",
+        "index": 0,
+        "isGroup": false,
+        "isHidden": false,
+        "columnStyle": {
+          "textStyle": "regular",
+          "type": "text",
+          "textColor": "#000",
+          "columnColor": "#fff"
+        }
+      },
+      "http://schema.org/validFrom": {
+        "componentIri": "http://schema.org/validFrom",
+        "componentType": "NominalDimension",
+        "index": 1,
+        "isGroup": false,
+        "isHidden": false,
+        "columnStyle": {
+          "textStyle": "regular",
+          "type": "text",
+          "textColor": "#000",
+          "columnColor": "#fff"
+        }
+      },
+      "https://environment.ld.admin.ch/foen/gefahren-waldbrand-warnung/canton": {
+        "componentIri": "https://environment.ld.admin.ch/foen/gefahren-waldbrand-warnung/canton",
+        "componentType": "NominalDimension",
+        "index": 2,
+        "isGroup": false,
+        "isHidden": false,
+        "columnStyle": {
+          "textStyle": "regular",
+          "type": "text",
+          "textColor": "#000",
+          "columnColor": "#fff"
+        }
+      },
+      "https://environment.ld.admin.ch/foen/gefahren-waldbrand-warnung/level": {
+        "componentIri": "https://environment.ld.admin.ch/foen/gefahren-waldbrand-warnung/level",
+        "componentType": "OrdinalMeasure",
+        "index": 3,
+        "isGroup": false,
+        "isHidden": false,
+        "columnStyle": {
+          "textStyle": "regular",
+          "type": "text",
+          "textColor": "#000",
+          "columnColor": "#fff"
+        }
+      }
+    }
+  }
+}
