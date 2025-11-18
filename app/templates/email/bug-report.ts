@@ -1,4 +1,50 @@
 export const bugReportTemplates = {
+  sr: `
+Prijava greške
+
+Opišite grešku 
+Jasan i sažet opis greške. Ako se čini da je povezana sa problemom sa podacima (nedostajuće vrednosti, pogrešno parsiranje), prvo proverite skup podataka na Portalu otvorenih podataka (https://data.gov.rs) da biste videli da li je tamo sve u redu.
+Molimo opišite...
+
+----------------------------------------------
+Kako reprodukovati
+Koraci za reprodukovanje ponašanja:
+1. Idite na '...'
+2. Kliknite na '...'
+3. Skrolujte do '...'
+4. Vidite grešku
+
+----------------------------------------------
+Očekivano ponašanje
+Jasan i sažet opis onoga što ste očekivali da se dogodi.
+Molimo opišite...
+
+----------------------------------------------
+Snimci ekrana ili video
+Ako je moguće, dodajte snimke ekrana ili kratak video da pomognete u stavljanju problema u kontekst.
+
+----------------------------------------------
+Okruženje
+Molimo dopunite sledeće informacije.
+- Vizualni Admin okruženje i verzija: [npr., v1.0.0]
+- Pretraživač i verzija [npr., Chrome 107]
+
+----------------------------------------------
+Dodatni kontekst
+Dodajte bilo koji dodatni kontekst o problemu ovde.
+Molimo opišite...
+
+----------------------------------------------
+Kontakt informacije
+Titula: 
+Prezime:
+Ime:
+Pozicija:
+Organizacija:
+Email:
+Broj telefona (za eventualana pitanja):
+`,
+
   en: `
 Bug Report
 

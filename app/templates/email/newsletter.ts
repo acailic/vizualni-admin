@@ -1,4 +1,18 @@
 export const newsletterTemplates = {
+  sr: `
+Želeo/la bih da se pretplatim na Vizualni Admin newsletter. Molimo dodajte moju email adresu na mailing listu
+
+----------------------------------------------
+Kontakt informacije
+Titula: 
+Prezime:
+Ime:
+Pozicija:
+Organizacija:
+Email:
+Broj telefona (za eventualna pitanja):
+  `,
+
   en: `
 I would like to subscribe to the Visualize newsletter. Please add my email address to the mailing list
 

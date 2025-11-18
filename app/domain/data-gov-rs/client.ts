@@ -16,7 +16,12 @@ import type {
 } from './types';
 
 export class DataGovRsClient {
-  private config: Required<DataGovRsConfig>;
+  private config: {
+    apiUrl: string;
+    apiKey?: string;
+    defaultPageSize: number;
+    timeout: number;
+  };
 
   constructor(config: DataGovRsConfig) {
     this.config = {
@@ -35,11 +40,11 @@ export class DataGovRsClient {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.config.apiUrl}${endpoint}`;
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Accept-Language': 'sr', // Default to Serbian
-      ...options.headers,
+      ...(options.headers as Record<string, string>),
     };
 
     // Add API key if available

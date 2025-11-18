@@ -1,0 +1,78 @@
+import { bugReportTemplates } from "@/templates/email/bug-report";
+import { featureRequestTemplates } from "@/templates/email/feature-request";
+import { newsletterTemplates } from "@/templates/email/newsletter";
+import { Divider } from "@mui/material";
+import { createMailtoLink } from "../../../app/templates/email";
+import {
+  OWNER_ORGANIZATION_EMAIL,
+  SUPPORT_EMAIL,
+} from "../../../app/templates/email/config";
+
+export const contentId = "home";
+
+<Intro
+  title="Vizualizujte otvorene podatke Srbije 🇷🇸"
+  teaser="Kreirajte i ugrađujte vizualizacije bilo kog skupa podataka dostupnog na Portalu otvorenih podataka Srbije (data.gov.rs)."
+  buttonLabel="Kreiraj vizualizaciju"
+/>
+<Tutorial
+  headline="Vizualizujte podatke u samo nekoliko koraka…"
+  step1="Odaberite skup podataka"
+  step2="Uredite vizualizaciju"
+  step3="Podelite i ugradite"
+/>
+<Examples
+  headline="Prilagodite po svojoj želji…"
+  example1Headline="Kreirajte prelepe vizualizacije"
+  example1Description="Odaberite iz široke palete tipova grafikona i konfigurišite ih prema svojim potrebama."
+  example2Headline="Koristite napredne prilagođavanja"
+  example2Description="Uz pomoć prilagođenih filtera i segmentacije podataka, čak i složena pitanja mogu biti vizualizovana."
+/>
+<Actions
+  contribute={{
+    headline: "Želite da vizualizujete svoje podatke?",
+    description:
+      "Saznajte kako možete integrisati svoje podatke na Portal otvorenih podataka Srbije.",
+    buttonLabel: "Saznajte više",
+    buttonUrl: "https://data.gov.rs",
+  }}
+  newsletter={{
+    headline: "Pretplatite se na naš Newsletter",
+    description: "Budite u toku i pretplatite se na naš newsletter.",
+    buttonLabel: "Pretplatite se",
+    buttonUrl: createMailtoLink("sr", {
+      recipients: {
+        to: OWNER_ORGANIZATION_EMAIL,
+      },
+      template: newsletterTemplates,
+      subject: "Vizualni Admin Newsletter Pretplata",
+    }),
+  }}
+  bugReport={{
+    headline: "Pronašli ste grešku?",
+    description: "Molimo prijavite grešku kako bismo mogli da je popravimo što pre",
+    buttonLabel: "Prijavite grešku",
+    buttonUrl: createMailtoLink("sr", {
+      recipients: {
+        to: OWNER_ORGANIZATION_EMAIL,
+        bcc: SUPPORT_EMAIL,
+      },
+      template: bugReportTemplates,
+      subject: "Vizualni Admin Prijava Greške",
+    }),
+  }}
+  featureRequest={{
+    headline: "Zahtev za novu funkcionalnost",
+    description:
+      "Pošaljite vaše zahteve za nove funkcionalnosti i pomozite nam da oblikujemo budućnost naše platforme!",
+    buttonLabel: "Pošaljite",
+    buttonUrl: createMailtoLink("sr", {
+      recipients: {
+        to: OWNER_ORGANIZATION_EMAIL,
+        bcc: SUPPORT_EMAIL,
+      },
+      template: featureRequestTemplates,
+      subject: "Vizualni Admin Zahtev za Funkcionalnost",
+    }),
+  }}
+/>

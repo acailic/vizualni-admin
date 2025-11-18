@@ -13,7 +13,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const configs = await loadFixtureConfigs();
 
   return {
-    props: { locale, configs },
+    props: { locale: locale || null, configs },
   };
 };
 

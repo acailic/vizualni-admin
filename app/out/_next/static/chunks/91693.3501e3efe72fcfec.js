@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[91693],{91693:function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t,r,l){return a[e]};var a={lastWeek:"eeee 'trecută la' p",yesterday:"'ieri la' p",today:"'astăzi la' p",tomorrow:"'m\xe2ine la' p",nextWeek:"eeee 'viitoare la' p",other:"P"};e.exports=t.default}}]);
+//# sourceMappingURL=91693.3501e3efe72fcfec.js.map

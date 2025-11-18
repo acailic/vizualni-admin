@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[37325],{37325:function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t,u,o){return r[e]};var r={lastWeek:"'પાછલા' eeee p",yesterday:"'ગઈકાલે' p",today:"'આજે' p",tomorrow:"'આવતીકાલે' p",nextWeek:"eeee p",other:"P"};e.exports=t.default}}]);
+//# sourceMappingURL=37325.2214744ae53fc921.js.map

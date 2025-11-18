@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[88188],{88188:function(e,t,a){a.r(t),a.d(t,{configs:function(){return n}});let n=[{chartId:"nI6X4V_EcK2c",name:"Bathing water quality (interactive filters hierarchie)",slug:"bathing-water-quality-hierarchie"},{chartId:"rOAYJqoZQKlU",name:"Column - Heavy metals",slug:"column-heavy-metals"},{chartId:"Z6Re21LHbOoP",name:"Pie - Red list",slug:"pie-red-list"},{chartId:"cfNkIaMvN_xL",name:"Scatterplot - Palmer Penguins",slug:"scatterplot-palmer-penguins"}]}}]);
+//# sourceMappingURL=88188.692695964d3f0ac4.js.map

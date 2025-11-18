@@ -1,4 +1,42 @@
 export const featureRequestTemplates = {
+  sr: `
+Nova funkcionalnost
+
+Da li je vaš zahtev za funkcionalnost povezan sa problemom?
+Jasan i sažet opis problema. Npr. Uvek sam frustriran kada [...]
+Molimo opišite...
+
+----------------------------------------------
+Opišite rešenje koje biste želeli
+Jasan i sažet opis onoga što želite da se dogodi.
+Molimo opišite...
+
+----------------------------------------------
+Opišite alternative koje ste razmotrili
+Jasan i sažet opis bilo kojih alternativnih rešenja ili funkcionalnosti koje ste razmotrili.
+Molimo opišite...
+
+----------------------------------------------
+Slučajevi upotrebe i uticaj
+Primeri kako bi funkcionalnost bila korisna i procena koliki bi njen uticaj bio.
+Molimo opišite...
+
+----------------------------------------------
+Dodatni kontekst
+Dodajte bilo koji dodatni kontekst ili snimke ekrana o zahtevu za funkcionalnost ovde.
+Molimo opišite...
+
+----------------------------------------------
+Kontakt informacije
+Titula: 
+Prezime:
+Ime:
+Pozicija:
+Organizacija:
+Email:
+Broj telefona (za eventualna pitanja):
+`,
+
   en: `
 New Feature
 
