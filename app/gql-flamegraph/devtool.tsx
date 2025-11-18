@@ -555,7 +555,7 @@ const FlagList = () => {
           <Box sx={{ display: "flex" }}>
             <FlagSwitch flagName={flag.name as FlagName} />
           </Box>
-          <Typography variant="body3" style={{ paddingLeft: "0.5rem" }}>
+          <Typography variant="body2" style={{ paddingLeft: "0.5rem" }}>
             {flag.description}
           </Typography>
         </Fragment>

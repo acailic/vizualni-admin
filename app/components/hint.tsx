@@ -273,7 +273,7 @@ export const ChartUnexpectedError = ({ error }: { error?: Error }) => {
         An unexpected error occurred while displaying this chart.
       </Trans>
       {error ? (
-        <Typography variant="body3" component="div" mt={2}>
+        <Typography variant="body2" component="div" mt={2}>
           {error.message}
         </Typography>
       ) : null}

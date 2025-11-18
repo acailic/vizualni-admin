@@ -390,7 +390,7 @@ export const Table = () => {
         </Box>
       )}
       <Typography
-        variant="body3"
+        variant="body2"
         sx={{ display: "flex", justifyContent: "flex-end", mb: 5 }}
       >
         <Trans id="chart.table.number.of.lines">Total number of rows:</Trans>{" "}

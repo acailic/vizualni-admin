@@ -20,6 +20,21 @@ export interface DemoConfig {
 }
 
 export const DEMO_CONFIGS: Record<string, DemoConfig> = {
+  'air-quality': {
+    id: 'air-quality',
+    title: {
+      sr: '🚨 Kvalitet vazduha - Detaljno',
+      en: '🚨 Air Quality - Detailed'
+    },
+    description: {
+      sr: 'Šokantni podaci o zagađenju vazduha sa WHO upozorenjima i zdravstvenim rizicima',
+      en: 'Shocking air pollution data with WHO warnings and health risks'
+    },
+    searchQuery: 'kvalitet vazduha',
+    chartType: 'line',
+    tags: ['zivotna-sredina', 'zdravlje', 'kritično'],
+    icon: '🚨'
+  },
   budget: {
     id: 'budget',
     title: {
@@ -91,7 +106,7 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
       en: 'Traffic accidents and road safety statistics'
     },
     searchQuery: 'saobracaj',
-    chartType: 'map',
+    chartType: 'column',
     tags: ['saobracaj', 'bezbednost', 'nezgode'],
     icon: '🚗'
   },
@@ -109,6 +124,110 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
     chartType: 'bar',
     tags: ['zdravstvo', 'bolnice', 'pacijenti'],
     icon: '🏥'
+  health: {
+    id: 'health',
+    title: {
+      sr: 'Zdravstvo',
+      en: 'Healthcare'
+    },
+    description: {
+      sr: 'Zdravstveni podaci - bolnice, pacijenti, zdravstvene usluge',
+      en: 'Healthcare data - hospitals, patients, medical services'
+    },
+    searchQuery: 'zdravstvo',
+    chartType: 'bar',
+    tags: ['zdravstvo', 'medicina', 'bolnice'],
+    icon: '🏥'
+  },
+  employment: {
+    id: 'employment',
+    title: {
+      sr: 'Zaposlenost i tržište rada',
+      en: 'Employment and Labor Market'
+    },
+    description: {
+      sr: 'Statistika zaposlenih, nezaposlenih i slobodnih radnih mesta',
+      en: 'Statistics on employment, unemployment, and job vacancies'
+    },
+    searchQuery: 'zaposlenost',
+    chartType: 'line',
+    tags: ['zaposlenost', 'rad', 'ekonomija'],
+    icon: '💼'
+  },
+  energy: {
+    id: 'energy',
+    title: {
+      sr: 'Energetika',
+      en: 'Energy'
+    },
+    description: {
+      sr: 'Podaci o proizvodnji i potrošnji energije u Srbiji',
+      en: 'Data on energy production and consumption in Serbia'
+    },
+    searchQuery: 'energija',
+    chartType: 'column',
+    tags: ['energija', 'elektricna-energija', 'obnovljivi-izvori'],
+    icon: '⚡'
+  },
+  agriculture: {
+    id: 'agriculture',
+    title: {
+      sr: 'Poljoprivreda',
+      en: 'Agriculture'
+    },
+    description: {
+      sr: 'Poljoprivredni podaci - proizvodnja, usevi, stočarstvo',
+      en: 'Agricultural data - production, crops, livestock'
+    },
+    searchQuery: 'poljoprivreda',
+    chartType: 'bar',
+    tags: ['poljoprivreda', 'prehrambena-industrija', 'ruralni-razvoj'],
+    icon: '🌾'
+  },
+  tourism: {
+    id: 'tourism',
+    title: {
+      sr: 'Turizam',
+      en: 'Tourism'
+    },
+    description: {
+      sr: 'Turističke statistike - dolasci, noćenja, turistička potrošnja',
+      en: 'Tourism statistics - arrivals, overnight stays, tourism spending'
+    },
+    searchQuery: 'turizam',
+    chartType: 'line',
+    tags: ['turizam', 'ugostiteljstvo', 'kultura'],
+    icon: '✈️'
+  },
+  culture: {
+    id: 'culture',
+    title: {
+      sr: 'Kultura i umetnost',
+      en: 'Culture and Arts'
+    },
+    description: {
+      sr: 'Podaci o kulturnim ustanovama, događajima i kulturnoj baštini',
+      en: 'Data on cultural institutions, events, and cultural heritage'
+    },
+    searchQuery: 'kultura',
+    chartType: 'pie',
+    tags: ['kultura', 'umetnost', 'muzej'],
+    icon: '🎭'
+  },
+  infrastructure: {
+    id: 'infrastructure',
+    title: {
+      sr: 'Infrastruktura',
+      en: 'Infrastructure'
+    },
+    description: {
+      sr: 'Javna infrastruktura - putevi, vodovod, kanalizacija',
+      en: 'Public infrastructure - roads, water supply, sewerage'
+    },
+    searchQuery: 'infrastruktura',
+    chartType: 'column',
+    tags: ['infrastruktura', 'javni-radovi', 'gradnja'],
+    icon: '🏗️'
   }
 };
 

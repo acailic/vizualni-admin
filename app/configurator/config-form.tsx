@@ -58,6 +58,10 @@ export type Option = {
 
 export type OptionGroupKey = $FixMe;
 
+/**
+ * Base props for form field components.
+ * Extracts essential input attributes for consistent form handling.
+ */
 export type FieldProps = Pick<
   InputHTMLAttributes<HTMLInputElement>,
   "onChange" | "id" | "name" | "value" | "checked" | "type"
