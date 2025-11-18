@@ -21,7 +21,8 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "incremental": true
+    "incremental": true,
+    "tsBuildInfoFile": ".next/cache/tsconfig.tsbuildinfo"
   },
   "exclude": ["node_modules", "../node_modules", ".next"],
   "include": ["**/*.ts", "**/*.tsx"]
