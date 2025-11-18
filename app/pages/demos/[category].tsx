@@ -4,7 +4,8 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Tabs, Tab } from '@mui/material';
+import { useState } from 'react';
 import { DemoLayout, DemoLoading, DemoError, DemoEmpty } from '@/components/demos/demo-layout';
 import { SimpleChart } from '@/components/demos/simple-chart';
 import { DEMO_CONFIGS, getDemoConfig } from '@/lib/demos/config';
@@ -13,10 +14,12 @@ import dynamic from 'next/dynamic';
 
 // Import enhanced air quality page
 const AirQualityDemo = dynamic(() => import('./air-quality'), { ssr: true });
+import { ChartVisualizer } from '@/components/demos/ChartVisualizer';
 
 export default function DemoPage() {
   const router = useRouter();
   const { category } = router.query;
+  const [activeTab, setActiveTab] = useState(0);
 
   // Use enhanced air quality visualization
   if (category === 'air-quality') {
@@ -95,7 +98,13 @@ export default function DemoPage() {
                 <Typography variant="body2" color="text.secondary">
                   <strong>Format:</strong> {resource.format}
                 </Typography>
+              )} 
+              {Array.isArray(data) && (
+                <Typography variant="body2" color="text.secondary">
+                  <strong>Broj redova:</strong> {data.length}
+                </Typography>
               )}
+ 
             </Box>
           </Paper>
 
@@ -116,56 +125,77 @@ export default function DemoPage() {
               <Typography variant="body2" color="text.secondary">
                 Podaci nisu dostupni u formatu pogodnom za vizualizaciju.
               </Typography>
-            )}
+            )} 
           </Paper>
 
-          {/* Data Table Preview */}
-          <Box>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Pregled podataka
-            </Typography>
+          {/* Tabs for different views */}
+          <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
+            <Tabs value={activeTab} onChange={(e, v) => setActiveTab(v)}>
+              <Tab label="📊 Vizualizacija" />
+              <Tab label="📋 Tabela podataka" />
+            </Tabs>
+          </Box>
 
-            {Array.isArray(data) && data.length > 0 ? (
-              <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
-                <Table stickyHeader size="small">
-                  <TableHead>
-                    <TableRow>
-                      {Object.keys(data[0]).map((key) => (
-                        <TableCell key={key} sx={{ fontWeight: 600, backgroundColor: 'grey.100' }}>
-                          {key}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {data.slice(0, 20).map((row: any, i: number) => (
-                      <TableRow key={i} hover>
-                        {Object.values(row).map((value: any, j: number) => (
-                          <TableCell key={j}>
-                            {value !== null && value !== undefined
-                              ? String(value)
-                              : '-'}
+          {/* Chart View */}
+          {activeTab === 0 && Array.isArray(data) && data.length > 0 && (
+            <Paper sx={{ p: 4, mb: 4, backgroundColor: 'white' }}>
+              <ChartVisualizer
+                data={data}
+                chartType={config.chartType}
+                title={`${config.chartType.charAt(0).toUpperCase() + config.chartType.slice(1)} vizualizacija`}
+              />
+            </Paper>
+          )}
+
+          {/* Data Table View */}
+          {activeTab === 1 && (
+            <Box>
+              <Typography variant="h6" sx={{ mb: 2 }}>
+                Pregled podataka
+              </Typography>
+
+              {Array.isArray(data) && data.length > 0 ? (
+                <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
+                  <Table stickyHeader size="small">
+                    <TableHead>
+                      <TableRow>
+                        {Object.keys(data[0]).map((key) => (
+                          <TableCell key={key} sx={{ fontWeight: 600, backgroundColor: 'grey.100' }}>
+                            {key}
                           </TableCell>
                         ))}
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            ) : (
-              <Paper sx={{ p: 3, textAlign: 'center' }}>
-                <Typography color="text.secondary">
-                  Podaci nisu dostupni u tabelarnom formatu
-                </Typography>
-              </Paper>
-            )}
+                    </TableHead>
+                    <TableBody>
+                      {data.slice(0, 50).map((row: any, i: number) => (
+                        <TableRow key={i} hover>
+                          {Object.values(row).map((value: any, j: number) => (
+                            <TableCell key={j}>
+                              {value !== null && value !== undefined
+                                ? String(value)
+                                : '-'}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ) : (
+                <Paper sx={{ p: 3, textAlign: 'center' }}>
+                  <Typography color="text.secondary">
+                    Podaci nisu dostupni u tabelarnom formatu
+                  </Typography>
+                </Paper>
+              )}
 
-            {Array.isArray(data) && data.length > 20 && (
-              <Typography variant="body2" color="text.secondary" sx={{ mt: 2, textAlign: 'center' }}>
-                Prikazano prvih 20 od {data.length} redova
-              </Typography>
-            )}
-          </Box>
+              {Array.isArray(data) && data.length > 50 && (
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 2, textAlign: 'center' }}>
+                  Prikazano prvih 50 od {data.length} redova
+                </Typography>
+              )}
+            </Box>
+          )}
         </Box>
       )}
 
