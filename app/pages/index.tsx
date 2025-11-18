@@ -29,7 +29,9 @@ export default function ContentPage({ staticPage }: ContentPageProps) {
 export const getStaticProps: GetStaticProps<ContentPageProps> = async ({
   locale,
 }) => {
-  const path = `/${locale}/index`;
+  // When i18n is disabled (e.g., for GitHub Pages), use the default locale
+  const actualLocale = locale || 'sr';
+  const path = `/${actualLocale}/index`;
 
   // FIXME: this check should not be needed when fallback: false can be used
   const pageExists = !!staticPages[path];

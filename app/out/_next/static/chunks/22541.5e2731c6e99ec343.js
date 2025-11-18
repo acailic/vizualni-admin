@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[22541],{22541:function(e,l){Object.defineProperty(l,"__esModule",{value:!0}),l.default=function(e,l,a,f){return t[e]};var t={lastWeek:"eeee 'li għadda' 'fil-'p",yesterday:"'Il-bieraħ fil-'p",today:"'Illum fil-'p",tomorrow:"'Għada fil-'p",nextWeek:"eeee 'fil-'p",other:"P"};e.exports=l.default}}]);
+//# sourceMappingURL=22541.5e2731c6e99ec343.js.map

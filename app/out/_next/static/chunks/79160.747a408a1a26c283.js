@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[79160],{79160:function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t,r,s){return n[e]};var n={lastWeek:"'t\xeb' eeee 'e shkuar n\xeb' p",yesterday:"'dje n\xeb' p",today:"'sot n\xeb' p",tomorrow:"'nes\xebr n\xeb' p",nextWeek:"eeee 'at' p",other:"P"};e.exports=t.default}}]);
+//# sourceMappingURL=79160.747a408a1a26c283.js.map
