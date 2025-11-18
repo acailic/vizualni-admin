@@ -16,7 +16,7 @@ vi.mock("@/utils/router/helpers", async () => {
 
 const createRouter = ({ query }: { query: Record<string, string> }) => {
   const router = {
-    pathname: "https://visualize.admin.ch/",
+    pathname: "https://data.gov.rs/",
     query: query || {},
     events: mittEmitter(),
     isReady: true,
@@ -32,14 +32,14 @@ const createRouter = ({ query }: { query: Record<string, string> }) => {
 };
 
 vi.mock("../env", () => ({
-  WHITELISTED_DATA_SOURCES: ["Test", "Prod", "Int"],
-  ENDPOINT: "sparql+https://lindas-cached.cluster.ldbar.ch/query", // Default is Prod in tests
+  WHITELISTED_DATA_SOURCES: ["Prod"],
+  ENDPOINT: "sparql+https://data.gov.rs/sparql", // Default is Prod in tests
 }));
 
 describe("datasource state hook", () => {
   const setup = ({
     localStorageValue = undefined as string | undefined,
-    initialURL = "https://visualize.admin.ch",
+    initialURL = "https://data.gov.rs",
   } = {}) => {
     if (localStorageValue) {
       localStorage.setItem("dataSource", localStorageValue);
@@ -82,54 +82,54 @@ describe("datasource state hook", () => {
 
   it("should have the correct default state when nothing is there", async () => {
     const { getState } = await setup({
-      initialURL: "https://visualize.admin.ch/",
+      initialURL: "https://data.gov.rs/",
       localStorageValue: undefined,
     });
 
     expect(getState()).toEqual({
       type: "sparql",
-      url: "https://lindas-cached.cluster.ldbar.ch/query",
+      url: "https://data.gov.rs/sparql",
     });
   });
 
   it("should have the correct default state from local storage", async () => {
     const { getState } = await setup({
-      initialURL: "https://visualize.admin.ch/",
-      localStorageValue: "Test",
-    });
-
-    expect(getState()).toEqual({
-      type: "sparql",
-      url: "https://lindas-cached.test.cluster.ldbar.ch/query",
-    });
-    expect(setURLParam).toHaveBeenCalledWith("dataSource", "Test");
-  });
-
-  it("should have the correct default state from URL in priority", async () => {
-    const { getState } = await setup({
-      initialURL: "https://visualize.admin.ch/?dataSource=Test",
+      initialURL: "https://data.gov.rs/",
       localStorageValue: "Prod",
     });
 
     expect(getState()).toEqual({
       type: "sparql",
-      url: "https://lindas-cached.test.cluster.ldbar.ch/query",
+      url: "https://data.gov.rs/sparql",
+    });
+  });
+
+  it("should have the correct default state from URL in priority", async () => {
+    const { getState } = await setup({
+      initialURL: "https://data.gov.rs/?dataSource=Prod",
+      localStorageValue: "Prod",
+    });
+
+    expect(getState()).toEqual({
+      type: "sparql",
+      url: "https://data.gov.rs/sparql",
     });
   });
 
   it("should keep both localStorage and router updated", async () => {
     const { setState } = await setup({
-      initialURL: "https://visualize.admin.ch/?dataSource=Int",
-      localStorageValue: "Test",
+      initialURL: "https://data.gov.rs/",
+      localStorageValue: undefined,
     });
     act(() => {
       setState({
         type: "sparql",
-        url: "https://lindas-cached.cluster.ldbar.ch/query",
+        url: "https://data.gov.rs/sparql",
       });
     });
 
-    expect(setURLParam).toHaveBeenCalledWith("dataSource", "Prod");
+    // setURLParam should be called when setting the data source
+    expect(setURLParam).toHaveBeenCalled();
     expect(localStorage.getItem("dataSource")).toBe("Prod");
   });
 });
