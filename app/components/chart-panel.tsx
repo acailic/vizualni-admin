@@ -52,9 +52,16 @@ const useStyles = makeStyles<
 export const getChartWrapperId = (chartKey: string) =>
   `chart-wrapper-${chartKey}`;
 
+/**
+ * Props for the ChartWrapper component.
+ * Wraps a chart with editing controls and layout-specific behavior.
+ */
 export type ChartWrapperProps = BoxProps & {
+  /** Whether the chart is in editing mode */
   editing?: boolean;
+  /** Layout configuration for the chart */
   layout?: Layout;
+  /** Unique identifier for the chart */
   chartKey: string;
 };
 
@@ -91,9 +98,15 @@ type ChartPanelLayoutProps = PropsWithChildren<{
 }> &
   HTMLProps<HTMLDivElement>;
 
+/**
+ * Props for different chart panel layout types (vertical, tall, canvas).
+ */
 export type ChartPanelLayoutTypeProps = {
+  /** Layout blocks to render (charts or text blocks) */
   blocks: LayoutBlock[];
+  /** Function to render each individual block */
   renderBlock: (block: LayoutBlock) => JSX.Element;
+  /** Optional CSS class name */
   className?: string;
 };
 
