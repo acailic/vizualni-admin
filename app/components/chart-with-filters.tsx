@@ -3,14 +3,10 @@ import dynamic from "next/dynamic";
 import { forwardRef } from "react";
 
 import { useQueryFilters } from "@/charts/shared/chart-helpers";
+import { ChartWithFiltersProps } from "@/charts/shared/chart-props";
 import { Observer } from "@/charts/shared/use-size";
 import { useSyncInteractiveFilters } from "@/charts/shared/use-sync-interactive-filters";
-import { EmbedQueryParams } from "@/components/embed-params";
-import {
-  type ChartConfig,
-  type DashboardFiltersConfig,
-  type DataSource,
-} from "@/config-types";
+import { DataCubeObservationFilter } from "@/graphql/query-hooks";
 
 const ChartAreasVisualization = dynamic(
   import("@/charts/area/chart-area").then(
@@ -79,12 +75,9 @@ const ChartTableVisualization = dynamic(
   )
 );
 
-type GenericChartProps = {
-  dataSource: DataSource;
-  componentIds: string[] | undefined;
-  chartConfig: ChartConfig;
-  dashboardFilters: DashboardFiltersConfig | undefined;
-  embedParams?: EmbedQueryParams;
+type GenericChartProps = ChartWithFiltersProps & {
+  /** Filters to apply when querying observations */
+  observationQueryFilters: DataCubeObservationFilter[];
 };
 
 const GenericChart = ({
@@ -171,13 +164,7 @@ const GenericChart = ({
   }
 };
 
-type ChartWithFiltersProps = {
-  dataSource: DataSource;
-  componentIds: string[] | undefined;
-  chartConfig: ChartConfig;
-  dashboardFilters: DashboardFiltersConfig | undefined;
-  embedParams?: EmbedQueryParams;
-};
+// Note: ChartWithFiltersProps is now imported from chart-props.tsx
 
 export const useChartWithFiltersClasses = makeStyles(() => ({
   chartWithFilters: {

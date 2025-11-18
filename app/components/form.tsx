@@ -227,12 +227,22 @@ export const Slider = ({
   );
 };
 
+/**
+ * Props for Checkbox component.
+ * Combines Material-UI checkbox props with form field props.
+ */
 export type CheckboxProps = {
+  /** Label text or element to display next to checkbox */
   label: ComponentProps<typeof FormControlLabel>["label"];
+  /** Size variant of the checkbox */
   size?: ComponentProps<typeof FormControlLabel>["size"];
+  /** Whether the checkbox is disabled */
   disabled?: boolean;
+  /** Custom color for the checkbox */
   color?: string;
+  /** Whether to show indeterminate state */
   indeterminate?: boolean;
+  /** Optional CSS class name */
   className?: string;
 } & FieldProps;
 

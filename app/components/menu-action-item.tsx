@@ -21,31 +21,53 @@ const StyledMenuItem = styled(MenuItem)(({ theme, color }) => ({
   whiteSpace: "normal",
 })) as typeof MenuItem;
 
+/**
+ * Props for menu action items (buttons or links in dropdown menus).
+ * Uses discriminated union for type-safe button vs link behavior.
+ */
 export type MenuActionProps = {
+  /** Whether the action is disabled */
   disabled?: boolean;
+  /** Label text or custom content */
   label: string | NonNullable<ReactNode>;
+  /** Icon to display after the label */
   trailingIconName?: IconName;
+  /** Icon to display before the label */
   leadingIconName?: IconName;
+  /** Display priority (higher = shown first) */
   priority?: number;
+  /** Whether menu stays open after clicking */
   stayOpen?: boolean;
+  /** Color variant (red for destructive actions) */
   color?: "red";
+  /** Click handler (optional for links) */
   onClick?: (e: MouseEvent<HTMLElement>) => Promise<unknown> | void;
 } & (
   | {
+      /** Link type action */
       type: "link";
+      /** URL to navigate to */
       href: string;
+      /** Link target (_blank, _self, etc.) */
       target?: string;
+      /** Link rel attribute */
       rel?: string;
     }
   | {
+      /** Button type action without confirmation */
       type: "button";
       requireConfirmation?: false | undefined;
+      /** Click handler */
       onClick: (e: MouseEvent<HTMLElement>) => Promise<unknown> | void;
     }
   | {
+      /** Button type action with confirmation dialog */
       type: "button";
+      /** Click handler */
       onClick: (e: MouseEvent<HTMLElement>) => Promise<unknown> | void;
+      /** Requires user confirmation before action */
       requireConfirmation: true;
+      /** Title for confirmation dialog */
       confirmationTitle?: string;
       confirmationText?: string;
       onDialogClose?: () => void;
