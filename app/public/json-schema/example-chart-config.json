@@ -1,5 +1,5 @@
 {
-  "$schema": "https://visualize.admin.ch/json-schema/chart-config.json",
+  "$schema": "https://data.gov.rs/json-schema/chart-config.json",
   "type": "object",
   "schema": {
     "key": "",

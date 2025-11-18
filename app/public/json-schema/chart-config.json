@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://visualize.admin.ch/json-schema/chart-config.json",
+  "$id": "https://data.gov.rs/json-schema/chart-config.json",
   "type": "object",
   "title": "Chart Config",
-  "description": "JSON Schema for visualize.admin chart configuration.",
+  "description": "JSON Schema for data.gov.rs chart configuration.",
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://visualize.admin.ch/json-schema/chart-config.json"
+      "const": "https://data.gov.rs/json-schema/chart-config.json"
     },
     "schema": {
       "anyOf": [

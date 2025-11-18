@@ -84,7 +84,7 @@ export const DataSetPreview = ({
         >
           <Head>
             <title key="title">
-              {dataCubeMetadata.title} - visualize.admin.ch
+              {dataCubeMetadata.title} - data.gov.rs
             </title>
           </Head>
           {!odsIframe && (

@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://visualize.admin.ch/json-schema/configurator-state.json",
+  "$id": "https://data.gov.rs/json-schema/configurator-state.json",
   "type": "object",
   "title": "Configurator State",
-  "description": "JSON Schema for visualize.admin configurator state.",
+  "description": "JSON Schema for data.gov.rs configurator state.",
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://visualize.admin.ch/json-schema/configurator-state.json"
+      "const": "https://data.gov.rs/json-schema/configurator-state.json"
     },
     "schema": {
       "anyOf": [

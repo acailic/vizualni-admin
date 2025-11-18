@@ -95,8 +95,8 @@ export const Header = ({
       </TopBar>
       {hideLogo ? null : (
         <SwissFederalCiHeader
-          longTitle="visualize.admin.ch"
-          shortTitle="visualize"
+          longTitle="data.gov.rs"
+          shortTitle="data"
           rootHref="/"
           sx={{ backgroundColor: "white" }}
         />

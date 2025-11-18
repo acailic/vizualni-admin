@@ -65,7 +65,7 @@ export const Footer = ({ sx }: { sx?: SxProps }) => {
           text={t({
             id: "footer.about_us.text",
             message:
-              "The portal visualize.admin.ch allows the visualization of Swiss Open Government Data provided by the LINDAS Linked Data Service. Open Government Data (OGD) are data that are made available to the public free of charge in computer-readable format.",
+              "The portal data.gov.rs allows the visualization of Serbian Open Government Data. Open Government Data (OGD) are data that are made available to the public free of charge in computer-readable format.",
           })}
         />
       </FooterSection>
