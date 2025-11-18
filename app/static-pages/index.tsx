@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic";
 
 const pages = [
+  { path: "/sr/index", locale: "sr" },
+  
   { path: "/de/index", locale: "de" },
   { path: "/de/impressum", locale: "de" },
   { path: "/de/rechtliche-grundlagen", locale: "de" },
