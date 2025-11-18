@@ -12,18 +12,14 @@ import {
   TimeLocaleObject,
 } from "d3-time-format";
 import {
-  de as pluralsDe,
   en as pluralsEn,
-  fr as pluralsFr,
-  it as pluralsIt,
+  sr as pluralsSr,
 } from "make-plural/plurals";
 
 import { defaultLocale, locales } from "@/locales/constants";
 
-import { messages as catalogDe } from "./de/messages";
+import { messages as catalogSr } from "./sr/messages";
 import { messages as catalogEn } from "./en/messages";
-import { messages as catalogFr } from "./fr/messages";
-import { messages as catalogIt } from "./it/messages";
 
 export type Locale = (typeof locales)[number];
 
@@ -31,15 +27,11 @@ export { defaultLocale, locales };
 export { i18n };
 
 i18n.loadLocaleData({
-  de: { plurals: pluralsDe },
-  fr: { plurals: pluralsFr },
-  it: { plurals: pluralsIt },
+  sr: { plurals: pluralsSr },
   en: { plurals: pluralsEn },
 });
 i18n.load({
-  de: catalogDe,
-  fr: catalogFr,
-  it: catalogIt,
+  sr: catalogSr,
   en: catalogEn,
 });
 i18n.activate(defaultLocale);
@@ -47,7 +39,7 @@ i18n.activate(defaultLocale);
 /**
  * Parses a valid app locale from a locale string (e.g. a Accept-Language header).
  * If unparseable, returns default locale.
- * @param localeString locale string, e.g. de,en-US;q=0.7,en;q=0.3
+ * @param localeString locale string, e.g. sr,en-US;q=0.7,en;q=0.3
  */
 export const parseLocaleString = (
   localeString: string | null | undefined
@@ -55,53 +47,53 @@ export const parseLocaleString = (
   if (localeString == null) {
     return defaultLocale;
   }
-  const result = /^(de|fr|it|en)/.exec(localeString);
+  const result = /^(sr|en)/.exec(localeString);
   return result ? (result[1] as Locale) : defaultLocale;
 };
 
 // Below constants are extracted from d3-time-format/locale.
-const timeFormatDe = {
-  dateTime: "%A, der %e. %B %Y, %X",
+const timeFormatSr = {
+  dateTime: "%A, %e. %B %Y, %X",
   date: "%d.%m.%Y",
   time: "%H:%M:%S",
   periods: ["AM", "PM"],
   days: [
-    "Sonntag",
-    "Montag",
-    "Dienstag",
-    "Mittwoch",
-    "Donnerstag",
-    "Freitag",
-    "Samstag",
+    "Nedelja",
+    "Ponedeljak",
+    "Utorak",
+    "Sreda",
+    "Četvrtak",
+    "Petak",
+    "Subota",
   ],
-  shortDays: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+  shortDays: ["Ned", "Pon", "Uto", "Sre", "Čet", "Pet", "Sub"],
   months: [
     "Januar",
     "Februar",
-    "März",
+    "Mart",
     "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "Dezember",
+    "Maj",
+    "Jun",
+    "Jul",
+    "Avgust",
+    "Septembar",
+    "Oktobar",
+    "Novembar",
+    "Decembar",
   ],
   shortMonths: [
     "Jan",
     "Feb",
-    "Mrz",
+    "Mar",
     "Apr",
-    "Mai",
+    "Maj",
     "Jun",
     "Jul",
-    "Aug",
+    "Avg",
     "Sep",
     "Okt",
     "Nov",
-    "Dez",
+    "Dec",
   ],
 };
 
@@ -150,118 +142,24 @@ const timeFormatEn = {
   ],
 };
 
-const timeFormatFr = {
-  dateTime: "%A %e %B %Y à %X",
-  date: "%d/%m/%Y",
-  time: "%H:%M:%S",
-  periods: ["AM", "PM"],
-  days: [
-    "dimanche",
-    "lundi",
-    "mardi",
-    "mercredi",
-    "jeudi",
-    "vendredi",
-    "samedi",
-  ],
-  shortDays: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
-  months: [
-    "janvier",
-    "février",
-    "mars",
-    "avril",
-    "mai",
-    "juin",
-    "juillet",
-    "août",
-    "septembre",
-    "octobre",
-    "novembre",
-    "décembre",
-  ],
-  shortMonths: [
-    "janv.",
-    "févr.",
-    "mars",
-    "avr.",
-    "mai",
-    "juin",
-    "juil.",
-    "août",
-    "sept.",
-    "oct.",
-    "nov.",
-    "déc.",
-  ],
-};
-
-const timeFormatIt = {
-  dateTime: "%A %e %B %Y, %X",
-  date: "%d/%m/%Y",
-  time: "%H:%M:%S",
-  periods: ["AM", "PM"],
-  days: [
-    "Domenica",
-    "Lunedì",
-    "Martedì",
-    "Mercoledì",
-    "Giovedì",
-    "Venerdì",
-    "Sabato",
-  ],
-  shortDays: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
-  months: [
-    "Gennaio",
-    "Febbraio",
-    "Marzo",
-    "Aprile",
-    "Maggio",
-    "Giugno",
-    "Luglio",
-    "Agosto",
-    "Settembre",
-    "Ottobre",
-    "Novembre",
-    "Dicembre",
-  ],
-  shortMonths: [
-    "Gen",
-    "Feb",
-    "Mar",
-    "Apr",
-    "Mag",
-    "Giu",
-    "Lug",
-    "Ago",
-    "Set",
-    "Ott",
-    "Nov",
-    "Dic",
-  ],
-};
-
 const d3TimeFormatLocales: { [locale: string]: TimeLocaleObject } = {
-  de: timeFormatLocale(timeFormatDe as TimeLocaleDefinition),
-  fr: timeFormatLocale(timeFormatFr as TimeLocaleDefinition),
-  it: timeFormatLocale(timeFormatIt as TimeLocaleDefinition),
+  sr: timeFormatLocale(timeFormatSr as TimeLocaleDefinition),
   en: timeFormatLocale(timeFormatEn as TimeLocaleDefinition),
 };
 
 export const getD3TimeFormatLocale = (locale: string): TimeLocaleObject =>
-  d3TimeFormatLocales[locale] ?? d3TimeFormatLocales.de;
+  d3TimeFormatLocales[locale] ?? d3TimeFormatLocales.sr;
 
-const numberFormatCh = {
+const numberFormatRs = {
   decimal: ",",
-  thousands: "'",
+  thousands: ".",
   grouping: [3],
-  currency: ["", "\u00a0CHF"],
+  currency: ["", "\u00a0RSD"],
 };
 
 const d3FormatLocales: { [locale: string]: FormatLocaleObject } = {
-  de: formatLocale(numberFormatCh as FormatLocaleDefinition),
-  // fr: formatLocale(numberFormatCh as FormatLocaleDefinition),
-  // it: formatLocale(numberFormatCh as FormatLocaleDefinition),
-  // en: formatLocale(numberFormatCh as FormatLocaleDefinition),
+  sr: formatLocale(numberFormatRs as FormatLocaleDefinition),
+  en: formatLocale(numberFormatRs as FormatLocaleDefinition),
 };
 
-export const getD3FormatLocale = (): FormatLocaleObject => d3FormatLocales.de;
+export const getD3FormatLocale = (): FormatLocaleObject => d3FormatLocales.sr;

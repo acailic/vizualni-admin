@@ -123,17 +123,17 @@ describe("useDimensionFormatters", () => {
     const { formatters } = setup();
 
     // Keeps precision if it is over the currencyExponent
-    expect(formatters["iri-currency"]("20002.3333")).toEqual("20'002,3333");
+    expect(formatters["iri-currency"]("20002.3333")).toEqual("20.002,3333");
 
     // Pads with 0 otherwise
-    expect(formatters["iri-currency"]("20002")).toEqual("20'002,0");
+    expect(formatters["iri-currency"]("20002")).toEqual("20.002,0");
   });
 
   it("should work with dimension marked with currency and with datatype integer", () => {
     const { formatters } = setup();
 
     // If we have a resolution on the dimension
-    expect(formatters["iri-currency-int"]("20002")).toEqual("20'002");
+    expect(formatters["iri-currency-int"]("20002")).toEqual("20.002");
   });
 
   it("should work with decimal dimensions", () => {

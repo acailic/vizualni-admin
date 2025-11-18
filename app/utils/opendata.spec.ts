@@ -4,18 +4,16 @@ import { DataCubeMetadata } from "@/domain/data";
 import { makeOpenDataLink } from "@/utils/opendata";
 
 describe("makeOpenDataLink", () => {
-  it("should remove creator slug from identifier", () => {
-    const orgSuffix = "exampleOrg";
+  it("should create correct link to Serbian Open Data Portal", () => {
     const cube = {
-      identifier: `https://ld.admin.ch/data/123@${orgSuffix}`,
+      identifier: `https://data.gov.rs/datasets/example-dataset`,
       creator: {
-        iri: `https://register.ld.admin.ch/opendataswiss/org/${orgSuffix}`,
+        iri: `https://data.gov.rs/org/example-org`,
       },
-      workExamples: ["https://ld.admin.ch/application/opendataswiss"],
     } as DataCubeMetadata;
 
-    expect(makeOpenDataLink("de", cube)).toBe(
-      `https://opendata.swiss/de/perma/${encodeURIComponent(`https://ld.admin.ch/data/123@${orgSuffix}`)}`
+    expect(makeOpenDataLink("sr", cube)).toBe(
+      `https://data.gov.rs/sr/datasets/${encodeURIComponent(cube.identifier)}`
     );
   });
 });
