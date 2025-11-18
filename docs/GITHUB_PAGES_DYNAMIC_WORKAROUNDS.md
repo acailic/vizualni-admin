@@ -65,7 +65,7 @@ export async function getStaticPaths() {
       { params: { category: 'education' } },
       { params: { category: 'transport' } },
     ],
-    fallback: 'blocking' // or false for strict mode
+    fallback: false // strict mode for static export
   };
 }
 
@@ -116,7 +116,7 @@ export async function getStaticPaths() {
     paths: datasets.data.map((d) => ({
       params: { id: d.id }
     })),
-    fallback: 'blocking' // Generate on-demand for unknown IDs
+    fallback: false // Only generate pages for known IDs (required for next export)
   };
 }
 
@@ -130,7 +130,7 @@ export async function getStaticProps({ params }) {
       dataset,
       chartData: transformData(rawData)
     },
-    revalidate: 3600 // Regenerate every hour (ISR)
+    // NOTE: `revalidate` (ISR) does NOT work on GitHub Pages; this will be ignored in static export
   };
 }
 ```
@@ -167,17 +167,20 @@ export default function DemosIndex() {
 
   useEffect(() => {
     // Fetch preview data for each demo client-side
-    Object.entries(DEMO_CONFIGS).forEach(async ([key, config]) => {
-      const results = await dataGovRsClient.searchDatasets({
-        q: config.searchQuery,
-        page_size: 1
-      });
-
-      setDemosWithData(prev => ({
-        ...prev,
-        [key]: results.data[0]
-      }));
-    });
+    async function fetchAllDemoData() {
+      const entries = await Promise.all(
+        Object.entries(DEMO_CONFIGS).map(async ([key, config]) => {
+          const results = await dataGovRsClient.searchDatasets({
+            q: config.searchQuery,
+            page_size: 1
+          });
+          return [key, results.data[0]];
+        })
+      );
+      const demosData = Object.fromEntries(entries);
+      setDemosWithData(demosData);
+    }
+    fetchAllDemoData();
   }, []);
 
   return (
