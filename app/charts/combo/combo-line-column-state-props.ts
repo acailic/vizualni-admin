@@ -101,7 +101,6 @@ export const useComboLineColumnStateVariables = (
       const minY =
         min(data, (d) => (d[columnId] !== null ? Number(d[columnId]) : null)) ??
         0;
-      0;
 
       return Math.min(0, minY);
     },
