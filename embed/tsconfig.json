@@ -10,7 +10,9 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "react"
+    "jsx": "react",
+    "incremental": true,
+    "tsBuildInfoFile": "../.tsbuildinfo-embed"
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]
