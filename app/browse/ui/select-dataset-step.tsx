@@ -350,7 +350,7 @@ const SelectDatasetStepInner = ({
                         </Trans>
                       ) : (
                         <Trans id="browse.dataset.create-visualization-visualize">
-                          Create with visualize.admin
+                          Create with Vizualni Admin
                         </Trans>
                       )}
                     </Button>
@@ -393,7 +393,7 @@ const SelectDatasetStepInner = ({
                           </Trans>
                         ) : (
                           <Trans id="browse.dataset.create-visualization-visualize">
-                            Create with visualize.admin
+                            Create with Vizualni Admin
                           </Trans>
                         )}
                       </Button>
@@ -492,7 +492,7 @@ const SelectDatasetStepInner = ({
                       <>
                         <Head>
                           <title key="title">
-                            {pageTitle} - visualize.admin.ch
+                            {pageTitle} - Vizualni Admin
                           </title>
                         </Head>
                         <MotionBox
