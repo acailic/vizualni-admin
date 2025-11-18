@@ -50,7 +50,7 @@ describe("content pages", () => {
 
     await actions.common.switchLang("fr");
     await screen.findByText(
-      "Utilisation des jeux de données publiés sur visualize.admin.ch",
+      "Utilisation des jeux de données publiés sur data.gov.rs",
       undefined,
       {
         timeout: 20 * 1000,

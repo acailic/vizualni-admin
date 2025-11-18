@@ -1,5 +1,5 @@
 {
-  "$schema": "https://visualize.admin.ch/json-schema/configurator-state.json",
+  "$schema": "https://data.gov.rs/json-schema/configurator-state.json",
   "type": "object",
   "schema": {
     "state": "INITIAL",

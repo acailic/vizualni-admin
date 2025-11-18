@@ -4,7 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
-"Project-Id-Version: visualize.admin.ch\n"
+"Project-Id-Version: data.gov.rs\n"
 "Language: en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
@@ -965,7 +965,7 @@ msgstr "Heat Map"
 
 #: app/components/publish-actions.tsx
 msgid "publication.share.mail.body"
-msgstr "Here is a visualization I created using visualize.admin.ch"
+msgstr "Here is a visualization I created using data.gov.rs"
 
 #: app/configurator/table/table-chart-options.tsx
 msgid "controls.table.column.hide"
@@ -1983,7 +1983,7 @@ msgstr "The linking of different datasets carries risks such as data inconsisten
 
 #: app/components/footer.tsx
 msgid "footer.about_us.text"
-msgstr "The portal visualize.admin.ch allows the visualization of Swiss Open Government Data provided by the LINDAS Linked Data Service. Open Government Data (OGD) are data that are made available to the public free of charge in computer-readable format."
+msgstr "The portal data.gov.rs allows the visualization of Serbian Open Government Data. Open Government Data (OGD) are data that are made available to the public free of charge in computer-readable format."
 
 #: app/charts/map/wms-wmts-provider-info.tsx
 msgid "provider-info.title"
@@ -2155,7 +2155,7 @@ msgstr "Visualize color palettes"
 
 #: app/components/publish-actions.tsx
 msgid "publication.share.mail.subject"
-msgstr "visualize.admin.ch"
+msgstr "data.gov.rs"
 
 #: app/configurator/components/ui-helpers.ts
 msgid "time-units.Week"

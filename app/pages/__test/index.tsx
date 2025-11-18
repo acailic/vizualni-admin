@@ -20,15 +20,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 const configDescription = {
   int: (
     <>
-      Uses <strong>int.lindas.admin.ch</strong>, can be used locally and on{" "}
-      <strong>test.visualize.admin.ch</strong>.
+      Uses <strong>test data sources</strong>, can be used locally and in test environment.
     </>
   ),
   prod: (
     <>
-      Uses <strong>lindas.admin.ch</strong>, can be used on{" "}
-      <strong>visualize.admin.ch</strong> and{" "}
-      <strong>int.visualize.admin.ch</strong>.
+      Uses <strong>production data sources</strong>, can be used in production environment.
     </>
   ),
 };
