@@ -2,6 +2,8 @@
 
 A visualization tool for Serbian open data from [data.gov.rs](https://data.gov.rs), based on the [visualize-admin/visualization-tool](https://github.com/visualize-admin/visualization-tool).
 
+**🌐 Live Demo**: [https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
+
 ## About
 
 This project is a fork/adaptation of the Swiss Federal Office for the Environment's visualization tool, customized to work with Serbian open data from the [Portal otvorenih podataka](https://data.gov.rs).
@@ -73,6 +75,17 @@ The application will be available at:
 
 ```sh
 yarn build
+```
+
+### GitHub Pages Deployment
+
+The project is configured for automatic deployment to GitHub Pages. See [docs/GITHUB_PAGES.md](docs/GITHUB_PAGES.md) for details.
+
+**Live demo**: [https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
+
+To build for GitHub Pages locally:
+```sh
+NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static
 ```
 
 ### Running tests

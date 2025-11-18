@@ -36,11 +36,20 @@ console.log("GitHub Repo", process.env.NEXT_PUBLIC_GITHUB_REPO);
 console.log("Extra Certs", process.env.NODE_EXTRA_CA_CERTS);
 console.log("Prevent search bots", process.env.PREVENT_SEARCH_BOTS);
 
+// GitHub Pages configuration
+const isGitHubPages = process.env.NEXT_PUBLIC_BASE_PATH !== undefined;
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 module.exports = withPreconstruct(
   withBundleAnalyzer(
     withMDX({
-      output: "standalone",
-      i18n: {
+      output: isGitHubPages ? "export" : "standalone",
+      basePath: basePath,
+      assetPrefix: basePath,
+      images: {
+        unoptimized: isGitHubPages,
+      },
+      i18n: isGitHubPages ? undefined : {
         locales,
         defaultLocale,
       },

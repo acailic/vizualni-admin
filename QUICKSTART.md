@@ -2,6 +2,12 @@
 
 This guide will help you get Vizualni Admin up and running quickly.
 
+## Live Demo
+
+🌐 **View the live demo**: [https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
+
+The live demo is automatically deployed to GitHub Pages and showcases the visualization capabilities with Serbian open data.
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
