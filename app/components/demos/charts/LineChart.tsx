@@ -4,13 +4,13 @@
  */
 
 import { Box } from '@mui/material';
-import { useEffect, useRef } from 'react';
 import { max, min } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { easeLinear } from 'd3-ease';
 import { scaleLinear, scalePoint } from 'd3-scale';
 import * as d3 from 'd3-selection';
-import { curveMonotoneX, line } from 'd3-shape'; 
+import { curveMonotoneX, line } from 'd3-shape';
+import { useEffect, useRef } from 'react'; 
  
 export interface LineChartProps {
   data: Array<Record<string, any>>;

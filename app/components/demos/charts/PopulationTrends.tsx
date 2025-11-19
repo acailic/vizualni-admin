@@ -4,13 +4,13 @@
  */
 
 import { Box, useTheme } from '@mui/material';
-import { useEffect, useRef } from 'react';
 import { extent } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { easeLinear } from 'd3-ease';
 import { scaleLinear } from 'd3-scale';
 import * as d3 from 'd3-selection';
 import { area, curveMonotoneX, line } from 'd3-shape';
+import { useEffect, useRef } from 'react';
 
 export interface TrendDataPoint {
   year: number;
