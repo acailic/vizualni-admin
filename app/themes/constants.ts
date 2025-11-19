@@ -1,0 +1,303 @@
+// Local theme constants to replace Swiss Federal CI package
+
+export const breakpoints = {
+  keys: ["xs", "sm", "md", "lg", "xl"] as const,
+  values: {
+    xs: 0,
+    sm: 600,
+    md: 900,
+    lg: 1200,
+    xl: 1536,
+  },
+};
+
+export const spacing = 4;
+
+export const shadows = [
+  "none",
+  "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  "0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 3px 0 rgba(0, 0, 0, 0.06)",
+  "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+  "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+] as const;
+
+// Color definitions
+export const colors = {
+  cobalt: {
+    50: "#E8EEF7",
+    100: "#C6D5EB",
+    200: "#A0BADD",
+    300: "#7A9ECF",
+    400: "#5D89C5",
+    500: "#3F74BB",
+    600: "#396CB5",
+    700: "#3161AC",
+    800: "#2957A4",
+    900: "#1B4496",
+  },
+  monochrome: {
+    50: "#FAFAFA",
+    100: "#F5F5F5",
+    200: "#EEEEEE",
+    300: "#E0E0E0",
+    400: "#BDBDBD",
+    500: "#9E9E9E",
+    600: "#757575",
+    700: "#616161",
+    800: "#424242",
+    900: "#212121",
+  },
+  red: {
+    50: "#FCEDEF",
+    100: "#F8D3D6",
+    200: "#F3B5BA",
+    300: "#EE979E",
+    400: "#EA8089",
+    500: "#E66974",
+    600: "#E3616C",
+    700: "#DF5761",
+    800: "#DB4D57",
+    900: "#D53C44",
+  },
+};
+
+// Typography definitions
+export const typography = {
+  fontFamily: [
+    '"NotoSans"',
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Helvetica",
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
+  h1: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "2rem",
+      fontWeight: 300,
+      lineHeight: 1.2,
+    },
+    sm: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "2.5rem",
+      fontWeight: 300,
+      lineHeight: 1.2,
+    },
+  },
+  h2: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "1.5rem",
+      fontWeight: 300,
+      lineHeight: 1.3,
+    },
+    sm: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "2rem",
+      fontWeight: 300,
+      lineHeight: 1.3,
+    },
+  },
+  h3: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "1.25rem",
+      fontWeight: 400,
+      lineHeight: 1.4,
+    },
+  },
+  h4: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "1.125rem",
+      fontWeight: 400,
+      lineHeight: 1.4,
+    },
+  },
+  h5: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "1rem",
+      fontWeight: 400,
+      lineHeight: 1.5,
+    },
+  },
+  h6: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "0.875rem",
+      fontWeight: 700,
+      lineHeight: 1.5,
+    },
+  },
+  body1: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "1rem",
+      fontWeight: 400,
+      lineHeight: 1.5,
+    },
+  },
+  body2: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "0.875rem",
+      fontWeight: 400,
+      lineHeight: 1.5,
+    },
+  },
+  body3: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "0.8125rem",
+      fontWeight: 400,
+      lineHeight: 1.5,
+    },
+  },
+  caption: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "0.75rem",
+      fontWeight: 400,
+      lineHeight: 1.5,
+    },
+  },
+  button: {
+    xs: {
+      fontFamily: [
+        '"NotoSans"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+      fontSize: "0.875rem",
+      fontWeight: 700,
+      lineHeight: 1.5,
+      textTransform: "none" as const,
+    },
+  },
+};

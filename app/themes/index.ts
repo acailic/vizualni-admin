@@ -1,12 +1,60 @@
-import {
-  FederalBreakpointOverrides,
-  FederalColor,
-  FederalTypographyPropsVariantOverrides,
-  FederalTypographyVariants,
-  FederalTypographyVariantsOptions,
-} from "@interactivethings/swiss-federal-ci";
 import type {} from "@mui/lab/themeAugmentation";
 import { useTheme } from "@mui/material";
+
+// Type definitions for custom theme properties
+type FederalColor = {
+  50: string;
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+};
+
+type FederalTypographyVariants = {
+  h1: object;
+  h2: object;
+  h3: object;
+  h4: object;
+  h5: object;
+  h6: object;
+  body1: object;
+  body2: object;
+  body3: object;
+  caption: object;
+  button: object;
+};
+
+type FederalTypographyVariantsOptions = FederalTypographyVariants;
+
+type FederalTypographyPropsVariantOverrides = {
+  h1: true;
+  h2: true;
+  h3: true;
+  h4: true;
+  h5: true;
+  h6: true;
+  subtitle1: false;
+  subtitle2: false;
+  body1: true;
+  body2: true;
+  body3: true;
+  caption: true;
+  button: true;
+  overline: false;
+};
+
+type FederalBreakpointOverrides = {
+  xs: true;
+  sm: true;
+  md: true;
+  lg: true;
+  xl: true;
+};
 
 declare module "@mui/material" {
   interface TypographyVariants extends FederalTypographyVariants {}

@@ -1,20 +1,8 @@
-import { t as federalTypography } from "@interactivethings/swiss-federal-ci";
 import { type Typography } from "@mui/material/styles/createTypography";
 
-const fontFamily = [
-  '"NotoSans"',
-  "-apple-system",
-  "BlinkMacSystemFont",
-  '"Segoe UI"',
-  "Helvetica",
-  "Arial",
-  "sans-serif",
-  '"Apple Color Emoji"',
-  '"Segoe UI Emoji"',
-  '"Segoe UI Symbol"',
-].join(",");
+import { typography as typographyConstants } from "@/themes/constants";
 
-function overrideFontFamily(typography: typeof federalTypography) {
+function overrideFontFamily(typography: typeof typographyConstants) {
   return {
     ...(Object.fromEntries(
       Object.entries(typography).map(([variant, responsiveFontProps]) => [
@@ -24,14 +12,13 @@ function overrideFontFamily(typography: typeof federalTypography) {
             breakpoint,
             {
               ...(fontProps as object),
-              fontFamily,
             },
           ])
         ),
       ])
     ) as unknown as Typography),
-    fontFamily,
+    fontFamily: typographyConstants.fontFamily,
   };
 }
 
-export const typography: Typography = overrideFontFamily(federalTypography);
+export const typography: Typography = overrideFontFamily(typographyConstants);
