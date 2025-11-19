@@ -1,4 +1,6 @@
 import { Trans } from "@lingui/macro";
+
+import { ContentWrapper } from "@/components/content-wrapper";
 import { Box, Button, darken, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { AnimatePresence } from "framer-motion";

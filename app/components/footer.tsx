@@ -8,7 +8,7 @@ import {
   FooterSectionTitle,
 } from "@/components/footer-components";
 import { t } from "@lingui/macro";
-import { Link, SxProps } from "@mui/material";
+import { Box, Link, SxProps, Typography } from "@mui/material";
 import NextLink from "next/link";
 
 import contentRoutes from "@/content-routes.json";
@@ -54,88 +54,124 @@ export const Footer = ({ sx }: { sx?: SxProps }) => {
       bottomLinks={[versionLink, imprintLink, legalLink]}
       nCols={3}
     >
-      <FooterSection>
-        <FooterSectionTitle
-          title={t({
-            id: "footer.about_us.label",
-            message: "About this portal",
-          })}
-        />
-        <FooterSectionText
-          text={t({
-            id: "footer.about_us.text",
-            message:
-              "The portal data.gov.rs allows the visualization of Serbian Open Government Data. Open Government Data (OGD) are data that are made available to the public free of charge in computer-readable format.",
-          })}
-        />
-      </FooterSection>
-      <FooterSection>
-        <FooterSectionTitle
-          title={t({ id: "footer.contact.title", message: "Stay informed" })}
-        />
-        <FooterSectionSocialMediaButtonGroup>
-          <FooterSectionSocialMediaButton
-            type="youtube"
-            href="https://www.youtube.com/@visualizetutorials"
-          />
-          <FooterSectionSocialMediaButton
-            type="news"
-            href="mailto:visualize@bafu.admin.ch"
-          />
-        </FooterSectionSocialMediaButtonGroup>
-      </FooterSection>
-      <FooterSection>
-        <FooterSectionTitle
-          title={t({
-            id: "footer.information.title",
-            message: "Further information",
-          })}
-        />
-        <Link
-          href={`https://lindas.admin.ch/?lang=${locale}`}
-          target="_blank"
-          underline="none"
-        >
-          <FooterSectionButton
-            iconName="external"
-            label={t({
-              id: "footer.button.lindas",
-              message: "LINDAS Linked Data Services",
+      <Box
+        sx={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+          gap: 6,
+        }}
+      >
+        <Box>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+            {t({
+              id: "footer.about_us.label",
+              message: "About this portal",
             })}
-          />
-        </Link>
-        <Link
-          href={`https://www.youtube.com/@visualizetutorials`}
-          target="_blank"
-          underline="none"
-        >
-          <FooterSectionButton
-            iconName="external"
-            label={t({
-              id: "footer.tutorials",
-              message: "Tutorials",
+          </Typography>
+          <Typography variant="body2" sx={{ mb: 2 }}>
+            {t({
+              id: "footer.about_us.text",
+              message:
+                "The portal data.gov.rs allows the visualization of Serbian Open Government Data. Open Government Data (OGD) are data that are made available to the public free of charge in computer-readable format.",
             })}
-          />
-        </Link>
-        <Link
-          href={`https://visualization-tool.status.interactivethings.io/`}
-          target="_blank"
-          underline="none"
-        >
-          <FooterSectionButton
-            iconName="external"
-            label={t({
-              id: "footer.status",
-              message: "Status",
+          </Typography>
+        </Box>
+        <Box>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+            {t({ id: "footer.contact.title", message: "Stay informed" })}
+          </Typography>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Link
+              href="https://www.youtube.com/@visualizetutorials"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+            >
+              YouTube
+            </Link>
+            <Link
+              href="mailto:visualize@bafu.admin.ch"
+              aria-label="Contact via email"
+            >
+              Email
+            </Link>
+          </Box>
+        </Box>
+        <Box>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+            {t({
+              id: "footer.information.title",
+              message: "Further information",
             })}
-          />
-        </Link>
-        <NextLink href="/statistics" passHref legacyBehavior>
-          <Link underline="none">
-            <FooterSectionButton
-              label={t({ id: "footer.statistics", message: "Statistics" })}
-            />
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+            <Link
+              href={`https://lindas.admin.ch/?lang=${locale}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t({
+                id: "footer.button.lindas",
+                message: "LINDAS Linked Data Services",
+              })}
+            </Link>
+            <Link
+              href={`https://www.youtube.com/@visualizetutorials`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t({
+                id: "footer.tutorials",
+                message: "Tutorials",
+              })}
+            </Link>
+            <Link
+              href={`https://visualization-tool.status.interactivethings.io/`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t({
+                id: "footer.status",
+                message: "Status",
+              })}
+            </Link>
+            <NextLink href="/statistics" passHref legacyBehavior>
+              <Link>
+                {t({ id: "footer.statistics", message: "Statistics" })}
+              </Link>
+            </NextLink>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          maxWidth: "1200px",
+          margin: "24px auto 0",
+          pt: 4,
+          borderTop: "1px solid",
+          borderColor: "divider",
+          display: "flex",
+          gap: 3,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {versionLink.href ? (
+          <Link
+            href={versionLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="body2"
+          >
+            {versionLink.title}
           </Link>
+        ) : (
+          <Typography variant="body2">{versionLink.title}</Typography>
+        )}
+        <NextLink href={imprintLink.href} passHref legacyBehavior>
+          <Link variant="body2">{imprintLink.title}</Link>
         </NextLink>
       </FooterSection>
     </FooterComponent>
