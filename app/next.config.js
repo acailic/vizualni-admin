@@ -111,13 +111,6 @@ module.exports = withPreconstruct(
       // Optimize production builds
       productionBrowserSourceMaps: false,
 
-      // Enable compiler optimizations
-      compiler: {
-        removeConsole: process.env.NODE_ENV === "production" ? {
-          exclude: ["error", "warn"],
-        } : false,
-      },
-
       // Experimental optimizations for faster builds
       experimental: {
         // Optimize package imports to reduce bundle size

@@ -1,4 +1,3 @@
-import { ContentWrapper } from "@interactivethings/swiss-federal-ci/dist/components";
 import { Trans } from "@lingui/macro";
 import { Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -6,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 
 import { useBrowseContext } from "@/browse/model/context";
 import { SearchDatasetInput } from "@/browse/ui/search-dataset-input";
+import { ContentWrapper } from "@/components/content-wrapper";
 import {
   __BANNER_MARGIN_CSS_VAR,
   bannerPresenceProps,

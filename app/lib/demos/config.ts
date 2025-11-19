@@ -124,6 +124,7 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
     chartType: 'bar',
     tags: ['zdravstvo', 'bolnice', 'pacijenti'],
     icon: '🏥'
+  },
   health: {
     id: 'health',
     title: {

@@ -1,6 +1,6 @@
-import { ContentWrapper } from "@interactivethings/swiss-federal-ci/dist/components";
 import { Box, Button, Divider, Typography } from "@mui/material";
 
+import { ContentWrapper } from "@/components/content-wrapper";
 import { useIsMobile } from "@/utils/use-is-mobile";
 
 type ActionElementProps = {
