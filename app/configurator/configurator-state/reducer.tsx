@@ -1131,7 +1131,6 @@ const reducer_: Reducer<ConfiguratorState, ConfiguratorStateAction> = (
         console.warn(
           "Ignoring CHART_CONFIG_REMOVE as state is incompatible with action"
         );
-        console.log(current(draft));
       }
 
       ensureDashboardLayoutIsCorrect(draft);

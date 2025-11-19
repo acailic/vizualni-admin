@@ -34,7 +34,6 @@ export const inferJoinBy = (
   const tmp = options.map((option) => {
     const rightDimension = findDimensionForOption(option, newCube?.dimensions);
     if (!rightDimension) {
-      console.log("No dimension found for option", option);
       return {};
     }
 

@@ -40,15 +40,6 @@ const getRawCube = async (sparqlClient: ParsingClient, iri: string) => {
   return cube;
 };
 
-// const cachedGetRawCube = cachedWithTTL(
-//   (sourceUrl: string, iri: string) => {
-//     console.log("getting cached cube", sourceUrl, iri);
-//     return getRawCube(sourceUrl, iri);
-//   },
-//   (sourceUrl, iri) => `${iri}|${sourceUrl}`,
-//   60_000
-// );
-
 const createCubeLoader = (sparqlClient: ParsingClient) => {
   return (cubeIris: readonly string[]) => {
     return Promise.all(
