@@ -66,6 +66,22 @@ module.exports = withPreconstruct(
               key: "X-Content-Type-Options",
               value: "nosniff",
             },
+            {
+              key: "X-Frame-Options",
+              value: "SAMEORIGIN",
+            },
+            {
+              key: "X-XSS-Protection",
+              value: "1; mode=block",
+            },
+            {
+              key: "Referrer-Policy",
+              value: "strict-origin-when-cross-origin",
+            },
+            {
+              key: "Permissions-Policy",
+              value: "camera=(), microphone=(), geolocation=()",
+            },
           ],
         });
 
@@ -127,9 +143,8 @@ module.exports = withPreconstruct(
       },
 
       eslint: {
-        // Warning: Dangerously allow production builds to successfully complete even if
-        // your project has ESLint errors.
-        ignoreDuringBuilds: true,
+        // ESLint enabled in production builds to ensure code quality
+        ignoreDuringBuilds: false,
       },
 
       webpack(config, { dev }) {
