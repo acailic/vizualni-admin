@@ -11,13 +11,13 @@
  */
 
 export {
-  Tooltip,
+  InfoIconTooltip,
   MaybeTooltip,
   OverflowTooltip,
-  InfoIconTooltip,
-  type UnifiedTooltipProps,
-  type DefaultTooltipProps,
+  Tooltip,
   type ConditionalTooltipProps,
-  type OverflowTooltipProps,
+  type DefaultTooltipProps,
   type InfoIconTooltipProps,
+  type OverflowTooltipProps,
+  type UnifiedTooltipProps,
 } from "./Tooltip";

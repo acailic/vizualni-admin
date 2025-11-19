@@ -4,8 +4,10 @@
  */
 
 import { useMemo } from 'react';
-import { Box, Typography, Alert } from '@mui/material';
-import { BarChart, LineChart, ColumnChart, PieChart } from './charts';
+
+import { Alert, Box, Typography } from '@mui/material';
+
+import { BarChart, ColumnChart, LineChart, PieChart } from './charts';
 
 export interface ChartVisualizerProps {
   data: any[];

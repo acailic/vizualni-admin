@@ -1,16 +1,12 @@
-import {
-  Footer as FooterComponent,
-  FooterSection,
-  FooterSectionButton,
-  FooterSectionSocialMediaButton,
-  FooterSectionSocialMediaButtonGroup,
-  FooterSectionText,
-  FooterSectionTitle,
-} from "@/components/footer-components";
-import { t } from "@lingui/macro";
-import { Box, Link, SxProps, Typography } from "@mui/material";
 import NextLink from "next/link";
 
+import { Box, Link, SxProps, Typography } from "@mui/material";
+
+import { t } from "@lingui/macro";
+
+import {
+  Footer as FooterComponent,
+} from "@/components/footer-components";
 import contentRoutes from "@/content-routes.json";
 import { BUILD_COMMIT, BUILD_GITHUB_REPO, BUILD_VERSION } from "@/domain/env";
 import { useLocale } from "@/locales/use-locale";

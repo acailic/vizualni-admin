@@ -4,17 +4,17 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip, LinearProgress } from '@mui/material';
-import { DemoLayout } from '@/components/demos/demo-layout';
-import { ColumnChart } from '@/components/demos/charts/ColumnChart';
+
+import { Alert, Box, Card, CardContent, Chip, Grid, LinearProgress, Paper, Typography } from '@mui/material';
+
 import { LineChart } from '@/components/demos/charts/LineChart';
-import { BarChart } from '@/components/demos/charts/BarChart';
+import { DemoLayout } from '@/components/demos/demo-layout';
 import {
-  waitingLists,
-  hospitalCapacity,
+  healthcareStats,
   healthcareWorkerExodus,
   healthIndicators,
-  healthcareStats
+  hospitalCapacity,
+  waitingLists
 } from '@/data/serbia-healthcare';
 
 export default function HealthcareDemo() {

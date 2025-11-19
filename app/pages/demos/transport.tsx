@@ -4,17 +4,17 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip, LinearProgress } from '@mui/material';
-import { DemoLayout } from '@/components/demos/demo-layout';
-import { LineChart } from '@/components/demos/charts/LineChart';
+
+import { Alert, Box, Card, CardContent, Chip, Grid, LinearProgress, Paper, Typography } from '@mui/material';
+
 import { BarChart } from '@/components/demos/charts/BarChart';
-import { ColumnChart } from '@/components/demos/charts/ColumnChart';
-import { PieChart } from '@/components/demos/charts/PieChart';
+import { LineChart } from '@/components/demos/charts/LineChart';
+import { DemoLayout } from '@/components/demos/demo-layout';
 import {
-  trafficFatalities,
   accidentCauses,
-  roadInfrastructure,
   comparativeData,
+  roadInfrastructure,
+  trafficFatalities,
   trafficStats
 } from '@/data/serbia-traffic-safety';
 
@@ -61,7 +61,7 @@ export default function TransportDemo() {
           ) : (
             <>
               <strong>⚠️ CRITICAL SAFETY SITUATION:</strong> In 2024, <strong>{trafficStats.current2024Fatalities}</strong> people
-              lost their lives in traffic accidents - that's <strong>{trafficStats.averageFatalitiesPerDay}</strong> deaths EVERY DAY.
+              lost their lives in traffic accidents - that&apos;s <strong>{trafficStats.averageFatalitiesPerDay}</strong> deaths EVERY DAY.
               Over <strong>{trafficStats.preventablePercentage.toFixed(0)}%</strong> of accidents were <strong>preventable</strong>
               (speeding, alcohol, improper behavior).
               Serbia is <strong>{(trafficStats.comparisonWithEUAvg / 4.2 * 100).toFixed(0)}% worse</strong> than EU average.

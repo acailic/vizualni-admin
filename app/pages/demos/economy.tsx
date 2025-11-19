@@ -4,19 +4,19 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip, Divider } from '@mui/material';
-import { DemoLayout } from '@/components/demos/demo-layout';
-import { LineChart } from '@/components/demos/charts/LineChart';
+
+import { Alert, Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
+
 import { ColumnChart } from '@/components/demos/charts/ColumnChart';
+import { LineChart } from '@/components/demos/charts/LineChart';
 import { PieChart } from '@/components/demos/charts/PieChart';
+import { DemoLayout } from '@/components/demos/demo-layout';
 import {
   economicIndicators,
-  sectorComposition,
-  tradeBalance,
-  fdiInflows,
   economicStats,
-  topExports,
-  topImports
+  fdiInflows,
+  sectorComposition,
+  tradeBalance
 } from '@/data/serbia-economy';
 
 export default function EconomyDemo() {

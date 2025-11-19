@@ -3,28 +3,25 @@
  * Works with GitHub Pages static export via client-side data fetching
  */
 
-import { useRouter } from 'next/router';
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Tabs, Tab } from '@mui/material';
-import { useState } from 'react';
-import { DemoLayout, DemoLoading, DemoError, DemoEmpty } from '@/components/demos/demo-layout';
-import { SimpleChart } from '@/components/demos/simple-chart';
-import { DEMO_CONFIGS, getDemoConfig } from '@/lib/demos/config';
-import { useDataGovRs } from '@/hooks/use-data-gov-rs';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+
+import { Box, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from '@mui/material';
+
+import { ChartVisualizer } from '@/components/demos/ChartVisualizer';
+import { DemoEmpty, DemoError, DemoLayout, DemoLoading } from '@/components/demos/demo-layout';
+import { SimpleChart } from '@/components/demos/simple-chart';
+import { useDataGovRs } from '@/hooks/use-data-gov-rs';
+import { DEMO_CONFIGS, getDemoConfig } from '@/lib/demos/config';
 
 // Import enhanced air quality page
 const AirQualityDemo = dynamic(() => import('./air-quality'), { ssr: true });
-import { ChartVisualizer } from '@/components/demos/ChartVisualizer';
 
 export default function DemoPage() {
   const router = useRouter();
   const { category } = router.query;
   const [activeTab, setActiveTab] = useState(0);
-
-  // Use enhanced air quality visualization
-  if (category === 'air-quality') {
-    return <AirQualityDemo />;
-  }
 
   // Get demo configuration
   const config = category ? getDemoConfig(category as string) : null;
@@ -33,10 +30,16 @@ export default function DemoPage() {
   const locale = (router.locale || 'sr') as 'sr' | 'en';
 
   // Fetch data using custom hook (only if config exists)
+  // MUST be called before any conditional returns (Rules of Hooks)
   const { dataset, resource, data, loading, error, refetch } = useDataGovRs({
     searchQuery: config?.searchQuery,
-    autoFetch: !!config
+    autoFetch: !!config && category !== 'air-quality'
   });
+
+  // Use enhanced air quality visualization
+  if (category === 'air-quality') {
+    return <AirQualityDemo />;
+  }
 
   // Handle invalid category
   if (!config) {

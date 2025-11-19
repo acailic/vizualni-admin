@@ -4,17 +4,17 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip } from '@mui/material';
-import { DemoLayout } from '@/components/demos/demo-layout';
+
+import { Alert, Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
+
 import { LineChart } from '@/components/demos/charts/LineChart';
-import { BarChart } from '@/components/demos/charts/BarChart';
-import { ColumnChart } from '@/components/demos/charts/ColumnChart';
+import { DemoLayout } from '@/components/demos/demo-layout';
 import {
-  unemploymentTrends,
   brainDrainData,
-  wageComparison,
+  employmentStats,
   skillsMismatch,
-  employmentStats
+  unemploymentTrends,
+  wageComparison
 } from '@/data/serbia-employment';
 
 export default function EmploymentDemo() {

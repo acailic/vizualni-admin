@@ -4,19 +4,18 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip, LinearProgress } from '@mui/material';
-import { DemoLayout } from '@/components/demos/demo-layout';
+
+import { Alert, Box, Card, CardContent, Chip, Grid, LinearProgress, Paper, Typography } from '@mui/material';
+
 import { LineChart } from '@/components/demos/charts/LineChart';
-import { BarChart } from '@/components/demos/charts/BarChart';
-import { ColumnChart } from '@/components/demos/charts/ColumnChart';
 import { PieChart } from '@/components/demos/charts/PieChart';
+import { DemoLayout } from '@/components/demos/demo-layout';
 import {
-  energyProduction,
   energyImports,
-  renewableComparison,
-  emissions,
   energyInfrastructure,
-  energyStats
+  energyProduction,
+  energyStats,
+  renewableComparison
 } from '@/data/serbia-energy';
 
 export default function EnergyDemo() {

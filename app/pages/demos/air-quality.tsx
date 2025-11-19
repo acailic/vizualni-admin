@@ -4,11 +4,14 @@
  * with multiple visualizations and health warnings
  */
 
-import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip } from '@mui/material';
-import { DemoLayout, DemoLoading, DemoError, DemoEmpty } from '@/components/demos/demo-layout';
-import { useDataGovRs } from '@/hooks/use-data-gov-rs';
 import { useMemo } from 'react';
+
+import { useRouter } from 'next/router';
+
+import { Alert, Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
+
+import { DemoEmpty, DemoError, DemoLayout, DemoLoading } from '@/components/demos/demo-layout';
+import { useDataGovRs } from '@/hooks/use-data-gov-rs';
 
 // WHO Air Quality Guidelines (μg/m³)
 const WHO_LIMITS = {
