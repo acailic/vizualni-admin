@@ -328,22 +328,19 @@ const getInitialSymbolLayer = ({
 
 const META: Meta = {
   title: {
+    "sr-Latn": "",
+    "sr-Cyrl": "",
     en: "",
-    de: "",
-    fr: "",
-    it: "",
   },
   description: {
+    "sr-Latn": "",
+    "sr-Cyrl": "",
     en: "",
-    de: "",
-    fr: "",
-    it: "",
   },
   label: {
+    "sr-Latn": "",
+    "sr-Cyrl": "",
     en: "",
-    de: "",
-    fr: "",
-    it: "",
   },
 };
 

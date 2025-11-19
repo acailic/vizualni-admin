@@ -1,6 +1,6 @@
 {
   "extends": "next",
-  "plugins": ["import", "visualize-admin", "deprecate", "unused-imports"],
+  "plugins": ["import", "deprecate", "unused-imports"],
   "rules": {
     "no-duplicate-case": "error",
     "no-restricted-imports": [
@@ -11,8 +11,6 @@
       }
     ],
     "react/display-name": "off",
-    "visualize-admin/no-large-sx": "error",
-    "visualize-admin/make-styles": "error",
     "@next/next/no-html-link-for-pages": ["error", "app/pages/"],
     "deprecate/member-expression": [
       "error",
