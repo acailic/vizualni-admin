@@ -464,24 +464,41 @@ export const ShareContent = ({
           <IconButton
             title={i18n._(
               t({
-                id: "publication.share.linktitle.facebook",
-                message: `Share on Facebook`,
+                id: "publication.share.linktitle.linkedin",
+                message: `Share on LinkedIn`,
               })
             )}
-            href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Icon name="facebook" />
+            <Icon name="linkedIn" />
           </IconButton>
           <IconButton
             title={i18n._(
               t({
-                id: "publication.share.linktitle.twitter",
-                message: `Share on Twitter`,
+                id: "publication.share.linktitle.x",
+                message: `Share on X (Twitter)`,
               })
             )}
-            href={`https://twitter.com/intent/tweet?url=${shareUrl}&via=bafuCH`}
+            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&via=bafuCH`}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Icon name="twitter" />
+          </IconButton>
+          <IconButton
+            title={i18n._(
+              t({
+                id: "publication.share.linktitle.facebook",
+                message: `Share on Facebook`,
+              })
+            )}
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="facebook" />
           </IconButton>
           <IconButton
             title={i18n._(
