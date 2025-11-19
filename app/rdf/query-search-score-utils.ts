@@ -84,7 +84,33 @@ export const computeScores = (
   return infoPerCube;
 };
 
+/**
+ * Escape HTML special characters to prevent XSS attacks
+ */
+const escapeHtml = (text: string): string => {
+  const htmlEscapeMap: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+  return text.replace(/[&<>"']/g, (char) => htmlEscapeMap[char]);
+};
+
+/**
+ * Highlight search query matches in text with proper HTML escaping
+ */
 export const highlight = (text: string, query: string) => {
-  const re = new RegExp(query.toLowerCase().split(" ").join("|"), "gi");
-  return text.replace(re, (m) => `<b>${m}</b>`);
+  // First escape the entire text to prevent XSS
+  const escapedText = escapeHtml(text);
+
+  // Escape special regex characters in the query
+  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  // Create regex from query tokens
+  const re = new RegExp(escapedQuery.toLowerCase().split(" ").join("|"), "gi");
+
+  // Highlight matches in the escaped text
+  return escapedText.replace(re, (m) => `<b>${m}</b>`);
 };
