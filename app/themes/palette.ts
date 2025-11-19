@@ -1,6 +1,7 @@
-import { c as colors } from "@interactivethings/swiss-federal-ci";
 import { type ThemeOptions } from "@mui/material";
 import { PaletteOptions } from "@mui/material/styles";
+
+import { colors } from "@/themes/constants";
 
 // Serbian national colors - using Serbian blue as primary
 const blue: PaletteOptions["blue"] = {

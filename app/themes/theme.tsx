@@ -1,12 +1,8 @@
-import {
-  b as breakpoints,
-  s as spacing,
-} from "@interactivethings/swiss-federal-ci";
 import { createTheme } from "@mui/material/styles";
 
 import { components } from "@/themes/components";
+import { breakpoints, shadows, spacing } from "@/themes/constants";
 import { palette } from "@/themes/palette";
-import { shadows } from "@/themes/shadows";
 import { typography } from "@/themes/typography";
 
 export const theme = createTheme({

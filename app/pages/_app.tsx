@@ -72,7 +72,7 @@ export default function App({
   return (
     <>
       <Head>
-        <title key="title">visualize.admin.ch</title>
+        <title key="title">Visualize Admin</title>
         <meta property="og:type" content="website" />
         <meta property="og:title" content={titleByLocale[locale]} />
         <meta property="og:description" content={descriptionByLocale[locale]} />
@@ -114,15 +114,15 @@ export default function App({
 }
 
 const titleByLocale = {
-  de: "Visualisieren Sie Schweizer Open Government Data",
-  fr: "Visualisez les données ouvertes de l’administration publique suisse",
-  it: "Visualizza i dati aperti dell’amministrazione pubblica svizzera",
-  en: "Visualize Swiss Open Government Data",
+  de: "Visualisieren Sie Serbische Open Government Data",
+  fr: "Visualisez les données ouvertes de l'administration publique serbe",
+  it: "Visualizza i dati aperti dell'amministrazione pubblica serba",
+  en: "Visualize Serbian Open Government Data",
 };
 
 const descriptionByLocale = {
-  de: "Erstellen Sie Visualisierungen von Datensätzen, welche durch den Linked-Data Dienst (LINDAS) des Bundesarchivs bereitgestellt werden und betten Sie diese in Ihre Webseite ein.",
-  fr: "Créez et intégrez des visualisations à partir des jeux de données du service LINDAS (Linked Data).",
-  it: "Crea ed incorpora visualizzazioni partendo dai dataset forniti dal servizio LINDAS (Linked Data).",
-  en: "Create and embed visualizations from any dataset provided by the LINDAS Linked Data Service.",
+  de: "Erstellen Sie Visualisierungen von Datensätzen aus dem Portal otvorenih podataka (data.gov.rs) und betten Sie diese in Ihre Webseite ein.",
+  fr: "Créez et intégrez des visualisations à partir des jeux de données du portail de données ouvertes serbe (data.gov.rs).",
+  it: "Crea ed incorpora visualizzazioni partendo dai dataset del portale dati aperti serbo (data.gov.rs).",
+  en: "Create and embed visualizations from datasets provided by data.gov.rs, the Serbian Open Data Portal.",
 };

@@ -17,33 +17,61 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'yarn'
-          
+
+      # Cache Next.js build outputs
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            app/.next/cache
+            app/.next/standalone
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('app/**/*.{js,jsx,ts,tsx}') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+            ${{ runner.os }}-nextjs-
+
+      # Cache GraphQL codegen outputs
+      - name: Cache GraphQL codegen
+        uses: actions/cache@v4
+        with:
+          path: |
+            app/graphql
+            app/__generated__
+          key: ${{ runner.os }}-graphql-${{ hashFiles('**/schema.graphql', '**/*.graphql', 'codegen.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-graphql-
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
-        
-      - name: Compile translations
-        run: yarn locales:compile
-        
+        run: yarn install --frozen-lockfile --prefer-offline
+
+      # Run independent preparatory tasks in parallel
+      - name: Run preparatory tasks in parallel
+        run: |
+          yarn graphql:codegen &
+          yarn locales:compile &
+          yarn generate-json-schema &
+          wait
+
       - name: Build Rollup bundle
         run: yarn rollup -c rollup.config.js
-        
+
       - name: Build static export
-        run: yarn build:static
+        run: yarn next build ./app
         env:
           NEXT_PUBLIC_BASE_PATH: /vizualni-admin
-          
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./app/out
 

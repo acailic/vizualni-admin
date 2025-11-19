@@ -631,7 +631,7 @@ msgstr "Create a visualization"
 
 #: app/pages/v/[chartId].tsx
 msgid "hint.create.your.own.chart"
-msgstr "Copy this visualization or make a new visualization using Swiss Open Government Data."
+msgstr "Copy this visualization or make a new visualization using Serbian Open Government Data."
 
 #: app/configurator/components/chart-options-selector/limits-field.tsx
 msgid "controls.symbol.cross"

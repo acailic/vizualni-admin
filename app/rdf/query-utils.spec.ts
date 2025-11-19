@@ -11,11 +11,10 @@ describe("buildLocalizedSubQuery", () => {
     // it locale must be first!
     expect(subQuery).toMatchInlineSnapshot(`
       "OPTIONAL { ?s p ?o_it . FILTER(LANG(?o_it) = "it") }
-      OPTIONAL { ?s p ?o_de . FILTER(LANG(?o_de) = "de") }
-      OPTIONAL { ?s p ?o_fr . FILTER(LANG(?o_fr) = "fr") }
+      OPTIONAL { ?s p ?o_sr . FILTER(LANG(?o_sr) = "sr") }
       OPTIONAL { ?s p ?o_en . FILTER(LANG(?o_en) = "en") }
       OPTIONAL { ?s p ?o_ . FILTER(LANG(?o_) = "") }
-      BIND(COALESCE(?o_it, ?o_de, ?o_fr, ?o_en, ?o_) AS ?o)"
+      BIND(COALESCE(?o_it, ?o_sr, ?o_en, ?o_) AS ?o)"
     `);
   });
 
@@ -26,14 +25,12 @@ describe("buildLocalizedSubQuery", () => {
     });
     expect(subQuery).toMatchInlineSnapshot(`
       "OPTIONAL { ?s p ?o_en . FILTER(LANG(?o_en) = "en") }
-      OPTIONAL { ?s p ?o_de . FILTER(LANG(?o_de) = "de") }
-      OPTIONAL { ?s p ?o_fr . FILTER(LANG(?o_fr) = "fr") }
-      OPTIONAL { ?s p ?o_it . FILTER(LANG(?o_it) = "it") }
+      OPTIONAL { ?s p ?o_sr . FILTER(LANG(?o_sr) = "sr") }
       OPTIONAL { ?s p ?o_ . FILTER(LANG(?o_) = "") }
       OPTIONAL {
         ?s p ?o_raw .
       }
-      BIND(COALESCE(?o_en, ?o_de, ?o_fr, ?o_it, ?o_, ?o_raw) AS ?o)"
+      BIND(COALESCE(?o_en, ?o_sr, ?o_, ?o_raw) AS ?o)"
     `);
   });
 });

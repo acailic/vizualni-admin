@@ -42,7 +42,7 @@ i18n.activate(defaultLocale);
 /**
  * Parses a valid app locale from a locale string (e.g. a Accept-Language header).
  * If unparseable, returns default locale.
- * @param localeString locale string, e.g. de,en-US;q=0.7,en;q=0.3
+ * @param localeString locale string, e.g. sr,en-US;q=0.7,en;q=0.3
  */
 export const parseLocaleString = (
   localeString: string | null | undefined

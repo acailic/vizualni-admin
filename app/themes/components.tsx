@@ -1,7 +1,7 @@
-import { c } from "@interactivethings/swiss-federal-ci";
 import { Components } from "@mui/material";
 
 import { Icon } from "@/icons";
+import { colors } from "@/themes/constants";
 import {
   CheckboxCheckedIcon,
   CheckboxIcon,
@@ -402,7 +402,7 @@ export const components: Components = {
   MuiDivider: {
     styleOverrides: {
       root: {
-        borderColor: c.monochrome[300],
+        borderColor: colors.monochrome[300],
       },
     },
   },

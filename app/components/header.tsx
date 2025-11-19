@@ -1,11 +1,15 @@
 import { IconButton } from "@mui/material";
 import { TopBar } from "@interactivethings/swiss-federal-ci/dist/components";
 import { Header as SwissFederalCiHeader } from "@interactivethings/swiss-federal-ci/dist/components/pages-router";
+import { Box, IconButton } from "@mui/material";
+import { useRouter } from "next/router";
 
 import { DataSourceMenu } from "@/components/data-source-menu";
 import { Flex } from "@/components/flex";
 import { LanguagePicker } from "@/components/language-picker";
 import { __HEADER_HEIGHT_CSS_VAR } from "@/components/header-constants";
+import { SimpleHeader } from "@/components/simple-header";
+import contentRoutes from "@/content-routes.json";
 import { SOURCE_OPTIONS } from "@/domain/data-source/constants";
 import { LoginMenu } from "@/login/components/login-menu";
 import { useResizeObserver } from "@/utils/use-resize-observer";
@@ -30,14 +34,14 @@ export const Header = ({
 
   return (
     <div ref={ref} style={{ zIndex: 1 }}>
-      <TopBar
-        ContentWrapperProps={{
-          sx: {
-            justifyContent: "space-between",
-            ...(extendTopBar
-              ? { maxWidth: "unset !important", px: "48px !important" }
-              : {}),
-          },
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "12px 48px",
+          backgroundColor: "#0C4076",
+          ...(extendTopBar ? { maxWidth: "unset !important" } : {}),
         }}
       >
         {SOURCE_OPTIONS.length > 1 && <DataSourceMenu />}
@@ -68,9 +72,9 @@ export const Header = ({
           <LoginMenu />
           <LanguagePicker />
         </Flex>
-      </TopBar>
+      </Box>
       {hideLogo ? null : (
-        <SwissFederalCiHeader
+        <SimpleHeader
           longTitle="data.gov.rs"
           shortTitle="data"
           rootHref="/"
