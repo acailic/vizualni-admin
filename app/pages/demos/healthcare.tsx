@@ -372,10 +372,10 @@ export default function HealthcareDemo() {
 
           <Alert severity="info" sx={{ mt: 3 }}>
             {locale === 'sr'
-              ? 'Većina zdravstvenih indikatora pokazuje zabrinjavajuće zaostajanje za EU prosekom,
-                 posebno u broju lekara i medicinskih sestara po stanovništvu.'
-              : 'Most health indicators show concerning lag behind EU average,
-                 especially in the number of doctors and nurses per population.'
+              ? `Većina zdravstvenih indikatora pokazuje zabrinjavajuće zaostajanje za EU prosekom,
+                 posebno u broju lekara i medicinskih sestara po stanovništvu.`
+              : `Most health indicators show concerning lag behind EU average,
+                 especially in the number of doctors and nurses per population.`
             }
           </Alert>
         </Paper>
