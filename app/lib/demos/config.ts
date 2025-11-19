@@ -68,17 +68,17 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
   demographics: {
     id: 'demographics',
     title: {
-      sr: 'Demografija i stanovništvo',
-      en: 'Demographics and Population'
+      sr: '⚠️ Demografska kriza',
+      en: '⚠️ Demographic Crisis'
     },
     description: {
-      sr: 'Statistika stanovništva Srbije po regionima i demografskim grupama',
-      en: 'Serbian population statistics by region and demographic groups'
+      sr: 'Alarmantno: Stanovništvo pada za 15% do 2050. godine, medijana starosti 43.5 godina, stopa rasta -0.4%',
+      en: 'Alarming: Population declining 15% by 2050, median age 43.5 years, growth rate -0.4%'
     },
     searchQuery: 'stanovnistvo',
     chartType: 'bar',
-    tags: ['stanovnistvo', 'statistika', 'demografija'],
-    icon: '👥'
+    tags: ['stanovnistvo', 'statistika', 'demografija', 'kritično'],
+    icon: '⚠️'
   },
   education: {
     id: 'education',
@@ -98,32 +98,32 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
   transport: {
     id: 'transport',
     title: {
-      sr: 'Saobraćaj i bezbednost',
-      en: 'Traffic and Safety'
+      sr: '🚨 Saobraćajna katastrofa',
+      en: '🚨 Traffic Catastrophe'
     },
     description: {
-      sr: 'Saobraćajne nezgode i statistika bezbednosti na putevima',
-      en: 'Traffic accidents and road safety statistics'
+      sr: 'Preventabilne smrti na putevima - 482 života izgubljeno 2024, 1.3 smrti DNEVNO, 98% nesreća preventabilno',
+      en: 'Preventable road deaths - 482 lives lost in 2024, 1.3 deaths DAILY, 98% of accidents preventable'
     },
     searchQuery: 'saobracaj',
     chartType: 'column',
-    tags: ['saobracaj', 'bezbednost', 'nezgode'],
-    icon: '🚗'
+    tags: ['saobracaj', 'bezbednost', 'nezgode', 'kritično'],
+    icon: '🚨'
   },
   healthcare: {
     id: 'healthcare',
     title: {
-      sr: 'Zdravstvo i bolnice',
-      en: 'Healthcare and Hospitals'
+      sr: '🚨 Zdravstvena kriza',
+      en: '🚨 Healthcare Crisis'
     },
     description: {
-      sr: 'Kapaciteti zdravstvenih ustanova, lista čekanja i statistika pacijenata',
-      en: 'Healthcare facility capacity, waiting lists and patient statistics'
+      sr: 'Alarmantni podaci o listama čekanja, odlivu lekara i kapacitetima bolnica - preko 50,000 pacijenata čeka na procedure',
+      en: 'Alarming data on waiting lists, doctor exodus, and hospital capacity - over 50,000 patients waiting for procedures'
     },
     searchQuery: 'zdravstvo',
     chartType: 'bar',
-    tags: ['zdravstvo', 'bolnice', 'pacijenti'],
-    icon: '🏥'
+    tags: ['zdravstvo', 'bolnice', 'kritično', 'liste-čekanja'],
+    icon: '🚨'
   },
   health: {
     id: 'health',
@@ -143,32 +143,32 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
   employment: {
     id: 'employment',
     title: {
-      sr: 'Zaposlenost i tržište rada',
-      en: 'Employment and Labor Market'
+      sr: '🚨 Odliv mladih - Brain Drain',
+      en: '🚨 Youth Exodus - Brain Drain'
     },
     description: {
-      sr: 'Statistika zaposlenih, nezaposlenih i slobodnih radnih mesta',
-      en: 'Statistics on employment, unemployment, and job vacancies'
+      sr: 'Šokantni podaci o emigraciji mladih - 75,900 ljudi napustilo zemlju 2024, nezaposlenost mladih 25%, plate 75% niže od EU',
+      en: 'Shocking emigration data - 75,900 people left in 2024, youth unemployment 25%, wages 75% lower than EU'
     },
     searchQuery: 'zaposlenost',
     chartType: 'line',
-    tags: ['zaposlenost', 'rad', 'ekonomija'],
-    icon: '💼'
+    tags: ['zaposlenost', 'emigracija', 'brain-drain', 'kritično'],
+    icon: '🚨'
   },
   energy: {
     id: 'energy',
     title: {
-      sr: 'Energetika',
-      en: 'Energy'
+      sr: '🚨 Energetska kriza - Zavisnost od uglja',
+      en: '🚨 Energy Crisis - Coal Dependency'
     },
     description: {
-      sr: 'Podaci o proizvodnji i potrošnji energije u Srbiji',
-      en: 'Data on energy production and consumption in Serbia'
+      sr: 'Alarmantno: 68.5% energije iz UGLJA, obnovljivi izvori samo 2%, termoelektrane stare 45+ godina, uvoz porastao za €465M',
+      en: 'Alarming: 68.5% energy from COAL, renewables only 2%, plants 45+ years old, imports up €465M'
     },
     searchQuery: 'energija',
     chartType: 'column',
-    tags: ['energija', 'elektricna-energija', 'obnovljivi-izvori'],
-    icon: '⚡'
+    tags: ['energija', 'ugalj', 'zagađenje', 'kritično'],
+    icon: '🚨'
   },
   agriculture: {
     id: 'agriculture',

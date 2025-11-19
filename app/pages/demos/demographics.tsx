@@ -26,10 +26,11 @@ export default function DemographicsDemo() {
   const totalPopulation = (totalMale + totalFemale) * 1000; // Convert from thousands
 
   // Calculate demographic indicators
+  const population2024 = populationTrends[14]; // 2024 is at index 14
   const populationChange2024to2050 = populationTrends[populationTrends.length - 1].total -
-                                     populationTrends.find(p => p.year === 2024)!.total;
+                                     population2024.total;
   const percentageChange = ((populationChange2024to2050 /
-                            populationTrends.find(p => p.year === 2024)!.total) * 100).toFixed(1);
+                            population2024.total) * 100).toFixed(1);
 
   const title = locale === 'sr'
     ? '👥 Demografija Srbije - Piramida starosti i trendovi'
@@ -63,7 +64,7 @@ export default function DemographicsDemo() {
             <>
               <strong>⚠️ DEMOGRAFSKO UPOZORENJE:</strong> Stanovništvo Srbije se smanjuje.
               Projekcije pokazuju pad od <strong>{Math.abs(parseFloat(percentageChange))}%</strong> do 2050. godine
-              (sa {populationTrends.find(p => p.year === 2024)!.total.toFixed(2)}M na{' '}
+              (sa {population2024.total.toFixed(2)}M na{' '}
               {populationTrends[populationTrends.length - 1].total.toFixed(2)}M).
               Medijana starosti je <strong>{demographicStats.medianAge} godina</strong>.
             </>
@@ -71,7 +72,7 @@ export default function DemographicsDemo() {
             <>
               <strong>⚠️ DEMOGRAPHIC WARNING:</strong> Serbia's population is declining.
               Projections show a decrease of <strong>{Math.abs(parseFloat(percentageChange))}%</strong> by 2050
-              (from {populationTrends.find(p => p.year === 2024)!.total.toFixed(2)}M to{' '}
+              (from {population2024.total.toFixed(2)}M to{' '}
               {populationTrends[populationTrends.length - 1].total.toFixed(2)}M).
               Median age is <strong>{demographicStats.medianAge} years</strong>.
             </>
