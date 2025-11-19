@@ -1,7 +1,6 @@
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { TopBar } from "@interactivethings/swiss-federal-ci/dist/components";
 import { Header as SwissFederalCiHeader } from "@interactivethings/swiss-federal-ci/dist/components/pages-router";
-import { Box, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 
 import { DataSourceMenu } from "@/components/data-source-menu";
