@@ -72,7 +72,7 @@ export default function App({
   return (
     <>
       <Head>
-        <title key="title">visualize.admin.ch</title>
+        <title key="title">Visualize Admin</title>
         <meta property="og:type" content="website" />
         <meta property="og:title" content={titleByLocale[locale]} />
         <meta property="og:description" content={descriptionByLocale[locale]} />
