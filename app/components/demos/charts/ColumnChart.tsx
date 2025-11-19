@@ -3,6 +3,12 @@
  * Optimized for data.gov.rs demo visualizations
  */
 
+import { useEffect, useRef } from 'react';
+import * as d3 from 'd3-selection';
+import { scaleBand, scaleLinear } from 'd3-scale';
+import { axisBottom, axisLeft } from 'd3-axis';
+import { max } from 'd3-array';
+import { format } from 'd3-format';
 import { Box } from '@mui/material';
 import { max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';

@@ -1,0 +1,10 @@
+{
+  "name": "eslint-plugin-visualize-admin",
+  "version": "1.0.0",
+  "description": "Custom ESLint rules for visualize-admin",
+  "main": "index.js",
+  "keywords": [
+    "eslint",
+    "eslintplugin"
+  ]
+}
