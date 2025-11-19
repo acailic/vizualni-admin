@@ -3,8 +3,6 @@
  * Showcases how to share visualizations on LinkedIn, X.com (Twitter), and Facebook
  */
 
-import { useRouter } from "next/router";
-import { useRef } from "react";
 import {
   Alert,
   Box,
@@ -15,6 +13,8 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
+import { useRef } from "react";
 
 import { ChartVisualizer } from "@/components/demos/ChartVisualizer";
 import {

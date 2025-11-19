@@ -321,7 +321,7 @@ export const ChartMoreButton = ({
   }, [
     state,
     chartConfig,
-    menu.close,
+    menu,
     dispatch,
     chartKey,
     configKey,

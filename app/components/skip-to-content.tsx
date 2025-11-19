@@ -1,5 +1,5 @@
-import { Box, Link } from "@mui/material";
 import { Trans } from "@lingui/macro";
+import { Box, Link } from "@mui/material";
 
 /**
  * Skip to content link for keyboard navigation accessibility

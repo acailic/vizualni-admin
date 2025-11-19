@@ -3,8 +3,8 @@
  * Tech adoption, internet usage, e-commerce, and digital skills evolution
  */
 
-import { useRouter } from 'next/router';
 import { Alert, Box, Card, CardContent, Chip, Grid, Paper, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import { BarChart } from '@/components/demos/charts/BarChart';
 import { ColumnChart } from '@/components/demos/charts/ColumnChart';

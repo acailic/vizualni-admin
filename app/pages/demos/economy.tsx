@@ -3,8 +3,8 @@
  * Economic indicators showing Serbia's economic journey
  */
 
-import { useRouter } from 'next/router';
 import { Alert, Box, Card, CardContent, Chip, Grid, Paper, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import { ColumnChart } from '@/components/demos/charts/ColumnChart';
 import { LineChart } from '@/components/demos/charts/LineChart';

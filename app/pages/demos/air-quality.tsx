@@ -4,9 +4,9 @@
  * with multiple visualizations and health warnings
  */
 
+import { Alert, Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { Alert, Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
 
 import { DemoEmpty, DemoError, DemoLayout, DemoLoading } from '@/components/demos/demo-layout';
 import { useDataGovRs } from '@/hooks/use-data-gov-rs';

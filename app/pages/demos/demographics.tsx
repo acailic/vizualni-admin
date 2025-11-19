@@ -3,8 +3,8 @@
  * Population pyramid and trends showing demographic challenges
  */
 
-import { useRouter } from 'next/router';
 import { Alert, Box, Card, CardContent, Chip, Grid, Paper, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import { PopulationPyramid } from '@/components/demos/charts/PopulationPyramid';
 import { PopulationTrends } from '@/components/demos/charts/PopulationTrends';
@@ -39,7 +39,7 @@ export default function DemographicsDemo() {
 
   const description = locale === 'sr'
     ? 'Analiza strukture stanovništva Srbije po starosti i polu, sa projekcijama do 2050. godine'
-    : 'Analysis of Serbia\'s population structure by age and gender, with projections to 2050';
+    : 'Analysis of Serbia&apos;s population structure by age and gender, with projections to 2050';
 
   return (
     <DemoLayout
