@@ -1,4 +1,4 @@
 {
-  "locales": ["sr", "en"],
-  "defaultLocale": "sr"
+  "locales": ["sr-Latn", "sr-Cyrl", "en"],
+  "defaultLocale": "sr-Latn"
 }
