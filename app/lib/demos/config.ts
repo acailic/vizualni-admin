@@ -229,6 +229,51 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
     chartType: 'column',
     tags: ['infrastruktura', 'javni-radovi', 'gradnja'],
     icon: '🏗️'
+  },
+  economy: {
+    id: 'economy',
+    title: {
+      sr: 'Ekonomija i rast - Detaljno',
+      en: 'Economy and Growth - Detailed'
+    },
+    description: {
+      sr: 'Ekonomska transformacija Srbije: BDP, inflacija, nezaposlenost, spoljna trgovina i strane investicije sa ključnim ekonomskim događajima',
+      en: 'Serbia\'s economic transformation: GDP, inflation, unemployment, foreign trade and investment with key economic events'
+    },
+    searchQuery: 'ekonomija bdp',
+    chartType: 'line',
+    tags: ['ekonomija', 'bdp', 'finansije', 'investicije', 'transformacija'],
+    icon: '💰'
+  },
+  climate: {
+    id: 'climate',
+    title: {
+      sr: 'Klimatske promene - Detaljno',
+      en: 'Climate Change - Detailed'
+    },
+    description: {
+      sr: 'Alarmantni podaci o klimatskim promenama: porast temperature, ekstremni vremenski događaji, zagađenje i prelazak na obnovljive izvore energije',
+      en: 'Alarming climate change data: temperature rise, extreme weather events, pollution and renewable energy transition'
+    },
+    searchQuery: 'klima temperatura zivotna sredina',
+    chartType: 'line',
+    tags: ['klima', 'zivotna-sredina', 'temperatura', 'energija', 'kriticno'],
+    icon: '🌍'
+  },
+  digital: {
+    id: 'digital',
+    title: {
+      sr: 'Digitalna transformacija - Detaljno',
+      en: 'Digital Transformation - Detailed'
+    },
+    description: {
+      sr: 'Priča uspeha: eksplozivan rast IT industrije, internet penetracije, e-trgovine, digitalnih veština i 5 tech unicorna',
+      en: 'Success story: explosive growth of IT industry, internet penetration, e-commerce, digital skills and 5 tech unicorns'
+    },
+    searchQuery: 'digitalizacija internet tehnologija',
+    chartType: 'line',
+    tags: ['digitalizacija', 'internet', 'IT', 'tehnologija', 'uspeh'],
+    icon: '💻'
   }
 };
 
