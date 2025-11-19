@@ -4,22 +4,22 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip } from '@mui/material';
-import { DemoLayout } from '@/components/demos/demo-layout';
-import { LineChart } from '@/components/demos/charts/LineChart';
-import { ColumnChart } from '@/components/demos/charts/ColumnChart';
-import { PieChart } from '@/components/demos/charts/PieChart';
+
+import { Alert, Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
+
 import { BarChart } from '@/components/demos/charts/BarChart';
+import { ColumnChart } from '@/components/demos/charts/ColumnChart';
+import { LineChart } from '@/components/demos/charts/LineChart';
+import { DemoLayout } from '@/components/demos/demo-layout';
 import {
-  internetAdoption,
+  digitalDivide,
   digitalSkillsTrends,
   eCommerceTrends,
   eGovernmentTrends,
-  techIndustryGrowth,
+  freelancersTrends,
+  internetAdoption,
   socialMediaUsage,
-  digitalStats,
-  digitalDivide,
-  freelancersTrends
+  techIndustryGrowth
 } from '@/data/serbia-digital';
 
 export default function DigitalDemo() {

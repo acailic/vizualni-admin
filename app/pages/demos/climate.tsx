@@ -4,20 +4,22 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip } from '@mui/material';
-import { DemoLayout } from '@/components/demos/demo-layout';
-import { LineChart } from '@/components/demos/charts/LineChart';
+
+import { Alert, Box, Card, CardContent, Chip, Grid, Paper, Typography } from '@mui/material';
+
 import { ColumnChart } from '@/components/demos/charts/ColumnChart';
+import { LineChart } from '@/components/demos/charts/LineChart';
 import { PieChart } from '@/components/demos/charts/PieChart';
+import { DemoLayout } from '@/components/demos/demo-layout';
 import {
-  temperatureTrends,
-  extremeWeatherEvents,
-  precipitationTrends,
   airQualityTrends,
-  renewableEnergyTrends,
   climateStats,
   emissionsBySector,
-  forestationTrends
+  extremeWeatherEvents,
+  forestationTrends,
+  precipitationTrends,
+  renewableEnergyTrends,
+  temperatureTrends
 } from '@/data/serbia-climate';
 
 export default function ClimateDemo() {

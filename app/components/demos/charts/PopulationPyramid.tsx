@@ -4,10 +4,12 @@
  */
 
 import { useEffect, useRef } from 'react';
-import * as d3 from 'd3-selection';
-import { scaleBand, scaleLinear } from 'd3-scale';
-import { axisBottom, axisLeft } from 'd3-axis';
+
 import { max } from 'd3-array';
+import { axisBottom, axisLeft } from 'd3-axis';
+import { scaleBand, scaleLinear } from 'd3-scale';
+import * as d3 from 'd3-selection';
+
 import { Box, useTheme } from '@mui/material';
 
 export interface PyramidDataPoint {

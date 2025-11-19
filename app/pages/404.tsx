@@ -1,4 +1,4 @@
-import { Box, Typography, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 import {
   Actions,

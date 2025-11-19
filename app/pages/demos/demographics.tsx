@@ -4,16 +4,18 @@
  */
 
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography, Alert, Grid, Card, CardContent, Chip, Divider } from '@mui/material';
+
+import { Alert, Box, Card, CardContent, Chip, Grid, Paper, Typography } from '@mui/material';
+
 import { DemoLayout } from '@/components/demos/demo-layout';
 import { PopulationPyramid } from '@/components/demos/charts/PopulationPyramid';
 import { PopulationTrends } from '@/components/demos/charts/PopulationTrends';
 import {
   agePopulationData,
-  populationTrends,
   demographicStats,
-  regionalPopulation,
-  dependencyRatios
+  dependencyRatios,
+  populationTrends,
+  regionalPopulation
 } from '@/data/serbia-demographics';
 
 export default function DemographicsDemo() {
@@ -38,7 +40,7 @@ export default function DemographicsDemo() {
 
   const description = locale === 'sr'
     ? 'Analiza strukture stanovništva Srbije po starosti i polu, sa projekcijama do 2050. godine'
-    : 'Analysis of Serbia\'s population structure by age and gender, with projections to 2050';
+    : 'Analysis of Serbia&apos;s population structure by age and gender, with projections to 2050';
 
   return (
     <DemoLayout

@@ -1,6 +1,9 @@
 import { ReactNode } from "react";
+
 import { ErrorBoundary } from "react-error-boundary";
-import { Box, Button, Typography, Alert, AlertTitle } from "@mui/material";
+
+import { Alert, AlertTitle, Box, Button, Typography } from "@mui/material";
+
 import { Trans } from "@lingui/macro";
 import * as Sentry from "@sentry/nextjs";
 

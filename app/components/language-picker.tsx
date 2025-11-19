@@ -1,10 +1,12 @@
-import { Menu, MenuItem, Button, Box, Typography } from "@mui/material";
-import { useState, MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
+
 import { useRouter } from "next/router";
 
+import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+
 import { Icon } from "@/icons";
-import { useLocale } from "@/locales/use-locale";
 import localeConfig from "@/locales/locales.json";
+import { useLocale } from "@/locales/use-locale";
 
 // Simple Language/Globe icon component
 const LanguageIcon = () => (

@@ -4,9 +4,12 @@
  */
 
 import { ReactNode } from 'react';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Box, Container, Typography, Button } from '@mui/material';
+
+import { Box, Button, Container, Typography } from '@mui/material';
+
 import { Flex } from '@/components/flex';
 import { Header } from '@/components/header';
 

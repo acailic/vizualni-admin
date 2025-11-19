@@ -4,7 +4,8 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Box, Typography, Alert, Paper } from '@mui/material';
+
+import { Alert, Box, Paper, Typography } from '@mui/material';
 
 interface SimpleChartProps {
   data: any[];

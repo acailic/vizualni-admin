@@ -3,28 +3,30 @@
  * Showcases how to share visualizations on LinkedIn, X.com (Twitter), and Facebook
  */
 
-import { useRouter } from "next/router";
 import { useRef } from "react";
+
+import { useRouter } from "next/router";
+
 import {
-  Box,
-  Paper,
-  Typography,
   Alert,
-  Grid,
+  Box,
   Card,
   CardContent,
-  Button,
   Divider,
+  Grid,
+  Paper,
+  Typography,
 } from "@mui/material";
+
+import { ChartVisualizer } from "@/components/demos/ChartVisualizer";
 import {
+  DemoError,
   DemoLayout,
   DemoLoading,
-  DemoError,
 } from "@/components/demos/demo-layout";
-import { useDataGovRs } from "@/hooks/use-data-gov-rs";
-import { ChartVisualizer } from "@/components/demos/ChartVisualizer";
-import { SocialMediaShare } from "@/components/social-media-share";
 import { PublishActions } from "@/components/publish-actions";
+import { SocialMediaShare } from "@/components/social-media-share";
+import { useDataGovRs } from "@/hooks/use-data-gov-rs";
 import { Icon } from "@/icons";
 
 export default function SocialMediaSharingDemo() {
