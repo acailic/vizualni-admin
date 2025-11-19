@@ -71,7 +71,7 @@ export default function DemographicsDemo() {
             </>
           ) : (
             <>
-              <strong>⚠️ DEMOGRAPHIC WARNING:</strong> Serbia's population is declining.
+              <strong>⚠️ DEMOGRAPHIC WARNING:</strong> Serbia&apos;s population is declining.
               Projections show a decrease of <strong>{Math.abs(parseFloat(percentageChange))}%</strong> by 2050
               (from {population2024.total.toFixed(2)}M to{' '}
               {populationTrends[populationTrends.length - 1].total.toFixed(2)}M).
