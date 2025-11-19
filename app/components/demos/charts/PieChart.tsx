@@ -8,6 +8,9 @@ import * as d3 from 'd3-selection';
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { pie, arc } from 'd3-shape';
+import { sum } from 'd3-array';
+import { interpolate } from 'd3-interpolate';
+import { format } from 'd3-format';
 import { Box } from '@mui/material';
 
 export interface PieChartProps {
@@ -95,14 +98,14 @@ export const PieChart = ({
       .transition()
       .duration(1000)
       .attrTween('d', function(d: any) {
-        const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
+        const interp = interpolate({ startAngle: 0, endAngle: 0 }, d);
         return function(t: number) {
-          return arcGenerator(interpolate(t)) || '';
+          return arcGenerator(interp(t)) || '';
         };
       });
 
     // Calculate total for percentages
-    const total = d3.sum(data, d => Number(d[valueKey]) || 0);
+    const total = sum(data, d => Number(d[valueKey]) || 0);
 
     // Add labels
     const labels = g
@@ -126,7 +129,7 @@ export const PieChart = ({
         const percentage = ((Number(d.data[valueKey]) || 0) / total) * 100;
         return showPercentages
           ? `${percentage.toFixed(1)}%`
-          : d3.format(',.0f')(Number(d.data[valueKey]) || 0);
+          : format(',.0f')(Number(d.data[valueKey]) || 0);
       });
 
     // Animate labels
