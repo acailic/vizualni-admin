@@ -4,7 +4,6 @@
  */
 
 import { useRouter } from 'next/router';
-
 import { Alert, Box, Card, CardContent, Chip, Grid, Paper, Typography } from '@mui/material';
 
 import { ColumnChart } from '@/components/demos/charts/ColumnChart';

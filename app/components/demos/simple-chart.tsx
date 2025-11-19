@@ -4,7 +4,6 @@
  */
 
 import { useMemo, useState } from 'react';
-
 import { Alert, Box, Paper, Typography } from '@mui/material';
 
 interface SimpleChartProps {
@@ -59,6 +58,35 @@ export function SimpleChart({
     return { x: detectedX, y: detectedY, allKeys };
   }, [data, xKey, yKey]);
 
+  // Prepare data for visualization
+  const chartData = useMemo(() => {
+    if (!data || data.length === 0 || !keys.x || !keys.y) {
+      return [];
+    }
+    return data.slice(0, 50).map(row => ({
+      label: String(row[keys.x] || ''),
+      value: parseFloat(row[keys.y]) || 0,
+      ...row
+    }));
+  }, [data, keys]);
+
+  // Calculate basic statistics
+  const stats = useMemo(() => {
+    if (chartData.length === 0) {
+      return { min: 0, max: 0, avg: 0, count: 0 };
+    }
+    const values = chartData.map(d => d.value).filter(v => !isNaN(v));
+    if (values.length === 0) {
+      return { min: 0, max: 0, avg: 0, count: 0 };
+    }
+    return {
+      min: Math.min(...values),
+      max: Math.max(...values),
+      avg: values.reduce((a, b) => a + b, 0) / values.length,
+      count: values.length
+    };
+  }, [chartData]);
+
   if (!data || data.length === 0) {
     return (
       <Alert severity="info" sx={{ borderRadius: 2 }}>
@@ -74,26 +102,6 @@ export function SimpleChart({
       </Alert>
     );
   }
-
-  // Prepare data for visualization
-  const chartData = useMemo(() => {
-    return data.slice(0, 50).map(row => ({
-      label: String(row[keys.x] || ''),
-      value: parseFloat(row[keys.y]) || 0,
-      ...row
-    }));
-  }, [data, keys]);
-
-  // Calculate basic statistics
-  const stats = useMemo(() => {
-    const values = chartData.map(d => d.value).filter(v => !isNaN(v));
-    return {
-      min: Math.min(...values),
-      max: Math.max(...values),
-      avg: values.reduce((a, b) => a + b, 0) / values.length,
-      count: values.length
-    };
-  }, [chartData]);
 
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat('sr-RS', {

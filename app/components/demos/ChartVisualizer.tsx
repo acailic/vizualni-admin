@@ -4,7 +4,6 @@
  */
 
 import { useMemo } from 'react';
-
 import { Alert, Box, Typography } from '@mui/material';
 
 import { BarChart, ColumnChart, LineChart, PieChart } from './charts';

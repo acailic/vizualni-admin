@@ -3,11 +3,9 @@
  * Provides consistent structure for data.gov.rs visualizations
  */
 
-import { ReactNode } from 'react';
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
+import { ReactNode } from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
 
 import { Flex } from '@/components/flex';

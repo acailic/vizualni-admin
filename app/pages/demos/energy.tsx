@@ -4,9 +4,9 @@
  */
 
 import { useRouter } from 'next/router';
-
 import { Alert, Box, Card, CardContent, Chip, Grid, LinearProgress, Paper, Typography } from '@mui/material';
 
+import { BarChart } from '@/components/demos/charts/BarChart';
 import { LineChart } from '@/components/demos/charts/LineChart';
 import { PieChart } from '@/components/demos/charts/PieChart';
 import { DemoLayout } from '@/components/demos/demo-layout';

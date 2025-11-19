@@ -48,6 +48,33 @@ export type UnifiedTooltipProps =
   | InfoIconTooltipProps;
 
 /**
+ * Internal component for overflow variant to ensure hooks are called unconditionally
+ */
+const OverflowTooltipInternal = ({ children, ...rest }: Omit<TooltipProps, "open">) => {
+  const [open, setOpen] = useState(false);
+
+  const handleMouseEnter = useEvent(
+    ({ currentTarget: { scrollWidth, clientWidth } }: MouseEvent) => {
+      if (scrollWidth > clientWidth) {
+        setOpen(true);
+      }
+    }
+  );
+
+  return (
+    <MUITooltip
+      {...rest}
+      open={open}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={() => setOpen(false)}
+      disableHoverListener={!open}
+    >
+      {children}
+    </MUITooltip>
+  );
+};
+
+/**
  * Unified Tooltip component
  *
  * @example
@@ -84,27 +111,7 @@ export const Tooltip = (props: UnifiedTooltipProps) => {
   // Overflow variant (OverflowTooltip replacement)
   if (variant === "overflow") {
     const { children, variant: _, ...rest } = props as OverflowTooltipProps;
-    const [open, setOpen] = useState(false);
-
-    const handleMouseEnter = useEvent(
-      ({ currentTarget: { scrollWidth, clientWidth } }: MouseEvent) => {
-        if (scrollWidth > clientWidth) {
-          setOpen(true);
-        }
-      }
-    );
-
-    return (
-      <MUITooltip
-        {...rest}
-        open={open}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={() => setOpen(false)}
-        disableHoverListener={!open}
-      >
-        {children}
-      </MUITooltip>
-    );
+    return <OverflowTooltipInternal {...rest}>{children}</OverflowTooltipInternal>;
   }
 
   // Info icon variant (InfoIconTooltip replacement)

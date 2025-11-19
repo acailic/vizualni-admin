@@ -3,10 +3,8 @@
  * Showcases how to share visualizations on LinkedIn, X.com (Twitter), and Facebook
  */
 
-import { useRef } from "react";
-
 import { useRouter } from "next/router";
-
+import { useRef } from "react";
 import {
   Alert,
   Box,
