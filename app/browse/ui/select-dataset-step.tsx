@@ -1,4 +1,3 @@
-import { ContentWrapper } from "@interactivethings/swiss-federal-ci/dist/components";
 import { Trans } from "@lingui/macro";
 import { Box, Button, darken, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -41,6 +40,7 @@ import {
   PanelBodyWrapper,
   PanelLayout,
 } from "@/configurator/components/layout";
+import { ContentWrapper } from "@/components/content-wrapper";
 import { sourceToLabel } from "@/domain/data-source";
 import { truthy } from "@/domain/types";
 import {

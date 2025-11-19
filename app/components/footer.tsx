@@ -1,12 +1,12 @@
 import {
-  Footer as SwissFederalCiFooter,
+  Footer as FooterComponent,
   FooterSection,
   FooterSectionButton,
   FooterSectionSocialMediaButton,
   FooterSectionSocialMediaButtonGroup,
   FooterSectionText,
   FooterSectionTitle,
-} from "@interactivethings/swiss-federal-ci/dist/components";
+} from "@/components/footer-components";
 import { t } from "@lingui/macro";
 import { Link, SxProps } from "@mui/material";
 import NextLink from "next/link";
@@ -49,7 +49,7 @@ export const Footer = ({ sx }: { sx?: SxProps }) => {
   const versionLink = mkVersionLink();
 
   return (
-    <SwissFederalCiFooter
+    <FooterComponent
       ContentWrapperProps={{ sx: sx ?? undefined }}
       bottomLinks={[versionLink, imprintLink, legalLink]}
       nCols={3}
@@ -138,6 +138,6 @@ export const Footer = ({ sx }: { sx?: SxProps }) => {
           </Link>
         </NextLink>
       </FooterSection>
-    </SwissFederalCiFooter>
+    </FooterComponent>
   );
 };
