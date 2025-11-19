@@ -57,7 +57,9 @@ import { useDataCubesMetadataQuery } from "@/graphql/hooks";
 import { getChartIcon, Icon } from "@/icons";
 import { useLocale } from "@/locales/use-locale";
 import { animationFrame } from "@/utils/animation-frame";
+import { useChartUrls } from "@/utils/chart-urls";
 import { createId } from "@/utils/create-id";
+import { useAnchorMenu } from "@/utils/use-anchor-menu";
 import {
   DISABLE_SCREENSHOT_ATTR,
   useScreenshot,
@@ -183,8 +185,7 @@ export const ChartMoreButton = ({
 }) => {
   const locale = useLocale();
   const [state, dispatch] = useConfiguratorState(hasChartConfigs);
-  const [anchor, setAnchor] = useState<HTMLElement | null>(null);
-  const handleClose = useEventCallback(() => setAnchor(null));
+  const menu = useAnchorMenu();
   const chartConfig = getChartConfig(state, chartKey);
   const { setIsTableRaw } = useChartTablePreview();
 
@@ -211,7 +212,7 @@ export const ChartMoreButton = ({
       actions.push(
         <TableViewChartMenuActionItem
           chartType={chartConfig.chartType}
-          onSuccess={handleClose}
+          onSuccess={menu.close}
         />
       );
       actions.push(
@@ -240,7 +241,7 @@ export const ChartMoreButton = ({
     state.layout.type,
     configKey,
     disableDatabaseRelatedActions,
-    handleClose,
+    menu.close,
     chartKey,
     components,
     screenshotName,
@@ -257,7 +258,7 @@ export const ChartMoreButton = ({
           as="menuitem"
           onClick={() => {
             dispatch({ type: "CONFIGURE_CHART", value: { chartKey } });
-            handleClose();
+            menu.close();
           }}
           leadingIconName="pen"
           label={<Trans id="chart-controls.edit">Edit</Trans>}
@@ -268,7 +269,7 @@ export const ChartMoreButton = ({
     actions.push(
       <DuplicateChartMenuActionItem
         chartConfig={chartConfig}
-        onSuccess={handleClose}
+        onSuccess={menu.close}
       />
     );
 
@@ -276,7 +277,7 @@ export const ChartMoreButton = ({
       actions.push(
         <TableViewChartMenuActionItem
           chartType={chartConfig.chartType}
-          onSuccess={handleClose}
+          onSuccess={menu.close}
         />
       );
       actions.push(
@@ -310,7 +311,7 @@ export const ChartMoreButton = ({
               type: "CHART_CONFIG_REMOVE",
               value: { chartKey },
             });
-            handleClose();
+            menu.close();
           }}
           leadingIconName="trash"
           label={<Trans id="chart-controls.delete">Delete</Trans>}
@@ -322,7 +323,7 @@ export const ChartMoreButton = ({
   }, [
     state,
     chartConfig,
-    handleClose,
+    menu.close,
     dispatch,
     chartKey,
     configKey,
@@ -346,15 +347,15 @@ export const ChartMoreButton = ({
       <IconButton
         {...DISABLE_SCREENSHOT_ATTR}
         data-testid="chart-more-button"
-        onClick={(e) => setAnchor(e.currentTarget)}
+        onClick={menu.open}
         sx={{ height: "fit-content" }}
       >
         <Icon name="dots" />
       </IconButton>
       <ArrowMenuTopBottom
-        open={!!anchor}
-        anchorEl={anchor}
-        onClose={handleClose}
+        open={menu.isOpen}
+        anchorEl={menu.anchor}
+        onClose={menu.close}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
       >
@@ -366,12 +367,8 @@ export const ChartMoreButton = ({
 
 const CopyChartMenuActionItem = ({ configKey }: { configKey: string }) => {
   const locale = useLocale();
-  const [copyUrl, setCopyUrl] = useState("");
-  useEffect(() => {
-    setCopyUrl(
-      `${window.location.origin}/${locale}/create/new?copy=${configKey}`
-    );
-  }, [configKey, locale]);
+  const { getCopyUrl } = useChartUrls(locale);
+  const copyUrl = getCopyUrl(configKey);
 
   return (
     <MenuActionItem
@@ -388,10 +385,8 @@ const CopyChartMenuActionItem = ({ configKey }: { configKey: string }) => {
 
 const ShareChartMenuActionItem = ({ configKey }: { configKey: string }) => {
   const locale = useLocale();
-  const [shareUrl, setShareUrl] = useState("");
-  useEffect(() => {
-    setShareUrl(`${window.location.origin}/${locale}/v/${configKey}`);
-  }, [configKey, locale]);
+  const { getShareUrl } = useChartUrls(locale);
+  const shareUrl = getShareUrl(configKey);
 
   return (
     <MenuActionItem
