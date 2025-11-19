@@ -3,12 +3,12 @@
  * Optimized for data.gov.rs demo visualizations
  */
 
-import { axisBottom, axisLeft } from 'd3-axis';
+import { Box } from '@mui/material';
 import { max } from 'd3-array';
+import { axisBottom, axisLeft } from 'd3-axis';
 import { format } from 'd3-format';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import * as d3 from 'd3-selection';
-import { Box } from '@mui/material';
 import { useEffect, useRef } from 'react';
 
 export interface ColumnChartProps {
