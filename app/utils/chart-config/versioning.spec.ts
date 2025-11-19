@@ -397,3 +397,245 @@ describe("last version", () => {
     expect(direction).toBe("same");
   });
 });
+
+describe("upOrDown version comparison", () => {
+  it("should return 'up' when upgrading from lower to higher version", () => {
+    expect(upOrDown("1.0.0", "2.0.0")).toBe("up");
+    expect(upOrDown("1.0.0", "1.1.0")).toBe("up");
+    expect(upOrDown("1.0.0", "1.0.1")).toBe("up");
+    expect(upOrDown("1.2.3", "1.2.4")).toBe("up");
+    expect(upOrDown("1.2.3", "1.3.0")).toBe("up");
+    expect(upOrDown("1.2.3", "2.0.0")).toBe("up");
+  });
+
+  it("should return 'down' when downgrading from higher to lower version", () => {
+    expect(upOrDown("2.0.0", "1.0.0")).toBe("down");
+    expect(upOrDown("1.1.0", "1.0.0")).toBe("down");
+    expect(upOrDown("1.0.1", "1.0.0")).toBe("down");
+    expect(upOrDown("1.2.4", "1.2.3")).toBe("down");
+    expect(upOrDown("1.3.0", "1.2.3")).toBe("down");
+    expect(upOrDown("2.0.0", "1.2.3")).toBe("down");
+  });
+
+  it("should return 'same' when versions are identical", () => {
+    expect(upOrDown("1.0.0", "1.0.0")).toBe("same");
+    expect(upOrDown("1.2.3", "1.2.3")).toBe("same");
+    expect(upOrDown("10.20.30", "10.20.30")).toBe("same");
+  });
+
+  it("should handle multi-digit version numbers correctly", () => {
+    expect(upOrDown("1.9.0", "1.10.0")).toBe("up");
+    expect(upOrDown("1.10.0", "1.9.0")).toBe("down");
+    expect(upOrDown("10.0.0", "9.99.99")).toBe("up");
+  });
+
+  it("should compare major version first, then minor, then patch", () => {
+    expect(upOrDown("1.99.99", "2.0.0")).toBe("up");
+    expect(upOrDown("1.0.99", "1.1.0")).toBe("up");
+  });
+});
+
+describe("migration edge cases", () => {
+  it("should handle configs without version property (defaults to 1.0.0)", async () => {
+    const configWithoutVersion = {
+      chartType: "line",
+      fields: {
+        x: { componentIri: "test" },
+        y: { componentIri: "test" },
+      },
+      filters: {},
+      interactiveFiltersConfig: {
+        legend: { active: false, componentIri: "" },
+        time: { active: false, componentIri: "", presets: { type: "range", from: "", to: "" } },
+        dataFilters: { active: false, componentIris: [] },
+      },
+    };
+
+    const migrated = await migrateChartConfig(configWithoutVersion as any, {
+      toVersion: "1.0.0",
+      migrationProps: CONFIGURATOR_STATE,
+    });
+
+    expect(migrated).toBeDefined();
+  });
+
+  it("should preserve data integrity when migrating through multiple versions", async () => {
+    const originalData = {
+      version: "1.0.0",
+      chartType: "line",
+      fields: {
+        x: { componentIri: "TestDimensionIri" },
+        y: { componentIri: "TestMeasureIri" },
+      },
+      filters: {},
+      interactiveFiltersConfig: {
+        legend: { active: false, componentIri: "" },
+        time: { active: false, componentIri: "", presets: { type: "range", from: "", to: "" } },
+        dataFilters: { active: false, componentIris: [] },
+      },
+    };
+
+    const migrated = await migrateChartConfig(originalData, {
+      toVersion: "2.0.0",
+      migrationProps: CONFIGURATOR_STATE,
+    });
+
+    expect(migrated).toBeDefined();
+    expect((migrated as any).chartType).toBe("line");
+  });
+
+  it("should handle migration when config is already at target version", async () => {
+    const config = {
+      version: "3.0.0",
+      chartType: "line",
+      cubes: [],
+      fields: {},
+      interactiveFiltersConfig: {},
+    };
+
+    const result = await migrateChartConfig(config as any, {
+      toVersion: "3.0.0",
+      migrationProps: CONFIGURATOR_STATE,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.version).toBe("3.0.0");
+  });
+
+  it("should handle empty configuratorState migrations", async () => {
+    const emptyConfig = {
+      version: "1.0.0",
+      dataSource: { type: "sparql", url: "" },
+    };
+
+    const result = await migrateConfiguratorState(emptyConfig as any, {
+      toVersion: "1.0.0",
+    });
+
+    expect(result).toBeDefined();
+  });
+
+  it("should maintain required fields after migration", async () => {
+    const mapConfig = {
+      version: "1.0.0",
+      chartType: "map",
+      fields: {
+        areaLayer: {
+          show: true,
+          componentIri: "TestIri",
+          measureIri: "TestMeasure",
+          colorScaleType: "continuous",
+          palette: "oranges",
+          nbClass: 5,
+        },
+        symbolLayer: {
+          show: false,
+          componentIri: "TestIri",
+          measureIri: "TestMeasure",
+          color: "red",
+        },
+      },
+      baseLayer: { show: true },
+      filters: {},
+      interactiveFiltersConfig: {
+        legend: { active: false, componentIri: "" },
+        time: { active: false, componentIri: "", presets: { type: "range", from: "", to: "" } },
+        dataFilters: { active: false, componentIris: [] },
+      },
+    };
+
+    const migrated = await migrateChartConfig(mapConfig, {
+      toVersion: "1.0.2",
+      migrationProps: CONFIGURATOR_STATE,
+    });
+
+    expect(migrated).toBeDefined();
+    expect((migrated as any).chartType).toBe("map");
+    expect((migrated as any).fields.areaLayer).toBeDefined();
+    expect((migrated as any).fields.symbolLayer).toBeDefined();
+  });
+});
+
+describe("migration chain validation", () => {
+  it("should have continuous migration chain for chartConfig", () => {
+    const versions = chartConfigMigrations.map((m) => m.to);
+
+    for (let i = 0; i < chartConfigMigrations.length - 1; i++) {
+      const current = chartConfigMigrations[i];
+      const next = chartConfigMigrations[i + 1];
+
+      expect(current.to).toBe(next.from);
+    }
+  });
+
+  it("should have continuous migration chain for configuratorState", () => {
+    for (let i = 0; i < configuratorStateMigrations.length - 1; i++) {
+      const current = configuratorStateMigrations[i];
+      const next = configuratorStateMigrations[i + 1];
+
+      expect(current.to).toBe(next.from);
+    }
+  });
+
+  it("should have both up and down migrations for all versions", () => {
+    chartConfigMigrations.forEach((migration) => {
+      expect(migration.up).toBeDefined();
+      expect(migration.down).toBeDefined();
+      expect(typeof migration.up).toBe("function");
+      expect(typeof migration.down).toBe("function");
+    });
+
+    configuratorStateMigrations.forEach((migration) => {
+      expect(migration.up).toBeDefined();
+      expect(migration.down).toBeDefined();
+      expect(typeof migration.up).toBe("function");
+      expect(typeof migration.down).toBe("function");
+    });
+  });
+
+  it("should have description for all migrations", () => {
+    chartConfigMigrations.forEach((migration) => {
+      expect(migration.description).toBeDefined();
+      expect(migration.description.length).toBeGreaterThan(0);
+    });
+
+    configuratorStateMigrations.forEach((migration) => {
+      expect(migration.description).toBeDefined();
+      expect(migration.description.length).toBeGreaterThan(0);
+    });
+  });
+});
+
+describe("backward compatibility", () => {
+  it("should maintain essential config structure after up and down migration", async () => {
+    const originalConfig = {
+      version: "2.0.0",
+      chartType: "column",
+      cubes: [],
+      fields: {
+        x: { componentIri: "dimension1" },
+        y: { componentIri: "measure1" },
+      },
+      filters: {},
+      interactiveFiltersConfig: {
+        legend: { active: false, componentIri: "" },
+        timeRange: { active: false, componentId: "", presets: { type: "range", from: "", to: "" } },
+        calculation: { type: "identity", active: false },
+        dataFilters: { active: false, componentIds: [] },
+      },
+    };
+
+    const upgraded = await migrateChartConfig(originalConfig as any, {
+      toVersion: "3.0.0",
+      migrationProps: CONFIGURATOR_STATE,
+    });
+
+    const downgraded = await migrateChartConfig(upgraded, {
+      toVersion: "2.0.0",
+      migrationProps: CONFIGURATOR_STATE,
+    });
+
+    expect((downgraded as any).chartType).toBe(originalConfig.chartType);
+    expect((downgraded as any).version).toBe("2.0.0");
+  });
+});
