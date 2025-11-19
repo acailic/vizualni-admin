@@ -5,6 +5,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3-selection';
+import { easeLinear } from 'd3-ease';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { line, area, curveMonotoneX } from 'd3-shape';
@@ -166,7 +167,7 @@ export const PopulationTrends = ({
       .attr('stroke-dashoffset', historicalLength)
       .transition()
       .duration(1500)
-      .ease(d3.easeLinear)
+      .ease(easeLinear)
       .attr('stroke-dashoffset', 0);
 
     // Add projection line (dashed)
@@ -185,7 +186,7 @@ export const PopulationTrends = ({
       .transition()
       .delay(1500)
       .duration(1000)
-      .ease(d3.easeLinear)
+      .ease(easeLinear)
       .attr('stroke-dashoffset', 0);
 
     // Add X axis
