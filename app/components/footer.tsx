@@ -1,3 +1,12 @@
+import {
+  Footer as FooterComponent,
+  FooterSection,
+  FooterSectionButton,
+  FooterSectionSocialMediaButton,
+  FooterSectionSocialMediaButtonGroup,
+  FooterSectionText,
+  FooterSectionTitle,
+} from "@/components/footer-components";
 import { t } from "@lingui/macro";
 import { Box, Link, SxProps, Typography } from "@mui/material";
 import NextLink from "next/link";
@@ -40,17 +49,10 @@ export const Footer = ({ sx }: { sx?: SxProps }) => {
   const versionLink = mkVersionLink();
 
   return (
-    <Box
-      component="footer"
-      sx={{
-        backgroundColor: "monochrome.100",
-        borderTop: "1px solid",
-        borderColor: "divider",
-        py: 8,
-        px: 6,
-        mt: "auto",
-        ...sx,
-      }}
+    <FooterComponent
+      ContentWrapperProps={{ sx: sx ?? undefined }}
+      bottomLinks={[versionLink, imprintLink, legalLink]}
+      nCols={3}
     >
       <Box
         sx={{
@@ -171,10 +173,7 @@ export const Footer = ({ sx }: { sx?: SxProps }) => {
         <NextLink href={imprintLink.href} passHref legacyBehavior>
           <Link variant="body2">{imprintLink.title}</Link>
         </NextLink>
-        <NextLink href={legalLink.href} passHref legacyBehavior>
-          <Link variant="body2">{legalLink.title}</Link>
-        </NextLink>
-      </Box>
-    </Box>
+      </FooterSection>
+    </FooterComponent>
   );
 };

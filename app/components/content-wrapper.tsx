@@ -1,20 +1,30 @@
 import { Box, BoxProps } from "@mui/material";
+import { ReactNode } from "react";
 
-/**
- * ContentWrapper component - replaces the Swiss Federal CI ContentWrapper
- * A simple container component that provides consistent max-width and padding
- */
-export const ContentWrapper = ({ sx, children, ...props }: BoxProps) => {
+export const ContentWrapper = ({
+  children,
+  sx,
+  className,
+  ...props
+}: {
+  children?: ReactNode;
+  sx?: BoxProps["sx"];
+  className?: string;
+} & Omit<BoxProps, "sx" | "className">) => {
   return (
     <Box
-      {...props}
+      className={className}
       sx={{
-        maxWidth: "1200px",
-        margin: "0 auto",
-        padding: "0 24px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         width: "100%",
+        maxWidth: 1280,
+        mx: "auto",
+        px: 4,
         ...sx,
       }}
+      {...props}
     >
       {children}
     </Box>
