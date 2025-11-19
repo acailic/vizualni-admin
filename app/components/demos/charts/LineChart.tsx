@@ -9,6 +9,7 @@ import { scaleLinear, scalePoint } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { max, min } from 'd3-array';
 import { line, curveMonotoneX } from 'd3-shape';
+import { easeLinear } from 'd3-ease';
 import { Box } from '@mui/material';
 
 export interface LineChartProps {
@@ -111,7 +112,7 @@ export const LineChart = ({
       .attr('stroke-dashoffset', totalLength)
       .transition()
       .duration(1500)
-      .ease(d3.easeLinear)
+      .ease(easeLinear)
       .attr('stroke-dashoffset', 0);
 
     // Add dots

@@ -8,6 +8,7 @@ import * as d3 from 'd3-selection';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { max } from 'd3-array';
+import { format } from 'd3-format';
 import { Box } from '@mui/material';
 
 export interface ColumnChartProps {
@@ -123,7 +124,7 @@ export const ColumnChart = ({
       .style('fill', '#333')
       .text((d) => {
         const value = Number(d[yKey]);
-        return value > 0 ? d3.format(',.0f')(value) : '';
+        return value > 0 ? format(',.0f')(value) : '';
       })
       .style('opacity', 0)
       .transition()
