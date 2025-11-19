@@ -193,5 +193,10 @@ module.exports = withSentryConfig(
     disableServerWebpackPlugin: true,
     disableClientWebpackPlugin: true,
     hideSourceMaps: true,
+    // Suppress source map upload warnings
+    widenClientFileUpload: false,
+    tunnelRoute: "/monitoring",
+    org: process.env.SENTRY_ORG || "dummy-org",
+    project: process.env.SENTRY_PROJECT || "dummy-project",
   }
 );

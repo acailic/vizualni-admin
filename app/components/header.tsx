@@ -1,7 +1,5 @@
 import { Box, IconButton } from "@mui/material";
 
-import { Header as SwissFederalCiHeader } from "@interactivethings/swiss-federal-ci/dist/components/pages-router";
-
 import { DataSourceMenu } from "@/components/data-source-menu";
 import { Flex } from "@/components/flex";
 import { __HEADER_HEIGHT_CSS_VAR } from "@/components/header-constants";

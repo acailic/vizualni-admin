@@ -4,10 +4,8 @@
  * with multiple visualizations and health warnings
  */
 
-import { useMemo } from 'react';
-
 import { useRouter } from 'next/router';
-
+import { useMemo } from 'react';
 import { Alert, Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
 
 import { DemoEmpty, DemoError, DemoLayout, DemoLoading } from '@/components/demos/demo-layout';

@@ -4,7 +4,6 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
 import { Box, Card, CardActionArea, CardContent, Chip, Grid, Typography } from '@mui/material';
 
 import { DemoLayout } from '@/components/demos/demo-layout';

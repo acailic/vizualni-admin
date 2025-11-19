@@ -1,7 +1,5 @@
 import NextLink from "next/link";
-
 import { Box, Link, SxProps, Typography } from "@mui/material";
-
 import { t } from "@lingui/macro";
 
 import {

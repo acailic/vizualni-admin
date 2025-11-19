@@ -1,5 +1,4 @@
 import { Box, Link } from "@mui/material";
-
 import { Trans } from "@lingui/macro";
 
 /**

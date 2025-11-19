@@ -6,7 +6,6 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
 import { Box, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from '@mui/material';
 
 import { ChartVisualizer } from '@/components/demos/ChartVisualizer';

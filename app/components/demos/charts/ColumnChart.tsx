@@ -4,13 +4,11 @@
  */
 
 import { useEffect, useRef } from 'react';
-
 import { max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { format } from 'd3-format';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import * as d3 from 'd3-selection';
-
 import { Box } from '@mui/material';
  
 export interface ColumnChartProps {
