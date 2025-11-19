@@ -173,7 +173,7 @@ export const Footer = ({ sx }: { sx?: SxProps }) => {
         <NextLink href={imprintLink.href} passHref legacyBehavior>
           <Link variant="body2">{imprintLink.title}</Link>
         </NextLink>
-      </FooterSection>
+      </Box>
     </FooterComponent>
   );
 };

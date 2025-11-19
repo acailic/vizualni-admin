@@ -512,48 +512,6 @@ const makeServerFilter = (
   };
 };
 
-// Experimental method to unversion a dimension value locally. To be used / removed
-// once we have a confirmation from Zazuko that this works.
-// https://zulip.zazuko.com/#narrow/stream/32-bar-ld-ext/topic/unversioning.20dimension.20values
-// const unversionValue = (
-//   d: string,
-//   props: {
-//     resolvedDimension: ResolvedDimension;
-//   }
-// ) => {
-//   const { resolvedDimension } = props;
-//   const { cube, dimension } = resolvedDimension;
-
-//   // If dimension is versioned, the cube must be versioned too.
-//   if (dimensionIsVersioned(dimension)) {
-//     const versionedCubeIri = cube.term?.value ?? "";
-//     const unversionedCubeIri = versionedCubeIri
-//       .split("/")
-//       // Remove the version number.
-//       .slice(0, -1)
-//       .join("/");
-
-//     return `${unversionedCubeIri}/${d.replace(versionedCubeIri + "/", "")}`;
-//   }
-
-//   return d;
-// };
-
-// const unversioned = Object.fromEntries(
-//   Object.entries(d).map(([k, v]) => {
-//     const dim = cubeDimensionsByIri[k];
-
-//     if (dim) {
-//       const unversionedValue = unversionValue(v.value, {
-//         resolvedDimension: dim,
-//       });
-
-//       return [k, rdf.namedNode(unversionedValue)];
-//     }
-
-//     return [k, v];
-//   })
-// );
 
 export const hasHierarchy = (dim: CubeDimension) => {
   return dim.out(ns.cubeMeta.inHierarchy).values.length > 0;

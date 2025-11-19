@@ -277,7 +277,6 @@ export const executeDataCubesComponentsQuery = async (
   const fetching = !error && queries.some((q) => !q.data);
 
   if (error || fetching) {
-    console.log("Error or fetching", { error, fetching });
     return {
       data: undefined,
       error,
