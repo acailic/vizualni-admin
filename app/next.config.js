@@ -165,6 +165,11 @@ module.exports = withPreconstruct(
 
 module.exports = withSentryConfig(
   module.exports,
-  { silent: true },
+  {
+    silent: true,
+    // Disable build-time Sentry plugins to avoid org configuration errors
+    disableServerWebpackPlugin: true,
+    disableClientWebpackPlugin: true,
+  },
   { hideSourcemaps: true }
 );
