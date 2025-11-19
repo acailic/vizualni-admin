@@ -6,7 +6,6 @@ import { ChartConfig, ConfiguratorState } from "@/config-types";
 import { mapValueIrisToColor } from "@/configurator/components/ui-helpers";
 import { FIELD_VALUE_NONE } from "@/configurator/constants";
 import {
-  LEGACY_PROD_DATA_SOURCE_URL,
   PROD_DATA_SOURCE_URL,
 } from "@/domain/data-source/constants";
 import { client } from "@/graphql/client";
@@ -27,6 +26,9 @@ import {
 } from "@/utils/chart-config/upgrade-cube";
 import { createId } from "@/utils/create-id";
 import { maybeWindow } from "@/utils/maybe-window";
+
+// Legacy data source URL for migration purposes
+const LEGACY_PROD_DATA_SOURCE_URL = "https://lindas.admin.ch/query";
 
 type Migration = {
   description: string;
@@ -898,9 +900,8 @@ export const chartConfigMigrations: Migration[] = [
     up: (config) => {
       const newConfig = { ...config, version: "3.4.0" };
       newConfig.meta.label = {
-        de: "",
-        fr: "",
-        it: "",
+        "sr-Latn": "",
+        "sr-Cyrl": "",
         en: "",
       };
 
@@ -1754,15 +1755,13 @@ export const configuratorStateMigrations: Migration[] = [
       delete newConfig.activeField;
       newConfig.meta = {
         title: {
-          de: "",
-          fr: "",
-          it: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
         },
         description: {
-          de: "",
-          fr: "",
-          it: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
         },
       };
@@ -1860,15 +1859,13 @@ export const configuratorStateMigrations: Migration[] = [
       const newConfig = { ...config, version: "3.0.1" };
       newConfig.meta = newConfig.layout.meta ?? {
         title: {
-          de: "",
-          fr: "",
-          it: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
         },
         description: {
-          de: "",
-          fr: "",
-          it: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
         },
       };
@@ -2041,9 +2038,8 @@ export const configuratorStateMigrations: Migration[] = [
           meta: {
             ...meta,
             label: {
-              de: "",
-              fr: "",
-              it: "",
+              "sr-Latn": "",
+              "sr-Cyrl": "",
               en: "",
             },
           },

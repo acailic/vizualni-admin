@@ -88,25 +88,22 @@ const SingleFilters = t.record(t.string, FilterValueSingle, "SingleFilters");
 export type SingleFilters = t.TypeOf<typeof SingleFilters>;
 
 const Title = t.type({
-  de: t.string,
-  fr: t.string,
-  it: t.string,
+  "sr-Latn": t.string,
+  "sr-Cyrl": t.string,
   en: t.string,
 });
 export type Title = t.TypeOf<typeof Title>;
 
 const Description = t.type({
-  de: t.string,
-  fr: t.string,
-  it: t.string,
+  "sr-Latn": t.string,
+  "sr-Cyrl": t.string,
   en: t.string,
 });
 export type Description = t.TypeOf<typeof Description>;
 
 const Label = t.type({
-  de: t.string,
-  fr: t.string,
-  it: t.string,
+  "sr-Latn": t.string,
+  "sr-Cyrl": t.string,
   en: t.string,
 });
 export type Label = t.TypeOf<typeof Label>;
@@ -300,9 +297,8 @@ const HighlightAnnotation = t.type({
   type: t.literal("highlight"),
   targets: t.array(AnnotationTarget),
   text: t.type({
-    de: t.string,
-    fr: t.string,
-    it: t.string,
+    "sr-Latn": t.string,
+    "sr-Cyrl": t.string,
     en: t.string,
   }),
   highlightType: t.union([t.literal("none"), t.literal("filled")]),

@@ -17,22 +17,19 @@ it("should persist chart configs as is", () => {
       type: "tab",
       meta: {
         title: {
-          de: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          fr: "",
-          it: "",
         },
         description: {
-          de: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "Very long description with equal sign (=) and new\n\nlines\n\n!",
-          fr: "",
-          it: "",
         },
         label: {
-          de: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          fr: "",
-          it: "",
         },
       },
       blocks: [
@@ -49,22 +46,19 @@ it("should persist chart configs as is", () => {
         version: "4.4.0",
         meta: {
           title: {
+            "sr-Latn": "",
+            "sr-Cyrl": "",
             en: "",
-            de: "",
-            fr: "",
-            it: "",
           },
           description: {
+            "sr-Latn": "",
+            "sr-Cyrl": "",
             en: "",
-            de: "",
-            fr: "",
-            it: "",
           },
           label: {
+            "sr-Latn": "",
+            "sr-Cyrl": "",
             en: "",
-            de: "",
-            fr: "",
-            it: "",
           },
         },
         cubes: [

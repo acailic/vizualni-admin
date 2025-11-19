@@ -19,9 +19,8 @@ export const getDefaultHighlightAnnotation = (): HighlightAnnotation => {
     type: "highlight",
     targets: [],
     text: {
-      de: "",
-      fr: "",
-      it: "",
+      "sr-Latn": "",
+      "sr-Cyrl": "",
       en: "",
     },
     highlightType: "none",
