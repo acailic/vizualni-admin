@@ -3,14 +3,14 @@
  * Optimized for data.gov.rs demo visualizations
  */
 
-import { useEffect, useRef } from 'react';
-import * as d3 from 'd3-selection';
-import { scaleLinear, scalePoint } from 'd3-scale';
-import { axisBottom, axisLeft } from 'd3-axis';
 import { max, min } from 'd3-array';
-import { line, curveMonotoneX } from 'd3-shape';
+import { axisBottom, axisLeft } from 'd3-axis';
 import { easeLinear } from 'd3-ease';
+import { scaleLinear, scalePoint } from 'd3-scale';
+import * as d3 from 'd3-selection';
+import { curveMonotoneX, line } from 'd3-shape';
 import { Box } from '@mui/material';
+import { useEffect, useRef } from 'react';
 
 export interface LineChartProps {
   data: Array<Record<string, any>>;
