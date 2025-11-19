@@ -3,8 +3,8 @@
  * Automatically selects appropriate visualization based on data and chart type
  */
 
-import { useMemo } from 'react';
 import { Alert, Box, Typography } from '@mui/material';
+import { useMemo } from 'react';
 
 import { BarChart, ColumnChart, LineChart, PieChart } from './charts';
 

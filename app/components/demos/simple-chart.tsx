@@ -3,8 +3,8 @@
  * Features: Modern gradients, smooth animations, interactive tooltips, professional styling
  */
 
-import { useMemo, useState } from 'react';
 import { Alert, Box, Paper, Typography } from '@mui/material';
+import { useMemo, useState } from 'react';
 
 interface SimpleChartProps {
   data: any[];

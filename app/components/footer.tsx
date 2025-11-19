@@ -1,6 +1,6 @@
-import NextLink from "next/link";
-import { Box, Link, SxProps, Typography } from "@mui/material";
 import { t } from "@lingui/macro";
+import { Box, Link, SxProps, Typography } from "@mui/material";
+import NextLink from "next/link";
 
 import {
   Footer as FooterComponent,

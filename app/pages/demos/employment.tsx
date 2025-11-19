@@ -3,8 +3,8 @@
  * Alarming data about youth unemployment, brain drain, and wage gaps
  */
 
-import { useRouter } from 'next/router';
 import { Alert, Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import { LineChart } from '@/components/demos/charts/LineChart';
 import { DemoLayout } from '@/components/demos/demo-layout';

@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
 import { Box, CircularProgress, Fade } from "@mui/material";
+import { ReactNode } from "react";
 
 import { LoadingSkeleton } from "./loading-skeleton";
 

@@ -1,8 +1,8 @@
+import { Trans } from "@lingui/macro";
+import { Alert, AlertTitle, Box, Button, Typography } from "@mui/material";
+import * as Sentry from "@sentry/nextjs";
 import { ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Alert, AlertTitle, Box, Button, Typography } from "@mui/material";
-import { Trans } from "@lingui/macro";
-import * as Sentry from "@sentry/nextjs";
 
 interface ErrorFallbackProps {
   error: Error;
