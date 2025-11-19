@@ -28,13 +28,15 @@ if (isVercelPreview) {
   process.env.NEXTAUTH_URL = `https://${process.env.VERCEL_URL}`;
 }
 
-console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
-console.log("Version", process.env.NEXT_PUBLIC_VERSION);
-console.log("Commit", process.env.NEXT_PUBLIC_COMMIT);
-console.log("GitHub Repo", process.env.NEXT_PUBLIC_GITHUB_REPO);
-
-console.log("Extra Certs", process.env.NODE_EXTRA_CA_CERTS);
-console.log("Prevent search bots", process.env.PREVENT_SEARCH_BOTS);
+// Only log in development mode
+if (process.env.NODE_ENV === 'development') {
+  console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
+  console.log("Version", process.env.NEXT_PUBLIC_VERSION);
+  console.log("Commit", process.env.NEXT_PUBLIC_COMMIT);
+  console.log("GitHub Repo", process.env.NEXT_PUBLIC_GITHUB_REPO);
+  console.log("Extra Certs", process.env.NODE_EXTRA_CA_CERTS);
+  console.log("Prevent search bots", process.env.PREVENT_SEARCH_BOTS);
+}
 
 // GitHub Pages configuration
 const isGitHubPages = process.env.NEXT_PUBLIC_BASE_PATH !== undefined;
@@ -117,6 +119,11 @@ module.exports = withPreconstruct(
         optimizePackageImports: ['@mui/material', '@mui/icons-material', 'date-fns', 'lodash'],
         // Enable parallel compilation
         cpus: require('os').cpus().length - 1 || 1,
+      },
+
+      // Configure logging to show only errors
+      logging: {
+        level: 'error',
       },
 
       eslint: {
