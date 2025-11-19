@@ -10,6 +10,7 @@ import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { useEffect } from "react";
 
+import { AppErrorBoundary } from "@/components/app-error-boundary";
 import { SnackbarProvider } from "@/components/snackbar";
 import { PUBLIC_URL } from "@/domain/env";
 import { flag } from "@/flags/flag";
@@ -89,26 +90,28 @@ export default function App({
         ))}
       </Head>
 
-      <SessionProvider session={session}>
-        <LocaleProvider value={locale}>
-          <I18nProvider i18n={i18n}>
-            <GraphqlProvider>
-              <ThemeProvider theme={federalTheme.theme}>
-                <EventEmitterProvider>
-                  <SnackbarProvider>
-                    <CssBaseline />
-                    <Flashes />
-                    {shouldShowGQLDebug ? <GQLDebugPanel /> : null}
-                    <AsyncLocalizationProvider locale={locale}>
-                      <Component {...pageProps} />
-                    </AsyncLocalizationProvider>
-                  </SnackbarProvider>
-                </EventEmitterProvider>
-              </ThemeProvider>
-            </GraphqlProvider>
-          </I18nProvider>
-        </LocaleProvider>
-      </SessionProvider>
+      <AppErrorBoundary>
+        <SessionProvider session={session}>
+          <LocaleProvider value={locale}>
+            <I18nProvider i18n={i18n}>
+              <GraphqlProvider>
+                <ThemeProvider theme={federalTheme.theme}>
+                  <EventEmitterProvider>
+                    <SnackbarProvider>
+                      <CssBaseline />
+                      <Flashes />
+                      {shouldShowGQLDebug ? <GQLDebugPanel /> : null}
+                      <AsyncLocalizationProvider locale={locale}>
+                        <Component {...pageProps} />
+                      </AsyncLocalizationProvider>
+                    </SnackbarProvider>
+                  </EventEmitterProvider>
+                </ThemeProvider>
+              </GraphqlProvider>
+            </I18nProvider>
+          </LocaleProvider>
+        </SessionProvider>
+      </AppErrorBoundary>
     </>
   );
 }
