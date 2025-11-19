@@ -105,28 +105,6 @@ vi.mock("rdf-cube-view-query", () => ({
   },
 }));
 
-// Mock Swiss Federal CI package (removed in PR #7)
-vi.mock("@interactivethings/swiss-federal-ci", () => ({
-  c: {}, // colors
-  b: {}, // breakpoints
-  s: () => 0, // spacing
-  t: {}, // typography
-  e: {}, // elevation/shadows
-}));
-
-vi.mock("@interactivethings/swiss-federal-ci/dist/components", () => ({
-  ContentWrapper: ({ children }: { children: React.ReactNode }) => children,
-  TopBar: () => null,
-  Footer: () => null,
-}));
-
-vi.mock(
-  "@interactivethings/swiss-federal-ci/dist/components/pages-router",
-  () => ({
-    Header: () => null,
-  })
-);
-
 vi.mock("next/router", () => {
   const router = {
     route: "/",

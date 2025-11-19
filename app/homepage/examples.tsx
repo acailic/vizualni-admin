@@ -1,9 +1,9 @@
-import { ContentWrapper } from "@interactivethings/swiss-federal-ci/dist/components";
 import { Box, Card, Skeleton, Typography } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 import { useClient } from "urql";
 
 import { ChartPublished } from "@/components/chart-published";
+import { ContentWrapper } from "@/components/content-wrapper";
 import { EmbedQueryParams } from "@/components/embed-params";
 import { LoadingDataError } from "@/components/hint";
 import { ConfiguratorState } from "@/configurator";
