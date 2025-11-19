@@ -7,6 +7,8 @@ class MyDocument extends Document {
     return (
       <Html data-app-version={`${process.env.NEXT_PUBLIC_VERSION}`}>
         <Head>
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+          <link rel="alternate icon" href="/favicon.ico" />
           {/* eslint-disable-next-line @next/next/no-sync-scripts */}
           <script src="/api/client-env"></script>
           {GA_TRACKING_ID && (
