@@ -229,7 +229,10 @@ export const getConfigViewCount = async (configKey: string) => {
       },
     })
     .then((config) => config._count.views)
-    .catch(() => 0);
+    .catch((error) => {
+      console.error(`Failed to get view count for config ${configKey}:`, error);
+      return 0;
+    });
 };
 
 /**

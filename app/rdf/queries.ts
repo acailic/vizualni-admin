@@ -115,7 +115,7 @@ export const getCubeDimensions = async ({
       })
       .sort((a, b) => ascending(a.data.order, b.data.order));
   } catch (e) {
-    console.error(e);
+    console.error(`Failed to get cube dimensions for ${unversionedCubeIri}:`, e);
 
     return [];
   }
@@ -405,9 +405,7 @@ export const getCubeObservations = async ({
     } else {
       const count = Object.keys(v.values).length;
       if (count > 100) {
-        console.log(
-          `Will apply server side filter since filter values count is too high, iri: ${k}, count: ${count}`
-        );
+        // Apply server-side filter when filter values count exceeds threshold
         serverFilters[k] = v;
       } else {
         dbFilters[k] = v;
