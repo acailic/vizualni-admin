@@ -5,20 +5,13 @@
 
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3-selection';
-import { scaleLinear, scalePoint } from 'd3-scale';
-import { axisBottom, axisLeft } from 'd3-axis';
+import { scaleLinear, scalePoint } from 'd3-scale'; 
 import { max, min } from 'd3-array';
 import { line, curveMonotoneX } from 'd3-shape';
 import { easeLinear } from 'd3-ease';
-import { Box } from '@mui/material';
-import { max, min } from 'd3-array';
-import { axisBottom, axisLeft } from 'd3-axis';
-import { easeLinear } from 'd3-ease';
-import { scaleLinear, scalePoint } from 'd3-scale';
-import * as d3 from 'd3-selection';
-import { curveMonotoneX, line } from 'd3-shape';
-import { useEffect, useRef } from 'react';
-
+import { Box } from '@mui/material'; 
+import { axisBottom, axisLeft } from 'd3-axis'; 
+ 
 export interface LineChartProps {
   data: Array<Record<string, any>>;
   xKey: string;
