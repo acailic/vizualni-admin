@@ -3,9 +3,8 @@ import { ParsedUrlQuery } from "querystring";
 import mapValues from "lodash/mapValues";
 import pick from "lodash/pick";
 import pickBy from "lodash/pickBy";
-import NextLink from "next/link";
 import { Router } from "next/router";
-import { ComponentProps } from "react";
+import { UrlObject } from "url";
 
 import { truthy } from "@/domain/types";
 import { SearchCubeResultOrder } from "@/graphql/query-hooks";
@@ -82,7 +81,7 @@ export const buildURLFromBrowseParams = ({
   subsubtype,
   subsubiri,
   ...query
-}: BrowseParams): ComponentProps<typeof NextLink>["href"] => {
+}: BrowseParams): UrlObject => {
   const typePart = buildQueryPart(type, iri);
   const subtypePart = buildQueryPart(subtype, subiri);
   const subsubtypePart = buildQueryPart(subsubtype, subsubiri);

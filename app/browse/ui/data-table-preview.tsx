@@ -91,7 +91,7 @@ export const DataTablePreview = ({
               return (
                 <TableCell
                   key={component.id}
-                  component="th"
+                  component={"th" as any}
                   role="columnheader"
                   onClick={() => handleSort(component)}
                   sx={{
@@ -133,7 +133,7 @@ export const DataTablePreview = ({
                     return (
                       <TableCell
                         key={c.id}
-                        component="td"
+                        component={"td" as any}
                         sx={{ textAlign: numerical ? "right" : "left" }}
                       >
                         {format(numerical && v ? +v : v)}
