@@ -32,7 +32,7 @@ export default [
     ],
   },
 
-  // Main configuration for app files
+  // Shared plugins and rules for all app files
   {
     files: ['app/**/*.{js,jsx,ts,tsx}'],
     plugins: {
@@ -47,13 +47,10 @@ export default [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      parser: tsParser,
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
         },
-        project: ['./app/tsconfig.json'],
-        tsconfigRootDir: __dirname,
       },
     },
     rules: {
@@ -114,6 +111,18 @@ export default [
         },
       ],
       'unused-imports/no-unused-imports': 'warn',
+    },
+  },
+
+  // TypeScript-specific parser configuration
+  {
+    files: ['app/**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: ['./app/tsconfig.json'],
+        tsconfigRootDir: __dirname,
+      },
     },
   },
 
