@@ -17,6 +17,11 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      STORYBOOK_DISABLE_TELEMETRY: "1"
+      # Ensure CI never requires a Sentry auth token; uploads stay dry-run/disabled
+      SENTRY_UPLOAD: "false"
 
     steps:
       - name: Checkout
@@ -53,6 +58,9 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
+
+      - name: Lint (local ESLint config)
+        run: yarn lint --max-warnings=0
 
       # Run independent preparatory tasks in parallel
       - name: Run preparatory tasks in parallel

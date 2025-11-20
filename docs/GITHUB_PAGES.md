@@ -15,6 +15,7 @@ The project is configured to automatically deploy to GitHub Pages when changes a
 The repository includes a GitHub Actions workflow (`.github/workflows/deploy-github-pages.yml`) that:
 
 1. Builds the Next.js app as a static export
+2. Runs ESLint with the local repo configuration (`yarn lint --max-warnings=0`)
 2. Compiles translations
 3. Uploads the static files to GitHub Pages
 4. Deploys to the GitHub Pages environment
@@ -52,6 +53,11 @@ npx serve
 ```
 
 Then open `http://localhost:3000/vizualni-admin/` in your browser.
+
+## CI Notes
+
+- Linting runs with the repo’s ESLint config (`yarn lint --max-warnings=0`), so no global eslint is used.
+- Sourcemap uploads to Sentry are optional. The workflow sets `SENTRY_UPLOAD=false` to avoid requiring `SENTRY_AUTH_TOKEN`. To perform real uploads locally or in another CI, provide `SENTRY_AUTH_TOKEN` (and set `SENTRY_UPLOAD=true` if you want to override the guard).
 
 ## Important Notes
 

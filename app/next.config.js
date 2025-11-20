@@ -41,8 +41,11 @@ if (process.env.NODE_ENV === 'development') {
 // GitHub Pages configuration
 const isGitHubPages = process.env.NEXT_PUBLIC_BASE_PATH !== undefined;
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const enableSentryUpload =
+  Boolean(process.env.SENTRY_AUTH_TOKEN) &&
+  process.env.SENTRY_UPLOAD !== "false";
 
-module.exports = withPreconstruct(
+const nextConfig = withPreconstruct(
   withBundleAnalyzer(
     withMDX({
       output: isGitHubPages ? "export" : "standalone",
@@ -192,13 +195,13 @@ module.exports = withPreconstruct(
 );
 
 module.exports = withSentryConfig(
-  module.exports,
+  nextConfig,
   {
     // Suppress all Sentry build output
     silent: true,
-    // Disable build-time Sentry plugins to avoid org configuration errors
-    disableServerWebpackPlugin: true,
-    disableClientWebpackPlugin: true,
+    // Disable build-time Sentry plugins by default; enable when a token is present
+    disableServerWebpackPlugin: !enableSentryUpload,
+    disableClientWebpackPlugin: !enableSentryUpload,
     // Hide source maps in production to prevent code visibility in browser devtools
     hideSourceMaps: true,
     // Suppress source map upload warnings
@@ -214,5 +217,8 @@ module.exports = withSentryConfig(
     silent: true,
     // Hide source maps (also controlled by hideSourceMaps above)
     hideSourceMaps: true,
+    // CI-friendly: skip uploads when no auth token is provided
+    dryRun: !enableSentryUpload,
+    authToken: process.env.SENTRY_AUTH_TOKEN,
   }
 );

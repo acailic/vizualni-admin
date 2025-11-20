@@ -88,6 +88,8 @@ To build for GitHub Pages locally:
 NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static
 ```
 
+CI runs `yarn lint --max-warnings=0` using the repo’s ESLint config (no global install) before the GitHub Pages build. Sourcemap uploads to Sentry are optional: CI forces `SENTRY_UPLOAD=false`, and you can enable real uploads locally by providing `SENTRY_AUTH_TOKEN` (plus `SENTRY_UPLOAD=true` if you want to override the default guard).
+
 ### Running tests
 
 ```sh
