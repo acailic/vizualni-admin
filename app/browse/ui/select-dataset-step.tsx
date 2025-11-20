@@ -1,6 +1,4 @@
 import { Trans } from "@lingui/macro";
-
-import { ContentWrapper } from "@/components/content-wrapper";
 import { Box, Button, darken, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { AnimatePresence } from "framer-motion";
@@ -30,6 +28,7 @@ import { SearchDatasetInput } from "@/browse/ui/search-dataset-input";
 import { SearchFilters } from "@/browse/ui/search-filters";
 import { SelectDatasetBanner } from "@/browse/ui/select-dataset-banner";
 import { CHART_RESIZE_EVENT_TYPE } from "@/charts/shared/use-size";
+import { ContentWrapper } from "@/components/content-wrapper";
 import { Flex } from "@/components/flex";
 import { Footer } from "@/components/footer";
 import {

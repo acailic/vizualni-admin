@@ -4,6 +4,7 @@
  */
 
 import { useState, useEffect } from 'react';
+
 import { dataGovRsClient, getBestVisualizationResource } from '@/domain/data-gov-rs';
 import type { DatasetMetadata, Resource } from '@/domain/data-gov-rs/types';
 

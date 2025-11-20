@@ -2,6 +2,11 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { useUserConfig, useUserConfigs } from "@/domain/user-configs";
+import {
+  fetchChartConfig,
+  fetchChartConfigs,
+  fetchChartViewCount,
+} from "@/utils/chart-config/api";
 
 // Mock the API functions
 vi.mock("@/utils/chart-config/api", () => ({
@@ -9,12 +14,6 @@ vi.mock("@/utils/chart-config/api", () => ({
   fetchChartConfig: vi.fn(),
   fetchChartViewCount: vi.fn(),
 }));
-
-import {
-  fetchChartConfig,
-  fetchChartConfigs,
-  fetchChartViewCount,
-} from "@/utils/chart-config/api";
 
 const mockFetchChartConfigs = fetchChartConfigs as ReturnType<typeof vi.fn>;
 const mockFetchChartConfig = fetchChartConfig as ReturnType<typeof vi.fn>;

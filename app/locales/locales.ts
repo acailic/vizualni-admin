@@ -19,8 +19,8 @@ import {
 import { defaultLocale, locales } from "@/locales/constants";
 
 import { messages as catalogEn } from "./en/messages";
-import { messages as catalogSrLatn } from "./sr-Latn/messages";
 import { messages as catalogSrCyrl } from "./sr-Cyrl/messages";
+import { messages as catalogSrLatn } from "./sr-Latn/messages";
 
 export type Locale = (typeof locales)[number];
 

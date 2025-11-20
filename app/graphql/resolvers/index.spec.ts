@@ -1,14 +1,13 @@
-import { GraphQLError, Kind } from "graphql";
+import { GraphQLError } from "graphql";
 import { describe, expect, it, vi } from "vitest";
 
+import { ScaleType, TimeUnit } from "@/graphql/resolver-types";
 import {
   datasourceUrlValue,
   datasourceValidationError,
   resolveDimensionType,
   resolveMeasureType,
 } from "@/graphql/resolvers/index";
-import { ScaleType, TimeUnit } from "@/graphql/resolver-types";
-import { ResolvedDimension } from "@/graphql/shared-types";
 
 // Mock the data source validation module
 vi.mock("@/domain/data-source", () => ({
