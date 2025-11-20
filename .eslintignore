@@ -4,5 +4,6 @@
 /app/graphql/resolver-types.ts
 /app/graphql/query-hooks.ts
 /app/dist/*
+/app/out/*
 /app/node_modules/*
 .next/*
