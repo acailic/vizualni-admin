@@ -2,6 +2,8 @@ import importPlugin from 'eslint-plugin-import';
 import visualizeAdminPlugin from 'eslint-plugin-visualize-admin';
 import deprecatePlugin from 'eslint-plugin-deprecate';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
+import tsParser from '@typescript-eslint/parser';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -17,6 +19,8 @@ export default [
       'app/graphql/resolver-types.ts',
       'app/graphql/query-hooks.ts',
       'app/dist/**',
+      'app/out/**',
+      'app/public/static/**',
       'app/node_modules/**',
       '.next/**',
       'node_modules/**',
@@ -34,10 +38,12 @@ export default [
       'visualize-admin': visualizeAdminPlugin,
       deprecate: deprecatePlugin,
       'unused-imports': unusedImportsPlugin,
+      'react-hooks': reactHooksPlugin,
     },
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
+      parser: tsParser,
       parserOptions: {
         ecmaFeatures: {
           jsx: true,

@@ -2,7 +2,7 @@
  * Demo gallery page - showcases all available data.gov.rs demos
  */
 
-import { Box, Card, CardActionArea, CardContent, Chip, Grid, Typography } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardContent, Chip, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -62,6 +62,43 @@ export default function DemosIndex() {
               : 'Click on any demo below to see an interactive visualization with real data.'}
           </Typography>
         </Box>
+      </Box>
+
+      {/* Showcase CTA */}
+      <Box
+        sx={{
+          mb: 5,
+          p: 3,
+          borderRadius: 3,
+          border: '1px solid',
+          borderColor: 'divider',
+          background: 'linear-gradient(115deg, rgba(14,165,233,0.08), rgba(124,58,237,0.06))',
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: { xs: 'flex-start', md: 'center' },
+          gap: 2
+        }}
+      >
+        <Box sx={{ flex: 1 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
+            {locale === 'sr' ? 'Novi Demo Showcase' : 'New Demo Showcase'}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {locale === 'sr'
+              ? 'Kompaktan pregled najtraženijih grafika (ekonomija, transport, energetika, digitalizacija).'
+              : 'A compact set of highlight charts across economy, transport, energy, and digitalization.'}
+          </Typography>
+        </Box>
+        <Link href="/demos/showcase" passHref legacyBehavior>
+          <Button
+            component="a"
+            variant="contained"
+            color="primary"
+            sx={{ textTransform: 'none', fontWeight: 700, px: 2.5 }}
+          >
+            {locale === 'sr' ? 'Otvori showcase' : 'Open showcase'}
+          </Button>
+        </Link>
       </Box>
 
       {/* Demo Cards Grid */}

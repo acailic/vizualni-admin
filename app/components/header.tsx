@@ -1,4 +1,5 @@
 import { Box, IconButton } from "@mui/material";
+import Link from "next/link";
 
 import { DataSourceMenu } from "@/components/data-source-menu";
 import { Flex } from "@/components/flex";
@@ -41,6 +42,24 @@ export const Header = ({
       >
         {SOURCE_OPTIONS.length > 1 && <DataSourceMenu />}
         <Flex alignItems="center" gap={3} marginLeft="auto">
+          <Link href="/demos/showcase" passHref legacyBehavior>
+            <Box
+              component="a"
+              sx={{
+                color: "white",
+                fontWeight: 600,
+                textDecoration: "none",
+                padding: "6px 12px",
+                borderRadius: "999px",
+                border: "1px solid rgba(255,255,255,0.35)",
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,0.12)",
+                },
+              }}
+            >
+              Demo Showcase
+            </Box>
+          </Link>
           <IconButton
             component="a"
             href="https://github.com/acailic/vizualni-admin"
