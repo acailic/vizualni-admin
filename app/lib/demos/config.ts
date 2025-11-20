@@ -274,6 +274,21 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
     chartType: 'line',
     tags: ['digitalizacija', 'internet', 'IT', 'tehnologija', 'uspeh'],
     icon: '💻'
+  },
+  presentation: {
+    id: 'presentation',
+    title: {
+      sr: '🎬 Prezentacioni mod',
+      en: '🎬 Presentation Mode'
+    },
+    description: {
+      sr: 'Kurirana scena sa interaktivnim vizualizacijama, agendom, pričama iz podataka i CTA koracima',
+      en: 'Curated stage with interactive visuals, agenda, data stories, and CTA steps'
+    },
+    searchQuery: 'vizualizacije prezentacija',
+    chartType: 'line',
+    tags: ['demo', 'prezentacija', 'vizualizacije'],
+    icon: '🎬'
   }
 };
 

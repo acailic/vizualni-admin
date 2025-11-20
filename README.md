@@ -71,6 +71,12 @@ The application will be available at:
 - HTTP: http://localhost:3000
 - HTTPS: https://localhost:3000
 
+### Demo gallery & showcase
+
+- Open the curated demo showcase: http://localhost:3000/demos/showcase
+- Browse the full demo gallery: http://localhost:3000/demos
+- To view with a base path (GitHub Pages build): `NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static` then open `/vizualni-admin/demos/showcase` from the generated `out` dir.
+
 ### Building for production
 
 ```sh
@@ -96,6 +102,13 @@ CI runs `yarn lint --max-warnings=0` using the repo’s ESLint config (no global
 yarn test           # Run unit tests
 yarn e2e           # Run end-to-end tests
 ```
+
+## Presentation mode
+
+- Start dev server: `yarn dev` then open `http://localhost:3000/demos/presentation`
+- Slide-style sections: hero, agenda, highlights, data stories, CTA with chip navigation
+- Use existing sample data (digital, economy, energy) for the interactive charts
+- For static export/GitHub Pages: `NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static`
 
 ## Configuration
 
