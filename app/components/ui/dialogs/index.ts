@@ -39,10 +39,10 @@
  */
 
 export {
-  ConfirmationDialogBase,
-  DialogBase,
-  FormDialogBase,
   type ConfirmationDialogBaseProps,
   type DialogBaseProps,
   type FormDialogBaseProps,
+  ConfirmationDialogBase,
+  DialogBase,
+  FormDialogBase,
 } from "./DialogBase";
