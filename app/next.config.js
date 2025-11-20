@@ -149,8 +149,8 @@ const nextConfig = withPreconstruct(
       },
 
       eslint: {
-        // ESLint enabled in production builds to ensure code quality
-        ignoreDuringBuilds: false,
+        // Lint runs separately in CI; skip in-build lint to keep exports predictable
+        ignoreDuringBuilds: true,
       },
 
       webpack(config, { dev }) {

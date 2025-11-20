@@ -112,7 +112,8 @@ export type VisualizationProps<TChartConfig extends ChartConfig> =
  */
 export type ChartWithFiltersProps<TChartConfig extends ChartConfig = ChartConfig> =
   DataSourceProps &
-  ChartConfigProps<TChartConfig> & {
+  ChartConfigProps<TChartConfig> &
+  Partial<QueryFilterProps> & {
     /** Optional embed parameters */
     embedParams?: EmbedQueryParams;
   };

@@ -75,10 +75,7 @@ const ChartTableVisualization = dynamic(
   )
 );
 
-type GenericChartProps = ChartWithFiltersProps & {
-  /** Filters to apply when querying observations */
-  observationQueryFilters: DataCubeObservationFilter[];
-};
+type GenericChartProps = ChartWithFiltersProps;
 
 const GenericChart = ({
   dataSource,
