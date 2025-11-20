@@ -160,14 +160,14 @@ const Search = ({
                       <Typography variant="h5">{q.label}</Typography>
                       <Stack direction="row" spacing={4}>
                         <div>
-                          <Typography variant="overline">Duration</Typography>
+                          <Typography variant="caption">Duration</Typography>
                           <Typography variant="body2">
                             {q.endTime - q.startTime}ms
                           </Typography>
                         </div>
                       </Stack>
                       <Accordion sx={{ mt: 2 }}>
-                        <AccordionSummary sx={{ typography: "overline" }}>
+                        <AccordionSummary sx={{ typography: "caption" }}>
                           Query
                         </AccordionSummary>
                         <AccordionDetails>
