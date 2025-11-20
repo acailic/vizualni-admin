@@ -87,7 +87,7 @@ export default function EconomyDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'BDP po glavi stanovnika' : 'GDP per Capita'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -109,7 +109,7 @@ export default function EconomyDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Rast BDP-a (2023)' : 'GDP Growth (2023)'}
                 </Typography>
                 <Typography
@@ -138,7 +138,7 @@ export default function EconomyDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Nezaposlenost (2023)' : 'Unemployment (2023)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -163,7 +163,7 @@ export default function EconomyDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Inflacija (2023)' : 'Inflation (2023)'}
                 </Typography>
                 <Typography

@@ -227,10 +227,10 @@ const onColorComponentIdChange: OnEncodingOptionChange<string, MapConfig> = (
   );
 
   if (component) {
-    const colorPalette: PaletteType | undefined = get(
+    const colorPalette = get(
       chartConfig,
       `${basePath}.color.palette`
-    );
+    ) as PaletteType | undefined;
 
     if (
       MULTI_FILTER_ENABLED_COMPONENTS.includes(component.__typename) ||
@@ -867,10 +867,10 @@ const chartConfigOptionsUISpec: ChartSpecs = {
           delete chartConfig.fields.y.customDomain;
 
           const components = [...dimensions, ...measures];
-          const segment: ColumnSegmentField = get(
+          const segment = get(
             chartConfig,
             "fields.segment"
-          );
+          ) as ColumnSegmentField;
           const yComponent = components.find(
             (d) => d.id === chartConfig.fields.y.componentId
           );
@@ -1068,10 +1068,10 @@ const chartConfigOptionsUISpec: ChartSpecs = {
           delete chartConfig.fields.x.customDomain;
 
           const components = [...dimensions, ...measures];
-          const segment: ColumnSegmentField = get(
+          const segment = get(
             chartConfig,
             "fields.segment"
-          );
+          ) as ColumnSegmentField;
           const xComponent = components.find(
             (d) => d.id === chartConfig.fields.x.componentId
           );

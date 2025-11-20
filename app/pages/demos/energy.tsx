@@ -83,7 +83,7 @@ export default function EnergyDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'error.main' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Zavisnost od uglja' : 'Coal dependency'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'error.main' }}>
@@ -99,7 +99,7 @@ export default function EnergyDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'warning.main' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Obnovljivi izvori (S/V)' : 'Renewables (S/W)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -118,7 +118,7 @@ export default function EnergyDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'error.dark' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Troškovi uvoza (2024)' : 'Import costs (2024)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'error.dark' }}>
@@ -137,7 +137,7 @@ export default function EnergyDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'info.main' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'CO₂ emisije po glavi' : 'CO₂ per capita'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>

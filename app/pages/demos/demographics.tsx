@@ -92,7 +92,7 @@ export default function DemographicsDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Ukupno stanovništvo (2024)' : 'Total Population (2024)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -118,7 +118,7 @@ export default function DemographicsDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Promena do 2050' : 'Change by 2050'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'error.main' }}>
@@ -144,7 +144,7 @@ export default function DemographicsDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Medijana starosti' : 'Median Age'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -167,7 +167,7 @@ export default function DemographicsDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Racio zavisnosti starih' : 'Elderly Dependency Ratio'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>

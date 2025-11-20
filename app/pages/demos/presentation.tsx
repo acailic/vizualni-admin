@@ -114,7 +114,7 @@ export default function PresentationDemo() {
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
           <Grid container spacing={4} alignItems="center" sx={{ py: 6 }}>
             <Grid item xs={12} md={7}>
-              <Typography variant="overline" sx={{ letterSpacing: 2, color: 'rgba(255,255,255,0.7)' }}>
+              <Typography variant="caption" sx={{ letterSpacing: 2, color: 'rgba(255,255,255,0.7)' }}>
                 {locale === 'sr' ? 'Live demo za sastanke' : 'Live demo for meetings'}
               </Typography>
               <Typography variant="h3" sx={{ fontWeight: 800, mb: 2, lineHeight: 1.1 }}>
@@ -217,7 +217,7 @@ export default function PresentationDemo() {
             {highlightCards.map((card) => (
               <Grid item xs={12} sm={6} md={3} key={card.label}>
                 <Box sx={{ p: 3, borderRadius: 3, background: 'white', border: '1px solid', borderColor: 'rgba(0,0,0,0.06)', boxShadow: '0 10px 25px rgba(0,0,0,0.05)' }}>
-                  <Typography variant="overline" color="text.secondary">
+                  <Typography variant="caption" color="text.secondary">
                     {card.label}
                   </Typography>
                   <Typography variant="h4" sx={{ fontWeight: 800, my: 1 }}>

@@ -72,7 +72,7 @@ export default function EmploymentDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'error.main' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Nezaposlenost mladih (2024)' : 'Youth unemployment (2024)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'error.main' }}>
@@ -91,7 +91,7 @@ export default function EmploymentDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'error.dark' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Emigranti u 2024' : 'Emigrants in 2024'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'error.dark' }}>
@@ -107,7 +107,7 @@ export default function EmploymentDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'warning.main' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Razlika u platama' : 'Wage gap with EU'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -123,7 +123,7 @@ export default function EmploymentDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'info.main' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Nedostaje radnika' : 'Worker shortage'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>

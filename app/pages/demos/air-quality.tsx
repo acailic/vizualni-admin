@@ -197,7 +197,7 @@ export default function AirQualityDemo() {
                   }}
                 >
                   <CardContent>
-                    <Typography variant="overline" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary">
                       Prosečan PM2.5
                     </Typography>
                     <Typography variant="h3" sx={{ my: 1, fontWeight: 700 }}>
@@ -239,7 +239,7 @@ export default function AirQualityDemo() {
                   }}
                 >
                   <CardContent>
-                    <Typography variant="overline" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary">
                       Prosečan PM10
                     </Typography>
                     <Typography variant="h3" sx={{ my: 1, fontWeight: 700 }}>
@@ -274,7 +274,7 @@ export default function AirQualityDemo() {
             <Grid item xs={12} md={6} lg={3}>
               <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'error.main' }}>
                 <CardContent>
-                  <Typography variant="overline" color="text.secondary">
+                  <Typography variant="caption" color="text.secondary">
                     Dana iznad granice
                   </Typography>
                   <Typography variant="h3" sx={{ my: 1, fontWeight: 700 }}>
@@ -295,7 +295,7 @@ export default function AirQualityDemo() {
               <Grid item xs={12} md={6} lg={3}>
                 <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'error.dark' }}>
                   <CardContent>
-                    <Typography variant="overline" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary">
                       Maksimalan PM2.5
                     </Typography>
                     <Typography variant="h3" sx={{ my: 1, fontWeight: 700, color: 'error.main' }}>

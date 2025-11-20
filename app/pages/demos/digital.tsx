@@ -92,7 +92,7 @@ export default function DigitalDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Internet korisnici' : 'Internet Users'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'success.main' }}>
@@ -114,7 +114,7 @@ export default function DigitalDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Osnovne digitalne veštine' : 'Basic Digital Skills'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -136,7 +136,7 @@ export default function DigitalDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'IT izvoz (2023)' : 'IT Exports (2023)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -158,7 +158,7 @@ export default function DigitalDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Onlajn kupovina' : 'Online Shopping'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -327,7 +327,7 @@ export default function DigitalDemo() {
             <Grid item xs={12} sm={4}>
               <Card variant="outlined">
                 <CardContent>
-                  <Typography variant="overline" color="text.secondary">
+                  <Typography variant="caption" color="text.secondary">
                     {locale === 'sr' ? 'IT Zaposleni' : 'IT Employees'}
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>
@@ -342,7 +342,7 @@ export default function DigitalDemo() {
             <Grid item xs={12} sm={4}>
               <Card variant="outlined">
                 <CardContent>
-                  <Typography variant="overline" color="text.secondary">
+                  <Typography variant="caption" color="text.secondary">
                     {locale === 'sr' ? 'Startapovi' : 'Startups'}
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>
@@ -357,7 +357,7 @@ export default function DigitalDemo() {
             <Grid item xs={12} sm={4}>
               <Card variant="outlined">
                 <CardContent>
-                  <Typography variant="overline" color="text.secondary">
+                  <Typography variant="caption" color="text.secondary">
                     {locale === 'sr' ? 'Unicorns' : 'Unicorns'}
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>

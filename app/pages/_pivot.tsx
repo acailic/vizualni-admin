@@ -558,23 +558,23 @@ const PivotTable = ({ dataset }: { dataset: (typeof datasets)[string] }) => {
               </Typography>
             </summary>
 
-            <Typography variant="overline" display="block">
+            <Typography variant="caption" display="block">
               Columns
             </Typography>
             <Inspector data={columns} table={false} />
-            <Typography variant="overline" display="block">
+            <Typography variant="caption" display="block">
               Pivoted
             </Typography>
             <Inspector data={pivotted} table={false} />
-            <Typography variant="overline" display="block">
+            <Typography variant="caption" display="block">
               Pivoted tree
             </Typography>
             <Inspector data={tree} table={false} />
-            <Typography variant="overline" display="block">
+            <Typography variant="caption" display="block">
               Hierarchy
             </Typography>
             <Inspector data={hierarchy} table={false} />
-            <Typography variant="overline" display="block">
+            <Typography variant="caption" display="block">
               Hierarchy indexes
             </Typography>
             <Inspector data={hierarchyIndexes} table={false} />
@@ -654,7 +654,7 @@ const Page = () => {
   return (
     <Box m={5}>
       <Typography variant="h2">Pivot table</Typography>
-      <Typography variant="overline" display="block">
+      <Typography variant="caption" display="block">
         Dataset
       </Typography>
 

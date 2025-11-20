@@ -288,7 +288,7 @@ export default function PresentationEnhanced() {
               <Grid item xs={12} md={7}>
                 <Fade in timeout={1200}>
                   <Box>
-                    <Typography variant="overline" sx={{ letterSpacing: 3, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                    <Typography variant="caption" sx={{ letterSpacing: 3, color: 'rgba(255,255,255,0.8)', fontWeight: 600, textTransform: 'uppercase' }}>
                       {locale === 'sr' ? '🎯 Live demo za sastanke' : '🎯 Live demo for meetings'}
                     </Typography>
                     <Typography variant="h2" sx={{ fontWeight: 900, mb: 2, lineHeight: 1.1, mt: 1 }}>
@@ -522,7 +522,7 @@ export default function PresentationEnhanced() {
                       }
                     }}>
                       <Typography sx={{ fontSize: '2.5rem', mb: 2 }}>{card.icon}</Typography>
-                      <Typography variant="overline" color="text.secondary" sx={{ fontWeight: 700 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700, textTransform: 'uppercase' }}>
                         {card.label}
                       </Typography>
                       <Typography variant="h3" sx={{ fontWeight: 900, my: 1.5, color: 'primary.main' }}>

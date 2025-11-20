@@ -75,7 +75,7 @@ export default function HealthcareDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'error.main' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Ukupno na listi čekanja' : 'Total on waiting lists'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'error.main' }}>
@@ -91,7 +91,7 @@ export default function HealthcareDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'warning.main' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Prosečno vreme čekanja' : 'Average waiting time'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
@@ -107,7 +107,7 @@ export default function HealthcareDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'error.dark' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Zdravstveni radnici otišli (2024)' : 'Healthcare workers left (2024)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'error.dark' }}>
@@ -123,7 +123,7 @@ export default function HealthcareDemo() {
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', borderLeft: 4, borderColor: 'warning.dark' }}>
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Smanjenje kapaciteta (2015-2024)' : 'Capacity reduction (2015-2024)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>

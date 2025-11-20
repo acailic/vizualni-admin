@@ -92,7 +92,7 @@ export default function ClimateDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Porast temperature' : 'Temperature Rise'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'error.main' }}>
@@ -114,7 +114,7 @@ export default function ClimateDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Ekstremni događaji (2023)' : 'Extreme Events (2023)'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'warning.main' }}>
@@ -136,7 +136,7 @@ export default function ClimateDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'Obnovljiva energija' : 'Renewable Energy'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1, color: 'success.main' }}>
@@ -158,7 +158,7 @@ export default function ClimateDemo() {
               }}
             >
               <CardContent>
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                   {locale === 'sr' ? 'CO₂ emisije' : 'CO₂ Emissions'}
                 </Typography>
                 <Typography variant="h4" sx={{ fontWeight: 700, my: 1 }}>
