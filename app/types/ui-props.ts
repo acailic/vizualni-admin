@@ -7,8 +7,8 @@
  * @module ui-props
  */
 
-import { ReactNode } from "react";
 import { BoxProps, SxProps, Theme } from "@mui/material";
+import { ReactNode } from "react";
 
 // ============================================================================
 // BASE UI PROPS

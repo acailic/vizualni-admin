@@ -8,6 +8,8 @@
   },
   "plugins": ["import", "deprecate", "unused-imports"],
   "rules": {
+    "visualize-admin/no-large-sx": "off",
+    "visualize-admin/make-styles": "off",
     "no-duplicate-case": "error",
     "no-restricted-imports": [
       "error",

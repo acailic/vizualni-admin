@@ -1,4 +1,5 @@
 import { ComponentType, lazy, LazyExoticComponent, Suspense, ReactNode } from "react";
+
 import { LoadingSpinner } from "@/components/loading-wrapper";
 
 /**
