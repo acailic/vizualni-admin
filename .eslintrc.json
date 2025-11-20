@@ -1,11 +1,5 @@
 {
   "extends": "next",
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module",
-    "project": "./app/tsconfig.json"
-  },
   "plugins": ["import", "deprecate", "unused-imports"],
   "rules": {
     "visualize-admin/no-large-sx": "off",
@@ -66,6 +60,16 @@
     "unused-imports/no-unused-imports": "warn"
   },
   "overrides": [
+    {
+      "files": ["**/*.{ts,tsx}"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": "./app/tsconfig.json",
+        "tsconfigRootDir": "."
+      }
+    },
     {
       "files": ["**/*.docs.tsx"],
       "rules": {
