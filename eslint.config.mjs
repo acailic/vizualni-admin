@@ -24,6 +24,7 @@ export default [
       'app/out/**',
       'app/public/static/**',
       'app/node_modules/**',
+      'app/.next/**',
       '.next/**',
       'node_modules/**',
       'dist/**',
