@@ -56,70 +56,73 @@ module.exports = withPreconstruct(
         defaultLocale,
       },
 
-      headers: async () => {
-        const headers = [];
+      // Headers only work with server/standalone builds, not with static export
+      ...(!isGitHubPages && {
+        headers: async () => {
+          const headers = [];
 
-        headers.push({
-          source: "/:path*",
-          headers: [
-            {
-              key: "X-Content-Type-Options",
-              value: "nosniff",
-            },
-            {
-              key: "X-Frame-Options",
-              value: "SAMEORIGIN",
-            },
-            {
-              key: "X-XSS-Protection",
-              value: "1; mode=block",
-            },
-            {
-              key: "Referrer-Policy",
-              value: "strict-origin-when-cross-origin",
-            },
-            {
-              key: "Permissions-Policy",
-              value: "camera=(), microphone=(), geolocation=()",
-            },
-          ],
-        });
-
-        // See https://content-security-policy.com/ & https://developers.google.com/tag-platform/security/guides/csp
-        if (!(process.env.DISABLE_CSP && process.env.DISABLE_CSP === "true")) {
-          headers[0].headers.push({
-            key: "Content-Security-Policy",
-            value: [
-              `default-src 'self' 'unsafe-inline'${
-                process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""
-              } https://*.sentry.io https://vercel.live/ https://vercel.com https://*.googletagmanager.com`,
-              `script-src 'self' 'unsafe-inline'${
-                process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""
-              } https://*.sentry.io https://vercel.live/ https://vercel.com https://*.googletagmanager.com https://api.mapbox.com`,
-              `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net`,
-              `font-src 'self'`,
-              `form-action 'self'`,
-
-              // * to allow WMS / WMTS endpoints
-              `connect-src 'self' *`,
-
-              // * to allow loading legend images from custom WMS / WMTS endpoints and data: to allow downloading images
-              `img-src 'self' * data: blob:`,
-              `script-src-elem 'self' 'unsafe-inline' https://vercel.live https://vercel.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.mapbox.com https://cdn.jsdelivr.net`,
-              `worker-src 'self' blob:`,
-            ].join("; "),
+          headers.push({
+            source: "/:path*",
+            headers: [
+              {
+                key: "X-Content-Type-Options",
+                value: "nosniff",
+              },
+              {
+                key: "X-Frame-Options",
+                value: "SAMEORIGIN",
+              },
+              {
+                key: "X-XSS-Protection",
+                value: "1; mode=block",
+              },
+              {
+                key: "Referrer-Policy",
+                value: "strict-origin-when-cross-origin",
+              },
+              {
+                key: "Permissions-Policy",
+                value: "camera=(), microphone=(), geolocation=()",
+              },
+            ],
           });
-        }
 
-        if (process.env.PREVENT_SEARCH_BOTS === "true") {
-          headers[0].headers.push({
-            key: "X-Robots-Tag",
-            value: "noindex, nofollow",
-          });
-        }
+          // See https://content-security-policy.com/ & https://developers.google.com/tag-platform/security/guides/csp
+          if (!(process.env.DISABLE_CSP && process.env.DISABLE_CSP === "true")) {
+            headers[0].headers.push({
+              key: "Content-Security-Policy",
+              value: [
+                `default-src 'self' 'unsafe-inline'${
+                  process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""
+                } https://*.sentry.io https://vercel.live/ https://vercel.com https://*.googletagmanager.com`,
+                `script-src 'self' 'unsafe-inline'${
+                  process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""
+                } https://*.sentry.io https://vercel.live/ https://vercel.com https://*.googletagmanager.com https://api.mapbox.com`,
+                `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net`,
+                `font-src 'self'`,
+                `form-action 'self'`,
 
-        return headers;
-      },
+                // * to allow WMS / WMTS endpoints
+                `connect-src 'self' *`,
+
+                // * to allow loading legend images from custom WMS / WMTS endpoints and data: to allow downloading images
+                `img-src 'self' * data: blob:`,
+                `script-src-elem 'self' 'unsafe-inline' https://vercel.live https://vercel.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.mapbox.com https://cdn.jsdelivr.net`,
+                `worker-src 'self' blob:`,
+              ].join("; "),
+            });
+          }
+
+          if (process.env.PREVENT_SEARCH_BOTS === "true") {
+            headers[0].headers.push({
+              key: "X-Robots-Tag",
+              value: "noindex, nofollow",
+            });
+          }
+
+          return headers;
+        },
+      }),
 
       pageExtensions: ["js", "ts", "tsx", "mdx"],
 
@@ -172,15 +175,18 @@ module.exports = withPreconstruct(
         return config;
       },
 
-      async redirects() {
-        return [
-          {
-            source: "/storybook",
-            destination: "/storybook/index.html",
-            permanent: true,
-          },
-        ];
-      },
+      // Redirects only work with server/standalone builds, not with static export
+      ...(!isGitHubPages && {
+        async redirects() {
+          return [
+            {
+              source: "/storybook",
+              destination: "/storybook/index.html",
+              permanent: true,
+            },
+          ];
+        },
+      }),
     })
   )
 );
@@ -188,15 +194,25 @@ module.exports = withPreconstruct(
 module.exports = withSentryConfig(
   module.exports,
   {
+    // Suppress all Sentry build output
     silent: true,
     // Disable build-time Sentry plugins to avoid org configuration errors
     disableServerWebpackPlugin: true,
     disableClientWebpackPlugin: true,
+    // Hide source maps in production to prevent code visibility in browser devtools
     hideSourceMaps: true,
     // Suppress source map upload warnings
     widenClientFileUpload: false,
     tunnelRoute: "/monitoring",
     org: process.env.SENTRY_ORG || "dummy-org",
     project: process.env.SENTRY_PROJECT || "dummy-project",
+    // Disable telemetry to suppress additional warnings
+    disableLogger: true,
+  },
+  {
+    // Suppress CLI output and warnings
+    silent: true,
+    // Hide source maps (also controlled by hideSourceMaps above)
+    hideSourceMaps: true,
   }
 );
