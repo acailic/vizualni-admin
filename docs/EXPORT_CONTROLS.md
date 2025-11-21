@@ -41,7 +41,7 @@ import { ExportControls } from '@/components/demos/ExportControls';
 |------|------|----------|---------|-------------|
 | `targetElementId` | `string` | Yes | - | ID of the DOM element to export |
 | `fileNamePrefix` | `string` | No | `"chart"` | Prefix for the downloaded filename |
-| `sx` | `any` | No | - | MUI style overrides |
+| `sx` | `SxProps<Theme>` | No | - | MUI style overrides |
 
 ### Example: Integration in Demo Pages
 
