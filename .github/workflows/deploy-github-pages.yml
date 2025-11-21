@@ -62,24 +62,24 @@ jobs:
             ${{ runner.os }}-graphql-
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       - name: Lint (local ESLint config)
-        run: yarn lint --max-warnings=0
+        run: pnpm run lint --max-warnings=0
 
       # Run independent preparatory tasks in parallel
       - name: Run preparatory tasks in parallel
         run: |
-          yarn graphql:codegen &
-          yarn locales:compile &
-          yarn generate-json-schema &
+          pnpm run graphql:codegen &
+          pnpm run locales:compile &
+          pnpm run generate-json-schema &
           wait
 
       - name: Build Rollup bundle
-        run: yarn rollup -c rollup.config.js
+        run: pnpm exec rollup -c rollup.config.js
 
       - name: Build static export
-        run: yarn next build ./app
+        run: pnpm exec next build ./app
         env:
           NEXT_PUBLIC_BASE_PATH: /vizualni-admin
 
