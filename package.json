@@ -2,6 +2,7 @@
   "name": "vizualni-admin",
   "version": "1.0.0",
   "description": "Serbian Open Data Visualization Tool based on visualize-admin",
+  "packageManager": "yarn@1.22.22",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/acailic/vizualni-admin.git"
