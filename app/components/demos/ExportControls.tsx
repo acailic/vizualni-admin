@@ -3,9 +3,12 @@
  * Provides functionality to export charts as PNG or SVG
  */
 
-import { Box, Button, CircularProgress, Stack } from '@mui/material';
+import { Box, Button, CircularProgress, Stack, SxProps, Theme } from '@mui/material';
 import * as htmlToImage from 'html-to-image';
+import { enqueueSnackbar } from 'notistack';
 import { useState } from 'react';
+
+import SvgIcDownload from '@/icons/components/IcDownload';
 
 export interface ExportControlsProps {
   /**
@@ -22,7 +25,7 @@ export interface ExportControlsProps {
   /**
    * Optional style customization
    */
-  sx?: any;
+  sx?: SxProps<Theme>;
 }
 
 /**
@@ -42,6 +45,21 @@ export interface ExportControlsProps {
  * />
  * ```
  */
+/**
+ * Helper function to get and validate target element
+ */
+const getTargetElement = (elementId: string): HTMLElement | null => {
+  const element = document.getElementById(elementId);
+  if (!element) {
+    console.error(`Element with id "${elementId}" not found`);
+    enqueueSnackbar({
+      message: 'Greška: Nije pronađen element za eksport.',
+      variant: 'error'
+    });
+  }
+  return element;
+};
+
 export const ExportControls = ({
   targetElementId,
   fileNamePrefix = 'chart',
@@ -53,13 +71,8 @@ export const ExportControls = ({
    * Download chart as PNG
    */
   const handleExportPNG = async () => {
-    const element = document.getElementById(targetElementId);
-
-    if (!element) {
-      console.error(`Element with id "${targetElementId}" not found`);
-      alert(`Greška: Nije pronađen element za eksport.`);
-      return;
-    }
+    const element = getTargetElement(targetElementId);
+    if (!element) return;
 
     try {
       setExporting('png');
@@ -78,7 +91,10 @@ export const ExportControls = ({
       link.click();
     } catch (error) {
       console.error('Error exporting PNG:', error);
-      alert('Greška pri eksportovanju PNG-a. Pokušajte ponovo.');
+      enqueueSnackbar({
+        message: 'Greška pri eksportovanju PNG-a. Pokušajte ponovo.',
+        variant: 'error'
+      });
     } finally {
       setExporting(null);
     }
@@ -88,13 +104,8 @@ export const ExportControls = ({
    * Download chart as SVG
    */
   const handleExportSVG = async () => {
-    const element = document.getElementById(targetElementId);
-
-    if (!element) {
-      console.error(`Element with id "${targetElementId}" not found`);
-      alert(`Greška: Nije pronađen element za eksport.`);
-      return;
-    }
+    const element = getTargetElement(targetElementId);
+    if (!element) return;
 
     try {
       setExporting('svg');
@@ -128,7 +139,10 @@ export const ExportControls = ({
       }
     } catch (error) {
       console.error('Error exporting SVG:', error);
-      alert('Greška pri eksportovanju SVG-a. Pokušajte ponovo.');
+      enqueueSnackbar({
+        message: 'Greška pri eksportovanju SVG-a. Pokušajte ponovo.',
+        variant: 'error'
+      });
     } finally {
       setExporting(null);
     }
@@ -142,10 +156,10 @@ export const ExportControls = ({
           color="primary"
           onClick={handleExportPNG}
           disabled={!!exporting}
-          startIcon={exporting === 'png' ? <CircularProgress size={16} color="inherit" /> : null}
+          startIcon={exporting === 'png' ? <CircularProgress size={16} color="inherit" /> : <SvgIcDownload />}
           sx={{ textTransform: 'none' }}
         >
-          {exporting === 'png' ? 'Eksportovanje...' : '📥 Preuzmi PNG'}
+          {exporting === 'png' ? 'Eksportovanje...' : 'Preuzmi PNG'}
         </Button>
 
         <Button
@@ -153,10 +167,10 @@ export const ExportControls = ({
           color="primary"
           onClick={handleExportSVG}
           disabled={!!exporting}
-          startIcon={exporting === 'svg' ? <CircularProgress size={16} color="inherit" /> : null}
+          startIcon={exporting === 'svg' ? <CircularProgress size={16} color="inherit" /> : <SvgIcDownload />}
           sx={{ textTransform: 'none' }}
         >
-          {exporting === 'svg' ? 'Eksportovanje...' : '📥 Preuzmi SVG'}
+          {exporting === 'svg' ? 'Eksportovanje...' : 'Preuzmi SVG'}
         </Button>
       </Stack>
     </Box>
