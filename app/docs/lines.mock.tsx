@@ -5,6 +5,7 @@ import {
 } from "@/configurator";
 import { Dimension, Measure } from "@/domain/data";
 import { CHART_CONFIG_VERSION } from "@/utils/chart-config/constants";
+import { createMeta } from "@/locales/localized-string";
 
 const interactiveFiltersConfig: InteractiveFiltersConfig = {
   legend: {
@@ -73,26 +74,7 @@ export const fields = {
 export const chartConfig: LineConfig = {
   key: "line",
   version: CHART_CONFIG_VERSION,
-  meta: {
-    title: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-    description: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-    label: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-  },
+  meta: createMeta(),
   cubes: [{ iri: "", filters: {} }],
   annotations: [],
   limits: {},

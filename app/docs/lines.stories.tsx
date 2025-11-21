@@ -15,6 +15,7 @@ import {
   InteractiveFiltersProvider,
 } from "@/stores/interactive-filters";
 import { CONFIGURATOR_STATE_VERSION } from "@/utils/chart-config/constants";
+import { createMeta } from "@/locales/localized-string";
 
 import {
   chartConfig,
@@ -39,11 +40,7 @@ const LineChartStory = () => (
       dataSource: { type: "sparql", url: "" },
       layout: {
         type: "tab",
-        meta: {
-          title: { en: "", de: "", fr: "", it: "" },
-          description: { en: "", de: "", fr: "", it: "" },
-          label: { en: "", de: "", fr: "", it: "" },
-        },
+        meta: createMeta(),
         blocks: [{ type: "chart", key: chartConfig.key, initialized: false }],
         activeField: undefined,
       },

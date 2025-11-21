@@ -5,6 +5,7 @@ import {
 } from "@/configurator";
 import { Component, Dimension, Measure } from "@/domain/data";
 import { CHART_CONFIG_VERSION } from "@/utils/chart-config/constants";
+import { createMeta } from "@/locales/localized-string";
 
 export const interactiveFiltersConfig: InteractiveFiltersConfig = {
   legend: {
@@ -65,26 +66,7 @@ export const scatterplotFields: ScatterPlotFields = {
 export const chartConfig: ScatterPlotConfig = {
   key: "scatterplot",
   version: CHART_CONFIG_VERSION,
-  meta: {
-    title: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-    description: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-    label: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-  },
+  meta: createMeta(),
   cubes: [{ iri: "", filters: {} }],
   annotations: [],
   limits: {},
