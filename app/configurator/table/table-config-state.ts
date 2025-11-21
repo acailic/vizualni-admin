@@ -1,5 +1,5 @@
 import produce from "immer";
-import { DraggableLocation } from "react-beautiful-dnd";
+import { DraggableLocation } from "@hello-pangea/dnd";
 
 import {
   SortingOrder,

@@ -14,7 +14,7 @@ import {
   Draggable,
   Droppable,
   OnDragEndResponder,
-} from "react-beautiful-dnd";
+} from "@hello-pangea/dnd";
 
 import { RemoteLayer } from "@/charts/map/types";
 import { RemoteWMSLayer } from "@/charts/map/wms-utils";

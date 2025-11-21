@@ -1,7 +1,7 @@
 import { t, Trans } from "@lingui/macro";
 import { Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext } from "@hello-pangea/dnd";
 
 import { Loading } from "@/components/hint";
 import { ConfiguratorStateConfiguringChart } from "@/configurator";

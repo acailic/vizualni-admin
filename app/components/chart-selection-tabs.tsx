@@ -25,11 +25,11 @@ import {
   DragDropContext as BeautifulDragDropContext,
   Draggable,
   Droppable as BeautifulDroppable,
-} from "react-beautiful-dnd";
+} from "@hello-pangea/dnd";
 import type {
   DragDropContextProps,
   DroppableProps,
-} from "react-beautiful-dnd";
+} from "@hello-pangea/dnd";
 
 import { AddButton } from "@/components/add-button";
 import { ArrowMenuTopCenter } from "@/components/arrow-menu";

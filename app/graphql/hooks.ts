@@ -14,6 +14,7 @@ import {
 } from "@/domain/data";
 import { truthy } from "@/domain/types";
 import { Locale } from "@/locales/locales";
+import { createLocalizedString } from "@/locales/localized-string";
 import { LimitSingle, LimitTimeRange, LimitValueRange } from "@/rdf/limits";
 import { assert } from "@/utils/assert";
 
@@ -377,9 +378,11 @@ export function transformDataCubesComponents(
             return measure;
           }
 
+          const labels = createLocalizedString(conversionUnit.labels);
+
           return {
             ...measure,
-            unit: conversionUnit.labels[locale as Locale] ?? measure.unit,
+            unit: labels[locale as Locale] ?? measure.unit,
             originalUnit: measure.unit,
             limits: measure.limits.map((limit) => {
               switch (limit.type) {

@@ -29,7 +29,7 @@ import {
   Draggable,
   Droppable,
   OnDragEndResponder,
-} from "react-beautiful-dnd";
+} from "@hello-pangea/dnd";
 import { useClient } from "urql";
 
 import { getChartSpec } from "@/charts/chart-config-ui-options";

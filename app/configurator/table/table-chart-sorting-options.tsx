@@ -14,7 +14,7 @@ import {
   Draggable,
   Droppable,
   OnDragEndResponder,
-} from "react-beautiful-dnd";
+} from "@hello-pangea/dnd";
 
 import { Radio, RadioGroup, Select } from "@/components/form";
 import { VisuallyHidden } from "@/components/visually-hidden";

@@ -99,19 +99,20 @@ export const RenameDialog = ({
         <DialogContent>
           <Flex sx={{ flexDirection: "column", gap: 4 }}>
             <Input
-              name="de"
-              label={t({ id: "controls.language.german" })}
-              defaultValue={meta.title.de}
+              name="sr-Latn"
+              label={t({
+                id: "controls.language.serbian-latin",
+                message: "Serbian (Latin)",
+              })}
+              defaultValue={meta.title["sr-Latn"]}
             />
             <Input
-              name="fr"
-              label={t({ id: "controls.language.french" })}
-              defaultValue={meta.title.fr}
-            />
-            <Input
-              name="it"
-              label={t({ id: "controls.language.italian" })}
-              defaultValue={meta.title.it}
+              name="sr-Cyrl"
+              label={t({
+                id: "controls.language.serbian-cyrillic",
+                message: "Serbian (Cyrillic)",
+              })}
+              defaultValue={meta.title["sr-Cyrl"]}
             />
             <Input
               name="en"
