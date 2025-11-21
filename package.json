@@ -96,7 +96,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-storybook": "^0.11.2",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "eslint-plugin-visualize-admin": "link:./eslint/visualize-admin",
+    "eslint-plugin-visualize-admin": "file:./eslint/visualize-admin",
     "fs-extra": "^10.0.0",
     "import-move-codemod": "^0.0.3",
     "knip": "^5.42.0",
