@@ -1,3 +1,4 @@
+import { createMeta } from "@/locales/localized-string";
 import { migrateConfiguratorState } from "@/utils/chart-config/versioning";
 
 export const getExampleState1 = async () => {
@@ -8,20 +9,14 @@ export const getExampleState1 = async () => {
       type: "sparql",
       url: "https://lindas-cached.cluster.ldbar.ch/query",
     },
-    meta: {
+    meta: createMeta({
       title: {
-        de: "Lärmbelastung durch Verkehr",
         en: "Traffic noise pollution",
-        fr: "Exposition au bruit du trafic",
-        it: "Esposizione al rumore del traffico",
       },
       description: {
-        de: "",
         en: "",
-        fr: "",
-        it: "",
       },
-    },
+    }),
     chartConfig: {
       version: "1.2.1",
       fields: {
@@ -107,20 +102,14 @@ export const getExampleState2 = async () => {
       type: "sparql",
       url: "https://lindas-cached.cluster.ldbar.ch/query",
     },
-    meta: {
+    meta: createMeta({
       title: {
-        de: "Verteilung der Ausgaben und Einnahmen nach Ämtern",
         en: "Distribution of expenses and income by office",
-        fr: "Répartition des dépenses et recettes par office",
-        it: "Ripartizione delle spese e delle entrate per ufficio",
       },
       description: {
-        de: "",
         en: "",
-        fr: "",
-        it: "",
       },
-    },
+    }),
     chartConfig: {
       version: "1.2.1",
       fields: {
