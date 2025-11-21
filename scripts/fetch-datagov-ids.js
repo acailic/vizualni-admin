@@ -150,50 +150,7 @@ async function main() {
       }
     }
 
-    // Rate limiting - be nice to the API
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
-
-  console.log('\n\n');
-  console.log('╔' + '═'.repeat(78) + '╗');
-  console.log('║' + ' '.repeat(20) + '📋 RESULTS SUMMARY' + ' '.repeat(40) + '║');
-  console.log('╚' + '═'.repeat(78) + '╝');
-
-  if (allResults.length === 0) {
-    console.log('\n❌ No datasets found with CSV/JSON resources.');
-    return;
-  }
-
-  console.log(`\n✅ Found ${allResults.length} dataset(s) with CSV/JSON resources:\n`);
-
-  // Group by keyword
-  const byKeyword = {};
-  for (const result of allResults) {
-    if (!byKeyword[result.keyword]) {
-      byKeyword[result.keyword] = [];
-    }
-    byKeyword[result.keyword].push(result);
-  }
-
-  // Print grouped results
-  for (const keyword of SEARCH_KEYWORDS) {
-    const results = byKeyword[keyword];
-    if (!results || results.length === 0) continue;
-
-    console.log(`\n${'▀'.repeat(80)}`);
-    console.log(`🔑 Keyword: "${keyword}" - ${results.length} dataset(s)`);
-    console.log('▄'.repeat(80));
-
-    for (const { dataset, resources } of results) {
-      printDatasetInfo(dataset, resources);
-    }
-  }
-
-  // Print summary for config.ts
-  console.log('\n\n');
-  console.log('╔' + '═'.repeat(78) + '╗');
-  console.log('║' + ' '.repeat(15) + '📝 QUICK REFERENCE FOR config.ts' + ' '.repeat(30) + '║');
-  console.log('╚' + '═'.repeat(78) + '╝');
+    // Rate limiting - be nice to the API (only if datasets found)
   console.log('\nCopy these IDs into your DEMO_CONFIGS:\n');
 
   for (const { dataset, resources, keyword } of allResults) {
