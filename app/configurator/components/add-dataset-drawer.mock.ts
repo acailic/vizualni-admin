@@ -13,22 +13,19 @@ export const photovoltaikChartStateMock: ConfiguratorStateConfiguringChart = {
     blocks: [{ type: "chart", key: "8-5RW138pTDA", initialized: true }],
     meta: {
       title: {
-        de: "",
+        "sr-Latn": "",
+        "sr-Cyrl": "",
         en: "",
-        fr: "",
-        it: "",
       },
       description: {
-        de: "",
+        "sr-Latn": "",
+        "sr-Cyrl": "",
         en: "",
-        fr: "",
-        it: "",
       },
       label: {
-        de: "",
+        "sr-Latn": "",
+        "sr-Cyrl": "",
         en: "",
-        fr: "",
-        it: "",
       },
     },
   },
@@ -37,26 +34,23 @@ export const photovoltaikChartStateMock: ConfiguratorStateConfiguringChart = {
       activeField: "y",
       key: "8-5RW138pTDA",
       version: "3.1.0",
-      meta: {
-        title: {
-          en: "",
-          de: "",
-          fr: "",
-          it: "",
+        meta: {
+          title: {
+            "sr-Latn": "",
+            "sr-Cyrl": "",
+            en: "",
+          },
+          description: {
+            "sr-Latn": "",
+            "sr-Cyrl": "",
+            en: "",
+          },
+          label: {
+            "sr-Latn": "",
+            "sr-Cyrl": "",
+            en: "",
+          },
         },
-        description: {
-          en: "",
-          de: "",
-          fr: "",
-          it: "",
-        },
-        label: {
-          en: "",
-          de: "",
-          fr: "",
-          it: "",
-        },
-      },
       cubes: [
         {
           iri: "https://energy.ld.admin.ch/sfoe/bfe_ogd84_einmalverguetung_fuer_photovoltaikanlagen/14",
