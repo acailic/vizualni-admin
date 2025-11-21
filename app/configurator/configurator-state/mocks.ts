@@ -11,6 +11,7 @@ import {
   CHART_CONFIG_VERSION,
   CONFIGURATOR_STATE_VERSION,
 } from "@/utils/chart-config/constants";
+import { createMeta } from "@/locales/localized-string";
 
 export const configStateMock = {
   map: {
@@ -21,7 +22,7 @@ export const configStateMock = {
       activeField: "none",
       type: "singleURLs",
       publishableChartKeys: [],
-      meta: {} as ConfiguratorStateConfiguringChart["layout"]["meta"],
+      meta: createMeta(),
       blocks: [{ type: "chart", key: "abc", initialized: true }],
     },
     chartConfigs: [
@@ -29,7 +30,7 @@ export const configStateMock = {
         key: "abc",
         chartType: "map",
         version: CHART_CONFIG_VERSION,
-        meta: {} as ConfiguratorStateConfiguringChart["chartConfigs"][0]["meta"],
+        meta: createMeta(),
         interactiveFiltersConfig: {
           legend: {
             active: false,
@@ -109,52 +110,14 @@ export const configStateMock = {
     layout: {
       type: "tab",
       activeField: undefined,
-      meta: {
-        title: {
-          de: "",
-          en: "",
-          fr: "",
-          it: "",
-        },
-        description: {
-          de: "",
-          en: "",
-          fr: "",
-          it: "",
-        },
-        label: {
-          de: "",
-          en: "",
-          fr: "",
-          it: "",
-        },
-      },
+      meta: createMeta(),
       blocks: [{ type: "chart", key: "2of7iJAjccuj", initialized: true }],
     },
     chartConfigs: [
       {
         key: "2of7iJAjccuj",
         version: CHART_CONFIG_VERSION,
-        meta: {
-          title: {
-            en: "",
-            de: "",
-            fr: "",
-            it: "",
-          },
-          description: {
-            en: "",
-            de: "",
-            fr: "",
-            it: "",
-          },
-          label: {
-            en: "",
-            de: "",
-            fr: "",
-            it: "",
-          },
-        },
+        meta: createMeta(),
         cubes: [
           {
             iri: "https://energy.ld.admin.ch/sfoe/bfe_ogd84_einmalverguetung_fuer_photovoltaikanlagen/2",
