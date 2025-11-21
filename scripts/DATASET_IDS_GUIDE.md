@@ -140,7 +140,7 @@ If you get 403 errors:
 ### No Results Found
 
 If searches return no results:
-- ✅ Try alternative keywords (in Serbian): "budžet", "vazdušno", "školama"
+- ✅ Try alternative keywords (in Serbian): "budzeti", "vazdušno", "školama"
 - ✅ Check if the portal is accessible: https://data.gov.rs/
 - ✅ Browse categories directly on the website
 
