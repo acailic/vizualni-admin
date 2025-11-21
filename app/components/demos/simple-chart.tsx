@@ -814,7 +814,7 @@ function PieChart({ data, width, height, setTooltip }: any) {
   return (
     <g>
       {/* Define gradients for each slice */}
-      {slices.map((_, i) => (
+      {slices.map((_slice: any, i: number) => (
         <defs key={`grad-${i}`}>
           <linearGradient id={`pieGradient${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style={{ stopColor: solidColors[i], stopOpacity: 1 }} />

@@ -30,14 +30,22 @@ const mkVersionLink = () => {
 
 export const Footer = ({ sx }: { sx?: SxProps }) => {
   const locale = useLocale();
+
+  const getLocalizedRoute = <T extends Record<string, { title: string; path: string }>>(routes: T) => {
+    const key = (locale in routes ? locale : "en") as keyof T;
+    return routes[key];
+  };
+
+  const legalRoute = getLocalizedRoute(contentRoutes.legal);
+  const imprintRoute = getLocalizedRoute(contentRoutes.imprint);
   const legalLink = {
-    title: contentRoutes.legal[locale].title,
-    href: contentRoutes.legal[locale].path,
+    title: legalRoute.title,
+    href: legalRoute.path,
     external: false,
   };
   const imprintLink = {
-    title: contentRoutes.imprint[locale].title,
-    href: contentRoutes.imprint[locale].path,
+    title: imprintRoute.title,
+    href: imprintRoute.path,
     external: false,
   };
   const versionLink = mkVersionLink();
