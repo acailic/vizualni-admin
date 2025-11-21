@@ -1,19 +1,17 @@
-import { bugReportTemplates } from "./bug-report";
-
 type EmailRecipients = {
   to: string;
   bcc?: string;
 };
 
-export const createMailtoLink = (
-  lang: keyof typeof bugReportTemplates,
+export const createMailtoLink = <T extends Record<string, string>>(
+  lang: keyof T,
   {
     recipients,
     template: _template,
     subject,
   }: {
     recipients: EmailRecipients;
-    template: typeof bugReportTemplates;
+    template: T;
     subject: string;
   }
 ) => {

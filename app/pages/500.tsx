@@ -14,31 +14,21 @@ const Page = () => {
       <Box sx={{ backgroundColor: "muted.main", my: "auto" }}>
         <ErrorPageHint>
           <Typography component="div" variant="h2" sx={{ my: 3 }}>
-            Ein Fehler ist aufgetreten.{" "}
+            Došlo je do greške.{" "}
           </Typography>
           <Actions>
-            <ReloadButton>Seite aktualisieren</ReloadButton>&nbsp;oder&nbsp;
-            <HomeLink locale="de">zur Startseite navigieren</HomeLink>.
+            <ReloadButton>Osveži stranicu</ReloadButton>&nbsp;ili&nbsp;
+            <HomeLink locale="sr-Latn">vrati se na početnu stranu</HomeLink>.
           </Actions>
         </ErrorPageHint>
 
         <ErrorPageHint>
           <Typography component="div" variant="h2" sx={{ my: 3 }}>
-            Une erreur est survenue.{" "}
+            Дошло је до грешке.{" "}
           </Typography>
           <Actions>
-            <ReloadButton>Rafraîchir</ReloadButton>&nbsp;ou&nbsp;
-            <HomeLink locale="fr">aller à la page d&apos;accueil</HomeLink>.
-          </Actions>
-        </ErrorPageHint>
-
-        <ErrorPageHint>
-          <Typography component="div" variant="h2" sx={{ my: 3 }}>
-            Si è verificato un errore.{" "}
-          </Typography>
-          <Actions>
-            <ReloadButton>Ricarica la pagina</ReloadButton>&nbsp;o&nbsp;
-            <HomeLink locale="it">torna alla homepage</HomeLink>.
+            <ReloadButton>Освежи страницу</ReloadButton>&nbsp;или&nbsp;
+            <HomeLink locale="sr-Cyrl">врати се на почетну страну</HomeLink>.
           </Actions>
         </ErrorPageHint>
 

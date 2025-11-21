@@ -117,15 +117,15 @@ export default function App({
 }
 
 const titleByLocale = {
-  de: "Visualisieren Sie Serbische Open Government Data",
-  fr: "Visualisez les données ouvertes de l'administration publique serbe",
-  it: "Visualizza i dati aperti dell'amministrazione pubblica serba",
+  "sr-Latn": "Vizualizujte otvorene podatke Republike Srbije",
+  "sr-Cyrl": "Визуализујте отворене податке Републике Србије",
   en: "Visualize Serbian Open Government Data",
 };
 
 const descriptionByLocale = {
-  de: "Erstellen Sie Visualisierungen von Datensätzen aus dem Portal otvorenih podataka (data.gov.rs) und betten Sie diese in Ihre Webseite ein.",
-  fr: "Créez et intégrez des visualisations à partir des jeux de données du portail de données ouvertes serbe (data.gov.rs).",
-  it: "Crea ed incorpora visualizzazioni partendo dai dataset del portale dati aperti serbo (data.gov.rs).",
+  "sr-Latn":
+    "Kreirajte i ugradite vizualizacije iz skupova podataka sa portala data.gov.rs, zvaničnog portala otvorenih podataka Republike Srbije.",
+  "sr-Cyrl":
+    "Креирајте и уградите визуализације из скупова података са портала data.gov.rs, званичног портала отворених података Републике Србије.",
   en: "Create and embed visualizations from datasets provided by data.gov.rs, the Serbian Open Data Portal.",
 };

@@ -97,7 +97,7 @@ describe("add dataset", () => {
   const removeAction: ConfiguratorStateAction = {
     type: "DATASET_REMOVE",
     value: {
-      locale: "de",
+      locale: "sr-Latn",
       iri: "http://second-dataset",
     },
   };
@@ -588,22 +588,19 @@ describe("deriveFiltersFromFields", () => {
         "limits": {},
         "meta": {
           "description": {
-            "de": "",
+            "sr-Cyrl": "",
+            "sr-Latn": "",
             "en": "",
-            "fr": "",
-            "it": "",
           },
           "label": {
-            "de": "",
+            "sr-Cyrl": "",
+            "sr-Latn": "",
             "en": "",
-            "fr": "",
-            "it": "",
           },
           "title": {
-            "de": "",
+            "sr-Cyrl": "",
+            "sr-Latn": "",
             "en": "",
-            "fr": "",
-            "it": "",
           },
         },
         "version": "5.1.0",

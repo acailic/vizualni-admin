@@ -23,6 +23,7 @@ import {
 } from "@/docs/fixtures";
 import { InteractiveFiltersChartProvider } from "@/stores/interactive-filters";
 import { CHART_CONFIG_VERSION } from "@/utils/chart-config/constants";
+import { createMeta } from "@/locales/localized-string";
 
 const meta: Meta = {
   title: "components / Tooltip",
@@ -74,26 +75,7 @@ const TooltipBoxStory = () => (
         chartConfig={{
           key: "column-chart",
           version: CHART_CONFIG_VERSION,
-          meta: {
-            title: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-            description: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-            label: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-          },
+          meta: createMeta(),
           cubes: [{ iri: "", filters: {} }],
           annotations: [],
           limits: {},
@@ -252,26 +234,7 @@ const TooltipContentStory = {
         chartConfig={{
           key: "column-chart",
           version: CHART_CONFIG_VERSION,
-          meta: {
-            title: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-            description: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-            label: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-          },
+          meta: createMeta(),
           cubes: [{ iri: "", filters: {} }],
           annotations: [],
           limits: {},
@@ -333,26 +296,7 @@ export const TooltipContentStory2 = {
         chartConfig={{
           key: "column-chart",
           version: CHART_CONFIG_VERSION,
-          meta: {
-            title: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-            description: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-            label: {
-              en: "",
-              de: "",
-              fr: "",
-              it: "",
-            },
-          },
+          meta: createMeta(),
           cubes: [{ iri: "", filters: {} }],
           annotations: [],
           limits: {},
