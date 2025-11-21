@@ -90,7 +90,7 @@ export const CellDesktop = ({
       return (
         <Flex
           sx={{ alignItems: "center", fontWeight: textStyle, pl: 1, pr: 3 }}
-          {...cell.getCellProps()}
+          {...(cell.getCellProps() as any)}
         >
           <LinkedCellWrapper cell={cell} columnMeta={columnMeta} links={links}>
             <Tag tagColor={cColorScale(cell.value)}>
