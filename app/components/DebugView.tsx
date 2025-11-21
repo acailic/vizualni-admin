@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@mui/material';
 
 interface DebugViewProps {
   data: unknown[];
@@ -18,7 +19,7 @@ export const DebugView: React.FC<DebugViewProps> = ({
   const displayData = data.slice(0, maxRows);
 
   return (
-    <div style={{
+    <Box sx={{
       margin: '20px',
       padding: '20px',
       border: '3px solid #ff6b6b',
@@ -29,7 +30,7 @@ export const DebugView: React.FC<DebugViewProps> = ({
       maxWidth: '100%',
       overflow: 'auto'
     }}>
-      <div style={{
+      <Box sx={{
         marginBottom: '15px',
         fontWeight: 'bold',
         fontSize: '16px',
@@ -39,25 +40,25 @@ export const DebugView: React.FC<DebugViewProps> = ({
         gap: '10px'
       }}>
         <span>⚠️ {title}</span>
-        <span style={{
+        <Box component="span" sx={{
           fontSize: '12px',
           fontWeight: 'normal',
           color: '#666'
         }}>
           (Showing {displayData.length} of {data.length} rows)
-        </span>
-      </div>
+        </Box>
+      </Box>
 
       {displayData.length === 0 ? (
-        <div style={{ color: '#666', fontStyle: 'italic' }}>
+        <Box sx={{ color: '#666', fontStyle: 'italic' }}>
           No data available
-        </div>
+        </Box>
       ) : (
-        <div>
+        <Box>
           {displayData.map((row, index) => (
-            <div
+            <Box
               key={`row-${index}-${JSON.stringify(row).substring(0, 20)}`}
-              style={{
+              sx={{
                 marginBottom: '15px',
                 padding: '10px',
                 backgroundColor: '#fff',
@@ -65,25 +66,25 @@ export const DebugView: React.FC<DebugViewProps> = ({
                 borderRadius: '4px'
               }}
             >
-              <div style={{
+              <Box sx={{
                 marginBottom: '5px',
                 fontWeight: 'bold',
                 color: '#1976d2'
               }}>
                 Row {index + 1}:
-              </div>
-              <pre style={{
+              </Box>
+              <Box component="pre" sx={{
                 margin: 0,
                 whiteSpace: 'pre-wrap',
                 wordBreak: 'break-word'
               }}>
                 {JSON.stringify(row, null, 2)}
-              </pre>
-            </div>
+              </Box>
+            </Box>
           ))}
 
           {data.length > maxRows && (
-            <div style={{
+            <Box sx={{
               marginTop: '10px',
               padding: '10px',
               backgroundColor: '#e3f2fd',
@@ -92,12 +93,12 @@ export const DebugView: React.FC<DebugViewProps> = ({
               color: '#1565c0'
             }}>
               + {data.length - maxRows} more rows not shown
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
       )}
 
-      <div style={{
+      <Box sx={{
         marginTop: '15px',
         padding: '10px',
         backgroundColor: '#e8f5e9',
@@ -108,8 +109,8 @@ export const DebugView: React.FC<DebugViewProps> = ({
       }}>
         <strong>💡 Tip:</strong> Use the keys in these objects to map CSV headers
         to chart dimensions. Each key corresponds to a component ID in your data.
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
