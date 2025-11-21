@@ -78,7 +78,7 @@ export const CellDesktop = ({
             fontWeight: textStyle,
             px: 3,
           }}
-          {...cell.getCellProps()}
+          {...(cell.getCellProps() as any)}
         >
           <LinkedCellWrapper cell={cell} columnMeta={columnMeta} links={links}>
             {columnMeta.formatter(cell)}
