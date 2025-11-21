@@ -6,7 +6,7 @@ import {
   ToggleButtonGroup,
 } from "@mui/material";
 import { ReactNode, useMemo, useState } from "react";
-import { Layouts } from "react-grid-layout";
+import { Layout, Layouts } from "react-grid-layout";
 
 import {
   availableHandlesByBlockType,
@@ -87,7 +87,9 @@ export const Example = () => {
       </Stack>
       <ChartGridLayout
         className={"layout"}
-        onLayoutChange={(_layouts, allLayouts) => setLayouts(allLayouts)}
+        onLayoutChange={(_layouts: Layout[], allLayouts: Layouts) =>
+          setLayouts(allLayouts)
+        }
         layouts={layouts}
         resize
       >
