@@ -22,8 +22,7 @@ export const DebugView: React.FC<DebugViewProps> = ({
     <Box sx={{
       margin: '20px',
       padding: '20px',
-      border: '3px solid',
-      borderColor: '#ff6b6b',
+      border: '3px solid #ff6b6b',
       borderRadius: '8px',
       backgroundColor: '#fff3cd',
       fontFamily: 'monospace',
