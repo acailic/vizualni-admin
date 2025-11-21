@@ -15,15 +15,18 @@ import { useEffect, useRef } from 'react';
 export interface LineChartProps {
   data: Array<Record<string, any>>;
   xKey: string;
-  yKey: string;
+  yKey: string | string[];
   width?: number;
   height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
   color?: string;
+  colors?: string[];
   xLabel?: string;
   yLabel?: string;
   title?: string;
   description?: string;
+  multiSeries?: boolean;
+  showZeroLine?: boolean;
 }
 
 export const LineChart = ({
@@ -34,8 +37,11 @@ export const LineChart = ({
   height = 400,
   margin = { top: 20, right: 30, bottom: 60, left: 80 },
   color = '#4caf50',
+  colors = ['#4caf50', '#2196f3', '#ff9800', '#f44336', '#9c27b0', '#00bcd4'],
   xLabel = '',
-  yLabel = ''
+  yLabel = '',
+  multiSeries = false,
+  showZeroLine = false
 }: LineChartProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -54,9 +60,20 @@ export const LineChart = ({
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Extract values
+    // Determine series keys
+    let seriesKeys: string[];
+    if (multiSeries) {
+      // Auto-detect series keys (all keys except xKey)
+      seriesKeys = Object.keys(data[0] || {}).filter(key => key !== xKey);
+    } else {
+      seriesKeys = [typeof yKey === 'string' ? yKey : yKey[0]];
+    }
+
+    // Extract values for scaling
     const xValues = data.map(d => String(d[xKey]));
-    const yValues = data.map(d => Number(d[yKey]) || 0);
+    const allYValues = data.flatMap(d =>
+      seriesKeys.map(key => Number(d[key]) || 0)
+    );
 
     // Create scales
     const xScale = scalePoint()
@@ -64,8 +81,8 @@ export const LineChart = ({
       .range([0, innerWidth])
       .padding(0.5);
 
-    const yMin = min(yValues) || 0;
-    const yMax = max(yValues) || 0;
+    const yMin = min(allYValues) || 0;
+    const yMax = max(allYValues) || 0;
     const yScale = scaleLinear()
       .domain([Math.min(0, yMin), yMax])
       .range([innerHeight, 0])
@@ -92,58 +109,107 @@ export const LineChart = ({
       .style('stroke', '#e0e0e0')
       .style('stroke-opacity', 0.5);
 
-    // Create line generator
-    const lineGenerator = line<any>()
-      .x((d) => xScale(String(d[xKey])) || 0)
-      .y((d) => yScale(Number(d[yKey]) || 0))
-      .curve(curveMonotoneX);
+    // Add zero line if requested
+    if (showZeroLine && yMin < 0) {
+      g.append('line')
+        .attr('x1', 0)
+        .attr('x2', innerWidth)
+        .attr('y1', yScale(0))
+        .attr('y2', yScale(0))
+        .attr('stroke', '#666')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '4,4')
+        .attr('opacity', 0.6);
+    }
 
-    // Add the line path
-    const path = g
-      .append('path')
-      .datum(data)
-      .attr('fill', 'none')
-      .attr('stroke', color)
-      .attr('stroke-width', 2.5)
-      .attr('d', lineGenerator);
+    // Draw lines for each series
+    seriesKeys.forEach((key, index) => {
+      const seriesColor = multiSeries ? colors[index % colors.length] : color;
 
-    // Animate the line
-    const totalLength = path.node()?.getTotalLength() || 0;
-    path
-      .attr('stroke-dasharray', `${totalLength} ${totalLength}`)
-      .attr('stroke-dashoffset', totalLength)
-      .transition()
-      .duration(1500)
-      .ease(easeLinear)
-      .attr('stroke-dashoffset', 0);
+      // Create line generator
+      const lineGenerator = line<any>()
+        .x((d) => xScale(String(d[xKey])) || 0)
+        .y((d) => yScale(Number(d[key]) || 0))
+        .curve(curveMonotoneX);
 
-    // Add dots
-    g.selectAll('circle')
-      .data(data)
-      .enter()
-      .append('circle')
-      .attr('cx', (d) => xScale(String(d[xKey])) || 0)
-      .attr('cy', (d) => yScale(Number(d[yKey]) || 0))
-      .attr('r', 0)
-      .attr('fill', color)
-      .attr('stroke', '#fff')
-      .attr('stroke-width', 2)
-      .on('mouseover', function(event, d) {
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .attr('r', 7);
-      })
-      .on('mouseout', function() {
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .attr('r', 4);
-      })
-      .transition()
-      .delay((d, i) => i * 50)
-      .duration(500)
-      .attr('r', 4);
+      // Add the line path
+      const path = g
+        .append('path')
+        .datum(data)
+        .attr('fill', 'none')
+        .attr('stroke', seriesColor)
+        .attr('stroke-width', 2.5)
+        .attr('d', lineGenerator);
+
+      // Animate the line
+      const totalLength = path.node()?.getTotalLength() || 0;
+      path
+        .attr('stroke-dasharray', `${totalLength} ${totalLength}`)
+        .attr('stroke-dashoffset', totalLength)
+        .transition()
+        .duration(1500)
+        .ease(easeLinear)
+        .attr('stroke-dashoffset', 0);
+
+      // Add dots
+      g.selectAll(`.circle-${index}`)
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('class', `circle-${index}`)
+        .attr('cx', (d) => xScale(String(d[xKey])) || 0)
+        .attr('cy', (d) => yScale(Number(d[key]) || 0))
+        .attr('r', 0)
+        .attr('fill', seriesColor)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 2)
+        .on('mouseover', function(event, d) {
+          d3.select(this)
+            .transition()
+            .duration(200)
+            .attr('r', 7);
+        })
+        .on('mouseout', function() {
+          d3.select(this)
+            .transition()
+            .duration(200)
+            .attr('r', 4);
+        })
+        .transition()
+        .delay((d, i) => i * 50)
+        .duration(500)
+        .attr('r', 4);
+    });
+
+    // Add legend for multi-series
+    if (multiSeries && seriesKeys.length > 1) {
+      const legend = g
+        .append('g')
+        .attr('transform', `translate(${innerWidth - 150}, 10)`);
+
+      seriesKeys.forEach((key, i) => {
+        const legendRow = legend
+          .append('g')
+          .attr('transform', `translate(0, ${i * 20})`);
+
+        legendRow
+          .append('line')
+          .attr('x1', 0)
+          .attr('x2', 30)
+          .attr('y1', 0)
+          .attr('y2', 0)
+          .attr('stroke', colors[i % colors.length])
+          .attr('stroke-width', 2.5);
+
+        legendRow
+          .append('text')
+          .attr('x', 35)
+          .attr('y', 4)
+          .style('font-size', '11px')
+          .style('fill', '#333')
+          .text(key);
+      });
+    }
 
     // Add X axis label
     if (xLabel) {
@@ -168,7 +234,7 @@ export const LineChart = ({
         .text(yLabel);
     }
 
-  }, [data, xKey, yKey, width, height, margin, color, xLabel, yLabel]);
+  }, [data, xKey, yKey, width, height, margin, color, colors, xLabel, yLabel, multiSeries, showZeroLine]);
 
   return (
     <Box sx={{ width: '100%', overflow: 'auto' }}>
