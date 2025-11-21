@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 
-import { dataGovRsClient, getBestVisualizationResource } from '@/domain/data-gov-rs';
+import { dataGovRsClient, getBestVisualizationResource, parseCSVLine } from '@/domain/data-gov-rs';
 import type { DatasetMetadata, Resource } from '@/domain/data-gov-rs/types';
 
 interface UseDataGovRsOptions {
@@ -167,11 +167,15 @@ export function useDataGovRs(options: UseDataGovRsOptions): UseDataGovRsReturn {
 }
 
 /**
- * Simple CSV parser
- * For production, consider using a library like papaparse
+ * Production-ready CSV parser
+ * Handles quoted fields, different line endings, and empty rows
  */
 function parseCSVData(csv: string): any[] {
-  const lines = csv.split('\n').filter(line => line.trim());
+  // Normalize line endings to \n (handles \r\n, \r, and \n)
+  const normalizedCsv = csv.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  // Split into lines and filter out empty rows
+  const lines = normalizedCsv.split('\n').filter(line => line.trim());
 
   if (lines.length === 0) {
     return [];
@@ -196,42 +200,6 @@ function parseCSVData(csv: string): any[] {
   });
 
   return rows;
-}
-
-/**
- * Parse a single CSV line (handles quoted values)
- */
-function parseCSVLine(line: string): string[] {
-  const result: string[] = [];
-  let current = '';
-  let inQuotes = false;
-
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
-    const nextChar = line[i + 1];
-
-    if (char === '"') {
-      if (inQuotes && nextChar === '"') {
-        // Escaped quote
-        current += '"';
-        i++;
-      } else {
-        // Toggle quote state
-        inQuotes = !inQuotes;
-      }
-    } else if (char === ',' && !inQuotes) {
-      // End of field
-      result.push(current.trim());
-      current = '';
-    } else {
-      current += char;
-    }
-  }
-
-  // Add last field
-  result.push(current.trim());
-
-  return result;
 }
 
 /**
