@@ -7,11 +7,11 @@ import {
 import { Dimension, Measure } from "@/domain/data";
 import { ComponentId, stringifyComponentId } from "@/graphql/make-component-id";
 import { ScaleType, TimeUnit } from "@/graphql/resolver-types";
+import { createMeta } from "@/locales/localized-string";
 import {
   CHART_CONFIG_VERSION,
   CONFIGURATOR_STATE_VERSION,
 } from "@/utils/chart-config/constants";
-import { createMeta } from "@/locales/localized-string";
 
 export const configStateMock = {
   map: {

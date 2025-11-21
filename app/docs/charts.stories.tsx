@@ -24,6 +24,7 @@ import { InteractionVoronoi } from "@/charts/shared/overlay-voronoi";
 import { Observer } from "@/charts/shared/use-size";
 import { ConfiguratorStateProvider } from "@/configurator/configurator-state";
 import { Dimension, Measure } from "@/domain/data";
+import { createMeta } from "@/locales/localized-string";
 import {
   InteractiveFiltersChartProvider,
   InteractiveFiltersProvider,
@@ -43,7 +44,6 @@ import {
   scatterplotMeasures,
   scatterplotObservations,
 } from "./scatterplot.mock";
-import { createMeta } from "@/locales/localized-string";
 
 const meta: Meta = {
   title: "Charts / Charts",

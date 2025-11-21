@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
 import { DraggableLocation, OnDragStartResponder } from "@hello-pangea/dnd";
+import { useCallback, useState } from "react";
 
 import { ConfiguratorStateConfiguringChart, TableConfig } from "@/config-types";
 import { getChartConfig } from "@/config-utils";

@@ -10,12 +10,12 @@ import { ChartContainer, ChartSvg } from "@/charts/shared/containers";
 import { LegendColor } from "@/charts/shared/legend-color";
 import { Observer } from "@/charts/shared/use-size";
 import { ConfiguratorStateProvider } from "@/configurator/configurator-state";
+import { createMeta } from "@/locales/localized-string";
 import {
   InteractiveFiltersChartProvider,
   InteractiveFiltersProvider,
 } from "@/stores/interactive-filters";
 import { CONFIGURATOR_STATE_VERSION } from "@/utils/chart-config/constants";
-import { createMeta } from "@/locales/localized-string";
 
 import {
   chartConfig,

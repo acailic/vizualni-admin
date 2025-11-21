@@ -4,8 +4,8 @@ import {
   ScatterPlotFields,
 } from "@/configurator";
 import { Component, Dimension, Measure } from "@/domain/data";
-import { CHART_CONFIG_VERSION } from "@/utils/chart-config/constants";
 import { createMeta } from "@/locales/localized-string";
+import { CHART_CONFIG_VERSION } from "@/utils/chart-config/constants";
 
 export const interactiveFiltersConfig: InteractiveFiltersConfig = {
   legend: {

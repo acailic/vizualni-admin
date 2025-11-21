@@ -1,3 +1,8 @@
+import {
+  DragDropContext as BeautifulDragDropContext,
+  Draggable,
+  Droppable as BeautifulDroppable,
+} from "@hello-pangea/dnd";
 import { t, Trans } from "@lingui/macro";
 import { TabContext } from "@mui/lab";
 import {
@@ -21,15 +26,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import {
-  DragDropContext as BeautifulDragDropContext,
-  Draggable,
-  Droppable as BeautifulDroppable,
-} from "@hello-pangea/dnd";
-import type {
-  DragDropContextProps,
-  DroppableProps,
-} from "@hello-pangea/dnd";
+
 
 import { AddButton } from "@/components/add-button";
 import { ArrowMenuTopCenter } from "@/components/arrow-menu";
@@ -57,6 +54,11 @@ import { getIconName } from "@/configurator/components/ui-helpers";
 import { Icon, IconName } from "@/icons";
 import { useLocale } from "@/locales";
 import { useEvent } from "@/utils/use-event";
+
+import type {
+  DragDropContextProps,
+  DroppableProps,
+} from "@hello-pangea/dnd";
 
 type TabsState = {
   popoverOpen: boolean;

@@ -74,8 +74,8 @@ import {
   isJoinByCube,
 } from "@/graphql/join";
 import { PossibleFilterValue } from "@/graphql/query-hooks";
-import { DEFAULT_CATEGORICAL_PALETTE_ID } from "@/palettes";
 import { createLocalizedString } from "@/locales/localized-string";
+import { DEFAULT_CATEGORICAL_PALETTE_ID } from "@/palettes";
 import { findInHierarchy } from "@/rdf/tree-utils";
 import { theme } from "@/themes/theme";
 import { getCachedComponents } from "@/urql-cache";

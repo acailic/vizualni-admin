@@ -1,3 +1,9 @@
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  OnDragEndResponder,
+} from "@hello-pangea/dnd";
 import { t, Trans } from "@lingui/macro";
 import {
   Box,
@@ -9,12 +15,6 @@ import {
 import { makeStyles } from "@mui/styles";
 import { ascending } from "d3-array";
 import { ChangeEvent, ReactNode, useCallback } from "react";
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  OnDragEndResponder,
-} from "@hello-pangea/dnd";
 
 import { Radio, RadioGroup, Select } from "@/components/form";
 import { VisuallyHidden } from "@/components/visually-hidden";

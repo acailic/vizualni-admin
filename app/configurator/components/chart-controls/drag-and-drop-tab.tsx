@@ -1,8 +1,8 @@
+import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { Trans } from "@lingui/macro";
 import { Box, Theme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ReactNode } from "react";
-import { Draggable, Droppable } from "@hello-pangea/dnd";
 
 import { MoveDragButton } from "@/components/move-drag-button";
 import { TableColumn } from "@/config-types";

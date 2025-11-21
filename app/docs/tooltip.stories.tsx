@@ -21,9 +21,9 @@ import {
   measures,
   observations,
 } from "@/docs/fixtures";
+import { createMeta } from "@/locales/localized-string";
 import { InteractiveFiltersChartProvider } from "@/stores/interactive-filters";
 import { CHART_CONFIG_VERSION } from "@/utils/chart-config/constants";
-import { createMeta } from "@/locales/localized-string";
 
 const meta: Meta = {
   title: "components / Tooltip",

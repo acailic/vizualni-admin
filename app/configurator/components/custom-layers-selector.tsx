@@ -1,3 +1,9 @@
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  OnDragEndResponder,
+} from "@hello-pangea/dnd";
 import { t, Trans } from "@lingui/macro";
 import {
   Box,
@@ -9,12 +15,6 @@ import {
 } from "@mui/material";
 import uniq from "lodash/uniq";
 import { ReactNode, useCallback, useMemo, useState } from "react";
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  OnDragEndResponder,
-} from "@hello-pangea/dnd";
 
 import { RemoteLayer } from "@/charts/map/types";
 import { RemoteWMSLayer } from "@/charts/map/wms-utils";

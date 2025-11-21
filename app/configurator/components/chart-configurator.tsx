@@ -1,3 +1,9 @@
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  OnDragEndResponder,
+} from "@hello-pangea/dnd";
 import { t, Trans } from "@lingui/macro";
 import {
   Box,
@@ -24,12 +30,6 @@ import {
   useRef,
   useState,
 } from "react";
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  OnDragEndResponder,
-} from "@hello-pangea/dnd";
 import { useClient } from "urql";
 
 import { getChartSpec } from "@/charts/chart-config-ui-options";
