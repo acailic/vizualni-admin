@@ -75,6 +75,7 @@ import {
 } from "@/graphql/join";
 import { PossibleFilterValue } from "@/graphql/query-hooks";
 import { DEFAULT_CATEGORICAL_PALETTE_ID } from "@/palettes";
+import { createLocalizedString } from "@/locales/localized-string";
 import { findInHierarchy } from "@/rdf/tree-utils";
 import { theme } from "@/themes/theme";
 import { getCachedComponents } from "@/urql-cache";
@@ -1213,12 +1214,7 @@ const reducer_: Reducer<ConfiguratorState, ConfiguratorStateAction> = (
         const annotation = chartConfig.annotations.find((a) => a.key === key);
 
         if (annotation) {
-          annotation.text = {
-            en: "",
-            de: "",
-            fr: "",
-            it: "",
-          };
+          annotation.text = createLocalizedString();
         }
       }
 
