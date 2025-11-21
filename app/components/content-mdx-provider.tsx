@@ -19,11 +19,9 @@ const Wrapper = ({
   children: ReactNode;
 }) => {
   return contentId === "home" ? (
-    <ContentLayout contentId={contentId}>{children}</ContentLayout>
+    <ContentLayout>{children}</ContentLayout>
   ) : (
-    <StaticContentLayout contentId={castContentId(contentId)}>
-      {children}
-    </StaticContentLayout>
+    <StaticContentLayout>{children}</StaticContentLayout>
   );
 };
 

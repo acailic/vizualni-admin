@@ -11,11 +11,9 @@ import { LoginMenu } from "@/login/components/login-menu";
 import { useResizeObserver } from "@/utils/use-resize-observer";
 
 export const Header = ({
-  contentId,
   hideLogo,
   extendTopBar,
 }: {
-  contentId?: string;
   hideLogo?: boolean;
   extendTopBar?: boolean;
 }) => {

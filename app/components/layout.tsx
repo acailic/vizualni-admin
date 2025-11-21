@@ -29,10 +29,8 @@ export const AppLayout = ({
 
 export const ContentLayout = ({
   children,
-  contentId,
 }: {
   children?: ReactNode;
-  contentId?: string;
 }) => {
   return (
     <Flex
@@ -42,7 +40,7 @@ export const ContentLayout = ({
         backgroundColor: "monochrome.100",
       }}
     >
-      <Header contentId={contentId} />
+      <Header />
       <Flex
         component="main"
         role="main"
@@ -61,10 +59,8 @@ export const ContentLayout = ({
 
 export const StaticContentLayout = ({
   children,
-  contentId,
 }: {
   children?: ReactNode;
-  contentId: string | undefined;
 }) => {
   return (
     <Flex
@@ -74,7 +70,7 @@ export const StaticContentLayout = ({
         backgroundColor: "monochrome.100",
       }}
     >
-      <Header contentId={contentId} />
+      <Header />
       <Flex
         component="main"
         role="main"
