@@ -116,7 +116,7 @@ export const TableContent = ({ children }: { children: ReactNode }) => {
                     >
                       <OpenMetadataPanelWrapper component={dim}>
                         <span style={{ fontWeight: "bold" }}>
-                          {column.render("Header") as any}
+                          {(column.render("Header") as any)}
                         </span>
                       </OpenMetadataPanelWrapper>
                     </TableSortLabel>
