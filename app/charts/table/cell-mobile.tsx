@@ -46,9 +46,11 @@ export const DDContent = ({
           }}
         >
           <LinkedCellWrapper cell={cell} columnMeta={columnMeta} links={links}>
-            {(columnComponentType === "NumericalMeasure"
-              ? formatNumber(cell.value)
-              : cell.render("Cell")) as any}
+            {
+              (columnComponentType === "NumericalMeasure"
+                ? formatNumber(cell.value)
+                : cell.render("Cell")) as any
+            }
           </LinkedCellWrapper>
         </Box>
       );
@@ -150,9 +152,11 @@ export const DDContent = ({
             component="span"
             sx={{ color: textColor, fontWeight: textStyle }}
           >
-            {(columnComponentType === "NumericalMeasure"
-              ? formatNumber(cell.value)
-              : cell.render("Cell")) as any}
+            {
+              (columnComponentType === "NumericalMeasure"
+                ? formatNumber(cell.value)
+                : cell.render("Cell")) as any
+            }
           </Box>
         </LinkedCellWrapper>
       );
