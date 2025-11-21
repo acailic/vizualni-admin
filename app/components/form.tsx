@@ -46,6 +46,7 @@ import {
   ComponentProps,
   FocusEventHandler,
   KeyboardEventHandler,
+  MouseEvent,
   ReactNode,
   RefObject,
   SyntheticEvent,
@@ -756,13 +757,14 @@ export const SearchField = ({
 } & FieldProps) => {
   const { search, onSubmitSearch } = useBrowseContext();
   const onReset = InputProps?.onReset;
+  type InputOnResetEvent = Parameters<NonNullable<InputProps["onReset"]>>[0];
   const handleReset = useCallback(
-    (e) => {
+    (e: MouseEvent<HTMLButtonElement>) => {
       if (inputRef?.current) {
         inputRef.current.value = "";
       }
 
-      onReset?.(e);
+      onReset?.(e as unknown as InputOnResetEvent);
     },
     [inputRef, onReset]
   );
