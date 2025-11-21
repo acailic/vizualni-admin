@@ -83,16 +83,16 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
   education: {
     id: 'education',
     title: {
-      sr: 'Obrazovanje',
-      en: 'Education'
+      sr: '🎓 Statistika obrazovanja',
+      en: '🎓 Education Statistics'
     },
     description: {
-      sr: 'Statistika obrazovanja - učenici, studenti, škole',
-      en: 'Education statistics - students, schools, enrollment'
+      sr: 'Pregled broja učenika i studenata po nivoima obrazovanja - osnovno, srednje i visoko obrazovanje kroz godine',
+      en: 'Overview of student enrollment by education level - elementary, secondary, and higher education over the years'
     },
-    searchQuery: 'obrazovanje',
+    searchQuery: 'obrazovanje učenici studenti',
     chartType: 'column',
-    tags: ['obrazovanje', 'skole', 'studenti'],
+    tags: ['obrazovanje', 'skole', 'studenti', 'upis'],
     icon: '🎓'
   },
   transport: {
