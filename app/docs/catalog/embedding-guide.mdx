@@ -1,0 +1,267 @@
+<iframe
+  src="https://your-domain.com/embed/chart-123"
+  width="100%"
+  height="500"
+  frameborder="0"
+  allowfullscreen
+></iframe>
+```
+
+Replace `chart-123` with the actual chart ID from your published visualization. The iframe will automatically resize to fit the content when using the iframe-resizer library.
+
+## Responsive Embedding Techniques
+
+For responsive designs, use CSS to make the iframe adapt to different screen sizes:
+
+```html
+<style>
+  .vizualni-admin-embed {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  }
+  
+  .vizualni-admin-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+
+<div class="vizualni-admin-embed">
+  <iframe
+    src="https://your-domain.com/embed/chart-123"
+    allowfullscreen
+  ></iframe>
+</div>
+```
+
+This maintains a consistent aspect ratio across devices.
+
+## Embedding with Custom Dimensions
+
+You can specify custom dimensions using URL parameters:
+
+```html
+<iframe
+  src="https://your-domain.com/embed/chart-123?width=800&height=600"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+```
+
+Available parameters:
+- `width`: Chart width in pixels
+- `height`: Chart height in pixels
+- `responsive`: Set to `true` for automatic responsive behavior
+
+## Passing Configuration via URL Parameters
+
+Advanced configurations can be passed through URL hash parameters:
+
+```html
+<iframe
+  src="https://your-domain.com/embed/chart-123#chartType=bar&filters[city]=Belgrade"
+  width="100%"
+  height="500"
+  frameborder="0"
+></iframe>
+```
+
+This allows dynamic chart customization without republishing. Note that manually changing parameters may require additional adjustments to maintain chart integrity.
+
+## Handling Cross-Origin Issues
+
+Vizualni Admin uses iframe-resizer to handle cross-origin communication. Include the necessary scripts on your embedding page:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4/js/iframeResizer.min.js"></script>
+</head>
+<body>
+  <iframe
+    id="vizualni-admin-chart"
+    src="https://your-domain.com/embed/chart-123"
+    width="100%"
+    height="500"
+    frameborder="0"
+  ></iframe>
+  
+  <script>
+    iFrameResize({ log: false }, '#vizualni-admin-chart');
+  </script>
+</body>
+</html>
+```
+
+This ensures proper resizing and communication between the parent page and the embedded chart.
+
+## WordPress Integration
+
+### Using the Block Editor (Gutenberg)
+
+1. Add a Custom HTML block
+2. Paste your iframe code:
+
+```html
+<iframe
+  src="https://your-domain.com/embed/chart-123"
+  width="100%"
+  height="500"
+  frameborder="0"
+  allowfullscreen
+></iframe>
+```
+
+### Using a Shortcode
+
+Create a custom shortcode in your theme's `functions.php`:
+
+```php
+function vizualni_admin_shortcode($atts) {
+    $atts = shortcode_atts(array(
+        'id' => '',
+        'width' => '100%',
+        'height' => '500'
+    ), $atts);
+    
+    return '<iframe src="https://your-domain.com/embed/' . $atts['id'] . '" width="' . $atts['width'] . '" height="' . $atts['height'] . '" frameborder="0" allowfullscreen></iframe>';
+}
+add_shortcode('vizualni_admin', 'vizualni_admin_shortcode');
+```
+
+Then use it in your posts:
+
+```
+[vizualni_admin id="chart-123" width="100%" height="600"]
+```
+
+## React Integration
+
+```jsx
+import React, { useEffect, useRef } from 'react';
+
+const VizualniAdminEmbed = ({ chartId, width = '100%', height = '500' }) => {
+  const iframeRef = useRef(null);
+  
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      // Initialize iframe-resizer if available
+      if (window.iFrameResize) {
+        window.iFrameResize({ log: false }, iframe);
+      }
+    }
+  }, []);
+  
+  return (
+    <iframe
+      ref={iframeRef}
+      src={`https://your-domain.com/embed/${chartId}`}
+      width={width}
+      height={height}
+      frameBorder="0"
+      allowFullScreen
+    />
+  );
+};
+
+export default VizualniAdminEmbed;
+```
+
+Usage:
+
+```jsx
+<VizualniAdminEmbed chartId="chart-123" height="600" />
+```
+
+## Vue.js Integration
+
+```vue
+<template>
+  <iframe
+    ref="chartFrame"
+    :src="chartUrl"
+    :width="width"
+    :height="height"
+    frameborder="0"
+    allowfullscreen
+  ></iframe>
+</template>
+
+<script>
+export default {
+  name: 'VizualniAdminEmbed',
+  props: {
+    chartId: {
+      type: String,
+      required: true
+    },
+    width: {
+      type: String,
+      default: '100%'
+    },
+    height: {
+      type: String,
+      default: '500'
+    }
+  },
+  computed: {
+    chartUrl() {
+      return `https://your-domain.com/embed/${this.chartId}`;
+    }
+  },
+  mounted() {
+    // Initialize iframe-resizer
+    if (window.iFrameResize) {
+      window.iFrameResize({ log: false }, this.$refs.chartFrame);
+    }
+  }
+}
+</script>
+```
+
+## Angular Integration
+
+```typescript
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+
+declare var iFrameResize: any;
+
+@Component({
+  selector: 'app-vizualni-admin-embed',
+  template: `
+    <iframe
+      #chartFrame
+      [src]="chartUrl"
+      [width]="width"
+      [height]="height"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  `
+})
+export class VizualniAdminEmbedComponent implements AfterViewInit {
+  @ViewChild('chartFrame') iframe: ElementRef;
+  
+  @Input() chartId: string;
+  @Input() width: string = '100%';
+  @Input() height: string = '500';
+  
+  get chartUrl(): string {
+    return `https://your-domain.com/embed/${this.chartId}`;
+  }
+  
+  ngAfterViewInit() {
+    if (typeof iFrameResize !== 'undefined') {
+      iFrameResize({ log: false }, this.iframe.nativeElement);
+    }
+  }
+}

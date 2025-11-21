@@ -33,6 +33,36 @@ const pages: ConfigPageOrGroup[] = [
     title: "Branding",
     content: require("@/docs/catalog/branding.mdx"),
   },
+  {
+    title: "User Guides",
+    pages: [
+      {
+        path: "/getting-started",
+        title: "Getting Started",
+        content: require("@/docs/catalog/getting-started.mdx"),
+      },
+      {
+        path: "/tutorials-overview",
+        title: "Tutorials Overview",
+        content: require("@/docs/catalog/tutorials-overview.mdx"),
+      },
+      {
+        path: "/chart-types-guide",
+        title: "Chart Types Guide",
+        content: require("@/docs/catalog/chart-types-guide.mdx"),
+      },
+      {
+        path: "/embedding-guide",
+        title: "Embedding Guide",
+        content: require("@/docs/catalog/embedding-guide.mdx"),
+      },
+      {
+        path: "/data-gov-rs-guide",
+        title: "data.gov.rs API Guide",
+        content: require("@/docs/catalog/data-gov-rs-guide.mdx"),
+      },
+    ],
+  },
   // {
   //   path: "/accessibility",
   //   title: "Accessibility",
@@ -187,15 +217,15 @@ export default () => {
           title="Visualize"
           pages={pages}
           theme={{
-            brandColor: "#333",
+            brandColor: "#0B4EA2",
             sidebarColorText: "#333",
             navBarTextColor: "#333",
-            sidebarColorHeading: "#333",
+            sidebarColorHeading: "#0B4EA2",
             pageHeadingTextColor: "#fff",
-            linkColor: "rgb(255,95,85)",
-            sidebarColorTextActive: "rgb(255,95,85)",
+            linkColor: "#C6363C",
+            sidebarColorTextActive: "#C6363C",
             background: "#f5f5f5",
-            pageHeadingBackground: "#156896",
+            pageHeadingBackground: "#0B4EA2",
           }}
         />
         <HashHandler />

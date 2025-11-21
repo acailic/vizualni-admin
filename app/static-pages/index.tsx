@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 
 const pages = [
   { path: "/sr/index", locale: "sr" },
-  
+
   { path: "/de/index", locale: "de" },
   { path: "/de/impressum", locale: "de" },
   { path: "/de/rechtliche-grundlagen", locale: "de" },
@@ -18,6 +18,9 @@ const pages = [
   { path: "/en/index", locale: "en" },
   { path: "/en/imprint", locale: "en" },
   { path: "/en/legal-framework", locale: "en" },
+
+  { path: "/sr/tutorials", locale: "sr" },
+  { path: "/en/tutorials", locale: "en" },
 ];
 
 export const staticPages = Object.fromEntries(

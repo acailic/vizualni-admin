@@ -1,0 +1,440 @@
+What type of data do you have?
+├── Categorical data (categories, groups, labels)
+│   ├── Comparing values across categories
+│   │   ├── Few categories (3-7) → Pie Chart
+│   │   └── Many categories (8+) → Bar Chart or Column Chart
+│   └── Showing parts of a whole → Pie Chart
+├── Numerical data over time or sequence
+│   ├── Trends and changes over time → Line Chart
+│   └── Emphasizing magnitude → Area Chart
+├── Two numerical variables
+│   ├── Relationship between variables → Scatterplot
+│   └── Distribution patterns → Scatterplot
+└── Geographical data
+    └── Location-based data → Map Chart
+```
+
+## Bar Chart
+
+### When to Use
+Bar charts are ideal for comparing values across different categories, especially when you have many categories or long category names. They're perfect for ranking data, showing comparisons between groups, and displaying categorical data with quantitative values.
+
+### Best Practices
+- Use horizontal bars when category names are long
+- Sort bars by value for better readability (highest to lowest)
+- Limit to 8-12 categories to avoid clutter
+- Use consistent colors and add value labels for clarity
+- Include a zero baseline for accurate comparisons
+
+### Data Requirements
+- **Format**: Array of objects with category (string) and value (number) columns
+- **Example**:
+```json
+[
+  { "region": "Beograd", "population": 1680000 },
+  { "region": "Novi Sad", "population": 350000 },
+  { "region": "Niš", "population": 250000 }
+]
+```
+
+### Configuration Options
+```typescript
+<BarChart
+  data={data}
+  xKey="region"        // Category column
+  yKey="population"    // Value column
+  width={800}
+  height={400}
+  color="#2196f3"
+  xLabel="Region"
+  yLabel="Population"
+  title="Population by Region"
+/>
+```
+
+### Real Data Example
+Using demographics data from data.gov.rs:
+
+<BarChart
+  data={[
+    { "region": "Beograd", "population": 1680000 },
+    { "region": "Novi Sad", "population": 350000 },
+    { "region": "Niš", "population": 250000 },
+    { "region": "Kragujevac", "population": 180000 }
+  ]}
+  xKey="region"
+  yKey="population"
+  xLabel="Region"
+  yLabel="Population"
+  title="Population Distribution in Serbia"
+/>
+
+### Common Mistakes to Avoid
+- Using bars for time series data (use line charts instead)
+- Not starting y-axis from zero, which can mislead viewers
+- Too many categories making bars too thin
+- Inconsistent sorting that doesn't highlight key insights
+
+## Column Chart
+
+### When to Use
+Column charts work best for comparing values across categories with fewer items, or when you want to emphasize vertical growth. They're excellent for showing changes over time with few time periods, or comparing multiple series side-by-side.
+
+### Best Practices
+- Use for 3-8 categories to avoid overcrowding
+- Group related columns together
+- Use different colors for multiple series
+- Include grid lines for easier value reading
+- Add data labels for precision
+
+### Data Requirements
+- **Format**: Array of objects with category and one or more numeric columns
+- **Single Series Example**:
+```json
+[
+  { "year": "2020", "budget": 450000 },
+  { "year": "2021", "budget": 480000 },
+  { "year": "2022", "budget": 520000 }
+]
+```
+- **Multi-Series Example**:
+```json
+[
+  { "year": "2020", "revenue": 450000, "expenses": 380000 },
+  { "year": "2021", "revenue": 480000, "expenses": 420000 }
+]
+```
+
+### Configuration Options
+```typescript
+<ColumnChart
+  data={data}
+  xKey="year"
+  yKey={["revenue", "expenses"]}  // Single key or array for multi-series
+  width={800}
+  height={400}
+  colors={['#4caf50', '#f44336']}
+  xLabel="Year"
+  yLabel="Amount (€)"
+  multiSeries={true}
+  stacked={false}  // Set to true for stacked columns
+/>
+```
+
+### Real Data Example
+Budget data from Serbian government finances:
+
+<ColumnChart
+  data={[
+    { "year": "2020", "revenue": 450000, "expenses": 380000 },
+    { "year": "2021", "revenue": 480000, "expenses": 420000 },
+    { "year": "2022", "revenue": 520000, "expenses": 460000 }
+  ]}
+  xKey="year"
+  yKey={["revenue", "expenses"]}
+  xLabel="Year"
+  yLabel="Amount (€)"
+  multiSeries={true}
+  colors={['#4caf50', '#f44336']}
+/>
+
+### Common Mistakes to Avoid
+- Using columns for many categories (switch to bars)
+- Not labeling multiple series clearly
+- Using stacked columns when series don't add up meaningfully
+- Inconsistent color schemes across related charts
+
+## Line Chart
+
+### When to Use
+Line charts excel at showing trends and changes over time, or any sequential data. They're perfect for tracking progress, identifying patterns, and comparing multiple trends simultaneously.
+
+### Best Practices
+- Use for time series data with 5+ data points
+- Limit to 3-5 lines per chart to avoid confusion
+- Include data points (dots) for precise values
+- Use smooth curves for trends, straight lines for exact data
+- Add a zero baseline only if zero is meaningful
+
+### Data Requirements
+- **Format**: Array of objects with time/category and numeric value columns
+- **Single Series Example**:
+```json
+[
+  { "month": "Jan", "temperature": 2.5 },
+  { "month": "Feb", "temperature": 4.1 },
+  { "month": "Mar", "temperature": 8.7 }
+]
+```
+- **Multi-Series Example**:
+```json
+[
+  { "month": "Jan", "beograd": 2.5, "novi_sad": 1.8 },
+  { "month": "Feb", "beograd": 4.1, "novi_sad": 3.2 }
+]
+```
+
+### Configuration Options
+```typescript
+<LineChart
+  data={data}
+  xKey="month"
+  yKey={["beograd", "novi_sad"]}  // Single key or array
+  width={800}
+  height={400}
+  colors={['#2196f3', '#ff9800']}
+  xLabel="Month"
+  yLabel="Temperature (°C)"
+  multiSeries={true}
+  showZeroLine={false}
+/>
+```
+
+### Real Data Example
+Air quality monitoring data from Serbian cities:
+
+<LineChart
+  data={[
+    { "month": "Jan", "beograd": 25, "novi_sad": 22 },
+    { "month": "Feb", "beograd": 28, "novi_sad": 25 },
+    { "month": "Mar", "beograd": 22, "novi_sad": 20 },
+    { "month": "Apr", "beograd": 18, "novi_sad": 16 },
+    { "month": "May", "beograd": 15, "novi_sad": 13 }
+  ]}
+  xKey="month"
+  yKey={["beograd", "novi_sad"]}
+  xLabel="Month"
+  yLabel="Air Quality Index"
+  multiSeries={true}
+  colors={['#2196f3', '#ff9800']}
+/>
+
+### Common Mistakes to Avoid
+- Using lines for categorical data without natural order
+- Too many lines making the chart unreadable
+- Not labeling lines clearly in legends
+- Using line charts for single data points
+
+## Area Chart
+
+### When to Use
+Area charts emphasize magnitude and cumulative effects over time. They're ideal for showing volume, totals, or when the "area under the curve" has meaning, like resource consumption or market share over time.
+
+### Best Practices
+- Use for cumulative data or when area represents volume
+- Stack areas for part-to-whole relationships over time
+- Use semi-transparent colors for overlapping areas
+- Include grid lines for value reference
+- Limit to 3-4 areas to maintain readability
+
+### Data Requirements
+- **Format**: Time series data with numeric values
+- **Example**:
+```json
+[
+  { "year": "2019", "renewable": 1200, "fossil": 3400 },
+  { "year": "2020", "renewable": 1400, "fossil": 3200 },
+  { "year": "2021", "renewable": 1600, "fossil": 3100 }
+]
+```
+
+### Configuration Options
+```typescript
+<AreaChart
+  data={data}
+  xKey="year"
+  yKey={["renewable", "fossil"]}
+  width={800}
+  height={400}
+  colors={['#4caf50', '#f44336']}
+  xLabel="Year"
+  yLabel="Energy Production (GWh)"
+  stacked={true}
+/>
+```
+
+### Real Data Example
+Energy production data from Serbian power sector:
+
+*Note: Area chart component coming soon. Example shows stacked area concept.*
+
+### Common Mistakes to Avoid
+- Using areas when lines would be clearer
+- Not using stacking when areas represent parts of a whole
+- Poor color choices making areas hard to distinguish
+- Too many overlapping areas creating confusion
+
+## Pie Chart
+
+### When to Use
+Pie charts show parts of a whole, perfect for displaying proportions and percentages. Use them when you have 3-6 categories that add up to 100%, and when the relative sizes are more important than exact values.
+
+### Best Practices
+- Limit to 5-6 slices maximum
+- Order slices by size (largest first)
+- Use distinct colors and include percentages
+- Combine small slices into an "Other" category
+- Include a legend for clarity
+
+### Data Requirements
+- **Format**: Array of objects with category and numeric value columns
+- **Example**:
+```json
+[
+  { "sector": "Healthcare", "budget": 850000 },
+  { "sector": "Education", "budget": 720000 },
+  { "sector": "Defense", "budget": 650000 }
+]
+```
+
+### Configuration Options
+```typescript
+<PieChart
+  data={data}
+  labelKey="sector"
+  valueKey="budget"
+  width={500}
+  height={500}
+  colors={['#2196f3', '#4caf50', '#ff9800', '#f44336']}
+  showPercentages={true}
+/>
+```
+
+### Real Data Example
+Government budget allocation by sector:
+
+<PieChart
+  data={[
+    { "sector": "Healthcare", "budget": 850 },
+    { "sector": "Education", "budget": 720 },
+    { "sector": "Defense", "budget": 650 },
+    { "sector": "Infrastructure", "budget": 580 },
+    { "sector": "Social Services", "budget": 420 }
+  ]}
+  labelKey="sector"
+  valueKey="budget"
+  showPercentages={true}
+/>
+
+### Common Mistakes to Avoid
+- Using pie charts for many categories (use bar charts instead)
+- Not ordering slices logically
+- Using 3D effects that distort perception
+- Comparing multiple pie charts (use stacked bars instead)
+
+## Map Chart
+
+### When to Use
+Map charts visualize geographical data, showing patterns and distributions across regions. They're essential for location-based analysis, regional comparisons, and spatial trends.
+
+### Best Practices
+- Use appropriate map projections for your region
+- Choose color schemes that reflect data magnitude
+- Include a legend explaining color/value relationships
+- Add interactivity for detailed regional data
+- Consider choropleth vs. bubble map based on data type
+
+### Data Requirements
+- **Format**: Geographic data with region identifiers and values
+- **Example**:
+```json
+[
+  { "region": "RS-00", "unemployment": 12.5 },
+  { "region": "RS-01", "unemployment": 15.2 },
+  { "region": "RS-02", "unemployment": 10.8 }
+]
+```
+
+### Configuration Options
+```typescript
+<MapChart
+  data={data}
+  regionKey="region"
+  valueKey="unemployment"
+  mapType="choropleth"  // or "bubble"
+  colorScheme="Blues"
+  title="Unemployment by Region"
+/>
+```
+
+### Real Data Example
+Regional unemployment data across Serbia:
+
+*Note: Map chart component coming soon. Will integrate with Serbian administrative boundaries.*
+
+### Common Mistakes to Avoid
+- Using maps for non-geographic data
+- Poor color choices that don't reflect data relationships
+- Overly complex maps with too much detail
+- Not providing clear legends and scales
+
+## Scatterplot
+
+### When to Use
+Scatterplots show relationships between two numeric variables, revealing correlations, clusters, and outliers. They're perfect for statistical analysis and identifying patterns in paired data.
+
+### Best Practices
+- Use for continuous numeric data pairs
+- Add trend lines to show relationships
+- Include axis labels and units
+- Use point size or color for additional dimensions
+- Consider log scales for wide data ranges
+
+### Data Requirements
+- **Format**: Array of objects with two numeric columns
+- **Example**:
+```json
+[
+  { "gdp_per_capita": 8500, "life_expectancy": 76.5 },
+  { "gdp_per_capita": 12000, "life_expectancy": 78.2 },
+  { "gdp_per_capita": 6500, "life_expectancy": 74.1 }
+]
+```
+
+### Configuration Options
+```typescript
+<Scatterplot
+  data={data}
+  xKey="gdp_per_capita"
+  yKey="life_expectancy"
+  width={800}
+  height={400}
+  color="#2196f3"
+  xLabel="GDP per Capita (€)"
+  yLabel="Life Expectancy (years)"
+  showTrendLine={true}
+/>
+```
+
+### Real Data Example
+Relationship between economic indicators and social outcomes:
+
+*Note: Scatterplot component coming soon. Example shows correlation analysis concept.*
+
+### Common Mistakes to Avoid
+- Using scatterplots for categorical data
+- Not scaling axes appropriately
+- Overplotting with too many points
+- Assuming correlation implies causation
+
+## Implementation in Vizualni Admin
+
+All chart types are implemented as reusable React components in `/app/components/demos/charts/`. The system automatically detects data structure and suggests appropriate visualizations, but you can also manually specify chart types for custom implementations.
+
+### Component Architecture
+
+```typescript
+// Base chart interface
+interface BaseChartProps {
+  data: Array<Record<string, any>>;
+  width?: number;
+  height?: number;
+  title?: string;
+  description?: string;
+}
+
+// Specific chart implementations
+export const BarChart = (props: BarChartProps) => { ... }
+export const ColumnChart = (props: ColumnChartProps) => { ... }
+export const LineChart = (props: LineChartProps) => { ... }
+export const PieChart = (props: PieChartProps) => { ... }

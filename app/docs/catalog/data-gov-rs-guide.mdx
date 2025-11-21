@@ -1,0 +1,340 @@
+# Search for datasets containing "budžet"
+curl "https://data.gov.rs/api/1/datasets/?q=budžet&page_size=10"
+```
+
+**Response example:**
+
+```json
+{
+  "data": [
+    {
+      "id": "budzet-2023",
+      "title": "Državni budžet Republike Srbije 2023",
+      "description": "Podaci o državnom budžetu za 2023. godinu",
+      "organization": {
+        "id": "ministarstvo-finansija",
+        "name": "Ministarstvo finansija"
+      },
+      "resources": [
+        {
+          "id": "budzet-2023-csv",
+          "title": "Budžet 2023 - CSV",
+          "format": "CSV",
+          "url": "https://data.gov.rs/dataset/budzet-2023/resource/budzet-2023-csv/download/budzet.csv"
+        }
+      ],
+      "tags": ["budžet", "finansije", "država"],
+      "created_at": "2023-01-15T10:00:00Z",
+      "updated_at": "2023-01-15T10:00:00Z"
+    }
+  ],
+  "page": 1,
+  "page_size": 10,
+  "total": 1,
+  "next_page": null,
+  "previous_page": null
+}
+```
+
+## Understanding Dataset Structure
+
+Each dataset on data.gov.rs has a consistent structure:
+
+- **id**: Unique identifier for the dataset
+- **title**: Human-readable title (available in Serbian and English)
+- **description**: Detailed description of the dataset
+- **organization**: Publishing organization information
+- **resources**: Array of data files/resources
+- **tags**: Keywords for categorization
+- **created_at/updated_at**: Timestamps
+
+### Resources
+
+Each dataset contains one or more resources, which are the actual data files:
+
+```json
+{
+  "id": "resource-id",
+  "title": "Resource Title",
+  "format": "CSV",
+  "url": "https://data.gov.rs/...",
+  "size": 1024000,
+  "last_modified": "2023-01-15T10:00:00Z"
+}
+```
+
+## Filtering and Pagination
+
+### Filtering Options
+
+The API supports various filters to narrow down your search:
+
+```bash
+# Filter by organization
+curl "https://data.gov.rs/api/1/datasets/?organization=ministarstvo-finansija"
+
+# Filter by tags
+curl "https://data.gov.rs/api/1/datasets/?tags=finansije"
+
+# Filter by date range
+curl "https://data.gov.rs/api/1/datasets/?created_at__gte=2023-01-01"
+
+# Combine filters
+curl "https://data.gov.rs/api/1/datasets/?q=budžet&organization=ministarstvo-finansija"
+```
+
+### Pagination
+
+Results are paginated to improve performance:
+
+```bash
+# Get first page with 20 results
+curl "https://data.gov.rs/api/1/datasets/?page=1&page_size=20"
+
+# Get second page
+curl "https://data.gov.rs/api/1/datasets/?page=2&page_size=20"
+```
+
+The response includes pagination metadata:
+
+```json
+{
+  "data": [...],
+  "page": 1,
+  "page_size": 20,
+  "total": 150,
+  "next_page": "https://data.gov.rs/api/1/datasets/?page=2&page_size=20",
+  "previous_page": null
+}
+```
+
+## Supported Data Formats
+
+data.gov.rs supports multiple data formats, each suitable for different use cases:
+
+### CSV (Comma-Separated Values)
+Best for tabular data, easy to import into spreadsheets or databases.
+
+```csv
+godina,mesec,prihodi,rashodi
+2023,1,150000000,140000000
+2023,2,160000000,150000000
+2023,3,170000000,160000000
+```
+
+### JSON (JavaScript Object Notation)
+Structured data format, ideal for web applications and APIs.
+
+```json
+[
+  {
+    "godina": 2023,
+    "mesec": 1,
+    "prihodi": 150000000,
+    "rashodi": 140000000
+  },
+  {
+    "godina": 2023,
+    "mesec": 2,
+    "prihodi": 160000000,
+    "rashodi": 150000000
+  }
+]
+```
+
+### XML (eXtensible Markup Language)
+Hierarchical data format, common in government systems.
+
+```xml
+<data>
+  <record>
+    <godina>2023</godina>
+    <mesec>1</mesec>
+    <prihodi>150000000</prihodi>
+    <rashodi>140000000</rashodi>
+  </record>
+  <record>
+    <godina>2023</godina>
+    <mesec>2</mesec>
+    <prihodi>160000000</prihodi>
+    <rashodi>150000000</rashodi>
+  </record>
+</data>
+```
+
+## Handling API Responses
+
+### Error Handling
+
+The API returns standard HTTP status codes:
+
+- **200 OK**: Successful request
+- **400 Bad Request**: Invalid parameters
+- **404 Not Found**: Dataset/resource not found
+- **429 Too Many Requests**: Rate limit exceeded
+- **500 Internal Server Error**: Server error
+
+**Error response example:**
+
+```json
+{
+  "error": {
+    "message": "Dataset not found",
+    "code": 404
+  }
+}
+```
+
+### Language Support
+
+Set the preferred language using the Accept-Language header:
+
+```bash
+# Serbian (Cyrillic)
+curl -H "Accept-Language: sr" "https://data.gov.rs/api/1/datasets/"
+
+# Serbian (Latin)
+curl -H "Accept-Language: sr-Latn" "https://data.gov.rs/api/1/datasets/"
+
+# English
+curl -H "Accept-Language: en" "https://data.gov.rs/api/1/datasets/"
+```
+
+## Rate Limits and Best Practices
+
+### Rate Limiting
+
+The API may have rate limits to prevent abuse. Best practices:
+
+- Cache responses when possible
+- Use pagination efficiently
+- Implement exponential backoff for retries
+- Avoid unnecessary requests
+
+### Best Practices
+
+1. **Cache Data**: Store API responses locally to reduce requests
+2. **Use Pagination**: Don't fetch all data at once
+3. **Handle Errors Gracefully**: Implement proper error handling
+4. **Respect Formats**: Choose the right data format for your use case
+5. **Validate Data**: Always validate data before using it
+6. **Monitor Usage**: Keep track of your API usage
+
+## Common Use Cases with Examples
+
+### Creating a Budget Visualization
+
+**Use Case**: Visualize government budget data over time.
+
+1. Search for budget datasets:
+```bash
+curl "https://data.gov.rs/api/1/datasets/?q=budžet"
+```
+
+2. Get the dataset details:
+```bash
+curl "https://data.gov.rs/api/1/datasets/budzet-2023/"
+```
+
+3. Download the CSV data:
+```bash
+curl "https://data.gov.rs/dataset/budzet-2023/resource/budzet-2023-csv/download/budzet.csv" -o budzet.csv
+```
+
+4. Use in Vizualni Admin to create a line chart showing budget trends.
+
+### Population Statistics Dashboard
+
+**Use Case**: Create interactive charts showing population statistics by region.
+
+1. Find population datasets:
+```bash
+curl "https://data.gov.rs/api/1/datasets/?q=stanovništvo"
+```
+
+2. Filter by geographic data:
+```bash
+curl "https://data.gov.rs/api/1/datasets/?tags=geografija&tags=stanovništvo"
+```
+
+3. Create visualizations like:
+   - Bar charts for population by municipality
+   - Maps for geographic distribution
+   - Pie charts for demographic breakdowns
+
+### Health Data Analysis
+
+**Use Case**: Analyze healthcare statistics and trends.
+
+1. Search for health-related datasets:
+```bash
+curl "https://data.gov.rs/api/1/datasets/?q=zdravlje"
+```
+
+2. Look for time-series data:
+```bash
+curl "https://data.gov.rs/api/1/datasets/?tags=zdravlje&tags=vremenski-niz"
+```
+
+3. Create visualizations such as:
+   - Line charts for disease trends
+   - Column charts for hospital statistics
+   - Scatter plots for correlations
+
+## Visual Examples: API Responses to Visualizations
+
+### Budget Data Example
+
+**API Response (JSON):**
+
+```json
+[
+  {"kategorija": "Obrazovanje", "iznos": 45000000, "godina": 2023},
+  {"kategorija": "Zdravlje", "iznos": 52000000, "godina": 2023},
+  {"kategorija": "Infrastruktura", "iznos": 38000000, "godina": 2023},
+  {"kategorija": "Socijalna zaštita", "iznos": 28000000, "godina": 2023}
+]
+```
+
+**Visualization**: Pie Chart showing budget allocation by category
+
+<ImageSpecimen src="./static/docs/budget-pie-chart.png" plain />
+
+### Population Data Example
+
+**API Response (CSV):**
+
+```csv
+opština,stanovništvo_2020,stanovništvo_2021,stanovništvo_2022
+Beograd,1680000,1675000,1669000
+Novi Sad,380000,378000,376000
+Niš,260000,258000,256000
+Kragujevac,180000,179000,178000
+```
+
+**Visualization**: Line Chart showing population trends over time
+
+<ImageSpecimen src="./static/docs/population-line-chart.png" plain />
+
+### Geographic Data Example
+
+**API Response (GeoJSON):**
+
+```json
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Beograd",
+        "population": 1669000,
+        "area_km2": 3227
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.4573, 44.7872]
+      }
+    }
+  ]
+}

@@ -1,14 +1,19 @@
 # Vizualni Admin - Serbian Open Data Visualization Tool 🇷🇸
 
-A visualization tool for Serbian open data from [data.gov.rs](https://data.gov.rs). 🇷🇸
+A visualization tool for Serbian open data from
+[data.gov.rs](https://data.gov.rs). 🇷🇸
 
-**🌐 Live Demo**: [https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
+**🌐 Live Demo**:
+[https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
 
 ## About
 
-This project is a fork/adaptation of other visualization tool, customized to work with Serbian open data from the [Portal otvorenih podataka](https://data.gov.rs).
+This project is a fork/adaptation of other visualization tool, customized to
+work with Serbian open data from the
+[Portal otvorenih podataka](https://data.gov.rs).
 
 The tool allows users to:
+
 - Browse and visualize datasets from data.gov.rs
 - Create interactive charts and visualizations
 - Embed visualizations in websites and applications
@@ -17,11 +22,13 @@ The tool allows users to:
 ## Data Source
 
 This tool is configured to work with the Serbian Open Data Portal:
+
 - **Portal**: https://data.gov.rs
 - **API**: https://data.gov.rs/api/1/
 - **API Documentation**: https://data.gov.rs/apidoc/
 
-The portal provides access to datasets from Serbian public institutions in machine-readable formats.
+The portal provides access to datasets from Serbian public institutions in
+machine-readable formats.
 
 ## Technology Stack
 
@@ -45,6 +52,7 @@ The portal provides access to datasets from Serbian public institutions in machi
 
 1. Make sure Docker is running
 2. Start the PostgreSQL database:
+
    ```sh
    docker-compose up
    ```
@@ -63,11 +71,13 @@ yarn dev
 ```
 
 For SSL (required for authentication):
+
 ```sh
 yarn dev:ssl
 ```
 
 The application will be available at:
+
 - HTTP: http://localhost:3000
 - HTTPS: https://localhost:3000
 
@@ -75,7 +85,32 @@ The application will be available at:
 
 - Open the curated demo showcase: http://localhost:3000/demos/showcase
 - Browse the full demo gallery: http://localhost:3000/demos
-- To view with a base path (GitHub Pages build): `NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static` then open `/vizualni-admin/demos/showcase` from the generated `out` dir.
+- To view with a base path (GitHub Pages build):
+  `NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static` then open
+  `/vizualni-admin/demos/showcase` from the generated `out` dir.
+
+### Tutorials & Learning Resources
+
+Vizualni Admin now includes a comprehensive tutorial and documentation system
+designed to help users learn how to effectively create, customize, and share
+data visualizations. This multi-layered system features user-facing tutorials,
+step-by-step guides, interactive examples, and detailed documentation to support
+users at all skill levels.
+
+- **Tutorials Index**: Explore organized tutorials by category at
+  [https://acailic.github.io/vizualni-admin/tutorials](https://acailic.github.io/vizualni-admin/tutorials)
+- **Documentation Site**: Access developer and user guides at
+  [https://acailic.github.io/vizualni-admin/docs](https://acailic.github.io/vizualni-admin/docs)
+- **Embedding Guide**: Learn how to embed visualizations in websites at
+  [https://acailic.github.io/vizualni-admin/docs/embedding-guide](https://acailic.github.io/vizualni-admin/docs/embedding-guide)
+- **API Guide**: Understand using the data.gov.rs API at
+  [https://acailic.github.io/vizualni-admin/docs/data-gov-rs-guide](https://acailic.github.io/vizualni-admin/docs/data-gov-rs-guide)
+
+All tutorials and guides are available in both Serbian and English to
+accommodate our bilingual user base. Users can learn essential skills such as
+creating their first visualization, understanding different chart types,
+embedding content in external sites, integrating with data.gov.rs datasets, and
+applying advanced customization techniques.
 
 ### Building for production
 
@@ -85,16 +120,23 @@ yarn build
 
 ### GitHub Pages Deployment
 
-The project is configured for automatic deployment to GitHub Pages. See [docs/GITHUB_PAGES.md](docs/GITHUB_PAGES.md) for details.
+The project is configured for automatic deployment to GitHub Pages. See
+[docs/GITHUB_PAGES.md](docs/GITHUB_PAGES.md) for details.
 
-**Live demo**: [https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
+**Live demo**:
+[https://acailic.github.io/vizualni-admin/](https://acailic.github.io/vizualni-admin/)
 
 To build for GitHub Pages locally:
+
 ```sh
 NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static
 ```
 
-CI runs `yarn lint --max-warnings=0` using the repo’s ESLint config (no global install) before the GitHub Pages build. Sourcemap uploads to Sentry are optional: CI forces `SENTRY_UPLOAD=false`, and you can enable real uploads locally by providing `SENTRY_AUTH_TOKEN` (plus `SENTRY_UPLOAD=true` if you want to override the default guard).
+CI runs `yarn lint --max-warnings=0` using the repo’s ESLint config (no global
+install) before the GitHub Pages build. Sourcemap uploads to Sentry are
+optional: CI forces `SENTRY_UPLOAD=false`, and you can enable real uploads
+locally by providing `SENTRY_AUTH_TOKEN` (plus `SENTRY_UPLOAD=true` if you want
+to override the default guard).
 
 ### Running tests
 
@@ -105,20 +147,25 @@ yarn e2e           # Run end-to-end tests
 
 ## Presentation mode
 
-- Start dev server: `yarn dev` then open `http://localhost:3000/demos/presentation`
-- Slide-style sections: hero, agenda, highlights, data stories, CTA with chip navigation
+- Start dev server: `yarn dev` then open
+  `http://localhost:3000/demos/presentation`
+- Slide-style sections: hero, agenda, highlights, data stories, CTA with chip
+  navigation
 - Use existing sample data (digital, economy, energy) for the interactive charts
-- For static export/GitHub Pages: `NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static`
+- For static export/GitHub Pages:
+  `NEXT_PUBLIC_BASE_PATH=/vizualni-admin yarn build:static`
 
 ## Configuration
 
-Configuration is done through environment variables. Copy `.env.example` to `.env.local` and adjust the settings:
+Configuration is done through environment variables. Copy `.env.example` to
+`.env.local` and adjust the settings:
 
 ```sh
 cp .env.example .env.local
 ```
 
 Key configuration options:
+
 - Database connection (PostgreSQL)
 - API endpoints for data.gov.rs
 - Authentication settings
@@ -127,18 +174,21 @@ Key configuration options:
 ## Features
 
 ### Data Visualization
+
 - Multiple chart types (line, bar, area, pie, map, etc.)
 - Interactive filtering and exploration
 - Responsive design for all devices
 - Export to PNG, SVG, and data formats
 
 ### Data Integration
+
 - Integration with data.gov.rs REST API
 - Support for various data formats (CSV, JSON, XML)
 - Real-time data updates
 - Data caching and optimization
 
 ### Internationalization
+
 - Serbian (sr) and English (en) language support
 - Cyrillic and Latin script support
 - Locale-specific number and date formatting
@@ -162,11 +212,14 @@ Key configuration options:
 
 ## License
 
-This project is licensed under the BSD-3-Clause License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the BSD-3-Clause License - see the
+[LICENSE](LICENSE) file for details.
 
 ## Original Project
 
-This project is based on similar projects like  [visualize-admin/visualization-tool](https://github.com/visualize-admin/visualization-tool) created by the Swiss Federal Office for the Environment (FOEN).
+This project is based on similar projects like
+[visualize-admin/visualization-tool](https://github.com/visualize-admin/visualization-tool)
+created by the Swiss Federal Office for the Environment (FOEN).
 
 ## Contributing
 
@@ -175,7 +228,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Support
 
 For issues and questions:
-- GitHub Issues: [Create an issue](https://github.com/acailic/vizualni-admin/issues)
+
+- GitHub Issues:
+  [Create an issue](https://github.com/acailic/vizualni-admin/issues)
 - Data Portal Support: [data.gov.rs](https://data.gov.rs)
 
 ## Acknowledgments
