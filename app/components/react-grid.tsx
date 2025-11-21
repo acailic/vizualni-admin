@@ -374,7 +374,7 @@ export const ChartGridLayout = ({
       isResizable={resize}
     >
       {children}
-    </ResponsiveReactGridLayout>
+    </ResponsiveGrid>
   );
 };
 
