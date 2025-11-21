@@ -52,6 +52,7 @@
     "@rdfjs/namespace": "^2.0.1",
     "@reach/auto-id": "^0.15.3",
     "@sentry/nextjs": "^7.112.2",
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.1.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@tpluscode/rdf-ns-builders": "2.0.1",
@@ -167,7 +168,7 @@
   },
   "peerDependencies": {
     "@babel/runtime": "^7.8.4",
-    "next": "^13.0.0",
+    "next": "^13.0.0 || ^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
