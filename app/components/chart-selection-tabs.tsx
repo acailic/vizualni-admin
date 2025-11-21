@@ -11,6 +11,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import clsx from "clsx";
 import {
+  ComponentType,
   createContext,
   Dispatch,
   type MouseEvent,
@@ -20,7 +21,15 @@ import {
   useEffect,
   useState,
 } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext as BeautifulDragDropContext,
+  Draggable,
+  Droppable as BeautifulDroppable,
+} from "react-beautiful-dnd";
+import type {
+  DragDropContextProps,
+  DroppableProps,
+} from "react-beautiful-dnd";
 
 import { AddButton } from "@/components/add-button";
 import { ArrowMenuTopCenter } from "@/components/arrow-menu";
@@ -64,6 +73,11 @@ const TABS_STATE: TabsState = {
 const TabsStateContext = createContext<
   [TabsState, Dispatch<TabsState>] | undefined
 >(undefined);
+
+const DragDropContext =
+  BeautifulDragDropContext as unknown as ComponentType<DragDropContextProps>;
+const Droppable =
+  BeautifulDroppable as unknown as ComponentType<DroppableProps>;
 
 const useTabsState = () => {
   const ctx = useContext(TabsStateContext);
