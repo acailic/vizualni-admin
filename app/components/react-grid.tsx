@@ -221,7 +221,10 @@ export const ChartGridLayout = ({
   className: string;
   resize?: boolean;
   layouts: Record<string, Layout[]>;
-} & ComponentProps<typeof ResponsiveReactGridLayout>) => {
+  draggableHandle?: string;
+} & ComponentProps<typeof ResponsiveReactGridLayout> & {
+    [key: string]: any;
+  }) => {
   const classes = useStyles();
 
   const [state, dispatch] = useConfiguratorState(hasChartConfigs);
