@@ -1,13 +1,22 @@
-import { Box, Button, Card, CardActionArea, CardContent, Chip, Typography } from '@mui/material';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import {
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  Chip,
+  Typography,
+} from "@mui/material";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useTutorialProgress } from "@/hooks/useTutorialProgress";
 
 interface TutorialConfig {
   id: string;
   title: { sr: string; en: string };
   description: { sr: string; en: string };
   category: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  difficulty: "beginner" | "intermediate" | "advanced";
   estimatedTime: number; // in minutes
   icon: string;
   tags: string[];
@@ -16,83 +25,83 @@ interface TutorialConfig {
 
 interface TutorialCardProps {
   tutorial: TutorialConfig;
-  locale: 'sr' | 'en';
+  locale: "sr" | "en";
 }
 
-const PROGRESS_KEY = 'vizualni-admin-tutorial-progress';
+const PROGRESS_KEY = "vizualni-admin-tutorial-progress";
 
 export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
+  const { getTutorialStatus } = useTutorialProgress();
   const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
-    const progress = localStorage.getItem(PROGRESS_KEY);
-    if (progress) {
-      const parsed = JSON.parse(progress);
-      if (parsed.completed && parsed.completed.includes(tutorial.id)) {
-        setIsCompleted(true);
-      }
-    }
-  }, [tutorial.id]);
+    const status = getTutorialStatus(tutorial.id);
+    setIsCompleted(status.completed);
+  }, [tutorial.id, getTutorialStatus]);
 
   const title = tutorial.title[locale];
   const description = tutorial.description[locale];
 
   const difficultyColors = {
-    beginner: 'success',
-    intermediate: 'warning',
-    advanced: 'error',
+    beginner: "success",
+    intermediate: "warning",
+    advanced: "error",
   };
 
   const difficultyLabels = {
-    sr: { beginner: 'Početnik', intermediate: 'Srednji', advanced: 'Napredni' },
-    en: { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' },
+    sr: { beginner: "Početnik", intermediate: "Srednji", advanced: "Napredni" },
+    en: {
+      beginner: "Beginner",
+      intermediate: "Intermediate",
+      advanced: "Advanced",
+    },
   };
 
   const categoryLabels = {
     sr: {
-      'getting-started': 'Početak',
-      'creating-charts': 'Kreiranje Grafika',
-      'embedding': 'Ugrađivanje',
-      'api-usage': 'Korišćenje API-ja',
-      'advanced': 'Napredno',
+      "getting-started": "Početak",
+      "creating-charts": "Kreiranje Grafika",
+      embedding: "Ugrađivanje",
+      "api-usage": "Korišćenje API-ja",
+      advanced: "Napredno",
     },
     en: {
-      'getting-started': 'Getting Started',
-      'creating-charts': 'Creating Charts',
-      'embedding': 'Embedding',
-      'api-usage': 'API Usage',
-      'advanced': 'Advanced',
+      "getting-started": "Getting Started",
+      "creating-charts": "Creating Charts",
+      embedding: "Embedding",
+      "api-usage": "API Usage",
+      advanced: "Advanced",
     },
   };
 
   return (
     <Card
       sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        textDecoration: 'none',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        textDecoration: "none",
+        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         borderRadius: 3,
-        overflow: 'hidden',
-        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-        position: 'relative',
-        '&:hover': {
-          transform: 'translateY(-8px)',
-          boxShadow: '0 20px 40px rgba(102, 126, 234, 0.25)',
+        overflow: "hidden",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+        position: "relative",
+        "&:hover": {
+          transform: "translateY(-8px)",
+          boxShadow: "0 20px 40px rgba(102, 126, 234, 0.25)",
         },
-        '&::before': {
+        "&::before": {
           content: '""',
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
-          height: '5px',
-          background: 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
+          height: "5px",
+          background: "linear-gradient(90deg, #667eea 0%, #764ba2 100%)",
           opacity: 0,
-          transition: 'opacity 0.3s ease',
+          transition: "opacity 0.3s ease",
         },
-        '&:hover::before': {
+        "&:hover::before": {
           opacity: 1,
         },
       }}
@@ -101,46 +110,47 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
         component={Link}
         href={`/tutorials/${tutorial.id}`}
         sx={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'stretch',
-          justifyContent: 'flex-start',
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch",
+          justifyContent: "flex-start",
         }}
       >
         <CardContent sx={{ flexGrow: 1, p: 3 }}>
           {/* Icon with gradient background */}
           <Box
             sx={{
-              fontSize: '3rem',
+              fontSize: "3rem",
               mb: 2,
-              textAlign: 'center',
+              textAlign: "center",
               p: 2,
               borderRadius: 3,
-              background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100%',
-              position: 'relative',
+              background:
+                "linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              position: "relative",
             }}
           >
             {tutorial.icon}
             {isCompleted && (
               <Box
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
                   top: 4,
                   right: 4,
-                  backgroundColor: 'success.main',
-                  borderRadius: '50%',
+                  backgroundColor: "success.main",
+                  borderRadius: "50%",
                   width: 20,
                   height: 20,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '0.75rem',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontSize: "0.75rem",
                 }}
               >
                 ✓
@@ -155,7 +165,7 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
             sx={{
               fontWeight: 600,
               mb: 1.5,
-              color: 'text.primary',
+              color: "text.primary",
             }}
           >
             {title}
@@ -171,7 +181,7 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
           </Typography>
 
           {/* Metadata */}
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}>
             {/* Difficulty */}
             <Chip
               label={difficultyLabels[locale][tutorial.difficulty]}
@@ -179,9 +189,9 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
               color={difficultyColors[tutorial.difficulty]}
               sx={{
                 fontWeight: 600,
-                fontSize: '0.75rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.5px',
+                fontSize: "0.75rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
               }}
             />
 
@@ -190,9 +200,9 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
               label={`${tutorial.estimatedTime} min`}
               size="small"
               sx={{
-                fontSize: '0.75rem',
-                borderColor: '#667eea',
-                color: '#667eea',
+                fontSize: "0.75rem",
+                borderColor: "#667eea",
+                color: "#667eea",
                 fontWeight: 500,
               }}
               variant="outlined"
@@ -200,12 +210,14 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
 
             {/* Category */}
             <Chip
-              label={categoryLabels[locale][tutorial.category] || tutorial.category}
+              label={
+                categoryLabels[locale][tutorial.category] || tutorial.category
+              }
               size="small"
               sx={{
-                fontSize: '0.75rem',
-                borderColor: '#764ba2',
-                color: '#764ba2',
+                fontSize: "0.75rem",
+                borderColor: "#764ba2",
+                color: "#764ba2",
                 fontWeight: 500,
               }}
               variant="outlined"
@@ -217,9 +229,9 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
                 label={tutorial.tags[0]}
                 size="small"
                 sx={{
-                  fontSize: '0.75rem',
-                  borderColor: '#f5576c',
-                  color: '#f5576c',
+                  fontSize: "0.75rem",
+                  borderColor: "#f5576c",
+                  color: "#f5576c",
                   fontWeight: 500,
                 }}
                 variant="outlined"
@@ -233,16 +245,16 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
             color="primary"
             fullWidth
             sx={{
-              textTransform: 'none',
+              textTransform: "none",
               fontWeight: 600,
-              mt: 'auto',
+              mt: "auto",
             }}
             onClick={(e) => {
               e.preventDefault();
               window.location.href = `/tutorials/${tutorial.id}`;
             }}
           >
-            {locale === 'sr' ? 'Započni Tutorijal' : 'Start Tutorial'}
+            {locale === "sr" ? "Započni Tutorijal" : "Start Tutorial"}
           </Button>
         </CardContent>
       </CardActionArea>
