@@ -132,7 +132,7 @@ export const CellDesktop = ({
             // widthScale domain (see table state).
             px: `${BAR_CELL_PADDING}px`,
           }}
-          {...cell.getCellProps()}
+          {...(cell.getCellProps() as any)}
         >
           <LinkedCellWrapper cell={cell} columnMeta={columnMeta} links={links}>
             <Box>{columnMeta.formatter(cell)}</Box>
@@ -186,7 +186,7 @@ export const CellDesktop = ({
             backgroundColor: columnColor,
             fontWeight: textStyle,
           }}
-          {...cell.getCellProps()}
+          {...(cell.getCellProps() as any)}
         >
           <LinkedCellWrapper cell={cell} columnMeta={columnMeta} links={links}>
             {columnMeta.formatter(cell)}
