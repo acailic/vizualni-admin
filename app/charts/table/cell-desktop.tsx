@@ -114,7 +114,7 @@ export const CellDesktop = ({
             backgroundColor: isNull ? "grey.100" : hColorScale(cell.value),
             fontWeight: textStyle,
           }}
-          {...cell.getCellProps()}
+          {...(cell.getCellProps() as any)}
         >
           <LinkedCellWrapper cell={cell} columnMeta={columnMeta} links={links}>
             {columnMeta.formatter(cell)}
