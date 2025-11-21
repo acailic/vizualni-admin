@@ -4,6 +4,7 @@ import { Dimension, Measure, Observation } from "@/domain/data";
 import { DEFAULT_DATA_SOURCE } from "@/domain/data-source";
 import { stringifyComponentId } from "@/graphql/make-component-id";
 import { CONFIGURATOR_STATE_VERSION } from "@/utils/chart-config/constants";
+import { createMeta } from "@/locales/localized-string";
 
 import { ColumnFields, ConfiguratorState, TableConfig } from "../configurator";
 import { TimeUnit } from "../graphql/query-hooks";
@@ -23,11 +24,7 @@ export const states: ConfiguratorState[] = [
     dataSource: DEFAULT_DATA_SOURCE,
     layout: {
       type: "tab",
-      meta: {
-        title: { en: "", de: "", fr: "", it: "" },
-        description: { en: "", de: "", fr: "", it: "" },
-        label: { en: "", de: "", fr: "", it: "" },
-      },
+      meta: createMeta(),
       blocks: [{ type: "chart", key: "column", initialized: true }],
       activeField: undefined,
     },
@@ -35,26 +32,7 @@ export const states: ConfiguratorState[] = [
       {
         key: "column",
         version: "1.2.1",
-        meta: {
-          title: {
-            en: "",
-            de: "",
-            fr: "",
-            it: "",
-          },
-          description: {
-            en: "",
-            de: "",
-            fr: "",
-            it: "",
-          },
-          label: {
-            en: "",
-            de: "",
-            fr: "",
-            it: "",
-          },
-        },
+        meta: createMeta(),
         cubes: [{ iri: "", filters: {} }],
         annotations: [],
         limits: {},
@@ -1091,26 +1069,7 @@ export const tableDimensions: Dimension[] = [
 export const tableConfig: TableConfig = {
   key: "table",
   version: "1.2.1",
-  meta: {
-    title: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-    description: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-    label: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-  },
+  meta: createMeta(),
   cubes: [{ iri: "", filters: {} }],
   annotations: [],
   limits: {},
