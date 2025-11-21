@@ -56,7 +56,7 @@ export const DebugView: React.FC<DebugViewProps> = ({
         <div>
           {displayData.map((row, index) => (
             <div
-              key={index}
+              key={`row-${index}-${JSON.stringify(row).substring(0, 20)}`}
               style={{
                 marginBottom: '15px',
                 padding: '10px',
