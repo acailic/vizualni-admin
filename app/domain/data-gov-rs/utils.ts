@@ -118,8 +118,20 @@ export function parseCSV(csvText: string): Record<string, string>[] {
 /**
  * Parse a single CSV line
  * Handles quoted values with commas and escaped quotes
+ *
+ * @example
+ * ```ts
+ * parseCSVLine('a,b,c')
+ * // Returns: ["a", "b", "c"]
+ *
+ * parseCSVLine('a,"Belgrade, Serbia",c')
+ * // Returns: ["a", "Belgrade, Serbia", "c"]
+ *
+ * parseCSVLine('a,"He said ""Hello""",c')
+ * // Returns: ["a", "He said \"Hello\"", "c"]
+ * ```
  */
-function parseCSVLine(line: string): string[] {
+export function parseCSVLine(line: string): string[] {
   const result: string[] = [];
   let current = '';
   let inQuotes = false;

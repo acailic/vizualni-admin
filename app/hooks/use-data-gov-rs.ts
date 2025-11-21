@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 
-import { dataGovRsClient, getBestVisualizationResource } from '@/domain/data-gov-rs';
+import { dataGovRsClient, getBestVisualizationResource, parseCSVLine } from '@/domain/data-gov-rs';
 import type { DatasetMetadata, Resource } from '@/domain/data-gov-rs/types';
 
 interface UseDataGovRsOptions {
@@ -200,48 +200,6 @@ function parseCSVData(csv: string): any[] {
   });
 
   return rows;
-}
-
-/**
- * Parse a single CSV line
- * Handles quoted values with commas and escaped quotes
- *
- * Examples:
- * - Basic: "a,b,c" -> ["a", "b", "c"]
- * - Quoted with comma: 'a,"Belgrade, Serbia",c' -> ["a", "Belgrade, Serbia", "c"]
- * - Escaped quotes: 'a,"He said ""Hello""",c' -> ["a", "He said \"Hello\"", "c"]
- */
-function parseCSVLine(line: string): string[] {
-  const result: string[] = [];
-  let current = '';
-  let inQuotes = false;
-
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
-    const nextChar = line[i + 1];
-
-    if (char === '"') {
-      if (inQuotes && nextChar === '"') {
-        // Escaped quote (two consecutive quotes)
-        current += '"';
-        i++;
-      } else {
-        // Toggle quote state
-        inQuotes = !inQuotes;
-      }
-    } else if (char === ',' && !inQuotes) {
-      // End of field (comma outside quotes)
-      result.push(current.trim());
-      current = '';
-    } else {
-      current += char;
-    }
-  }
-
-  // Add last field
-  result.push(current.trim());
-
-  return result;
 }
 
 /**
