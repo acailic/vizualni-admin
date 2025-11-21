@@ -28,8 +28,6 @@ interface TutorialCardProps {
   locale: "sr" | "en";
 }
 
-const PROGRESS_KEY = "vizualni-admin-tutorial-progress";
-
 export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
   const { getTutorialStatus } = useTutorialProgress();
   const [isCompleted, setIsCompleted] = useState(false);
