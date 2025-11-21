@@ -60,7 +60,7 @@ export const DDContent = ({
       return (
         <LinkedCellWrapper cell={cell} columnMeta={columnMeta} links={links}>
           <Tag tagColor={colorScale(cell.value)} small>
-            {cell.render("Cell")}
+            {cell.render("Cell") as any}
           </Tag>
         </LinkedCellWrapper>
       );

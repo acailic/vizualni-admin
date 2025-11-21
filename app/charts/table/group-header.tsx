@@ -33,7 +33,7 @@ export const GroupHeader = ({
           <Fragment key={i}>
             {cell.isGrouped && (
               <Flex
-                {...row.getToggleRowExpandedProps()}
+                {...(row.getToggleRowExpandedProps() as any)}
                 sx={{
                   minWidth: "100%",
                   alignItems: "center",
