@@ -163,7 +163,7 @@ export const LineChart = ({
         .attr('fill', seriesColor)
         .attr('stroke', '#fff')
         .attr('stroke-width', 2)
-        .on('mouseover', function(event, d) {
+        .on('mouseover', function(_event, _d) {
           d3.select(this)
             .transition()
             .duration(200)
@@ -176,7 +176,7 @@ export const LineChart = ({
             .attr('r', 4);
         })
         .transition()
-        .delay((d, i) => i * 50)
+        .delay((_, i) => i * 50)
         .duration(500)
         .attr('r', 4);
     });

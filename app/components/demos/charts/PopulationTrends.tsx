@@ -311,7 +311,7 @@ export const PopulationTrends = ({
       .attr('x', 18)
       .attr('dy', '1.2em');
 
-    const overlay = g.append('rect')
+    g.append('rect')
       .attr('class', 'overlay')
       .attr('width', innerWidth)
       .attr('height', innerHeight)

@@ -32,7 +32,7 @@ export const PieChart = ({
   valueKey,
   width = 500,
   height = 500,
-  colors = schemeCategory10,
+  colors = [...schemeCategory10],
   showPercentages = true
 }: PieChartProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -153,7 +153,7 @@ export const PieChart = ({
       .enter()
       .append('g')
       .attr('class', 'legend-item')
-      .attr('transform', (d, i) => `translate(0, ${i * 25})`);
+      .attr('transform', (_d, i) => `translate(0, ${i * 25})`);
 
     legendItems
       .append('rect')

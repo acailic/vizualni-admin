@@ -76,12 +76,11 @@ function prepareDataForVisualization(data: any[], maxRows: number = 20): any[] {
 }
 
 export const ChartVisualizer = ({ data, chartType, title, description }: ChartVisualizerProps) => {
-  const { visualizationData, columns, preparedData } = useMemo(() => {
+  const { columns, preparedData } = useMemo(() => {
     const columns = detectVisualizationColumns(data);
     const preparedData = prepareDataForVisualization(data, 25);
 
     return {
-      visualizationData: data,
       columns,
       preparedData
     };

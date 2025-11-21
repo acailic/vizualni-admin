@@ -122,7 +122,7 @@ export const PopulationPyramid = ({
       .attr('height', yScale.bandwidth())
       .attr('fill', maleColor)
       .attr('opacity', 0.8)
-      .on('mouseover', function(event, d) {
+      .on('mouseover', function(_event, d) {
         d3.select(this).attr('opacity', 1);
 
         // Show tooltip
@@ -169,11 +169,10 @@ export const PopulationPyramid = ({
       .attr('height', yScale.bandwidth())
       .attr('fill', femaleColor)
       .attr('opacity', 0.8)
-      .on('mouseover', function(event, d) {
+      .on('mouseover', function(_event, d) {
         d3.select(this).attr('opacity', 1);
 
         // Show tooltip
-        const barEnd = xScale(0) + (innerWidth / 2 - xScale(0));
         const tooltip = g.append('g')
           .attr('class', 'tooltip-female')
           .attr('transform', `translate(${innerWidth / 2 + (innerWidth / 2 - xScale(0)) + 10}, ${(yScale(d.ageRange) || 0) + yScale.bandwidth() / 2})`);

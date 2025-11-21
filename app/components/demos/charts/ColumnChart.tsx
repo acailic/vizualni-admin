@@ -164,7 +164,7 @@ export const ColumnChart = ({
           })
           .transition()
           .duration(800)
-          .delay((d, i) => i * 50 + index * 20)
+          .delay((_, i) => i * 50 + index * 20)
           .attr('y', (d) => yScale(Number(d[key]) || 0))
           .attr('height', (d) => innerHeight - yScale(Number(d[key]) || 0));
       });
@@ -209,7 +209,7 @@ export const ColumnChart = ({
         .attr('y', innerHeight)
         .attr('width', xScale.bandwidth())
         .attr('height', 0)
-        .attr('fill', (d, i) => colors[i % colors.length])
+        .attr('fill', (_, i) => colors[i % colors.length])
         .attr('opacity', 0.85)
         .on('mouseover', function() {
           d3.select(this).attr('opacity', 1);
@@ -219,7 +219,7 @@ export const ColumnChart = ({
         })
         .transition()
         .duration(800)
-        .delay((d, i) => i * 50)
+        .delay((_, i) => i * 50)
         .attr('y', (d) => yScale(Number(d[singleKey]) || 0))
         .attr('height', (d) => innerHeight - yScale(Number(d[singleKey]) || 0));
 
@@ -241,7 +241,7 @@ export const ColumnChart = ({
         })
         .style('opacity', 0)
         .transition()
-        .delay((d, i) => 800 + i * 50)
+        .delay((_, i) => 800 + i * 50)
         .duration(400)
         .style('opacity', 1);
     }

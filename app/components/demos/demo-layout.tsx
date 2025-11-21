@@ -5,7 +5,6 @@
 
 import { Box, Button, Container, Typography } from '@mui/material';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import { Flex } from '@/components/flex';
@@ -49,7 +48,6 @@ export function DemoLayout({
   datasetInfo,
   hideBackButton = false
 }: DemoLayoutProps) {
-  const router = useRouter();
 
   return (
     <Flex sx={{ minHeight: '100vh', flexDirection: 'column' }}>

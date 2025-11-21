@@ -218,7 +218,7 @@ export function SimpleChart({
           {chartType === 'column' && <ColumnChart data={chartData} stats={stats} width={width} height={height} setTooltip={setTooltip} />}
           {chartType === 'line' && <LineChart data={chartData} stats={stats} width={width} height={height} setTooltip={setTooltip} />}
           {chartType === 'area' && <AreaChart data={chartData} stats={stats} width={width} height={height} setTooltip={setTooltip} />}
-          {chartType === 'pie' && <PieChart data={chartData} stats={stats} width={width} height={height} setTooltip={setTooltip} />}
+          {chartType === 'pie' && <PieChart data={chartData} width={width} height={height} setTooltip={setTooltip} />}
           {(chartType === 'map' || chartType === 'scatterplot') && (
             <text x={width / 2} y={height / 2} textAnchor="middle" fill="#999" fontSize="16">
               {chartType} vizualizacija u razvoju
@@ -786,7 +786,7 @@ function AreaChart({ data, stats, width, height, setTooltip }: any) {
 }
 
 // Enhanced Pie Chart with modern design
-function PieChart({ data, stats, width, height, setTooltip }: any) {
+function PieChart({ data, width, height, setTooltip }: any) {
   const radius = Math.min(width, height) / 2 - 80;
   const centerX = width / 2 - 60;
   const centerY = height / 2;
@@ -808,17 +808,6 @@ function PieChart({ data, stats, width, height, setTooltip }: any) {
       endAngle
     };
   });
-
-  const colors = [
-    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-    'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-    'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-    'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-    'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-    'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)'
-  ];
 
   const solidColors = ['#667eea', '#f5576c', '#00f2fe', '#38f9d7', '#fa709a', '#330867', '#a8edea', '#ff9a9e'];
 
