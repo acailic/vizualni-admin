@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { fold } from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/lib/function";
-import { Layouts } from "react-grid-layout";
+import { Layout, Layouts } from "react-grid-layout";
 
 import { ChartPanelLayoutTypeProps } from "@/components/chart-panel";
 import {
@@ -71,7 +71,10 @@ export const ChartPanelLayoutCanvas = ({
       layouts={layout.layouts}
       resize={state.state === "LAYOUTING"}
       draggableHandle={`.${chartPanelLayoutGridClasses.dragHandle}`}
-      onLayoutChange={(_, allLayouts) => handleChangeLayouts(allLayouts)}
+      onLayoutChange={(
+        _currentLayout: Layout[],
+        allLayouts: Layouts
+      ) => handleChangeLayouts(allLayouts)}
       breakpoints={FREE_CANVAS_BREAKPOINTS}
     >
       {blocks.map(renderBlock)}
