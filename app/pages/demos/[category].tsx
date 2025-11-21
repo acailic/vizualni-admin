@@ -10,6 +10,7 @@ import { useState } from 'react';
 
 import { ChartVisualizer } from '@/components/demos/ChartVisualizer';
 import { DemoEmpty, DemoError, DemoLayout, DemoLoading } from '@/components/demos/demo-layout';
+import { ExportControls } from '@/components/demos/ExportControls';
 import { SimpleChart } from '@/components/demos/simple-chart';
 import { useDataGovRs } from '@/hooks/use-data-gov-rs';
 import { DEMO_CONFIGS, getDemoConfig } from '@/lib/demos/config';
@@ -110,8 +111,18 @@ export default function DemoPage() {
             </Box>
           </Paper>
 
+          {/* Export Controls */}
+          {Array.isArray(data) && data.length > 0 && (
+            <Box sx={{ mb: 3 }}>
+              <ExportControls
+                targetElementId="main-chart-container"
+                fileNamePrefix={`${category}-chart`}
+              />
+            </Box>
+          )}
+
           {/* Chart Visualization */}
-          <Paper sx={{ p: 4, mb: 4, backgroundColor: 'white' }}>
+          <Paper id="main-chart-container" sx={{ p: 4, mb: 4, backgroundColor: 'white' }}>
             <Typography variant="h6" sx={{ mb: 3, fontWeight: 500 }}>
               📊 Vizualizacija podataka
             </Typography>
@@ -127,7 +138,7 @@ export default function DemoPage() {
               <Typography variant="body2" color="text.secondary">
                 Podaci nisu dostupni u formatu pogodnom za vizualizaciju.
               </Typography>
-            )} 
+            )}
           </Paper>
 
           {/* Tabs for different views */}
@@ -140,13 +151,21 @@ export default function DemoPage() {
 
           {/* Chart View */}
           {activeTab === 0 && Array.isArray(data) && data.length > 0 && (
-            <Paper sx={{ p: 4, mb: 4, backgroundColor: 'white' }}>
-              <ChartVisualizer
-                data={data}
-                chartType={config.chartType}
-                title={`${config.chartType.charAt(0).toUpperCase() + config.chartType.slice(1)} vizualizacija`}
-              />
-            </Paper>
+            <>
+              <Box sx={{ mb: 3 }}>
+                <ExportControls
+                  targetElementId="detailed-chart-container"
+                  fileNamePrefix={`${category}-detailed-chart`}
+                />
+              </Box>
+              <Paper id="detailed-chart-container" sx={{ p: 4, mb: 4, backgroundColor: 'white' }}>
+                <ChartVisualizer
+                  data={data}
+                  chartType={config.chartType}
+                  title={`${config.chartType.charAt(0).toUpperCase() + config.chartType.slice(1)} vizualizacija`}
+                />
+              </Paper>
+            </>
           )}
 
           {/* Data Table View */}
