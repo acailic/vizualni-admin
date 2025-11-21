@@ -106,7 +106,7 @@ function printDatasetInfo(dataset, resources) {
     let notes = dataset.notes;
     if (notes.length > 150) {
       const lastSpace = notes.lastIndexOf(' ', 150);
-      if (lastSpace > 0) {
+      if (lastSpace >= 0) {
         notes = notes.substring(0, lastSpace);
       } else {
         notes = notes.substring(0, 150);
