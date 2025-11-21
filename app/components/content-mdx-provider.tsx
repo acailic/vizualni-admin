@@ -4,13 +4,6 @@ import { ReactNode } from "react";
 import { ContentLayout, StaticContentLayout } from "@/components/layout";
 import { Actions, Examples, Intro, Tutorial } from "@/homepage";
 
-const castContentId = (contentId: unknown) => {
-  if (typeof contentId === "string") {
-    return contentId;
-  }
-  return undefined;
-};
-
 const Wrapper = ({
   contentId,
   children,
