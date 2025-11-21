@@ -359,6 +359,8 @@ const ConversionUnit = t.type({
     fr: t.string,
     it: t.string,
     en: t.string,
+    "sr-Latn": t.string,
+    "sr-Cyrl": t.string,
   }),
 });
 export type ConversionUnit = t.TypeOf<typeof ConversionUnit>;

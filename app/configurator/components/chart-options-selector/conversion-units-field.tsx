@@ -595,6 +595,8 @@ const getDefaultConversionUnit = ({
       fr: label,
       it: label,
       en: label,
+      "sr-Latn": label,
+      "sr-Cyrl": label,
     },
   };
 };
