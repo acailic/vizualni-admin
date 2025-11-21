@@ -180,9 +180,9 @@ export function transformEducationDataSimple(
  *
  * Output:
  * [
- *   { level: "Osnovno", students: 500000 },
- *   { level: "Srednje", students: 300000 },
- *   { level: "Visoko", students: 250000 }
+ *   { level: "osnovno", students: 500000 },
+ *   { level: "srednje", students: 300000 },
+ *   { level: "visoko", students: 250000 }
  * ]
  */
 export function transformEducationLevelDistribution(
