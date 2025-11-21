@@ -639,6 +639,8 @@ const AddLayoutBlocks = () => {
               fr: "",
               it: "",
               en: "",
+              "sr-Latn": "",
+              "sr-Cyrl": "",
             },
             initialized: false,
           },

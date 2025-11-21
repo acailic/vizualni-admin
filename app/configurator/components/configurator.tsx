@@ -8,7 +8,7 @@ import {
   useEventCallback,
 } from "@mui/material";
 import Button, { ButtonProps } from "@mui/material/Button";
-import { PUBLISHED_STATE } from "@prisma/client";
+import { PUBLISHED_STATE } from "../../db/prisma-types";
 import * as clipboard from "clipboard-polyfill/text";
 import NextLink from "next/link";
 import { useRouter } from "next/router";

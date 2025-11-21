@@ -1178,9 +1178,9 @@ export const configJoinedCubes: Partial<
       },
     },
     meta: {
-      title: { en: "", de: "", fr: "", it: "" },
-      description: { en: "", de: "", fr: "", it: "" },
-      label: { en: "", de: "", fr: "", it: "" },
+      title: { "sr-Latn": "", "sr-Cyrl": "", en: "" },
+      description: { "sr-Latn": "", "sr-Cyrl": "", en: "" },
+      label: { "sr-Latn": "", "sr-Cyrl": "", en: "" },
     },
     cubes: [
       {
@@ -1579,9 +1579,9 @@ export const configJoinedCubes: Partial<
     key: "ydBHrv26xvUg",
     version: CHART_CONFIG_VERSION,
     meta: {
-      title: { en: "", de: "", fr: "", it: "" },
-      description: { en: "", de: "", fr: "", it: "" },
-      label: { en: "", de: "", fr: "", it: "" },
+      title: { "sr-Latn": "", "sr-Cyrl": "", en: "" },
+      description: { "sr-Latn": "", "sr-Cyrl": "", en: "" },
+      label: { "sr-Latn": "", "sr-Cyrl": "", en: "" },
     },
     cubes: [
       {

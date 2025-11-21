@@ -1,8 +1,14 @@
 /* eslint-disable no-redeclare */
-import { PALETTE_TYPE } from "@prisma/client";
 import { fold } from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/lib/function";
 import * as t from "io-ts";
+
+// Define PALETTE_TYPE locally to avoid Prisma client dependency for static builds
+export enum PALETTE_TYPE {
+  SEQUENTIAL = "SEQUENTIAL",
+  DIVERGING = "DIVERGING",
+  CATEGORICAL = "CATEGORICAL",
+}
 
 const DimensionType = t.union([
   t.literal("NominalDimension"),
@@ -714,11 +720,11 @@ export const convertPaletteTypeToDBType = (
 ): PALETTE_TYPE => {
   switch (type) {
     case "diverging":
-      return "DIVERGING";
+      return PALETTE_TYPE.DIVERGING;
     case "sequential":
-      return "SEQUENTIAL";
+      return PALETTE_TYPE.SEQUENTIAL;
     case "categorical":
-      return "CATEGORICAL";
+      return PALETTE_TYPE.CATEGORICAL;
     default:
       const _exhaustiveCheck: never = type;
       return _exhaustiveCheck;
@@ -729,11 +735,11 @@ export const convertDBTypeToPaletteType = (
   type: PALETTE_TYPE
 ): CustomPaletteType["type"] => {
   switch (type) {
-    case "DIVERGING":
+    case PALETTE_TYPE.DIVERGING:
       return "diverging";
-    case "SEQUENTIAL":
+    case PALETTE_TYPE.SEQUENTIAL:
       return "sequential";
-    case "CATEGORICAL":
+    case PALETTE_TYPE.CATEGORICAL:
       return "categorical";
     default:
       const _exhaustiveCheck: never = type;
@@ -1346,6 +1352,8 @@ const LayoutTextBlock = t.type({
     fr: t.string,
     it: t.string,
     en: t.string,
+    "sr-Latn": t.string,
+    "sr-Cyrl": t.string,
   }),
 });
 export type LayoutTextBlock = t.TypeOf<typeof LayoutTextBlock>;
