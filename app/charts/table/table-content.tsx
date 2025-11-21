@@ -118,7 +118,7 @@ export const TableContent = ({ children }: { children: ReactNode }) => {
                         <span style={{ fontWeight: "bold" }}>
                           {column.render("Header") as any}
                         </span>
-                      </OpenMetadataPanelWrapper>>
+                      </OpenMetadataPanelWrapper>
                     </TableSortLabel>
                   </Flex>
                 );

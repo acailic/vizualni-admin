@@ -5,7 +5,7 @@ import isEqual from "lodash/isEqual";
 import map from "lodash/map";
 import mapValues from "lodash/mapValues";
 import range from "lodash/range";
-import { ComponentProps, useEffect, useState } from "react";
+import { ComponentProps, ReactNode, useEffect, useState } from "react";
 import { Layout, Responsive, WidthProvider } from "react-grid-layout";
 import { match } from "ts-pattern";
 
@@ -217,6 +217,7 @@ export const ChartGridLayout = ({
   resize,
   ...rest
 }: {
+  children?: ReactNode;
   className: string;
   resize?: boolean;
 } & ComponentProps<typeof ResponsiveReactGridLayout>) => {

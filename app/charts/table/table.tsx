@@ -2,7 +2,13 @@ import { t, Trans } from "@lingui/macro";
 import { Box, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import FlexSearch from "flexsearch";
-import { forwardRef, useCallback, useMemo, useState } from "react";
+import {
+  CSSProperties,
+  forwardRef,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import {
   useExpanded,
   useFlexLayout,
@@ -178,14 +184,14 @@ export const Table = () => {
 
   // Desktop row
   const renderDesktopRow = useCallback(
-    ({ index, style }) => {
+    ({ index, style }: { index: number; style: CSSProperties }) => {
       const row = rows[index];
       prepareRow(row);
       return (
         <Box
-          {...row.getRowProps({
+          {...(row.getRowProps({
             style: { ...style, minWidth: "100%" },
-          })}
+          } as any) as any)}
           className={classes.desktopRow}
         >
           {row.subRows.length === 0 ? (
@@ -219,7 +225,7 @@ export const Table = () => {
   );
 
   const renderMobileRow = useCallback(
-    ({ index, style }) => {
+    ({ index, style }: { index: number; style: CSSProperties }) => {
       const row = rows[index];
       prepareRow(row);
 
@@ -227,13 +233,13 @@ export const Table = () => {
         <>
           <Box
             className={classes.mobileRow}
-            {...row.getRowProps({
+            {...(row.getRowProps({
               style: {
                 ...style,
                 flexDirection: "column",
                 width: "100%",
               },
-            })}
+            } as any) as any)}
           >
             {row.subRows.length === 0 ? (
               row.cells.map((cell, i) => {
@@ -257,7 +263,7 @@ export const Table = () => {
                         whiteSpace: "nowrap",
                       }}
                     >
-                      {cell.column.Header}
+                      {cell.column.render("Header") as any}
                     </Box>
                     <Flex
                       component="dd"
@@ -346,6 +352,7 @@ export const Table = () => {
         >
           <AutoSizer>
             {({ width, height }: { width: number; height: number }) => (
+              // @ts-ignore
               <VariableSizeList
                 key={rows.length} // Reset when groups are toggled because itemSize remains cached per index
                 height={height}
@@ -353,7 +360,7 @@ export const Table = () => {
                 itemSize={getMobileItemSize}
                 width={width}
               >
-                {renderMobileRow}
+                {renderMobileRow as any}
               </VariableSizeList>
             )}
           </AutoSizer>
@@ -362,9 +369,11 @@ export const Table = () => {
         /* Regular table view */
         <Box
           sx={{ position: "relative", mb: 4, fontSize: "0.875rem" }}
-          {...getTableProps({ style: { minWidth: "100%", height: "100%" } })}
+          {...(getTableProps({
+            style: { minWidth: "100%", height: "100%" },
+          }) as any)}
         >
-          <div {...getTableBodyProps()} style={{ height: "100%" }}>
+          <div {...(getTableBodyProps() as any)} style={{ height: "100%" }}>
             <TableContentProvider
               headerGroups={headerGroups}
               tableColumnsMeta={tableColumnsMeta}
@@ -373,6 +382,7 @@ export const Table = () => {
             >
               <AutoSizer disableWidth>
                 {({ height }: { height: number }) => (
+                  // @ts-ignore
                   <FixedSizeList
                     outerElementType={TableContentWrapper}
                     // row height = header row height
@@ -381,7 +391,7 @@ export const Table = () => {
                     itemSize={rowHeight} // depends on whether a column has bars (40px or 56px)
                     width="100%"
                   >
-                    {renderDesktopRow}
+                    {renderDesktopRow as any}
                   </FixedSizeList>
                 )}
               </AutoSizer>
