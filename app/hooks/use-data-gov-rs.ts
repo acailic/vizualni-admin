@@ -167,11 +167,15 @@ export function useDataGovRs(options: UseDataGovRsOptions): UseDataGovRsReturn {
 }
 
 /**
- * Simple CSV parser
- * For production, consider using a library like papaparse
+ * Production-ready CSV parser
+ * Handles quoted fields, different line endings, and empty rows
  */
 function parseCSVData(csv: string): any[] {
-  const lines = csv.split('\n').filter(line => line.trim());
+  // Normalize line endings to \n (handles \r\n, \r, and \n)
+  const normalizedCsv = csv.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  // Split into lines and filter out empty rows
+  const lines = normalizedCsv.split('\n').filter(line => line.trim());
 
   if (lines.length === 0) {
     return [];
@@ -199,7 +203,13 @@ function parseCSVData(csv: string): any[] {
 }
 
 /**
- * Parse a single CSV line (handles quoted values)
+ * Parse a single CSV line
+ * Handles quoted values with commas and escaped quotes
+ *
+ * Examples:
+ * - Basic: "a,b,c" -> ["a", "b", "c"]
+ * - Quoted with comma: 'a,"Belgrade, Serbia",c' -> ["a", "Belgrade, Serbia", "c"]
+ * - Escaped quotes: 'a,"He said ""Hello""",c' -> ["a", "He said \"Hello\"", "c"]
  */
 function parseCSVLine(line: string): string[] {
   const result: string[] = [];
@@ -212,7 +222,7 @@ function parseCSVLine(line: string): string[] {
 
     if (char === '"') {
       if (inQuotes && nextChar === '"') {
-        // Escaped quote
+        // Escaped quote (two consecutive quotes)
         current += '"';
         i++;
       } else {
@@ -220,7 +230,7 @@ function parseCSVLine(line: string): string[] {
         inQuotes = !inQuotes;
       }
     } else if (char === ',' && !inQuotes) {
-      // End of field
+      // End of field (comma outside quotes)
       result.push(current.trim());
       current = '';
     } else {

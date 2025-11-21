@@ -77,26 +77,79 @@ export function getUpdateFrequency(dataset: DatasetMetadata): string {
 
 /**
  * Parse CSV data to array of objects
+ * Handles quoted fields with commas, different line endings, and empty rows
+ *
+ * @example
+ * ```ts
+ * parseCSV('name,city\nJohn,"Belgrade, Serbia"\nJane,Novi Sad')
+ * // Returns:
+ * // [
+ * //   { name: 'John', city: 'Belgrade, Serbia' },
+ * //   { name: 'Jane', city: 'Novi Sad' }
+ * // ]
+ * ```
  */
 export function parseCSV(csvText: string): Record<string, string>[] {
-  const lines = csvText.trim().split('\n');
+  // Normalize line endings to \n (handles \r\n, \r, and \n)
+  const normalizedCsv = csvText.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  // Split into lines and filter out empty rows
+  const lines = normalizedCsv.split('\n').filter(line => line.trim());
+
   if (lines.length < 2) return [];
 
-  const headers = lines[0].split(',').map(h => h.trim());
+  const headers = parseCSVLine(lines[0]);
   const data: Record<string, string>[] = [];
 
   for (let i = 1; i < lines.length; i++) {
-    const values = lines[i].split(',').map(v => v.trim());
+    const values = parseCSVLine(lines[i]);
     const row: Record<string, string> = {};
-    
+
     headers.forEach((header, index) => {
       row[header] = values[index] || '';
     });
-    
+
     data.push(row);
   }
 
   return data;
+}
+
+/**
+ * Parse a single CSV line
+ * Handles quoted values with commas and escaped quotes
+ */
+function parseCSVLine(line: string): string[] {
+  const result: string[] = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    const nextChar = line[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        // Escaped quote (two consecutive quotes)
+        current += '"';
+        i++;
+      } else {
+        // Toggle quote state
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      // End of field (comma outside quotes)
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+
+  // Add last field
+  result.push(current.trim());
+
+  return result;
 }
 
 /**
