@@ -220,6 +220,7 @@ export const ChartGridLayout = ({
   children?: ReactNode;
   className: string;
   resize?: boolean;
+  layouts: Record<string, Layout[]>;
 } & ComponentProps<typeof ResponsiveReactGridLayout>) => {
   const classes = useStyles();
 
