@@ -101,7 +101,7 @@ export const DEMO_CONFIGS: Record<string, DemoConfig> = {
     id: 'budget',
     title: { sr: 'Budžet', en: 'Budget' },
     // ... other fields
-    defaultDatasetId: 'YOUR_DATASET_ID_HERE', // ← Add this
+    defaultDatasetId: 'YOUR_DATASET_ID_HERE', // ← Populate with actual dataset ID from data.gov.rs
   },
   // ... other configs
 };
