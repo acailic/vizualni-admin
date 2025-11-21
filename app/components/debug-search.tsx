@@ -240,7 +240,7 @@ export const DebugSearch = () => {
           includeDrafts={includeDrafts}
           query={customSearch}
           filters={[]}
-          locale="fr"
+          locale="sr-Latn"
         />
       ) : (
         <>
@@ -249,7 +249,7 @@ export const DebugSearch = () => {
             includeDrafts={includeDrafts}
             query="bruit"
             filters={[]}
-            locale="fr"
+            locale="sr-Latn"
           />
           <Search
             sourceUrl={sourceUrl}
@@ -270,7 +270,7 @@ export const DebugSearch = () => {
             includeDrafts={includeDrafts}
             query="Ausgaben"
             filters={[]}
-            locale="de"
+            locale="sr-Latn"
           />
           <Search
             sourceUrl={sourceUrl}
@@ -298,21 +298,21 @@ export const DebugSearch = () => {
             includeDrafts={includeDrafts}
             query="Einmalvergütung"
             filters={[]}
-            locale="de"
+            locale="sr-Latn"
           />
           <Search
             sourceUrl={sourceUrl}
             includeDrafts={includeDrafts}
             query="zeitverzögert"
             filters={[]}
-            locale="de"
+            locale="sr-Latn"
           />
           <Search
             sourceUrl={sourceUrl}
             includeDrafts={includeDrafts}
             query="öffentlich"
             filters={[]}
-            locale="de"
+            locale="sr-Latn"
           />
           <Search
             sourceUrl={sourceUrl}
@@ -340,7 +340,7 @@ export const DebugSearch = () => {
             includeDrafts={includeDrafts}
             query="émissions de gaz à effet de serre"
             filters={[]}
-            locale="fr"
+            locale="sr-Latn"
           />
         </>
       )}
