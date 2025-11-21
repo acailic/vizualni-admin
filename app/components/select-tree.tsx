@@ -119,6 +119,7 @@ const TreeItemContent = forwardRef<
     size?: SelectProps["size"];
     icon?: ReactNode;
     label?: ReactNode;
+    children?: ReactNode;
     onClick?: MouseEventHandler;
     nodeId: string;
     onMouseDown?: MouseEventHandler;
