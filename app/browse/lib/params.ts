@@ -1,10 +1,10 @@
 import { ParsedUrlQuery } from "querystring";
+import { UrlObject } from "url";
 
 import mapValues from "lodash/mapValues";
 import pick from "lodash/pick";
 import pickBy from "lodash/pickBy";
 import { Router } from "next/router";
-import { UrlObject } from "url";
 
 import { truthy } from "@/domain/types";
 import { SearchCubeResultOrder } from "@/graphql/query-hooks";
