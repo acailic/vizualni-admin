@@ -50,6 +50,10 @@ export const TextBlock = forwardRef<
   } & ComponentProps<"div">
 >(({ children, block, className, dragHandleProps, ...rest }, ref) => {
   const locale = useLocale();
+  const getLocalizedValue = <T extends Record<string, string>>(values: T) => {
+    const key = (locale in values ? locale : "en") as keyof T;
+    return values[key];
+  };
   const [state, dispatch] = useConfiguratorState(hasChartConfigs);
   const layouting = isLayouting(state);
   const classes = useTextBlockStyles({ layouting });
@@ -63,7 +67,7 @@ export const TextBlock = forwardRef<
       value: block.key,
     });
   });
-  const text = block.text[locale];
+  const text = getLocalizedValue(block.text);
 
   return (
     <div
