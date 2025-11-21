@@ -85,7 +85,7 @@ export const TableContent = ({ children }: { children: ReactNode }) => {
           return (
             // getHeaderGroupProps() returns props with key
             // eslint-disable-next-line react/jsx-key
-            <Box {...headerGroup.getHeaderGroupProps()}>
+            <Box {...(headerGroup.getHeaderGroupProps() as any)}>
               {headerGroup.headers.map((column) => {
                 const { dim, columnComponentType } =
                   tableColumnsMeta[column.id];
@@ -101,7 +101,9 @@ export const TableContent = ({ children }: { children: ReactNode }) => {
                         ? classes.headerGroupMeasure
                         : undefined
                     )}
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    {...(column.getHeaderProps(
+                      column.getSortByToggleProps()
+                    ) as any)}
                   >
                     <TableSortLabel
                       active={isCustomSorted}
@@ -114,9 +116,9 @@ export const TableContent = ({ children }: { children: ReactNode }) => {
                     >
                       <OpenMetadataPanelWrapper component={dim}>
                         <span style={{ fontWeight: "bold" }}>
-                          {column.render("Header")}
+                          {column.render("Header") as any}
                         </span>
-                      </OpenMetadataPanelWrapper>
+                      </OpenMetadataPanelWrapper>>
                     </TableSortLabel>
                   </Flex>
                 );
