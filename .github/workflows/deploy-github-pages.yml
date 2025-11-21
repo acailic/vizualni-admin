@@ -22,6 +22,8 @@ jobs:
       STORYBOOK_DISABLE_TELEMETRY: "1"
       # Ensure CI never requires a Sentry auth token; uploads stay dry-run/disabled
       SENTRY_UPLOAD: "false"
+      # Ignore the legacy yarn-path setting that points to a missing binary
+      YARN_IGNORE_PATH: "1"
 
     steps:
       - name: Checkout
