@@ -71,7 +71,7 @@ export function transformEducationData(
 
     // Normalize education level names
     const normalizedLevel = normalizeEducationLevel(level, locale);
-    groupedData[year][normalizedLevel] = students;
+    groupedData[year][normalizedLevel] = (groupedData[year][normalizedLevel] || 0) + students;
   });
 
   // Convert to array format for charts
@@ -111,8 +111,8 @@ function normalizeEducationLevel(level: string, locale: 'sr' | 'en'): string {
     return locale === 'sr' ? 'visoko' : 'higher';
   }
 
-  // Return original if no match
-  return level;
+  // Return normalized (lowercased) if no match
+  return normalized;
 }
 
 /**
@@ -265,19 +265,22 @@ export function transformEducationLevelDistribution(
  */
 function detectColumn(row: Record<string, any>, possibleNames: string[]): string | null {
   const columns = Object.keys(row);
+  const lowerColumns = columns.map(col => col.toLowerCase());
 
   for (const name of possibleNames) {
-    // Exact match (case-insensitive)
-    const exactMatch = columns.find(col =>
-      col.toLowerCase() === name.toLowerCase()
-    );
-    if (exactMatch) return exactMatch;
-
-    // Partial match (column contains the name)
-    const partialMatch = columns.find(col =>
-      col.toLowerCase().includes(name.toLowerCase())
-    );
-    if (partialMatch) return partialMatch;
+    const lowerName = name.toLowerCase();
+    // Try exact match first
+    for (let i = 0; i < lowerColumns.length; i++) {
+      if (lowerColumns[i] === lowerName) {
+        return columns[i];
+      }
+    }
+    // Then try partial match
+    for (let i = 0; i < lowerColumns.length; i++) {
+      if (lowerColumns[i].includes(lowerName)) {
+        return columns[i];
+      }
+    }
   }
 
   return null;
@@ -305,7 +308,7 @@ export function transformBudgetData(
   ]);
 
   const amountColumn = detectColumn(rawData[0], [
-    'Amount', 'Iznos', 'iznos', 'Budget', 'Budžet', 'budzet',
+    'Amount', 'Iznos', 'iznos', 'Budget', 'Budžet', 'budžet',
     'Allocated', 'Alocirano', 'Value', 'Vrednost'
   ]);
 
@@ -328,7 +331,7 @@ export function transformBudgetData(
       groupedData[year] = {};
     }
 
-    groupedData[year][category] = amount;
+    groupedData[year][category] = (groupedData[year][category] || 0) + amount;
   });
 
   const transformedData = Object.entries(groupedData).map(([year, categories]) => ({
