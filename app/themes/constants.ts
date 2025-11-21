@@ -1,7 +1,9 @@
+import type { Breakpoint, Shadows } from "@mui/material/styles";
+
 // Local theme constants to replace Swiss Federal CI package
 
 export const breakpoints = {
-  keys: ["xs", "sm", "md", "lg", "xl"] as const,
+  keys: ["xs", "sm", "md", "lg", "xl"] as Breakpoint[],
   values: {
     xs: 0,
     sm: 600,
@@ -13,7 +15,7 @@ export const breakpoints = {
 
 export const spacing = 4;
 
-export const shadows = [
+export const shadows: Shadows = [
   "none",
   "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
   "0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 3px 0 rgba(0, 0, 0, 0.06)",
@@ -39,7 +41,7 @@ export const shadows = [
   "none",
   "none",
   "none",
-] as const;
+];
 
 // Color definitions
 export const colors = {

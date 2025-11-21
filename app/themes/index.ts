@@ -22,11 +22,14 @@ type FederalTypographyVariants = {
   h4: object;
   h5: object;
   h6: object;
+  subtitle1: object;
+  subtitle2: object;
   body1: object;
   body2: object;
   body3: object;
   caption: object;
   button: object;
+  overline: object;
 };
 
 type FederalTypographyVariantsOptions = FederalTypographyVariants;
@@ -38,14 +41,14 @@ type FederalTypographyPropsVariantOverrides = {
   h4: true;
   h5: true;
   h6: true;
-  subtitle1: false;
-  subtitle2: false;
+  subtitle1: true;
+  subtitle2: true;
   body1: true;
   body2: true;
   body3: true;
   caption: true;
   button: true;
-  overline: false;
+  overline: true;
 };
 
 type FederalBreakpointOverrides = {
@@ -76,9 +79,9 @@ declare module "@mui/material/Button" {
   }
 
   interface ButtonPropsSizeOverrides {
-    small: false;
-    medium: false;
-    large: false;
+    small: true;
+    medium: true;
+    large: true;
 
     xs: true;
     sm: true;

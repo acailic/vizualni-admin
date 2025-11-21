@@ -13,7 +13,7 @@ describe("makeOpenDataLink", () => {
     } as DataCubeMetadata;
 
     expect(makeOpenDataLink("sr", cube)).toBe(
-      `https://data.gov.rs/sr/datasets/${encodeURIComponent(cube.identifier)}`
+      `https://data.gov.rs/sr/datasets/${encodeURIComponent(cube.identifier!)}`
     );
   });
 });

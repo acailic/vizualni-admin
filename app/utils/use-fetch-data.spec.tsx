@@ -356,8 +356,9 @@ describe("useHydrate", () => {
 
   it("should only hydrate once", () => {
     const queryKey = ["hydrate", "once"];
-    const serverData1 = { first: true };
-    const serverData2 = { second: true };
+    type ServerData = { first?: boolean; second?: boolean };
+    const serverData1: ServerData = { first: true };
+    const serverData2: ServerData = { second: true };
 
     const { result, rerender } = renderHook(
       ({ data }) => {

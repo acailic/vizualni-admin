@@ -27,7 +27,7 @@ export const useRenderTime = (componentName: string, enabled = process.env.NODE_
     startTime.current = performance.now();
   });
 
-  return duration => {
+  return (duration: number) => {
     if (enabled) {
       console.log(`[Performance] ${componentName} operation took ${duration.toFixed(2)}ms`);
     }

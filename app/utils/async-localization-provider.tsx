@@ -4,6 +4,12 @@ import { PropsWithChildren, useEffect, useState } from "react";
 
 import { Locale } from "@/locales/locales";
 
+const localeImportMap: Record<Locale, string> = {
+  en: "en-GB",
+  "sr-Latn": "sr-Latn",
+  "sr-Cyrl": "sr",
+};
+
 type AsyncLocalizationProviderProps = {
   locale: Locale;
 };
@@ -16,25 +22,19 @@ export const AsyncLocalizationProvider = (
 
   useEffect(() => {
     const run = async () => {
-      switch (locale) {
-        case "en": {
-          const importedLocale = await import("date-fns/locale/en-GB");
-          setDateFnsLocale(importedLocale.default);
-          break;
-        }
-        case "de":
-        case "fr":
-        case "it": {
-          const importedLocale = await import(
-            `date-fns/locale/${locale}/index.js`
-          );
-          setDateFnsLocale(importedLocale.default);
-          break;
-        }
-        default:
-          const _exhaustiveCheck: never = locale;
-          return _exhaustiveCheck;
+      const importKey = localeImportMap[locale];
+
+      if (!importKey) {
+        console.warn(`Missing date-fns locale for "${locale}", falling back to en-GB.`);
+        const fallback = await import("date-fns/locale/en-GB");
+        setDateFnsLocale(fallback.default);
+        return;
       }
+
+      const importedLocale = await import(
+        `date-fns/locale/${importKey}/index.js`
+      );
+      setDateFnsLocale(importedLocale.default);
     };
 
     run();

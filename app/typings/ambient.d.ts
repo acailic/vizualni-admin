@@ -33,3 +33,8 @@ declare module "*.graphql" {
 
   export = Schema;
 }
+
+declare module "@cozy/cli-tree" {
+  export const build: (...args: any[]) => any;
+  export const completionHandler: (...args: any[]) => Promise<void>;
+}

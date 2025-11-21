@@ -21,6 +21,8 @@ export interface ColumnChartProps {
   colors?: string[];
   xLabel?: string;
   yLabel?: string;
+  title?: string;
+  description?: string;
 }
 
 export const ColumnChart = ({

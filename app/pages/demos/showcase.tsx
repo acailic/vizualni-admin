@@ -222,7 +222,7 @@ export default function DemoShowcasePage() {
                   height={360}
                   xLabel={locale === 'sr' ? 'Segment' : 'Segment'}
                   yLabel={locale === 'sr' ? 'Udeo (%)' : 'Share (%)'}
-                  color="#22c55e"
+                  colors={["#22c55e"]}
                 />
               </Box>
             </CardContent>

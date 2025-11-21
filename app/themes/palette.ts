@@ -94,18 +94,11 @@ export const palette = {
     ...colors.monochrome,
   },
   red: {
+    ...colors.red,
     main: "#C6363C", // Serbian red
-    50: "#FCEDEF",
-    100: "#F8D3D6",
-    200: "#F3B5BA",
-    300: "#EE979E",
-    400: "#EA8089",
-    500: "#E66974",
-    600: "#E3616C",
     700: "#C6363C",
     800: "#B42F35",
     900: "#9E2A2F",
-    ...colors.red,
   },
   orange,
   yellow: {

@@ -12,6 +12,7 @@ export interface ChartVisualizerProps {
   data: any[];
   chartType: 'line' | 'bar' | 'column' | 'area' | 'pie' | 'map' | 'scatterplot';
   title?: string;
+  description?: string;
 }
 
 /**
@@ -74,7 +75,7 @@ function prepareDataForVisualization(data: any[], maxRows: number = 20): any[] {
   return data.filter((_, index) => index % step === 0).slice(0, maxRows);
 }
 
-export const ChartVisualizer = ({ data, chartType, title }: ChartVisualizerProps) => {
+export const ChartVisualizer = ({ data, chartType, title, description }: ChartVisualizerProps) => {
   const { visualizationData, columns, preparedData } = useMemo(() => {
     const columns = detectVisualizationColumns(data);
     const preparedData = prepareDataForVisualization(data, 25);
@@ -115,6 +116,11 @@ export const ChartVisualizer = ({ data, chartType, title }: ChartVisualizerProps
       {title && (
         <Typography variant="h6" sx={{ mb: 2, textAlign: 'center' }}>
           {title}
+        </Typography>
+      )}
+      {description && (
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, textAlign: 'center' }}>
+          {description}
         </Typography>
       )}
 

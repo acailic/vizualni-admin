@@ -30,12 +30,14 @@ export function lazyLoad<T extends ComponentType<any>>(
       console.error("Error loading component:", error);
 
       // Return a fallback component on error
+      const FallbackComponent: ComponentType = () => (
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          Failed to load component. Please refresh the page.
+        </div>
+      );
+
       return {
-        default: (() => (
-          <div style={{ padding: "20px", textAlign: "center" }}>
-            Failed to load component. Please refresh the page.
-          </div>
-        )) as T,
+        default: FallbackComponent as unknown as T,
       };
     })
   );

@@ -22,6 +22,8 @@ export interface PieChartProps {
   height?: number;
   colors?: string[];
   showPercentages?: boolean;
+  title?: string;
+  description?: string;
 }
 
 export const PieChart = ({

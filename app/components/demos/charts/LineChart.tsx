@@ -22,6 +22,8 @@ export interface LineChartProps {
   color?: string;
   xLabel?: string;
   yLabel?: string;
+  title?: string;
+  description?: string;
 }
 
 export const LineChart = ({

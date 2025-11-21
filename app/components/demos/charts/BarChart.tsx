@@ -23,6 +23,8 @@ export interface BarChartProps {
   color?: string;
   xLabel?: string;
   yLabel?: string;
+  title?: string;
+  description?: string;
 }
 
 export const BarChart = ({
