@@ -17,13 +17,6 @@ const API_BASE = 'https://data.gov.rs/api/action';
 const SEARCH_KEYWORDS = ['budzet', 'vazduh', 'skole', 'saobracaj'];
 const TARGET_FORMATS = ['CSV', 'JSON', 'XLSX', 'XLS'];
 
-// Alternative API endpoints to try
-const API_ENDPOINTS = [
-  'https://data.gov.rs/api/action/package_search',
-  'https://data.gov.rs/api/3/action/package_search',
-  'https://data.gov.rs/api/1/datasets/'
-];
-
 /**
  * Search datasets by keyword using CKAN API
  */
@@ -37,7 +30,7 @@ async function searchDatasets(query) {
   try {
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
         'Accept': 'application/json',
         'Accept-Language': 'sr-RS,sr;q=0.9,en;q=0.8',
         'Referer': 'https://data.gov.rs/'
@@ -86,6 +79,9 @@ function formatDate(dateString) {
 
   try {
     const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return dateString;
+    }
     return date.toISOString().split('T')[0]; // YYYY-MM-DD
   } catch {
     return dateString;
@@ -104,11 +100,21 @@ function printDatasetInfo(dataset, resources) {
   console.log(`Created:       ${formatDate(dataset.metadata_created)}`);
   console.log(`Modified:      ${formatDate(dataset.metadata_modified)}`);
   console.log(`License:       ${dataset.license_title || 'N/A'}`);
-  console.log(`URL:           https://data.gov.rs/sr/datasets/${dataset.id || ''}`);
+  console.log(`URL:           https://data.gov.rs/sr/datasets/${dataset.id || 'unknown'}`);
 
   if (dataset.notes) {
-    const notes = dataset.notes.substring(0, 150);
-    console.log(`Description:   ${notes}${notes.length >= 150 ? '...' : ''}`);
+    let notes = dataset.notes;
+    if (notes.length > 150) {
+      const lastSpace = notes.lastIndexOf(' ', 150);
+      if (lastSpace > 0) {
+        notes = notes.substring(0, lastSpace);
+      } else {
+        notes = notes.substring(0, 150);
+      }
+      console.log(`Description:   ${notes}...`);
+    } else {
+      console.log(`Description:   ${notes}`);
+    }
   }
 
   console.log('\n📁 Resources:');
@@ -150,7 +156,50 @@ async function main() {
       }
     }
 
-    // Rate limiting - be nice to the API (only if datasets found)
+    // Rate limiting - be nice to the API
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+
+  console.log('\n\n');
+  console.log('╔' + '═'.repeat(78) + '╗');
+  console.log('║' + ' '.repeat(20) + '📋 RESULTS SUMMARY' + ' '.repeat(40) + '║');
+  console.log('╚' + '═'.repeat(78) + '╝');
+
+  if (allResults.length === 0) {
+    console.log('\n❌ No datasets found with CSV/JSON resources.');
+    return;
+  }
+
+  console.log(`\n✅ Found ${allResults.length} dataset(s) with CSV/JSON resources:\n`);
+
+  // Group by keyword
+  const byKeyword = {};
+  for (const result of allResults) {
+    if (!byKeyword[result.keyword]) {
+      byKeyword[result.keyword] = [];
+    }
+    byKeyword[result.keyword].push(result);
+  }
+
+  // Print grouped results
+  for (const keyword of SEARCH_KEYWORDS) {
+    const results = byKeyword[keyword];
+    if (!results || results.length === 0) continue;
+
+    console.log(`\n${'▀'.repeat(80)}`);
+    console.log(`🔑 Keyword: "${keyword}" - ${results.length} dataset(s)`);
+    console.log('▄'.repeat(80));
+
+    for (const { dataset, resources } of results) {
+      printDatasetInfo(dataset, resources);
+    }
+  }
+
+  // Print summary for config.ts
+  console.log('\n\n');
+  console.log('╔' + '═'.repeat(78) + '╗');
+  console.log('║' + ' '.repeat(15) + '📝 QUICK REFERENCE FOR config.ts' + ' '.repeat(30) + '║');
+  console.log('╚' + '═'.repeat(78) + '╝');
   console.log('\nCopy these IDs into your DEMO_CONFIGS:\n');
 
   for (const { dataset, resources, keyword } of allResults) {
