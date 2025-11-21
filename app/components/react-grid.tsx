@@ -5,8 +5,14 @@ import isEqual from "lodash/isEqual";
 import map from "lodash/map";
 import mapValues from "lodash/mapValues";
 import range from "lodash/range";
-import { ComponentProps, ReactNode, useEffect, useState } from "react";
-import { Layout, Responsive, WidthProvider } from "react-grid-layout";
+import { ReactNode, useEffect, useState } from "react";
+import {
+  Layout,
+  Responsive,
+  ResponsiveProps,
+  WidthProvider,
+  WidthProviderProps,
+} from "react-grid-layout";
 import { match } from "ts-pattern";
 
 import { useStyles as useChartContainerStyles } from "@/charts/shared/containers";
@@ -210,21 +216,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const CHART_GRID_MIN_HEIGHT = 150;
 
+type ChartGridLayoutProps = {
+  children?: ReactNode;
+  className: string;
+  resize?: boolean;
+  layouts: Record<string, Layout[]>;
+  draggableHandle?: string;
+} & ResponsiveProps &
+  WidthProviderProps & {
+    [key: string]: any;
+  };
+
 export const ChartGridLayout = ({
   children,
   className,
   layouts,
   resize,
   ...rest
-}: {
-  children?: ReactNode;
-  className: string;
-  resize?: boolean;
-  layouts: Record<string, Layout[]>;
-  draggableHandle?: string;
-} & ComponentProps<typeof ResponsiveReactGridLayout> & {
-    [key: string]: any;
-  }) => {
+}: ChartGridLayoutProps) => {
   const classes = useStyles();
 
   const [state, dispatch] = useConfiguratorState(hasChartConfigs);
