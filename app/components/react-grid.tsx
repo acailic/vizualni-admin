@@ -5,7 +5,7 @@ import isEqual from "lodash/isEqual";
 import map from "lodash/map";
 import mapValues from "lodash/mapValues";
 import range from "lodash/range";
-import { ReactNode, useEffect, useState } from "react";
+import { ComponentType, ReactNode, useEffect, useState } from "react";
 import {
   Layout,
   Responsive,
@@ -29,6 +29,9 @@ import { assert } from "@/utils/assert";
 import { useTimeout } from "@/utils/use-timeout";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+const ResponsiveGrid = ResponsiveReactGridLayout as unknown as ComponentType<
+  ResponsiveProps & WidthProviderProps
+>;
 
 type ResizeHandle = NonNullable<Layout["resizeHandles"]>[number];
 export type GridLayout = "horizontal" | "vertical" | "wide" | "tall";
@@ -359,7 +362,7 @@ export const ChartGridLayout = ({
   ]);
 
   return (
-    <ResponsiveReactGridLayout
+    <ResponsiveGrid
       {...rest}
       layouts={layouts}
       className={clsx(classes.root, className)}
