@@ -43,6 +43,7 @@ import {
   scatterplotMeasures,
   scatterplotObservations,
 } from "./scatterplot.mock";
+import { createMeta } from "@/locales/localized-string";
 
 const meta: Meta = {
   title: "Charts / Charts",
@@ -61,11 +62,7 @@ const ColumnsStory = {
         dataSource: { type: "sparql", url: "" },
         layout: {
           type: "tab",
-          meta: {
-            title: { en: "", de: "", fr: "", it: "" },
-            description: { en: "", de: "", fr: "", it: "" },
-            label: { en: "", de: "", fr: "", it: "" },
-          },
+          meta: createMeta(),
           blocks: [{ type: "chart", key: chartConfig.key, initialized: true }],
           activeField: undefined,
         },
@@ -133,11 +130,7 @@ const ScatterplotStory = {
         dataSource: { type: "sparql", url: "" },
         layout: {
           type: "tab",
-          meta: {
-            title: { en: "", de: "", fr: "", it: "" },
-            description: { en: "", de: "", fr: "", it: "" },
-            label: { en: "", de: "", fr: "", it: "" },
-          },
+          meta: createMeta(),
           blocks: [
             {
               type: "chart",
