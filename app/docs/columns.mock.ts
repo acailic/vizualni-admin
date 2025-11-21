@@ -1,6 +1,7 @@
 import { ColumnConfig } from "@/config-types";
 import { Dimension, Measure } from "@/domain/data";
 import { CHART_CONFIG_VERSION } from "@/utils/chart-config/constants";
+import { createMeta } from "@/locales/localized-string";
 
 export const columnFields = {
   x: {
@@ -22,26 +23,7 @@ export const chartConfig: ColumnConfig = {
   key: "column-chart",
   chartType: "column",
   version: CHART_CONFIG_VERSION,
-  meta: {
-    title: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-    description: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-    label: {
-      en: "",
-      de: "",
-      fr: "",
-      it: "",
-    },
-  },
+  meta: createMeta(),
   cubes: [{ iri: "", filters: {} }],
   annotations: [],
   limits: {},
