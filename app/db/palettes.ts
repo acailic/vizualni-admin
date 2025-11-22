@@ -39,7 +39,7 @@ export const getPalettesForUser = async ({
     },
   });
 
-  return palettes.map((palette) => {
+  return palettes.map((palette: any) => {
     return {
       paletteId: palette.paletteId,
       name: palette.name,

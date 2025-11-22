@@ -1,8 +1,8 @@
 import { Trans } from "@lingui/macro";
 import { Box, Button, Popover, styled } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { hexToHsva, hsvaToHex } from "@uiw/react-color";
 import { HsvaColor } from "@uiw/color-convert";
+import { hexToHsva, hsvaToHex } from "@uiw/react-color";
 import { color as d3Color } from "d3-color";
 import dynamic from "next/dynamic";
 import { MouseEventHandler, useCallback, useMemo, useRef } from "react";

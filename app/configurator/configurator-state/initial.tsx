@@ -21,22 +21,19 @@ export const getInitialConfiguringConfigBasedOnCube = (props: {
       type: "tab",
       meta: {
         title: {
-          de: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          fr: "",
-          it: "",
         },
         description: {
-          de: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          fr: "",
-          it: "",
         },
         label: {
-          de: "",
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          fr: "",
-          it: "",
         },
       },
       blocks: [{ type: "chart", key: chartConfig.key, initialized: false }],

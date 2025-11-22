@@ -7,7 +7,7 @@ import {
   Prisma,
   PUBLISHED_STATE,
   User,
-} from "@prisma/client";
+} from "./prisma-types";
 
 import {
   ChartConfig,
@@ -228,8 +228,8 @@ export const getConfigViewCount = async (configKey: string) => {
         },
       },
     })
-    .then((config) => config._count.views)
-    .catch((error) => {
+    .then((config: any) => config._count.views)
+    .catch((error: any) => {
       console.error(`Failed to get view count for config ${configKey}:`, error);
       return 0;
     });
