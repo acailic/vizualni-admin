@@ -135,12 +135,45 @@ const nextConfig = withPreconstruct(
       // Optimize production builds
       productionBrowserSourceMaps: false,
 
+      // Compiler optimizations
+      compiler: {
+        // Remove console.log in production (keeps console.error/warn)
+        removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
+      },
+
       // Experimental optimizations for faster builds
       experimental: {
         // Optimize package imports to reduce bundle size
-        optimizePackageImports: ['@mui/material', '@mui/icons-material', 'date-fns', 'lodash'],
+        optimizePackageImports: [
+          '@mui/material',
+          '@mui/icons-material',
+          '@mui/lab',
+          'date-fns',
+          'lodash',
+          'd3-array',
+          'd3-scale',
+          'd3-shape',
+          'd3-format',
+          'd3-time-format',
+          'framer-motion',
+          '@emotion/react',
+          '@emotion/styled',
+        ],
         // Enable parallel compilation
         cpus: require('os').cpus().length - 1 || 1,
+      },
+
+      // Modularize imports for better tree-shaking
+      modularizeImports: {
+        '@mui/icons-material': {
+          transform: '@mui/icons-material/{{member}}',
+        },
+        'lodash': {
+          transform: 'lodash/{{member}}',
+        },
+        'date-fns': {
+          transform: 'date-fns/{{member}}',
+        },
       },
 
       // Configure logging to show only errors
