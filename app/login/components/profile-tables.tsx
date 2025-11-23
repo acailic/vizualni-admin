@@ -16,7 +16,6 @@ import {
   tableRowClasses,
   Typography,
 } from "@mui/material";
-import { PUBLISHED_STATE } from "../../db/prisma-types";
 import sortBy from "lodash/sortBy";
 import NextLink from "next/link";
 import { ReactNode, useMemo, useState } from "react";
@@ -44,6 +43,8 @@ import { useRootStyles } from "@/login/utils";
 import { formatInteger } from "@/statistics/formatters";
 import { removeConfig, updateConfig } from "@/utils/chart-config/api";
 import { useMutate } from "@/utils/use-fetch-data";
+
+import { PUBLISHED_STATE } from "../../db/prisma-types";
 
 const PREVIEW_LIMIT = 3;
 const POPOVER_PADDING = 8;

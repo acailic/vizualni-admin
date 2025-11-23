@@ -3,13 +3,6 @@
  */
 
 import {
-  Config as PrismaConfig,
-  Prisma,
-  PUBLISHED_STATE,
-  User,
-} from "./prisma-types";
-
-import {
   ChartConfig,
   Config,
   ConfiguratorState,
@@ -19,6 +12,13 @@ import { prisma } from "@/db/client";
 import { isDataSourceUrlAllowed } from "@/domain/data-source";
 import { upgradeConfiguratorStateServerSide } from "@/utils/chart-config/upgrade-cube";
 import { migrateConfiguratorState } from "@/utils/chart-config/versioning";
+
+import {
+  Config as PrismaConfig,
+  Prisma,
+  PUBLISHED_STATE,
+  User,
+} from "./prisma-types";
 
 /**
  * Store data in the DB.

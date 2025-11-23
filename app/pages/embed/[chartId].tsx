@@ -1,4 +1,3 @@
-import { Config as PrismaConfig } from "../../db/prisma-types";
 import "iframe-resizer/js/iframeResizer.contentWindow.js";
 import { GetStaticPaths, GetStaticProps } from "next";
 import ErrorPage from "next/error";
@@ -11,6 +10,8 @@ import {
   ConfiguratorStateProvider,
   ConfiguratorStatePublished,
 } from "@/configurator";
+
+import { Config as PrismaConfig } from "../../db/prisma-types";
 
 type PageProps =
   | {

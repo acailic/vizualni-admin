@@ -1,4 +1,3 @@
-import { Config, PUBLISHED_STATE } from "../../db/prisma-types";
 import isUndefined from "lodash/isUndefined";
 import omit from "lodash/omit";
 import omitBy from "lodash/omitBy";
@@ -7,6 +6,7 @@ import { InferAPIResponse } from "nextkit";
 import { ParsedConfig } from "@/db/config";
 
 import { ConfiguratorState, CustomPaletteType } from "../../config-types";
+import { Config, PUBLISHED_STATE } from "../../db/prisma-types";
 import { apiFetch } from "../api";
 import { createId } from "../create-id";
 

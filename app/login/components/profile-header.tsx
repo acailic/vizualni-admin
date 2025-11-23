@@ -1,7 +1,6 @@
 import { Trans } from "@lingui/macro";
 import { Box, Button, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { User } from "../../db/prisma-types";
 import clsx from "clsx";
 import NextLink from "next/link";
 import { signOut } from "next-auth/react";
@@ -9,6 +8,8 @@ import { signOut } from "next-auth/react";
 import { ADFS_PROFILE_URL } from "@/domain/env";
 import { Icon } from "@/icons";
 import { useRootStyles } from "@/login/utils";
+
+import { User } from "../../db/prisma-types";
 
 const useStyles = makeStyles<Theme>((theme) => ({
   section: {

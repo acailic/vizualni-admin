@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Config as PrismaConfig, PUBLISHED_STATE } from "../../db/prisma-types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import ErrorPage from "next/error";
 import Head from "next/head";
@@ -28,6 +27,8 @@ import { ConfiguratorStateProvider } from "@/configurator/configurator-state";
 import { deserializeProps, Serialized } from "@/db/serialize";
 import { useLocale } from "@/locales/use-locale";
 import { useDataSourceStore } from "@/stores/data-source";
+
+import { Config as PrismaConfig, PUBLISHED_STATE } from "../../db/prisma-types";
 
 type PageProps =
   | {

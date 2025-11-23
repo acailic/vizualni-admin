@@ -1,3 +1,4 @@
+```bash
 # Search for datasets containing "budžet"
 curl "https://data.gov.rs/api/1/datasets/?q=budžet&page_size=10"
 ```
@@ -110,9 +111,11 @@ The response includes pagination metadata:
 
 ## Supported Data Formats
 
-data.gov.rs supports multiple data formats, each suitable for different use cases:
+data.gov.rs supports multiple data formats, each suitable for different use
+cases:
 
 ### CSV (Comma-Separated Values)
+
 Best for tabular data, easy to import into spreadsheets or databases.
 
 ```csv
@@ -123,6 +126,7 @@ godina,mesec,prihodi,rashodi
 ```
 
 ### JSON (JavaScript Object Notation)
+
 Structured data format, ideal for web applications and APIs.
 
 ```json
@@ -143,6 +147,7 @@ Structured data format, ideal for web applications and APIs.
 ```
 
 ### XML (eXtensible Markup Language)
+
 Hierarchical data format, common in government systems.
 
 ```xml
@@ -227,16 +232,19 @@ The API may have rate limits to prevent abuse. Best practices:
 **Use Case**: Visualize government budget data over time.
 
 1. Search for budget datasets:
+
 ```bash
 curl "https://data.gov.rs/api/1/datasets/?q=budžet"
 ```
 
 2. Get the dataset details:
+
 ```bash
 curl "https://data.gov.rs/api/1/datasets/budzet-2023/"
 ```
 
 3. Download the CSV data:
+
 ```bash
 curl "https://data.gov.rs/dataset/budzet-2023/resource/budzet-2023-csv/download/budzet.csv" -o budzet.csv
 ```
@@ -248,11 +256,13 @@ curl "https://data.gov.rs/dataset/budzet-2023/resource/budzet-2023-csv/download/
 **Use Case**: Create interactive charts showing population statistics by region.
 
 1. Find population datasets:
+
 ```bash
 curl "https://data.gov.rs/api/1/datasets/?q=stanovništvo"
 ```
 
 2. Filter by geographic data:
+
 ```bash
 curl "https://data.gov.rs/api/1/datasets/?tags=geografija&tags=stanovništvo"
 ```
@@ -267,11 +277,13 @@ curl "https://data.gov.rs/api/1/datasets/?tags=geografija&tags=stanovništvo"
 **Use Case**: Analyze healthcare statistics and trends.
 
 1. Search for health-related datasets:
+
 ```bash
 curl "https://data.gov.rs/api/1/datasets/?q=zdravlje"
 ```
 
 2. Look for time-series data:
+
 ```bash
 curl "https://data.gov.rs/api/1/datasets/?tags=zdravlje&tags=vremenski-niz"
 ```
@@ -289,10 +301,10 @@ curl "https://data.gov.rs/api/1/datasets/?tags=zdravlje&tags=vremenski-niz"
 
 ```json
 [
-  {"kategorija": "Obrazovanje", "iznos": 45000000, "godina": 2023},
-  {"kategorija": "Zdravlje", "iznos": 52000000, "godina": 2023},
-  {"kategorija": "Infrastruktura", "iznos": 38000000, "godina": 2023},
-  {"kategorija": "Socijalna zaštita", "iznos": 28000000, "godina": 2023}
+  { "kategorija": "Obrazovanje", "iznos": 45000000, "godina": 2023 },
+  { "kategorija": "Zdravlje", "iznos": 52000000, "godina": 2023 },
+  { "kategorija": "Infrastruktura", "iznos": 38000000, "godina": 2023 },
+  { "kategorija": "Socijalna zaštita", "iznos": 28000000, "godina": 2023 }
 ]
 ```
 
@@ -338,3 +350,4 @@ Kragujevac,180000,179000,178000
     }
   ]
 }
+```
