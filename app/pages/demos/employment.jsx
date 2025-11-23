@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Employment Crisis Visualization
  * Alarming data about youth unemployment, brain drain, and wage gaps

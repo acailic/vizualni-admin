@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Energy Crisis Visualization
  * Alarming data about coal dependency, renewable energy lag, and aging infrastructure

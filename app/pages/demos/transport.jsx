@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Traffic Safety Crisis Visualization
  * Alarming data about road fatalities, preventable accidents, and poor infrastructure

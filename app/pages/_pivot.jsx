@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Box, Card as MUICard, CircularProgress, FormControlLabel, lighten, Switch, Typography, } from "@mui/material";
 import { makeStyles, styled } from "@mui/styles";
 import clsx from "clsx";

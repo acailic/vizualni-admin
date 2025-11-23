@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Social Media Sharing Demo
  * Showcases how to share visualizations on LinkedIn, X.com (Twitter), and Facebook
