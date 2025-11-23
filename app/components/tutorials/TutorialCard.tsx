@@ -34,10 +34,8 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
   const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
-    if ('getTutorialStatus' in progressApi) {
-      const status = progressApi.getTutorialStatus(tutorial.id);
-      setIsCompleted(status.completed);
-    }
+    const status = progressApi.getTutorialStatus(tutorial.id);
+    setIsCompleted(status.completed);
   }, [tutorial.id, progressApi]);
 
   const title = tutorial.title[locale];

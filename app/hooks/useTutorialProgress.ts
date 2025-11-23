@@ -10,13 +10,39 @@ interface ProgressData {
   tutorials: Record<string, TutorialProgress>;
 }
 
+interface TutorialProgressApi {
+  progress: ProgressData;
+  startTutorial: (id: string) => void;
+  completeStep: (id: string, stepId: string) => void;
+  completeTutorial: (id: string) => void;
+  getTutorialStatus: (id: string) => TutorialProgress;
+  getOverallStats: () => {
+    totalTutorials: number;
+    startedTutorials: number;
+    completedTutorials: number;
+    completedSteps: number;
+  };
+  resetProgress: () => void;
+}
+
+interface TutorialInstanceApi {
+  progress: TutorialProgress;
+  markStepCompleted: (stepId: string) => void;
+  isStepCompleted: (stepId: string) => boolean;
+  isTutorialCompleted: boolean;
+  startTutorial: () => void;
+  completeTutorial: () => void;
+}
+
 const STORAGE_KEY = "vizualni-admin-tutorial-progress";
 
 const defaultProgress: ProgressData = {
   tutorials: {},
 };
 
-export const useTutorialProgress = (tutorialId?: string) => {
+export function useTutorialProgress(): TutorialProgressApi;
+export function useTutorialProgress(tutorialId: string): TutorialInstanceApi;
+export function useTutorialProgress(tutorialId?: string) {
   const [progress, setProgress] = useState<ProgressData>(defaultProgress);
 
   useEffect(() => {
@@ -130,4 +156,4 @@ export const useTutorialProgress = (tutorialId?: string) => {
     getOverallStats,
     resetProgress,
   };
-};
+}
