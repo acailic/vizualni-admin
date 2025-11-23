@@ -122,6 +122,7 @@
     "nanoid": "^5.0.9",
     "next-auth": "4.24.11",
     "nextkit": "^3.4.3",
+    "prism-react-renderer": "^2.3.1",
     "node-fetch": "^3.3.2",
     "notistack": "^3.0.1",
     "nprogress": "^0.2.0",
