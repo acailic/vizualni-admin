@@ -8,8 +8,9 @@ import { max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { format } from 'd3-format';
 import { scaleBand, scaleLinear } from 'd3-scale';
-import * as d3 from 'd3-selection';
-import { useEffect, useRef } from 'react';
+import { select } from 'd3-selection';
+import 'd3-transition';
+import { memo, useEffect, useRef } from 'react';
  
 export interface ColumnChartProps {
   data: Array<Record<string, any>>;
@@ -28,7 +29,7 @@ export interface ColumnChartProps {
   showZeroLine?: boolean;
 }
 
-export const ColumnChart = ({
+export const ColumnChart = memo(({
   data,
   xKey,
   yKey,
@@ -48,9 +49,9 @@ export const ColumnChart = ({
     if (!svgRef.current || !data || data.length === 0) return;
 
     // Clear previous chart
-    d3.select(svgRef.current).selectAll('*').remove();
+    select(svgRef.current).selectAll('*').remove();
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -157,10 +158,10 @@ export const ColumnChart = ({
           .attr('fill', colors[index % colors.length])
           .attr('opacity', 0.85)
           .on('mouseover', function() {
-            d3.select(this).attr('opacity', 1);
+            select(this).attr('opacity', 1);
           })
           .on('mouseout', function() {
-            d3.select(this).attr('opacity', 0.85);
+            select(this).attr('opacity', 0.85);
           })
           .transition()
           .duration(800)
@@ -184,10 +185,10 @@ export const ColumnChart = ({
             .attr('fill', colors[index % colors.length])
             .attr('opacity', 0.85)
             .on('mouseover', function() {
-              d3.select(this).attr('opacity', 1);
+              select(this).attr('opacity', 1);
             })
             .on('mouseout', function() {
-              d3.select(this).attr('opacity', 0.85);
+              select(this).attr('opacity', 0.85);
             })
             .transition()
             .duration(800)
@@ -212,10 +213,10 @@ export const ColumnChart = ({
         .attr('fill', (_, i) => colors[i % colors.length])
         .attr('opacity', 0.85)
         .on('mouseover', function() {
-          d3.select(this).attr('opacity', 1);
+          select(this).attr('opacity', 1);
         })
         .on('mouseout', function() {
-          d3.select(this).attr('opacity', 0.85);
+          select(this).attr('opacity', 0.85);
         })
         .transition()
         .duration(800)
@@ -309,4 +310,6 @@ export const ColumnChart = ({
       />
     </Box>
   );
-};
+});
+
+ColumnChart.displayName = 'ColumnChart';
