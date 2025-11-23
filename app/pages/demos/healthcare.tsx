@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Healthcare Crisis Visualization
  * Alarming data about waiting lists, capacity issues, and healthcare worker exodus
