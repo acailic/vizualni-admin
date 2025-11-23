@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { ContentCopy, CheckCircle, Lightbulb, Warning } from '@mui/icons-material';
 import {
   Box,
   Typography,
@@ -13,7 +13,8 @@ import {
   Chip,
   Divider,
 } from '@mui/material';
-import { ContentCopy, CheckCircle, Error, Lightbulb, Warning } from '@mui/icons-material';
+import React, { useState } from 'react';
+
 import { SimpleChart } from '../demos/simple-chart';
 
 interface BaseStep {

@@ -3,6 +3,7 @@
  * Provides consistent structure for step-by-step tutorials
  */
 
+import { ChevronLeft, ChevronRight, Menu } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -19,11 +20,9 @@ import {
   useMediaQuery,
   useTheme,
   IconButton,
-  Divider,
 } from '@mui/material';
 import Link from 'next/link';
 import { ReactNode, useState } from 'react';
-import { ChevronLeft, ChevronRight, Menu } from '@mui/icons-material';
 
 import { Flex } from '@/components/flex';
 import { Header } from '@/components/header';

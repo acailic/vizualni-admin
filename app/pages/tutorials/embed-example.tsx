@@ -1,5 +1,6 @@
+import { Box, Typography, TextField, Checkbox, FormControlLabel, Tabs, Tab, Container } from '@mui/material';
 import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Checkbox, FormControlLabel, Tabs, Tab, Container } from '@mui/material';
+
 import { BarChart } from '@/components/demos/charts/BarChart';
 import CodeBlock from '@/components/tutorials/CodeBlock';
 

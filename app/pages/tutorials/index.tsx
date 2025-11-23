@@ -2,15 +2,14 @@
  * Tutorials landing page - showcases all available tutorials
  */
 
-import { Box, Button, Grid, Typography } from "@mui/material";
-import Link from "next/link";
+import { Box, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
 
 import { DemoLayout } from "@/components/demos/demo-layout";
-import { TUTORIAL_CONFIGS, TutorialConfig } from "@/lib/tutorials/config";
-import TutorialSearch from "@/components/tutorials/TutorialSearch";
 import TutorialCard from "@/components/tutorials/TutorialCard";
+import TutorialSearch from "@/components/tutorials/TutorialSearch";
+import { TUTORIAL_CONFIGS, TutorialConfig } from "@/lib/tutorials/config";
 
 export default function TutorialsIndex() {
   const router = useRouter();

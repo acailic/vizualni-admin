@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Highlight, themes } from 'prism-react-renderer';
-import { Box, Button, IconButton, Typography, Chip } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Button, IconButton, Typography, Chip } from '@mui/material';
+import { Highlight, themes } from 'prism-react-renderer';
+import React, { useState } from 'react';
 
 interface CodeBlockProps {
   code: string;

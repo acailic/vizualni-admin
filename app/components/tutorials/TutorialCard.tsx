@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
 import { useTutorialProgress } from "@/hooks/useTutorialProgress";
 
 interface TutorialConfig {

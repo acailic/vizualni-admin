@@ -3,6 +3,11 @@
  * Provides consistent navigation across the application
  */
 
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DescriptionIcon from '@mui/icons-material/Description';
+import HomeIcon from '@mui/icons-material/Home';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import {
   AppBar,
   Toolbar,
@@ -10,8 +15,6 @@ import {
   Button,
   Box,
   IconButton,
-  Menu,
-  MenuItem,
   useMediaQuery,
   useTheme,
   Drawer,
@@ -21,14 +24,9 @@ import {
   ListItemText,
   ListItemIcon,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import DescriptionIcon from '@mui/icons-material/Description';
-import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const navigationItems = [
   { label: { sr: 'Početna', en: 'Home' }, href: '/', icon: <HomeIcon /> },

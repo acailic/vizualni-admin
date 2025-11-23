@@ -14,7 +14,6 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Divider,
   Breadcrumbs,
   Link as MuiLink,
 } from "@mui/material";
@@ -23,8 +22,8 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 import { InteractiveStep } from "@/components/tutorials/InteractiveStep";
-import { getTutorialConfig, getAllTutorialIds } from "@/lib/tutorials/config";
 import { useTutorialProgress } from "@/hooks/useTutorialProgress";
+import { getTutorialConfig, getAllTutorialIds } from "@/lib/tutorials/config";
 
 /**
  * Adapter function to convert TutorialStep to InteractiveStep's Step union

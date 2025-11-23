@@ -1,7 +1,3 @@
-import { GetStaticProps } from "next";
-
-import { ContentMDXProvider } from "@/components/content-mdx-provider";
-import { staticPages } from "@/static-pages";
 import {
   Box,
   Grid,
@@ -11,7 +7,11 @@ import {
   Button,
   CardActions,
 } from "@mui/material";
+import { GetStaticProps } from "next";
 import Link from "next/link";
+
+import { ContentMDXProvider } from "@/components/content-mdx-provider";
+import { staticPages } from "@/static-pages";
 
 /**
  * TODO: this page can be combined with [slug].tsx into [[...slug]].tsx,

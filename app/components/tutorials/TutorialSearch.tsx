@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import {
   TextField,
   FormControl,
@@ -10,6 +9,8 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
+import React, { useState, useEffect } from "react";
+
 import { TutorialConfig } from "../../lib/tutorials/config";
 
 interface TutorialSearchProps {
