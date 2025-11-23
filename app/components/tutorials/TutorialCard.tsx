@@ -41,7 +41,10 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
   const title = tutorial.title[locale];
   const description = tutorial.description[locale];
 
-  const difficultyColors = {
+  const difficultyColors: Record<
+    "beginner" | "intermediate" | "advanced",
+    NonNullable<React.ComponentProps<typeof Chip>["color"]>
+  > = {
     beginner: "success",
     intermediate: "warning",
     advanced: "error",
@@ -72,6 +75,9 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
       advanced: "Advanced",
     },
   };
+  const categoryLabel =
+    (categoryLabels[locale] as Record<string, string>)[tutorial.category] ||
+    tutorial.category;
 
   return (
     <Card
@@ -209,9 +215,7 @@ export default function TutorialCard({ tutorial, locale }: TutorialCardProps) {
 
             {/* Category */}
             <Chip
-              label={
-                categoryLabels[locale][tutorial.category] || tutorial.category
-              }
+              label={categoryLabel}
               size="small"
               sx={{
                 fontSize: "0.75rem",

@@ -1,0 +1,42 @@
+import { Card, Typography } from "@mui/material";
+import { ContentWrapper } from "@/components/content-wrapper";
+import { Flex } from "@/components/flex";
+import { HomepageSectionTitle } from "@/homepage/generic";
+import { Step1 } from "@/homepage/step1";
+import { Step2 } from "@/homepage/step2";
+import { Step3 } from "@/homepage/step3";
+export const Tutorial = ({ headline, step1, step2, step3, }) => {
+    return (<ContentWrapper sx={{ py: 20 }}>
+      <div style={{ width: "100%" }}>
+        <HomepageSectionTitle>{headline}</HomepageSectionTitle>
+        <Flex sx={(t) => ({
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            gap: 12,
+            width: "100%",
+            [t.breakpoints.up("lg")]: {
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+            },
+        })}>
+          <Card>
+            <Step1 />
+            <HomepageTutorialStep>{step1}</HomepageTutorialStep>
+          </Card>
+          <Card>
+            <Step2 />
+            <HomepageTutorialStep>{step2}</HomepageTutorialStep>
+          </Card>
+          <Card>
+            <Step3 />
+            <HomepageTutorialStep>{step3}</HomepageTutorialStep>
+          </Card>
+        </Flex>
+      </div>
+    </ContentWrapper>);
+};
+const HomepageTutorialStep = ({ children }) => (<Typography variant="h3" component="p" sx={{ px: 7, py: 11, fontWeight: "bold" }}>
+    {children}
+  </Typography>);

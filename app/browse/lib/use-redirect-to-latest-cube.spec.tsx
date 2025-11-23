@@ -38,7 +38,7 @@ describe("use redirect to versioned cube", () => {
       replace: vi.fn(async () => true),
     } as unknown as NextRouter;
     (useRouter as Mock<typeof useRouter>).mockReturnValue(router);
-    (useLocale as Mock<typeof useLocale>).mockReturnValue("de");
+    (useLocale as Mock<typeof useLocale>).mockReturnValue("sr-Latn");
     (queryLatestCubeIri as Mock<typeof queryLatestCubeIri>).mockImplementation(
       async () => versionedCube
     );

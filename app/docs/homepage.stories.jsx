@@ -1,0 +1,63 @@
+import { Box } from "@mui/material";
+import { Actions, Examples, Intro, Tutorial } from "@/homepage";
+import { bugReportTemplates } from "@/templates/email/bug-report";
+import { OWNER_ORGANIZATION_EMAIL, SUPPORT_EMAIL, } from "@/templates/email/config";
+import { featureRequestTemplates } from "@/templates/email/feature-request";
+import { newsletterTemplates } from "@/templates/email/newsletter";
+import { createMailtoLink } from "../../app/templates/email";
+import { ReactSpecimen } from "./catalog";
+const meta = {
+    title: "page / Homepage",
+};
+export default meta;
+const HomepageStory = {
+    render: () => (<ReactSpecimen>
+      <Box>
+        <Intro title="Visualize Swiss Open Government Data" teaser="Create and embed visualizations from any dataset provided by the LINDAS Linked Data Service." buttonLabel="Create a visualization"/>
+        <Tutorial headline="Visualize data in just a few steps…" step1="Select a dataset" step2="Edit the visualization" step3="Share & embed"/>
+        <Examples headline="Make it your own…" example1Headline="Create beautiful visualizations" example1Description="Choose from a wide range of chart types and configure them according to your needs." example2Headline="Use powerful customizations" example2Description="With the help of custom filters and data segmentation, even complex issues can be visualized."/>
+        <Actions contribute={{
+            headline: "Would you like to visualize your own data?",
+            description: "Find out how you can integrate your data into the LINDAS Linked Data Service.",
+            buttonLabel: "Learn how",
+            buttonUrl: "https://lindas.admin.ch/?lang=en",
+        }} newsletter={{
+            headline: "Subscribe to our Newsletter",
+            description: "Stay up to date and subscribe to our newsletter.",
+            buttonLabel: "Subscribe",
+            buttonUrl: createMailtoLink("en", {
+                recipients: {
+                    to: OWNER_ORGANIZATION_EMAIL,
+                },
+                template: newsletterTemplates,
+                subject: "Visualize Newsletter Subscribe",
+            }),
+        }} bugReport={{
+            headline: "Found a bug?",
+            description: "Please report the bug, so can fix it as soon as possible",
+            buttonLabel: "Report a bug",
+            buttonUrl: createMailtoLink("en", {
+                recipients: {
+                    to: OWNER_ORGANIZATION_EMAIL,
+                    bcc: SUPPORT_EMAIL,
+                },
+                template: bugReportTemplates,
+                subject: "Visualize Bug Report",
+            }),
+        }} featureRequest={{
+            headline: "New feature request",
+            description: "Submit your feature requests today and help shape the future of our platform!",
+            buttonLabel: "Submit",
+            buttonUrl: createMailtoLink("en", {
+                recipients: {
+                    to: OWNER_ORGANIZATION_EMAIL,
+                    bcc: SUPPORT_EMAIL,
+                },
+                template: featureRequestTemplates,
+                subject: "Visualize Feature Request",
+            }),
+        }}/>
+      </Box>
+    </ReactSpecimen>),
+};
+export { HomepageStory as Homepage };

@@ -1,0 +1,49 @@
+import groupBy from "lodash/groupBy";
+import Link from "next/link";
+import { loadFixtureConfigs } from "@/test/utils";
+export const getStaticProps = async ({ locale }) => {
+    const configs = await loadFixtureConfigs();
+    return {
+        props: { locale: locale || null, configs },
+    };
+};
+const configDescription = {
+    int: (<>
+      Uses <strong>test data sources</strong>, can be used locally and in test environment.
+    </>),
+    prod: (<>
+      Uses <strong>production data sources</strong>, can be used in production environment.
+    </>),
+};
+const Page = ({ configs }) => {
+    const byEnv = groupBy(configs, (x) => x.env);
+    return (<div style={{ padding: "2rem" }}>
+      <h1>Test Charts</h1>
+      <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gridGap: "2rem",
+        }}>
+        {["int", "prod"].map((env) => {
+            const configs = byEnv[env];
+            if (!configs || !configs.length) {
+                return null;
+            }
+            return (<div key={env}>
+              <h2>{env}</h2>
+              <p>{configDescription[env]}</p>
+              <ul>
+                {configs.map(({ name, chartId, slug }) => (<li key={chartId}>
+                    <Link href={`/__test/${env}/${slug}`} passHref legacyBehavior>
+                      <a>{name}</a>
+                    </Link>
+                    <br />
+                    {chartId}
+                  </li>))}
+              </ul>
+            </div>);
+        })}
+      </div>
+    </div>);
+};
+export default Page;

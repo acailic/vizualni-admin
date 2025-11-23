@@ -1,0 +1,87 @@
+import clsx from "clsx";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
+import classes from "@/components/markdown.module.css";
+import { palette } from "@/themes/palette";
+const components = {
+    h1: ({ children, className, ...props }) => (<h1 className={clsx(className, classes.common)} {...props}>
+      {children}
+    </h1>),
+    h2: ({ children, className, ...props }) => (<h2 className={clsx(className, classes.common)} {...props}>
+      {children}
+    </h2>),
+    h3: ({ children, className, ...props }) => (<h3 className={clsx(className, classes.common)} {...props}>
+      {children}
+    </h3>),
+    h4: ({ children, className, ...props }) => (<h4 className={clsx(className, classes.common)} {...props}>
+      {children}
+    </h4>),
+    h5: ({ children, className, ...props }) => (<h5 className={clsx(className, classes.common)} {...props}>
+      {children}
+    </h5>),
+    h6: ({ children, className, ...props }) => (<h6 className={clsx(className, classes.common)} {...props}>
+      {children}
+    </h6>),
+    p: ({ children, className, ...props }) => (<p className={clsx(className, classes.common)} {...props}>
+      {children}
+    </p>),
+    a: ({ children, className, style, ...props }) => (<a target="_blank" className={clsx(className, classes.common)} style={{ ...style, color: palette.primary.main }} {...props}>
+      {children}
+    </a>),
+};
+export const Markdown = (props) => {
+    return (<ReactMarkdown components={components} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSanitize]} {...props}/>);
+};
+export const InlineMarkdown = ({ children, ...rest }) => {
+    const inlineMarkdown = children === null || children === void 0 ? void 0 : children.replace(/\r?\n|\r/g, " ");
+    return (<ReactMarkdown components={{
+            p: ({ children }) => <>{children}</>,
+            strong: ({ children }) => <strong>{children}</strong>,
+            em: ({ children }) => <em>{children}</em>,
+            a: ({ children, href }) => <a href={href}>{children}</a>,
+            h1: () => null,
+            h2: () => null,
+            h3: () => null,
+            h4: () => null,
+            h5: () => null,
+            h6: () => null,
+            ul: () => null,
+            li: () => null,
+            blockquote: () => null,
+            code: ({ children }) => <code>{children}</code>,
+            br: () => <> </>,
+        }} skipHtml {...rest}>
+      {inlineMarkdown}
+    </ReactMarkdown>);
+};
+const componentsInheritFonts = {
+    h1: ({ children, className, ...props }) => (<h1 className={clsx(className, classes.common, classes.inheritFonts)} {...props}>
+      {children}
+    </h1>),
+    h2: ({ children, className, ...props }) => (<h2 className={clsx(className, classes.common, classes.inheritFonts)} {...props}>
+      {children}
+    </h2>),
+    h3: ({ children, className, ...props }) => (<h3 className={clsx(className, classes.common, classes.inheritFonts)} {...props}>
+      {children}
+    </h3>),
+    h4: ({ children, className, ...props }) => (<h4 className={clsx(className, classes.common, classes.inheritFonts)} {...props}>
+      {children}
+    </h4>),
+    h5: ({ children, className, ...props }) => (<h5 className={clsx(className, classes.common, classes.inheritFonts)} {...props}>
+      {children}
+    </h5>),
+    h6: ({ children, className, ...props }) => (<h6 className={clsx(className, classes.common, classes.inheritFonts)} {...props}>
+      {children}
+    </h6>),
+    p: ({ children, className, ...props }) => (<p className={clsx(className, classes.common, classes.inheritFonts)} {...props}>
+      {children}
+    </p>),
+    a: ({ children, className, style, ...props }) => (<a className={clsx(className, classes.common, classes.inheritFonts)} target="_blank" style={{ ...style, color: palette.primary.main }} {...props}>
+      {children}
+    </a>),
+};
+export const MarkdownInheritFonts = (props) => {
+    return (<ReactMarkdown components={componentsInheritFonts} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSanitize]} {...props}/>);
+};

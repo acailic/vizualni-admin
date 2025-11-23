@@ -1,0 +1,50 @@
+import { useCallback, useMemo } from "react";
+import { useGetRenderStackedColumnDatum } from "@/charts/column/rendering-utils";
+import { useChartState } from "@/charts/shared/chart-state";
+import { StackedAnnotationHighlight } from "@/charts/shared/overlay-rects";
+import { useAnnotationInteractions } from "@/charts/shared/use-annotation-interactions";
+export const InteractionColumns = ({ disableGaps = true, }) => {
+    const chartState = useChartState();
+    const { chartData, bounds: { chartHeight, margins }, getX, xScale, xScaleInteraction, } = chartState;
+    const { onClick, onHover, onHoverOut } = useAnnotationInteractions({
+        focusingSegment: false,
+    });
+    const scale = disableGaps ? xScaleInteraction : xScale;
+    const bandwidth = scale.bandwidth();
+    return (<g transform={`translate(${margins.left} ${margins.top})`}>
+      {chartData.map((d, i) => {
+            const x = getX(d);
+            const xScaled = scale(x);
+            return (<rect key={i} x={xScaled} y={0} width={bandwidth} height={Math.max(0, chartHeight)} fill="hotpink" fillOpacity={0} stroke="none" onMouseOver={() => onHover(d, { segment: undefined })} onMouseOut={onHoverOut} onClick={() => onClick(d, { segment: undefined })}/>);
+        })}
+    </g>);
+};
+export const InteractionColumnsStacked = () => {
+    const { bounds: { height, margins }, series, } = useChartState();
+    const { onClick, onHover, onHoverOut } = useAnnotationInteractions({
+        focusingSegment: true,
+    });
+    const getRenderDatum = useGetRenderStackedColumnDatum();
+    const renderData = useMemo(() => {
+        return series.flatMap(getRenderDatum);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+        getRenderDatum,
+        series,
+        // We need to reset the yRange on height change.
+        height,
+    ]);
+    return (<g transform={`translate(${margins.left} ${margins.top})`}>
+      {renderData.map((d) => {
+            return (<rect key={d.key} x={d.x} y={d.y} width={d.width} height={d.height} fill="hotpink" fillOpacity={0} stroke="none" onMouseOver={() => onHover(d.observation, { segment: d.segment })} onMouseOut={onHoverOut} onClick={() => onClick(d.observation, { segment: d.segment })}/>);
+        })}
+    </g>);
+};
+export const StackedColumnAnnotationHighlight = () => {
+    const { bounds, getY, getX, yScale, xScale, chartDataGroupedByX, xDimension, } = useChartState();
+    const getValue = useCallback((d) => {
+        var _a;
+        return (_a = getY(d)) !== null && _a !== void 0 ? _a : 0;
+    }, [getY]);
+    return (<StackedAnnotationHighlight bounds={bounds} getValue={getValue} getAxisValue={getX} valueScale={yScale} axisScale={xScale} chartDataGrouped={chartDataGroupedByX} dimension={xDimension} isHorizontal={false}/>);
+};

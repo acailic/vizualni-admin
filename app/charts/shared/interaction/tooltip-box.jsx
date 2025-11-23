@@ -1,0 +1,315 @@
+import { Box } from "@mui/material";
+import throttle from "lodash/throttle";
+import { useEffect, useMemo, useRef, useState } from "react";
+import ReactDOM from "react-dom";
+import { getChartWidth } from "@/charts/shared/chart-dimensions";
+import { useSize } from "@/charts/shared/use-size";
+import { useIsMobile } from "@/utils/use-is-mobile";
+import { useResizeObserver } from "@/utils/use-resize-observer";
+const TRIANGLE_SIZE = 8;
+const TOOLTIP_OFFSET = 4;
+export const MOBILE_TOOLTIP_PLACEMENT = {
+    x: "center",
+    y: "bottom",
+};
+const Portal = ({ children }) => {
+    return ReactDOM.createPortal(children, document.body);
+};
+const useScroll = () => {
+    const [state, setState] = useState([0, 0]);
+    useEffect(() => {
+        var _a;
+        const handleScroll = throttle(() => {
+            setState([window.scrollX, window.scrollY]);
+        }, 16);
+        (_a = document.scrollingElement) === null || _a === void 0 ? void 0 : _a.addEventListener("scroll", handleScroll);
+        handleScroll();
+        return () => {
+            var _a;
+            (_a = document.scrollingElement) === null || _a === void 0 ? void 0 : _a.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+    return state;
+};
+const usePosition = (yKey) => {
+    const yKeyRef = useRef();
+    const [rect, rectRect] = useState();
+    const [x, y] = rect !== null && rect !== void 0 ? rect : [0, 0];
+    const setRef = useMemo(() => {
+        return (node) => {
+            if (yKey === yKeyRef.current || !node) {
+                return;
+            }
+            const { left, top } = node.getBoundingClientRect();
+            rectRect([left, top]);
+            yKeyRef.current = yKey;
+        };
+    }, [yKey]);
+    const [scrollX, scrollY] = useScroll();
+    const bbox = useMemo(() => {
+        return {
+            left: x + scrollX,
+            top: y + scrollY,
+        };
+    }, [x, y, scrollX, scrollY]);
+    return [bbox, setRef];
+};
+/**
+ * Responsible for folding the container size into a single value based on breakpoints.
+ * After accepting the container width, it accepts functions each breakpoint to return the generic value.
+ */
+const foldContainerSize = (containerWidth) => ({ xs, md, lg, }) => {
+    if (lg && containerWidth >= 900) {
+        return lg(containerWidth);
+    }
+    if (md && containerWidth >= 600) {
+        return md(containerWidth);
+    }
+    return xs(containerWidth);
+};
+export const getCenteredTooltipPlacement = (props) => {
+    const { chartWidth, xAnchor, topAnchor } = props;
+    return topAnchor
+        ? {
+            x: "center",
+            y: "top",
+        }
+        : {
+            x: foldContainerSize(chartWidth)({
+                xs: (w) => (xAnchor < w * 0.5 ? "right" : "left"),
+                md: (w) => (xAnchor < w * 0.25 ? "right" : "left"),
+            }),
+            y: "middle",
+        };
+};
+export const TooltipBox = ({ x, y, placement, margins, children, withTriangle = true, }) => {
+    const triangle = withTriangle ? mkTriangle(placement) : null;
+    const [position, positionRef] = usePosition(y);
+    const [tooltipRef, tooltipWidth] = useResizeObserver();
+    const isMobile = useIsMobile();
+    const { width } = useSize();
+    const chartWidth = getChartWidth({
+        width,
+        left: margins.left,
+        right: margins.right,
+    });
+    const tooltipXBoundary = isMobile
+        ? getTooltipXBoundary(x, tooltipWidth, chartWidth)
+        : x;
+    const mobileTriangleXPosition = getTriangleXPos(x, tooltipWidth, chartWidth);
+    const desktopTriangleXPosition = {
+        left: triangle === null || triangle === void 0 ? void 0 : triangle.left,
+        right: triangle === null || triangle === void 0 ? void 0 : triangle.right,
+    };
+    const triangleXPosition = isMobile
+        ? { left: mobileTriangleXPosition }
+        : desktopTriangleXPosition;
+    return (<>
+      <div ref={positionRef}/>
+      <Portal>
+        <Box ref={tooltipRef} data-testid="chart-tooltip" style={{
+            zIndex: 1301,
+            position: "absolute",
+            left: tooltipXBoundary + margins.left + position.left,
+            top: mxYOffset(y, placement) + margins.top + position.top,
+            transform: mkTranslation(placement),
+            maxWidth: "100%",
+            pointerEvents: "none",
+        }}>
+          <Box sx={{
+            width: "fit-content",
+            padding: 3,
+            whiteSpace: "nowrap",
+            pointerEvents: "none",
+            backgroundColor: "background.paper",
+            borderRadius: 1,
+            filter: `drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25))`,
+            "&::before": {
+                content: "''",
+                display: withTriangle ? "block" : "none",
+                position: "absolute",
+                pointerEvents: "none",
+                zIndex: -1,
+                width: 0,
+                height: 0,
+                borderStyle: "solid",
+                top: triangle === null || triangle === void 0 ? void 0 : triangle.top,
+                bottom: triangle === null || triangle === void 0 ? void 0 : triangle.bottom,
+                ...triangleXPosition,
+                borderWidth: triangle === null || triangle === void 0 ? void 0 : triangle.borderWidth,
+                borderTopColor: triangle === null || triangle === void 0 ? void 0 : triangle.borderTopColor,
+                borderRightColor: triangle === null || triangle === void 0 ? void 0 : triangle.borderRightColor,
+                borderBottomColor: triangle === null || triangle === void 0 ? void 0 : triangle.borderBottomColor,
+                borderLeftColor: triangle === null || triangle === void 0 ? void 0 : triangle.borderLeftColor,
+            },
+        }}>
+            {children}
+          </Box>
+        </Box>
+      </Portal>
+    </>);
+};
+const mxYOffset = (yAnchor, p) => p.y === "top"
+    ? yAnchor - TRIANGLE_SIZE - TOOLTIP_OFFSET
+    : p.y === "bottom"
+        ? yAnchor + TRIANGLE_SIZE + TOOLTIP_OFFSET
+        : yAnchor;
+const mkTranslation = (p) => `translate3d(${mkXTranslation(p.x, p.y)}, ${mkYTranslation(p.y)}, 0)`;
+const mkXTranslation = (xP, yP) => {
+    if (yP !== "middle") {
+        return xP === "left" ? "-100%" : xP === "center" ? "-50%" : 0;
+    }
+    else {
+        return xP === "left"
+            ? `calc(-100% - ${TRIANGLE_SIZE + TOOLTIP_OFFSET}px)`
+            : xP === "center"
+                ? "-50%"
+                : `${TRIANGLE_SIZE + TOOLTIP_OFFSET}px`;
+    }
+};
+const mkYTranslation = (yP) => yP === "top" ? "-100%" : yP === "middle" ? "-50%" : 0;
+const mkTriangle = (p) => {
+    switch (true) {
+        case p.x === "right" && p.y === "bottom":
+            return {
+                left: 0,
+                right: "unset",
+                bottom: "unset",
+                top: `-${TRIANGLE_SIZE}px`,
+                borderWidth: `${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px`,
+                borderTopColor: `transparent`,
+                borderRightColor: `transparent`,
+                borderBottomColor: `background.paper`,
+                borderLeftColor: `background.paper`,
+            };
+        case p.x === "center" && p.y === "bottom":
+            return {
+                left: `calc(50% - ${TRIANGLE_SIZE}px)`,
+                right: "unset",
+                bottom: "unset",
+                top: `-${TRIANGLE_SIZE}px`,
+                borderWidth: `0 ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px`,
+                borderTopColor: `transparent`,
+                borderRightColor: `transparent`,
+                borderBottomColor: `background.paper`,
+                borderLeftColor: `transparent`,
+            };
+        case p.x === "left" && p.y === "bottom":
+            return {
+                left: `calc(100% - ${TRIANGLE_SIZE * 2}px)`,
+                right: "unset",
+                bottom: "unset",
+                top: `-${TRIANGLE_SIZE}px`,
+                borderWidth: `${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px`,
+                borderTopColor: `transparent`,
+                borderRightColor: `background.paper`,
+                borderBottomColor: `background.paper`,
+                borderLeftColor: `transparent`,
+            };
+        // triangle position downwards pointing (placement "top")
+        case p.x === "right" && p.y === "top":
+            return {
+                left: 0,
+                right: "unset",
+                bottom: `-${TRIANGLE_SIZE}px`,
+                top: "unset",
+                borderWidth: `${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px`,
+                borderTopColor: `background.paper`,
+                borderRightColor: `transparent`,
+                borderBottomColor: `transparent`,
+                borderLeftColor: `background.paper`,
+            };
+        case p.x === "center" && p.y === "top":
+            return {
+                left: `calc(50% - ${TRIANGLE_SIZE}px)`,
+                right: "unset",
+                bottom: `-${TRIANGLE_SIZE}px`,
+                top: "unset",
+                borderWidth: `${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px 0 ${TRIANGLE_SIZE}px`,
+                borderTopColor: `background.paper`,
+                borderRightColor: `transparent`,
+                borderBottomColor: `transparent`,
+                borderLeftColor: `transparent`,
+            };
+        case p.x === "left" && p.y === "top":
+            return {
+                left: `calc(100% - ${TRIANGLE_SIZE * 2}px)`,
+                right: "unset",
+                bottom: `-${TRIANGLE_SIZE}px`,
+                top: "unset",
+                borderWidth: `${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px`,
+                borderTopColor: `background.paper`,
+                borderRightColor: `background.paper`,
+                borderBottomColor: `transparent`,
+                borderLeftColor: `transparent`,
+            };
+        // triangle pointing towards the side (left /right) (placement "middle")
+        case p.x === "left" && p.y === "middle":
+            return {
+                left: "100%",
+                right: "unset",
+                bottom: "unset",
+                top: `calc(50% - ${TRIANGLE_SIZE}px)`,
+                borderWidth: `${TRIANGLE_SIZE}px 0 ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px`,
+                borderTopColor: `transparent`,
+                borderRightColor: `transparent`,
+                borderBottomColor: `transparent`,
+                borderLeftColor: `background.paper`,
+            };
+        case p.x === "right" && p.y === "middle":
+            return {
+                left: `${-TRIANGLE_SIZE}px`,
+                right: "unset",
+                bottom: "unset",
+                top: `calc(50% - ${TRIANGLE_SIZE}px)`,
+                borderWidth: `${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px 0`,
+                borderTopColor: `transparent`,
+                borderRightColor: `background.paper`,
+                borderBottomColor: `transparent`,
+                borderLeftColor: `transparent`,
+            };
+        case p.x === "center" && p.y === "middle":
+            return {
+                left: `${-TRIANGLE_SIZE}px`,
+                right: "unset",
+                bottom: "unset",
+                top: `calc(50% - ${TRIANGLE_SIZE}px)`,
+                borderWidth: 0,
+                borderTopColor: `transparent`,
+                borderRightColor: `transparent`,
+                borderBottomColor: `transparent`,
+                borderLeftColor: `transparent`,
+            };
+        default:
+            return {
+                left: `calc(100% - ${TRIANGLE_SIZE * 2}px)`,
+                right: "unset",
+                bottom: `-${TRIANGLE_SIZE}px`,
+                top: "unset",
+                borderWidth: `${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px ${TRIANGLE_SIZE}px`,
+                borderTopColor: `background.paper`,
+                borderRightColor: `background.paper`,
+                borderBottomColor: `transparent`,
+                borderLeftColor: `transparent`,
+            };
+    }
+};
+const getTooltipXBoundary = (x, tooltipWidth, chartWidth) => {
+    return Math.max(tooltipWidth / 2 - TRIANGLE_SIZE, Math.min(chartWidth - tooltipWidth / 2 + TRIANGLE_SIZE, x));
+};
+const getTriangleXPos = (x, tooltipWidth, chartWidth) => {
+    if (chartWidth < tooltipWidth) {
+        const xMax = chartWidth + TRIANGLE_SIZE;
+        return Math.min(Math.max(x, Math.min(tooltipWidth / 2 - TRIANGLE_SIZE, Math.min(chartWidth - tooltipWidth / 2 + TRIANGLE_SIZE, x))), xMax);
+    }
+    const hasReachedMax = chartWidth - tooltipWidth / 2 + TRIANGLE_SIZE < x;
+    if (hasReachedMax) {
+        const overflow = x - (chartWidth - tooltipWidth / 2 + TRIANGLE_SIZE);
+        const maxOverflow = tooltipWidth / 2 - TRIANGLE_SIZE;
+        const proportion = Math.min(overflow / maxOverflow, 1);
+        return (tooltipWidth / 2 + proportion * (tooltipWidth / 2) - TRIANGLE_SIZE * 2);
+    }
+    else {
+        return Math.min(tooltipWidth / 2 - TRIANGLE_SIZE, Math.min(chartWidth - tooltipWidth / 2 + TRIANGLE_SIZE, x));
+    }
+};

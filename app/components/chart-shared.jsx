@@ -1,0 +1,333 @@
+import { t, Trans } from "@lingui/macro";
+import { Box, IconButton, ThemeProvider, useTheme, } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { select } from "d3-selection";
+import deburr from "lodash/deburr";
+import uniqBy from "lodash/uniqBy";
+import { useCallback, useEffect, useMemo, } from "react";
+import { createRoot } from "react-dom/client";
+import { ChartDataFiltersToggle, useChartDataFiltersState, } from "@/charts/shared/chart-data-filters";
+import { ChartDataFiltersList } from "@/charts/shared/chart-data-filters/filters-list";
+import { extractChartConfigUsedComponents } from "@/charts/shared/chart-helpers";
+import { ArrowMenuTopBottom } from "@/components/arrow-menu";
+import { CHART_FOOTNOTES_CLASS_NAME, VisualizeLink, } from "@/components/chart-footnotes";
+import { chartPanelLayoutGridClasses } from "@/components/chart-panel-layout-grid";
+import { TABLE_PREVIEW_WRAPPER_CLASS_NAME, useChartTablePreview, } from "@/components/chart-table-preview";
+import { useChartWithFiltersClasses } from "@/components/chart-with-filters";
+import { MenuActionItem } from "@/components/menu-action-item";
+import { MetadataPanel } from "@/components/metadata-panel";
+import { getChartConfig } from "@/config-utils";
+import { hasChartConfigs, isConfiguring, isPublished, useConfiguratorState, } from "@/configurator";
+import { timeUnitToFormatter } from "@/configurator/components/ui-helpers";
+import { truthy } from "@/domain/types";
+import { useDataCubesMetadataQuery } from "@/graphql/hooks";
+import { getChartIcon, Icon } from "@/icons";
+import { useLocale } from "@/locales/use-locale";
+import { animationFrame } from "@/utils/animation-frame";
+import { useChartUrls } from "@/utils/chart-urls";
+import { createId } from "@/utils/create-id";
+import { useAnchorMenu } from "@/utils/use-anchor-menu";
+import { DISABLE_SCREENSHOT_ATTR, useScreenshot, } from "@/utils/use-screenshot";
+export const CHART_GRID_ROW_COUNT = 7;
+/** Generic styles shared between `ChartPreview` and `ChartPublished`. */
+export const useChartStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        minWidth: 0,
+        padding: theme.spacing(8),
+        backgroundColor: theme.palette.background.paper,
+        border: ({ removeBorder }) => removeBorder ? "none" : `1px solid ${theme.palette.divider}`,
+        [`.${chartPanelLayoutGridClasses.root} &`]: {
+            display: "flex",
+            flexDirection: "column",
+        },
+        // Make sure that all children have min-width: 0 and max-width: 100%
+        // to prevent overflow issues.
+        "& > *": {
+            minWidth: 0,
+            maxWidth: "100%",
+        },
+    },
+    editing: {
+        display: "flex",
+        flexDirection: "column",
+    },
+    pastEditing: {
+        display: "grid",
+        gridTemplateRows: "subgrid",
+        /** Should stay in sync with the number of rows contained in a chart */
+        gridRow: `span ${CHART_GRID_ROW_COUNT}`,
+    },
+}));
+export const ChartControls = ({ dataSource, chartConfig, dashboardFilters, metadataPanelProps, }) => {
+    const chartDataFilters = chartConfig.interactiveFiltersConfig.dataFilters;
+    const dashboardDataFilters = dashboardFilters === null || dashboardFilters === void 0 ? void 0 : dashboardFilters.dataFilters;
+    const showFilters = chartDataFilters.active &&
+        chartDataFilters.componentIds.some((id) => !(dashboardDataFilters === null || dashboardDataFilters === void 0 ? void 0 : dashboardDataFilters.componentIds.includes(id)));
+    const chartFiltersState = useChartDataFiltersState({
+        dataSource,
+        chartConfig,
+        dashboardFilters,
+    });
+    return showFilters || metadataPanelProps ? (<Box {...DISABLE_SCREENSHOT_ATTR} sx={{
+            display: "grid",
+            gridTemplateAreas: `
+    "filtersToggle metadataToggle"
+    "filtersList filtersList"`,
+            mt: 4,
+        }}>
+      <Box sx={{ gridArea: "filtersToggle" }}>
+        {showFilters && <ChartDataFiltersToggle {...chartFiltersState}/>}
+      </Box>
+      {metadataPanelProps ? (<div style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                gridArea: "metadataToggle",
+            }}>
+          <MetadataPanel dataSource={dataSource} chartConfig={chartConfig} dashboardFilters={dashboardFilters} {...metadataPanelProps}/>
+        </div>) : null}
+      <Box sx={{ gridArea: "filtersList" }}>
+        {showFilters && <ChartDataFiltersList {...chartFiltersState}/>}
+      </Box>
+    </Box>) : (<span style={{ height: 1 }}/>);
+};
+export const ChartMoreButton = ({ configKey, chartKey, chartWrapperNode, components, disableDatabaseRelatedActions, }) => {
+    const locale = useLocale();
+    const [state, dispatch] = useConfiguratorState(hasChartConfigs);
+    const menu = useAnchorMenu();
+    const chartConfig = getChartConfig(state, chartKey);
+    const { setIsTableRaw } = useChartTablePreview();
+    // Reset back to chart view when switching chart type.
+    useEffect(() => {
+        setIsTableRaw(false);
+    }, [chartConfig.chartType, setIsTableRaw]);
+    const disableButton = isPublished(state) &&
+        state.layout.type === "dashboard" &&
+        chartConfig.chartType === "table";
+    const screenshotName = useMemo(() => {
+        const date = timeUnitToFormatter.Day(new Date());
+        const label = chartConfig.meta.title[locale] || chartConfig.chartType;
+        return `${date}_${label}`;
+    }, [chartConfig.meta.title, chartConfig.chartType, locale]);
+    const getPublishedActions = useCallback(() => {
+        const actions = [];
+        if (chartConfig.chartType !== "table") {
+            actions.push(<TableViewChartMenuActionItem chartType={chartConfig.chartType} onSuccess={menu.close}/>);
+            actions.push(<DownloadPNGImageMenuActionItem configKey={configKey} chartKey={chartKey} components={components} screenshotName={screenshotName} screenshotNode={chartWrapperNode}/>);
+        }
+        if (state.layout.type !== "dashboard" &&
+            configKey &&
+            !disableDatabaseRelatedActions) {
+            actions.push(<CopyChartMenuActionItem configKey={configKey}/>);
+            actions.push(<ShareChartMenuActionItem configKey={configKey}/>);
+        }
+        return actions;
+    }, [
+        chartConfig.chartType,
+        state.layout.type,
+        configKey,
+        disableDatabaseRelatedActions,
+        menu.close,
+        chartKey,
+        components,
+        screenshotName,
+        chartWrapperNode,
+    ]);
+    const getUnpublishedActions = useCallback(() => {
+        const actions = [];
+        if (!isConfiguring(state)) {
+            actions.push(<MenuActionItem type="button" as="menuitem" onClick={() => {
+                    dispatch({ type: "CONFIGURE_CHART", value: { chartKey } });
+                    menu.close();
+                }} leadingIconName="pen" label={<Trans id="chart-controls.edit">Edit</Trans>}/>);
+        }
+        actions.push(<DuplicateChartMenuActionItem chartConfig={chartConfig} onSuccess={menu.close}/>);
+        if (chartConfig.chartType !== "table") {
+            actions.push(<TableViewChartMenuActionItem chartType={chartConfig.chartType} onSuccess={menu.close}/>);
+            actions.push(<DownloadPNGImageMenuActionItem configKey={configKey} chartKey={chartKey} components={components} screenshotName={screenshotName} screenshotNode={chartWrapperNode}/>);
+        }
+        if (state.chartConfigs.length > 1) {
+            actions.push(<MenuActionItem type="button" as="menuitem" color="red" requireConfirmation confirmationTitle={t({
+                    id: "chart-controls.delete.title",
+                    message: "Delete chart?",
+                })} confirmationText={t({
+                    id: "chart-controls.delete.confirmation",
+                    message: "Are you sure you want to delete this chart?",
+                })} onClick={() => {
+                    dispatch({
+                        type: "CHART_CONFIG_REMOVE",
+                        value: { chartKey },
+                    });
+                    menu.close();
+                }} leadingIconName="trash" label={<Trans id="chart-controls.delete">Delete</Trans>}/>);
+        }
+        return actions;
+    }, [
+        state,
+        chartConfig,
+        menu,
+        dispatch,
+        chartKey,
+        configKey,
+        components,
+        screenshotName,
+        chartWrapperNode,
+    ]);
+    const published = isPublished(state);
+    const availableActions = useMemo(() => {
+        return published ? getPublishedActions() : getUnpublishedActions();
+    }, [getPublishedActions, getUnpublishedActions, published]);
+    if (disableButton || availableActions.length === 0) {
+        return null;
+    }
+    return (<>
+      <IconButton {...DISABLE_SCREENSHOT_ATTR} data-testid="chart-more-button" onClick={menu.open} sx={{ height: "fit-content" }}>
+        <Icon name="dots"/>
+      </IconButton>
+      <ArrowMenuTopBottom open={menu.isOpen} anchorEl={menu.anchor} onClose={menu.close} anchorOrigin={{ horizontal: "right", vertical: "bottom" }} transformOrigin={{ horizontal: "right", vertical: "top" }}>
+        {availableActions}
+      </ArrowMenuTopBottom>
+    </>);
+};
+const CopyChartMenuActionItem = ({ configKey }) => {
+    const locale = useLocale();
+    const { getCopyUrl } = useChartUrls(locale);
+    const copyUrl = getCopyUrl(configKey);
+    return (<MenuActionItem type="link" as="menuitem" href={copyUrl} target="_blank" rel="noopener noreferrer" leadingIconName="pen" label={<Trans id="chart-controls.copy-and-edit">Copy and edit</Trans>}/>);
+};
+const ShareChartMenuActionItem = ({ configKey }) => {
+    const locale = useLocale();
+    const { getShareUrl } = useChartUrls(locale);
+    const shareUrl = getShareUrl(configKey);
+    return (<MenuActionItem type="link" as="menuitem" href={shareUrl} target="_blank" rel="noopener noreferrer" leadingIconName="share" label={<Trans id="button.share">Share</Trans>}/>);
+};
+export const DuplicateChartMenuActionItem = ({ chartConfig, onSuccess, }) => {
+    const locale = useLocale();
+    const [_, dispatch] = useConfiguratorState(hasChartConfigs);
+    return (<MenuActionItem type="button" as="menuitem" onClick={() => {
+            dispatch({
+                type: "CHART_CONFIG_ADD",
+                value: {
+                    chartConfig: { ...chartConfig, key: createId() },
+                    locale,
+                },
+            });
+            onSuccess();
+        }} leadingIconName="duplicate" label={<Trans id="chart-controls.duplicate">Duplicate</Trans>}/>);
+};
+const TableViewChartMenuActionItem = ({ chartType, onSuccess, }) => {
+    const { isTable, setIsTable } = useChartTablePreview();
+    return (<MenuActionItem type="button" as="menuitem" onClick={() => {
+            setIsTable(!isTable);
+            onSuccess();
+        }} leadingIconName={isTable ? getChartIcon(chartType) : "tableChart"} label={isTable ? (<Trans id="chart-controls.chart-view">Chart view</Trans>) : (<Trans id="chart-controls.table-view">Table view</Trans>)}/>);
+};
+const DownloadPNGImageMenuActionItem = ({ configKey, chartKey, components, screenshotName, screenshotNode, }) => {
+    const modifyNode = useModifyNode(configKey);
+    const metadata = usePNGMetadata({
+        configKey,
+        chartKey,
+        components,
+    });
+    const { loading, screenshot } = useScreenshot({
+        type: "png",
+        screenshotName,
+        screenshotNode,
+        modifyNode,
+        pngMetadata: metadata,
+    });
+    return (<MenuActionItem type="button" as="menuitem" onClick={screenshot} disabled={loading} leadingIconName="download" label={t({ id: "chart-controls.export-png", message: "Export PNG" })}/>);
+};
+const useModifyNode = (configKey) => {
+    const theme = useTheme();
+    const chartWithFiltersClasses = useChartWithFiltersClasses();
+    return useCallback(async (clonedNode, originalNode) => {
+        var _a;
+        // We need to explicitly set the height of the chart container to the height
+        // of the chart, as otherwise the screenshot won't work for free canvas charts.
+        const tablePreviewWrapper = clonedNode.querySelector(`.${TABLE_PREVIEW_WRAPPER_CLASS_NAME}`);
+        if (tablePreviewWrapper) {
+            const chart = originalNode.querySelector(`.${chartWithFiltersClasses.chartWithFilters}`);
+            if (chart) {
+                const height = chart.clientHeight;
+                tablePreviewWrapper.style.height = `${height}px`;
+            }
+        }
+        const footnotes = clonedNode.querySelector(`.${CHART_FOOTNOTES_CLASS_NAME}`);
+        if (footnotes && configKey) {
+            const container = document.createElement("div");
+            footnotes.appendChild(container);
+            const root = createRoot(container);
+            root.render(<ThemeProvider theme={theme}>
+            <VisualizeLink configKey={configKey} createdWith={t({ id: "metadata.link.created.with" })}/>
+          </ThemeProvider>);
+            await animationFrame();
+        }
+        // Remove some elements that should not be included in the screenshot.
+        // For maps, we can't apply custom classes to internal elements, so we need
+        // to remove them here.
+        (_a = clonedNode.querySelector(".maplibregl-ctrl")) === null || _a === void 0 ? void 0 : _a.remove();
+        // Every text element should be dark-grey (currently we use primary.main to
+        // indicate interactive elements, which doesn't make sense for screenshots)
+        // and not have underlines.
+        const color = theme.palette.grey[700];
+        select(clonedNode)
+            .selectAll(`:is(p, button, a, span, div, li, h1, h2, h3, h4, h5, h6):not([${DISABLE_SCREENSHOT_COLOR_WIPE_KEY}='true'])`)
+            .style("color", color)
+            .style("text-decoration", "none");
+        // SVG elements have fill instead of color. Here we only target text elements,
+        // to avoid changing the color of other SVG elements (charts).
+        select(clonedNode)
+            .selectAll(`text:not([${DISABLE_SCREENSHOT_COLOR_WIPE_KEY}='true'])`)
+            .style("fill", color);
+    }, [chartWithFiltersClasses.chartWithFilters, theme, configKey]);
+};
+export const DISABLE_SCREENSHOT_COLOR_WIPE_KEY = "data-disable-screenshot-color";
+export const DISABLE_SCREENSHOT_COLOR_WIPE_ATTR = {
+    [DISABLE_SCREENSHOT_COLOR_WIPE_KEY]: true,
+};
+const usePNGMetadata = ({ chartKey, configKey, components, }) => {
+    const locale = useLocale();
+    const [state] = useConfiguratorState(hasChartConfigs);
+    const chartConfig = getChartConfig(state, chartKey);
+    const usedComponents = useMemo(() => {
+        return extractChartConfigUsedComponents(chartConfig, { components });
+    }, [chartConfig, components]);
+    const [{ data }] = useDataCubesMetadataQuery({
+        variables: {
+            sourceType: state.dataSource.type,
+            sourceUrl: state.dataSource.url,
+            locale,
+            cubeFilters: uniqBy(usedComponents.map((component) => ({ iri: component.cubeIri })), "iri"),
+        },
+        pause: !usedComponents.length,
+    });
+    return useMemo(() => {
+        const publisher = data === null || data === void 0 ? void 0 : data.dataCubesMetadata.map((cube) => {
+            var _a, _b;
+            return cube.contactPoints
+                ? cube.contactPoints
+                    .map((contactPoint) => `${contactPoint.name} (${contactPoint.email})`)
+                    .join(", ")
+                : ((_b = (_a = cube.creator) === null || _a === void 0 ? void 0 : _a.label) !== null && _b !== void 0 ? _b : cube.publisher);
+        }).join(", ");
+        const publisherMetadata = publisher
+            ? { key: "Publisher", value: publisher }
+            : null;
+        const publishURL = configKey
+            ? `${window.location.origin}/${locale}/v/${configKey}`
+            : null;
+        const publishURLMetadata = publishURL
+            ? { key: "Publish URL", value: publishURL }
+            : null;
+        const datasets = data === null || data === void 0 ? void 0 : data.dataCubesMetadata.map((cube) => `${cube.title} ${cube.version ? `(${cube.version})` : ""}`).join(", ");
+        const datasetsMetadata = datasets
+            ? { key: "Dataset", value: datasets }
+            : null;
+        const metadata = [publisherMetadata, publishURLMetadata, datasetsMetadata]
+            .filter(truthy)
+            .map(({ key, value }) => `${key}: ${value}`)
+            .join(" | ");
+        return metadata ? [{ key: "Comment", value: deburr(metadata) }] : [];
+    }, [configKey, data === null || data === void 0 ? void 0 : data.dataCubesMetadata, locale]);
+};

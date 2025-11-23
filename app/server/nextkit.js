@@ -1,0 +1,13 @@
+import createAPI from "nextkit";
+/** Provides type hints */
+export const controller = (methods) => {
+    return methods;
+};
+export const api = createAPI({
+    async onError(_req, _res, error) {
+        return {
+            status: 500,
+            message: `Something went wrong: ${error instanceof Error ? error.message : error}`,
+        };
+    },
+});

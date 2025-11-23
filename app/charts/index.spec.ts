@@ -263,22 +263,19 @@ describe("chart type switch", () => {
       conversionUnitsByComponentId: {},
       meta: {
         title: {
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          de: "",
-          fr: "",
-          it: "",
         },
         description: {
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          de: "",
-          fr: "",
-          it: "",
         },
         label: {
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          de: "",
-          fr: "",
-          it: "",
         },
       },
       fields: {
@@ -346,16 +343,14 @@ describe("chart type switch", () => {
       version: "3.0.0",
       meta: {
         title: {
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          de: "",
-          fr: "",
-          it: "",
         },
         description: {
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          de: "",
-          fr: "",
-          it: "",
         },
       },
       cubes: [
@@ -487,16 +482,14 @@ describe("chart type switch", () => {
       version: "3.0.0",
       meta: {
         title: {
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          de: "",
-          fr: "",
-          it: "",
         },
         description: {
+          "sr-Latn": "",
+          "sr-Cyrl": "",
           en: "",
-          de: "",
-          fr: "",
-          it: "",
         },
       },
       cubes: [

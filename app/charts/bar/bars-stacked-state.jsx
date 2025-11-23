@@ -1,0 +1,453 @@
+import { extent, group, rollup, sum } from "d3-array";
+import { scaleBand, scaleLinear, scaleOrdinal, scaleTime, } from "d3-scale";
+import { schemeCategory10 } from "d3-scale-chromatic";
+import { stack, stackOffsetDiverging, stackOrderAscending, stackOrderDescending, stackOrderReverse, } from "d3-shape";
+import orderBy from "lodash/orderBy";
+import { useCallback, useMemo } from "react";
+import { useBarsStackedStateData, useBarsStackedStateVariables, } from "@/charts/bar/bars-stacked-state-props";
+import { MIN_BAR_HEIGHT, PADDING_INNER, PADDING_OUTER, } from "@/charts/bar/constants";
+import { ANNOTATION_SINGLE_SEGMENT_OFFSET, } from "@/charts/shared/annotations";
+import { getChartWidth, useAxisLabelSizeVariables, useChartBounds, useChartPadding, } from "@/charts/shared/chart-dimensions";
+import { getWideData, normalizeData, useGetIdentityX, } from "@/charts/shared/chart-helpers";
+import { ChartContext, } from "@/charts/shared/chart-state";
+import { getCenteredTooltipPlacement, MOBILE_TOOLTIP_PLACEMENT, } from "@/charts/shared/interaction/tooltip-box";
+import { DEFAULT_MARGIN_TOP } from "@/charts/shared/margins";
+import { useValueLabelFormatter, } from "@/charts/shared/show-values-utils";
+import { getStackedPosition, getStackedTooltipValueFormatter, getStackedXScale, } from "@/charts/shared/stacked-helpers";
+import { useChartFormatters } from "@/charts/shared/use-chart-formatters";
+import { InteractionProvider } from "@/charts/shared/use-interaction";
+import { useSize } from "@/charts/shared/use-size";
+import { isTemporalDimension } from "@/domain/data";
+import { useFormatNumber } from "@/formatters";
+import { getPalette } from "@/palettes";
+import { useChartInteractiveFilters } from "@/stores/interactive-filters";
+import { sortByIndex } from "@/utils/array";
+import { getSortingOrders, makeDimensionValueSorters, } from "@/utils/sorting-values";
+import { useIsMobile } from "@/utils/use-is-mobile";
+const useBarsStackedState = (chartProps, variables, data) => {
+    var _a, _b, _c, _d, _e, _f;
+    const { chartConfig, dimensions, measures } = chartProps;
+    const { yDimension, xMeasure, getX, getYAsDate, getYAbbreviationOrLabel, getYLabel, getY, formatYDate, segmentDimension, segmentsByAbbreviationOrLabel, getSegment, getSegmentAbbreviationOrLabel, getSegmentLabel, xAxisLabel, yAxisLabel, } = variables;
+    const getIdentityX = useGetIdentityX(xMeasure.id);
+    const { chartData, scalesData, segmentData, timeRangeData, paddingData, allData, } = data;
+    const { fields, interactiveFiltersConfig } = chartConfig;
+    const { x } = fields;
+    const { width, height } = useSize();
+    const formatNumber = useFormatNumber({ decimals: "auto" });
+    const formatters = useChartFormatters(chartProps);
+    const calculationType = useChartInteractiveFilters((d) => d.calculation.type);
+    const yKey = fields.y.componentId;
+    const segmentsByValue = useMemo(() => {
+        const values = (segmentDimension === null || segmentDimension === void 0 ? void 0 : segmentDimension.values) || [];
+        return new Map(values.map((d) => [d.value, d]));
+    }, [segmentDimension === null || segmentDimension === void 0 ? void 0 : segmentDimension.values]);
+    const sumsBySegment = useMemo(() => {
+        return Object.fromEntries(rollup(scalesData, (v) => sum(v, (x) => getX(x)), (x) => getSegment(x)));
+    }, [getSegment, getX, scalesData]);
+    const segmentFilter = (segmentDimension === null || segmentDimension === void 0 ? void 0 : segmentDimension.id)
+        ? (_a = chartConfig.cubes.find((d) => d.iri === segmentDimension.cubeIri)) === null || _a === void 0 ? void 0 : _a.filters[segmentDimension.id]
+        : undefined;
+    const { allSegments, segments } = useMemo(() => {
+        var _a, _b;
+        const allUniqueSegments = Array.from(new Set(segmentData.map(getSegment)));
+        const uniqueSegments = Array.from(new Set(scalesData.map(getSegment)));
+        const sorting = (_a = fields === null || fields === void 0 ? void 0 : fields.segment) === null || _a === void 0 ? void 0 : _a.sorting;
+        const sorters = makeDimensionValueSorters(segmentDimension, {
+            sorting,
+            sumsBySegment,
+            useAbbreviations: (_b = fields.segment) === null || _b === void 0 ? void 0 : _b.useAbbreviations,
+            dimensionFilter: segmentFilter,
+        });
+        const allSegments = orderBy(allUniqueSegments, sorters, getSortingOrders(sorters, sorting));
+        return {
+            allSegments,
+            segments: allSegments.filter((d) => uniqueSegments.includes(d)),
+        };
+    }, [
+        scalesData,
+        segmentData,
+        segmentDimension,
+        (_b = fields.segment) === null || _b === void 0 ? void 0 : _b.sorting,
+        (_c = fields.segment) === null || _c === void 0 ? void 0 : _c.useAbbreviations,
+        sumsBySegment,
+        segmentFilter,
+        getSegment,
+    ]);
+    const sumsByY = useMemo(() => {
+        return Object.fromEntries(rollup(chartData, (v) => sum(v, (d) => getX(d)), (x) => getY(x)));
+    }, [chartData, getX, getY]);
+    const normalize = calculationType === "percent";
+    const chartDataGroupedByY = useMemo(() => {
+        if (normalize) {
+            return group(normalizeData(chartData, {
+                key: xMeasure.id,
+                getAxisValue: getX,
+                getTotalGroupValue: (d) => sumsByY[getY(d)],
+            }), getY);
+        }
+        return group(chartData, getY);
+    }, [normalize, chartData, getY, xMeasure.id, getX, sumsByY]);
+    const chartWideData = useMemo(() => {
+        return getWideData({
+            dataGrouped: chartDataGroupedByY,
+            key: yKey,
+            getAxisValue: getX,
+            getSegment,
+            allSegments: segments,
+            imputationType: "zeros",
+        });
+    }, [getSegment, getX, chartDataGroupedByY, segments, yKey]);
+    const yFilter = (_d = chartConfig.cubes.find((d) => d.iri === yDimension.cubeIri)) === null || _d === void 0 ? void 0 : _d.filters[yDimension.id];
+    // Map ordered segments labels to colors
+    const { colors, yScale, yTimeRangeDomainLabels, yScaleInteraction, yScaleTimeRange, } = useMemo(() => {
+        var _a, _b;
+        const colors = scaleOrdinal();
+        if (fields.segment && segmentsByAbbreviationOrLabel && fields.color) {
+            const orderedSegmentLabelsAndColors = allSegments.map((segment) => {
+                var _a, _b, _c;
+                // FIXME: Labels in observations can differ from dimension values because the latter can be concatenated to only appear once per value
+                // See https://github.com/visualize-admin/visualization-tool/issues/97
+                const dvIri = ((_a = segmentsByAbbreviationOrLabel.get(segment)) === null || _a === void 0 ? void 0 : _a.value) ||
+                    ((_b = segmentsByValue.get(segment)) === null || _b === void 0 ? void 0 : _b.value) ||
+                    "";
+                // There is no way to gracefully recover here :(
+                if (!dvIri) {
+                    console.warn(`Can't find color for '${segment}'.`);
+                }
+                return {
+                    label: segment,
+                    color: fields.color.type === "segment"
+                        ? ((_c = fields.color.colorMapping[dvIri]) !== null && _c !== void 0 ? _c : schemeCategory10[0])
+                        : schemeCategory10[0],
+                };
+            });
+            colors.domain(orderedSegmentLabelsAndColors.map((s) => s.label));
+            colors.range(orderedSegmentLabelsAndColors.map((s) => s.color));
+        }
+        else {
+            colors.domain(allSegments);
+            colors.range(getPalette({
+                paletteId: fields.color.paletteId,
+                colorField: fields.color,
+            }));
+        }
+        colors.unknown(() => undefined);
+        const yValues = [...new Set(scalesData.map(getY))];
+        const yTimeRangeValues = [...new Set(timeRangeData.map(getY))];
+        const ySorting = (_a = fields.y) === null || _a === void 0 ? void 0 : _a.sorting;
+        const ySorters = makeDimensionValueSorters(yDimension, {
+            sorting: ySorting,
+            useAbbreviations: (_b = fields.y) === null || _b === void 0 ? void 0 : _b.useAbbreviations,
+            measureBySegment: sumsByY,
+            dimensionFilter: yFilter,
+        });
+        const yDomain = orderBy(yValues, ySorters, getSortingOrders(ySorters, ySorting));
+        const yTimeRangeDomainLabels = yTimeRangeValues.map(getYLabel);
+        const yScale = scaleBand()
+            .domain(yDomain)
+            .paddingInner(PADDING_INNER)
+            .paddingOuter(PADDING_OUTER);
+        const yScaleInteraction = scaleBand()
+            .domain(yDomain)
+            .paddingInner(0)
+            .paddingOuter(0);
+        const yScaleTimeRangeDomain = extent(timeRangeData, (d) => getYAsDate(d));
+        const yScaleTimeRange = scaleTime().domain(yScaleTimeRangeDomain);
+        return {
+            colors,
+            yScale,
+            yTimeRangeDomainLabels,
+            yScaleTimeRange,
+            yScaleInteraction,
+        };
+    }, [
+        fields.color,
+        fields.segment,
+        fields.y.sorting,
+        fields.y.useAbbreviations,
+        yDimension,
+        yFilter,
+        sumsByY,
+        getY,
+        getYLabel,
+        getYAsDate,
+        scalesData,
+        timeRangeData,
+        segmentsByAbbreviationOrLabel,
+        segmentsByValue,
+        allSegments,
+    ]);
+    const animationIri = (_e = fields.animation) === null || _e === void 0 ? void 0 : _e.componentId;
+    const getAnimation = useCallback((d) => {
+        return animationIri ? d[animationIri] : "";
+    }, [animationIri]);
+    const xScale = useMemo(() => {
+        return getStackedXScale(scalesData, {
+            normalize,
+            getY,
+            getX,
+            getTime: getAnimation,
+            customDomain: x.customDomain,
+        });
+    }, [scalesData, normalize, getX, getY, getAnimation, x.customDomain]);
+    const paddingXScale = useMemo(() => {
+        //  When the user can toggle between absolute and relative values, we use the
+        // absolute values to calculate the xScale domain, so that the xScale doesn't
+        // change when the user toggles between absolute and relative values.
+        if (interactiveFiltersConfig.calculation.active) {
+            const scale = getStackedXScale(paddingData, {
+                normalize: false,
+                getX,
+                getY,
+                getTime: getAnimation,
+                customDomain: x.customDomain,
+            });
+            if (scale.domain()[1] < 100 && scale.domain()[0] > -100) {
+                return scaleLinear().domain([0, 100]);
+            }
+            return scale;
+        }
+        return getStackedXScale(paddingData, {
+            normalize,
+            getX,
+            getY,
+            getTime: getAnimation,
+            customDomain: x.customDomain,
+        });
+    }, [
+        interactiveFiltersConfig.calculation.active,
+        paddingData,
+        normalize,
+        getX,
+        getY,
+        getAnimation,
+        x.customDomain,
+    ]);
+    // stack order
+    const series = useMemo(() => {
+        var _a;
+        const sorting = (_a = fields.segment) === null || _a === void 0 ? void 0 : _a.sorting;
+        const sortingType = sorting === null || sorting === void 0 ? void 0 : sorting.sortingType;
+        const sortingOrder = sorting === null || sorting === void 0 ? void 0 : sorting.sortingOrder;
+        const stackOrder = sortingType === "byTotalSize"
+            ? sortingOrder === "asc"
+                ? stackOrderAscending
+                : stackOrderDescending
+            : // Reverse segments here, so they're sorted from top to bottom
+                stackOrderReverse;
+        const stacked = stack()
+            .order(stackOrder)
+            .offset(stackOffsetDiverging)
+            .keys(segments);
+        return stacked(chartWideData);
+    }, [chartWideData, (_f = fields.segment) === null || _f === void 0 ? void 0 : _f.sorting, segments]);
+    /** Chart dimensions */
+    const { top, left, bottom } = useChartPadding({
+        xLabelPresent: !!xMeasure.label,
+        yScale: paddingXScale,
+        width,
+        height,
+        interactiveFiltersConfig,
+        formatNumber,
+        bandDomain: yTimeRangeDomainLabels.every((d) => d === undefined)
+            ? yScale.domain()
+            : yTimeRangeDomainLabels,
+        normalize,
+        isFlipped: true,
+    });
+    const right = 40;
+    const leftAxisLabelSize = useAxisLabelSizeVariables({
+        label: yAxisLabel,
+        width,
+    });
+    const bottomAxisLabelSize = useAxisLabelSizeVariables({
+        label: xAxisLabel,
+        width,
+    });
+    const margins = {
+        top: DEFAULT_MARGIN_TOP + top + leftAxisLabelSize.offset,
+        right,
+        bottom: bottom + 45,
+        left,
+    };
+    const barCount = yScale.domain().length;
+    const chartWidth = getChartWidth({ width, left, right });
+    const bounds = useChartBounds({ width, chartWidth, height, margins });
+    const { chartHeight } = bounds;
+    // Here we adjust the height to make sure the bars have a minimum height and are legible
+    const adjustedChartHeight = barCount * MIN_BAR_HEIGHT > chartHeight
+        ? barCount * MIN_BAR_HEIGHT
+        : chartHeight;
+    yScale.range([0, adjustedChartHeight]);
+    yScaleInteraction.range([0, adjustedChartHeight]);
+    yScaleTimeRange.range([0, adjustedChartHeight]);
+    xScale.range([0, chartWidth]);
+    const isMobile = useIsMobile();
+    const formatYAxisTick = useCallback((tick) => {
+        return isTemporalDimension(yDimension)
+            ? formatYDate(tick)
+            : getYLabel(tick);
+    }, [yDimension, formatYDate, getYLabel]);
+    const getAnnotationInfo = useCallback((observation, { segment, focusingSegment }) => {
+        var _a, _b;
+        const y = getY(observation);
+        let x;
+        let color;
+        if (focusingSegment) {
+            x = getStackedPosition({
+                observation,
+                series,
+                key: yKey,
+                getAxisValue: getY,
+                measureScale: xScale,
+                fallbackMeasureValue: xScale((_a = getX(observation)) !== null && _a !== void 0 ? _a : 0),
+                segment,
+            });
+            color = colors(segment);
+        }
+        else {
+            const values = (_b = chartDataGroupedByY.get(y)) !== null && _b !== void 0 ? _b : [];
+            const xValues = values.map(getX);
+            x =
+                xScale(sum(xValues.map((d) => d !== null && d !== void 0 ? d : 0))) +
+                    ANNOTATION_SINGLE_SEGMENT_OFFSET;
+        }
+        return {
+            x,
+            y: yScale(y) + yScale.bandwidth() * 0.5,
+            color,
+        };
+    }, [colors, getX, getY, series, xScale, yKey, yScale, chartDataGroupedByY]);
+    const getTooltipInfo = useCallback((datum) => {
+        var _a;
+        const bw = yScale.bandwidth();
+        const y = getY(datum);
+        const tooltipValues = (_a = chartDataGroupedByY.get(y)) !== null && _a !== void 0 ? _a : [];
+        const xValues = tooltipValues.map(getX);
+        const sortedTooltipValues = sortByIndex({
+            data: tooltipValues,
+            order: segments,
+            getCategory: getSegment,
+            sortingOrder: "asc",
+        });
+        const xValueFormatter = getStackedTooltipValueFormatter({
+            normalize,
+            measureId: xMeasure.id,
+            measureUnit: xMeasure.unit,
+            formatters,
+            formatNumber,
+        });
+        const yAnchorRaw = yScale(y) + bw * 0.5;
+        const xAnchor = isMobile
+            ? chartHeight
+            : xScale(sum(xValues.map((d) => d !== null && d !== void 0 ? d : 0)));
+        const placement = isMobile
+            ? MOBILE_TOOLTIP_PLACEMENT
+            : getCenteredTooltipPlacement({
+                chartWidth,
+                xAnchor,
+                topAnchor: !fields.segment,
+            });
+        const yLabel = getYAbbreviationOrLabel(datum);
+        return {
+            yAnchor: yAnchorRaw + (placement.y === "top" ? bw : 0),
+            xAnchor,
+            placement,
+            value: formatYAxisTick(yLabel),
+            datum: {
+                label: fields.segment && getSegmentAbbreviationOrLabel(datum),
+                value: xValueFormatter(getX(datum), getIdentityX(datum)),
+                color: colors(getSegment(datum)),
+            },
+            values: sortedTooltipValues.map((d) => {
+                var _a;
+                const segment = getSegment(d);
+                const x = getStackedPosition({
+                    observation: d,
+                    series,
+                    key: yKey,
+                    getAxisValue: getY,
+                    measureScale: xScale,
+                    fallbackMeasureValue: xScale((_a = getX(d)) !== null && _a !== void 0 ? _a : 0),
+                    segment,
+                });
+                return {
+                    label: getSegmentAbbreviationOrLabel(d),
+                    value: xValueFormatter(getX(d), getIdentityX(d)),
+                    axis: "x",
+                    axisOffset: x,
+                    color: colors(segment),
+                };
+            }),
+        };
+    }, [
+        yScale,
+        getY,
+        chartDataGroupedByY,
+        getX,
+        segments,
+        getSegment,
+        normalize,
+        xMeasure.id,
+        xMeasure.unit,
+        formatters,
+        formatNumber,
+        isMobile,
+        chartHeight,
+        xScale,
+        chartWidth,
+        fields.segment,
+        getYAbbreviationOrLabel,
+        formatYAxisTick,
+        getSegmentAbbreviationOrLabel,
+        getIdentityX,
+        colors,
+        series,
+        yKey,
+    ]);
+    const valueLabelFormatter = useValueLabelFormatter({
+        measureId: xMeasure.id,
+        dimensions,
+        measures,
+        normalize,
+    });
+    return {
+        chartType: "bar",
+        chartDataGroupedByY,
+        bounds: {
+            ...bounds,
+            chartHeight: adjustedChartHeight,
+        },
+        chartData,
+        allData,
+        xScale,
+        yScaleInteraction,
+        yScaleTimeRange,
+        yScale,
+        segments,
+        colors,
+        getColorLabel: getSegmentLabel,
+        chartWideData,
+        series,
+        getAnnotationInfo,
+        getTooltipInfo,
+        leftAxisLabelSize,
+        leftAxisLabelOffsetTop: top,
+        bottomAxisLabelSize,
+        valueLabelFormatter,
+        formatYAxisTick,
+        ...variables,
+    };
+};
+const StackedBarsChartProvider = (props) => {
+    const { children, ...chartProps } = props;
+    const variables = useBarsStackedStateVariables(chartProps);
+    const data = useBarsStackedStateData(chartProps, variables);
+    const state = useBarsStackedState(chartProps, variables, data);
+    return (<ChartContext.Provider value={state}>{children}</ChartContext.Provider>);
+};
+export const StackedBarsChart = (props) => {
+    return (<InteractionProvider>
+      <StackedBarsChartProvider {...props}/>
+    </InteractionProvider>);
+};

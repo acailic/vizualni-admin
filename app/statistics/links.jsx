@@ -1,0 +1,38 @@
+import { Link, Typography } from "@mui/material";
+import { Icon } from "@/icons";
+export const ChartLink = ({ locale, chartKey, }) => {
+    return (<Link href={`/${locale}/v/${chartKey}`} target="_blank" sx={{
+            display: "flex",
+            gap: 2,
+            justifyContent: "space-between",
+        }}>
+      <Typography variant="caption" component="p" sx={{
+            overflow: "hidden",
+            maxWidth: 200,
+            cursor: "default",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+        }}>
+        {chartKey}
+      </Typography>
+      <Icon name="legacyLinkExternal" size={16}/>
+    </Link>);
+};
+export const CubeLink = ({ locale, iri, title, }) => {
+    return (<Link href={`/${locale}/browse?dataset=${iri}`} target="_blank" sx={{
+            display: "flex",
+            gap: 2,
+            justifyContent: "space-between",
+        }}>
+      <Typography variant="caption" component="p" sx={{
+            overflow: "hidden",
+            maxWidth: 200,
+            cursor: "default",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+        }}>
+        {title}
+      </Typography>
+      <Icon name="legacyLinkExternal" size={16}/>
+    </Link>);
+};
