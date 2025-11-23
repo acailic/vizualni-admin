@@ -1,8 +1,11 @@
 /**
  * API client for data.gov.rs
- * 
+ *
  * This client provides access to the Serbian Open Data Portal API
  * See: https://data.gov.rs/apidoc/
+ *
+ * In production (GitHub Pages), routes through Cloudflare Worker proxy.
+ * Set NEXT_PUBLIC_API_PROXY_URL to your deployed worker URL.
  */
 
 import type {
@@ -15,6 +18,19 @@ import type {
   ApiError,
 } from './types';
 
+const DIRECT_API_URL = 'https://data.gov.rs/api/1';
+
+function getDefaultApiUrl(): string {
+  const proxyUrl = process.env.NEXT_PUBLIC_API_PROXY_URL;
+  const useProxy = process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_USE_PROXY === 'true';
+
+  if (useProxy && proxyUrl) {
+    return `${proxyUrl}/api/data-gov`;
+  }
+
+  return process.env.DATA_GOV_RS_API_URL || DIRECT_API_URL;
+}
+
 export class DataGovRsClient {
   private config: {
     apiUrl: string;
@@ -25,7 +41,7 @@ export class DataGovRsClient {
 
   constructor(config: DataGovRsConfig) {
     this.config = {
-      apiUrl: config.apiUrl || process.env.DATA_GOV_RS_API_URL || 'https://data.gov.rs/api/1',
+      apiUrl: config.apiUrl || getDefaultApiUrl(),
       apiKey: config.apiKey || process.env.DATA_GOV_RS_API_KEY,
       defaultPageSize: config.defaultPageSize || 20,
       timeout: config.timeout || 10000,
