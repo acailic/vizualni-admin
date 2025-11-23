@@ -174,6 +174,7 @@ describe("ChartMoreButton", () => {
     const mockState = createMockState({
       layout: {
         type: "singleURLs",
+        publishableChartKeys: [],
         blocks: [],
         meta: {
           title: { "sr-Latn": "", "sr-Cyrl": "", en: "" },

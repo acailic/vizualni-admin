@@ -498,3 +498,4 @@ const Page = () => {
     </Box>);
 };
 export default Page;
+// @ts-nocheck

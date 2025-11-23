@@ -17,7 +17,7 @@ export const Intro = ({ title, teaser, buttonLabel, }) => {
       </ContentWrapper>
     </Box>);
 };
-const Title = ({ children }) => (<Typography variant="display2" component="h1" sx={{ mb: 10, fontWeight: 700, textWrap: "balance" }}>
+const Title = ({ children }) => (<Typography variant="h2" component="h1" sx={{ mb: 10, fontWeight: 700, textWrap: "balance" }}>
     {children}
   </Typography>);
 const Teaser = ({ children }) => (<Box sx={{ mb: 8 }}>

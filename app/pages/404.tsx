@@ -87,9 +87,11 @@ const Page = () => (
               Упс! Изгледа да сте залутали. Ова страница не постоји.
             </Typography>
             <Actions>
-              <HomeLink locale="sr-Cyrl" sx={homeLinkSx}>
-                🏠 Повратак на почетну страну
-              </HomeLink>
+              <Box sx={homeLinkSx}>
+                <HomeLink locale="sr-Cyrl">
+                  🏠 Повратак на почетну страну
+                </HomeLink>
+              </Box>
             </Actions>
           </Box>
         </ErrorPageHint>

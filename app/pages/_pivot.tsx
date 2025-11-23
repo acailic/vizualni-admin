@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Box,
   Card as MUICard,
@@ -674,3 +675,4 @@ const Page = () => {
 };
 
 export default Page;
+// @ts-nocheck

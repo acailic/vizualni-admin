@@ -33,7 +33,7 @@ export const Intro = ({
 
 const Title = ({ children }: { children: ReactNode }) => (
   <Typography
-    variant="display2"
+    variant="h2"
     component="h1"
     sx={{ mb: 10, fontWeight: 700, textWrap: "balance" }}
   >

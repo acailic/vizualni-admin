@@ -407,3 +407,4 @@ export async function getStaticProps() {
         props: {}
     };
 }
+// @ts-nocheck

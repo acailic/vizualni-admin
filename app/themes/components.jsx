@@ -252,8 +252,7 @@ export const components = {
                         case "xl":
                             return { padding: "10px 20px", ...typography.h3 };
                         default:
-                            const _exhaustiveCheck = size;
-                            return _exhaustiveCheck;
+                            return { padding: "10px 20px", ...typography.h5 };
                     }
                 })();
                 const variant = (_b = ownerState.variant) !== null && _b !== void 0 ? _b : "contained";

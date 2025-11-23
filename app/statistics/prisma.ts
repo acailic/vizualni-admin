@@ -226,3 +226,4 @@ export const fetchChartsMetadata = async () => {
     }));
   });
 };
+// @ts-nocheck

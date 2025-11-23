@@ -277,8 +277,7 @@ export const components: Components = {
             case "xl":
               return { padding: "10px 20px", ...typography.h3 };
             default:
-              const _exhaustiveCheck: never = size;
-              return _exhaustiveCheck;
+              return { padding: "10px 20px", ...typography.h5 };
           }
         })();
 

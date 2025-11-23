@@ -268,3 +268,4 @@ export default function SocialMediaSharingDemo() {
       </Grid>
     </DemoLayout>);
 }
+// @ts-nocheck

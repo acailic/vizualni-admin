@@ -27,7 +27,7 @@ describe("use redirect to versioned cube", () => {
             replace: vi.fn(async () => true),
         };
         useRouter.mockReturnValue(router);
-        useLocale.mockReturnValue("de");
+        useLocale.mockReturnValue("sr-Latn");
         queryLatestCubeIri.mockImplementation(async () => versionedCube);
         renderHook(() => useRedirectToLatestCube({
             datasetIri,

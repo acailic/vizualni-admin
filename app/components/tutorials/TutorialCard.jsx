@@ -40,6 +40,8 @@ export default function TutorialCard({ tutorial, locale }) {
             advanced: "Advanced",
         },
     };
+    const categoryLabel = categoryLabels[locale][tutorial.category] ||
+        tutorial.category;
     return (<Card sx={{
             height: "100%",
             display: "flex",
@@ -143,7 +145,7 @@ export default function TutorialCard({ tutorial, locale }) {
         }} variant="outlined"/>
 
             {/* Category */}
-            <Chip label={categoryLabels[locale][tutorial.category] || tutorial.category} size="small" sx={{
+            <Chip label={categoryLabel} size="small" sx={{
             fontSize: "0.75rem",
             borderColor: "#764ba2",
             color: "#764ba2",

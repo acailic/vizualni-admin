@@ -1,6 +1,7 @@
 import { TUTORIAL_CONFIGS, getTutorialConfig, getAllTutorialIds, getTutorialsByCategory, getTutorialTitle, getTutorialDescription, TutorialConfig } from './config';
 
-export { TUTORIAL_CONFIGS, getTutorialConfig, getAllTutorialIds, getTutorialsByCategory, getTutorialTitle, getTutorialDescription, TutorialConfig };
+export { TUTORIAL_CONFIGS, getTutorialConfig, getAllTutorialIds, getTutorialsByCategory, getTutorialTitle, getTutorialDescription };
+export type { TutorialConfig };
 
 /**
  * Get the next tutorial in the same category

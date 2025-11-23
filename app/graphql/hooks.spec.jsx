@@ -27,7 +27,9 @@ describe("makeUseQuery", () => {
         const [result] = useMockQuery({ variables });
         const client = useMemo(() => new Client({ url: "http://example.com" }), []);
         return (<Provider value={client}>
-        <div data-testid="result">{(_a = result.data) !== null && _a !== void 0 ? _a : "loading"}</div>
+        <div data-testid="result">
+          {String((_a = result.data) !== null && _a !== void 0 ? _a : "loading")}
+        </div>
       </Provider>);
     };
     it("should return eventually the result of the executeQuery callback", async () => {

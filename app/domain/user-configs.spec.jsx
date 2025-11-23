@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { renderHook, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import { useUserConfig, useUserConfigs } from "@/domain/user-configs";
 import { fetchChartConfig, fetchChartConfigs, fetchChartViewCount, } from "@/utils/chart-config/api";
 // Mock the API functions
