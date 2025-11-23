@@ -1,5 +1,5 @@
-// eslint-disable-next-line no-restricted-imports
-import { groupBy, mapValues } from "lodash";
+import groupBy from "lodash/groupBy";
+import mapValues from "lodash/mapValues";
 
 import { isDimensionOfTimeUnit, PartialSearchCube } from "@/domain/data";
 import { truthy } from "@/domain/types";
