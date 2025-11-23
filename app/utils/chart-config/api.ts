@@ -1,4 +1,4 @@
-import { Config, PUBLISHED_STATE } from "@prisma/client";
+import { Config, PUBLISHED_STATE } from "../../db/prisma-types";
 import isUndefined from "lodash/isUndefined";
 import omit from "lodash/omit";
 import omitBy from "lodash/omitBy";

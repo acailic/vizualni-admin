@@ -16,7 +16,7 @@ import {
   tableRowClasses,
   Typography,
 } from "@mui/material";
-import { PUBLISHED_STATE } from "@prisma/client";
+import { PUBLISHED_STATE } from "../../db/prisma-types";
 import sortBy from "lodash/sortBy";
 import NextLink from "next/link";
 import { ReactNode, useMemo, useState } from "react";

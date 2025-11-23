@@ -1,6 +1,6 @@
 import { ParsedUrlQuery } from "querystring";
 
-import { PUBLISHED_STATE } from "@prisma/client";
+import { PUBLISHED_STATE } from "../../db/prisma-types";
 import { NextRouter, useRouter } from "next/router";
 import {
   createContext,

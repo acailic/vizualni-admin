@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Config as PrismaConfig, PUBLISHED_STATE } from "@prisma/client";
+import { Config as PrismaConfig, PUBLISHED_STATE } from "../../db/prisma-types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import ErrorPage from "next/error";
 import Head from "next/head";
